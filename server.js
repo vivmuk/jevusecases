@@ -24,6 +24,9 @@ const server = http.createServer((req, res) => {
   if (!file.startsWith(ROOT)) { res.writeHead(403).end('forbidden'); return; }
   fs.stat(file, (err, stat) => {
     if (err || stat.isDirectory()) {
+      /* A missing file with an extension is a real 404. A missing extension-less
+         path is a page request, so it gets the page. */
+      if (path.extname(url)) { res.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' }).end('not found'); return; }
       const fallback = path.join(ROOT, 'index.html');
       fs.readFile(fallback, (e2, buf) => {
         if (e2) { res.writeHead(404).end('not found'); return; }

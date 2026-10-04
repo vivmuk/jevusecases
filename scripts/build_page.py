@@ -11,6 +11,7 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 VIDEO = "https://youtube.com/watch?v=3iDiWTt8lok"
+SITE = "https://jevusecases-production.up.railway.app/"
 SOURCE = "These 19 Jev-Claude use cases are blowing people's minds"
 REPO = "https://github.com/vivmuk/jevusecases"
 
@@ -179,6 +180,7 @@ def build():
         repo=REPO,
         source=SOURCE,
         video=VIDEO,
+        site=SITE,
         state=e(anat["state"]),
         cases=len(cases),
         index_groups=index_panel(cases),
@@ -204,6 +206,8 @@ TEMPLATE = """<!doctype html>
 <meta property="og:title" content="Jev use cases">
 <meta property="og:description" content="Nineteen closed-answer jobs for a decision model, each with its code and its prompts.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="{site}">
+<link rel="canonical" href="{site}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230a0c0e'/><rect x='9' y='7' width='3' height='18' fill='%23ede7da'/><rect x='15' y='7' width='8' height='3' fill='%23e8a33d'/><rect x='15' y='14' width='8' height='3' fill='%23ede7da'/><rect x='15' y='21' width='5' height='3' fill='%23ede7da'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
