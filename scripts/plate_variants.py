@@ -38,6 +38,19 @@ NOTEXT = (
     "no emoji. Any document, screen or envelope is drawn blank or as plain ruled lines. "
 )
 
+# Labelled plates are allowed text, but only the labels the brief names, spelled
+# the way the brief spells them. Anything longer comes back as invented glyphs.
+LABELS = (
+    " The only lettering in the picture is these exact short labels, each spelled letter for "
+    "letter, with no extra words and no invented text anywhere else: {labels}. Set each label in "
+    "a plain bold sans-serif face inside or beside the object it names, in near-black ink except "
+    "for the one amber label the scene describes. Every other surface, list row, document and "
+    "screen is drawn as plain ruled lines or left blank. No other writing, no captions, no "
+    "watermark, no logo, no signature, no people, no faces, no hands, no emoji."
+)
+
+DEFAULT_LABELS = {"detailed_text": "INBOX, SPAM, DRAFT"}
+
 # Three deliberate distances from the job. Level 1 is the house style: pure
 # geometry, no objects. Level 3 is a narrative of the actual workflow.
 LEVELS = {
@@ -57,9 +70,26 @@ LEVELS = {
         "dividers, trays) but stay flat and unshaded. Clear left-to-right before-and-after flow. "
         "Subject: {scene}"
     ),
+    "detailed_text": (
+        "A detailed illustration of the whole workflow that depicts the working software itself, "
+        "about {n} elements: a flat product-style window with a title bar, clearly separated list "
+        "rows, panels and buttons drawn as simple outlined shapes, plus connectors with "
+        "arrowheads showing what happens to each item. Clear left-to-right before-and-after flow. "
+        "Subject: {scene}"
+    ),
 }
 
-COUNTS = {"minimal": "four to six", "readable": "nine to fourteen", "detailed": "twenty to thirty"}
+COUNTS = {"minimal": "four to six", "readable": "nine to fourteen",
+          "detailed": "twenty to thirty", "detailed_text": "eighteen to twenty-eight"}
+
+
+def labels_for(level, case):
+    return case.get("plate_labels", {}).get(level) or DEFAULT_LABELS.get(level, "")
+
+
+def prompt_for(level, case, scene):
+    tail = LABELS.format(labels=labels_for(level, case)) if level == "detailed_text" else NOTEXT
+    return BASE + LEVELS[level].format(n=COUNTS[level], scene=scene) + tail
 
 
 def main():
@@ -72,20 +102,22 @@ def main():
     if case is None:
         raise SystemExit("no case %d in content.json" % n)
 
-    scenes = case.get("plate_levels") or {}
+    scenes_by_level = case.get("plate_levels") or {}
     print("case %d  %s" % (n, case["title"]))
     for level in wanted:
-        scene = scenes.get(level) or case["plate"]
-        prompt = (BASE
-                  + LEVELS[level].format(n=COUNTS[level], scene=scene)
-                  + NOTEXT)
-        dest = OUT / ("case-%02d-%s.png" % (n, level))
-        print("  %-9s -> %s" % (level, dest.name), flush=True)
-        res = generate(prompt, dest)
-        if res:
-            print("     ok %dx%d %.0f KB" % (res[0], res[1], res[2] / 1024), flush=True)
-        else:
-            print("     FAILED", flush=True)
+        if level not in LEVELS:
+            raise SystemExit("unknown level %r (have: %s)" % (level, ", ".join(LEVELS)))
+        raw = scenes_by_level.get(level) or case["plate"]
+        scenes = raw if isinstance(raw, list) else [raw]
+        for i, scene in enumerate(scenes, 1):
+            tag = "" if len(scenes) == 1 else "-%d" % i
+            dest = OUT / ("case-%02d-%s%s.png" % (n, level, tag))
+            print("  %-14s %s" % (level + tag, dest.name), flush=True)
+            res = generate(prompt_for(level, case, scene), dest)
+            if res:
+                print("     ok %dx%d %.0f KB" % (res[0], res[1], res[2] / 1024), flush=True)
+            else:
+                print("     FAILED", flush=True)
     return 0
 
 

@@ -112,14 +112,15 @@ def card(case, index):
             <img src="assets/plates/plate-{n:02d}.webp" width="1600" height="900"
                  alt="{alt}" loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate {n:02d}. The shape of the job, drawn without labels on purpose.</figcaption>
+          <figcaption>Plate {n:02d}. {caption}</figcaption>
         </figure>
       </div>
     </article>""".format(
         cls=cls, n=case["n"], title=e(case["title"]), tier=e(case["tier"]),
         video=VIDEO, sec=secs(case["at"]), at=e(case["at"]), what=e(case["what"]),
         shape=shape, use=e(case["use"]), code=code_block(case),
-        prompts=prompt_blocks(case), alt=e(short_alt(case)))
+        prompts=prompt_blocks(case), alt=e(short_alt(case)),
+        caption=e(case.get("caption", "The shape of the job.")))
 
 
 def secs(stamp):

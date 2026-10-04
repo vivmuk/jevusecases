@@ -28,7 +28,8 @@
           "question": "category=choice:Which budget category?|utilities:Power, water, internet,rent:Housing,subs:Subscriptions,ignore:Not a real expense"
         }
       ],
-      "plate": "A single wide horizontal open rectangle divided by four thin vertical hairlines into five empty cells, each cell holding one short horizontal hairline of a different length; the middle cell’s hairline is amber instead of ink. Outline strokes only, at most nine elements, wide empty margins, no grid of small squares, no hatch texture, no filled blocks."
+      "plate": "A single wide horizontal open rectangle divided by four thin vertical hairlines into five empty cells, each cell holding one short horizontal hairline of a different length; the middle cell’s hairline is amber instead of ink. Outline strokes only, at most nine elements, wide empty margins, no grid of small squares, no hatch texture, no filled blocks.",
+      "caption": "Rows go in as raw text, the label list is the question, and one label plus its probability lands in the next column."
     },
     {
       "n": 2,
@@ -62,7 +63,8 @@
           "question": "auto=Is this message answerable from the public documentation without a human?"
         }
       ],
-      "plate": "One inbound arrow at the left splitting into three clearly separated route lines that leave at different angles, with a small probability dial drawn as an arc sitting on the junction. Keep the three routes distinct and unlabelled."
+      "plate": "One inbound arrow at the left splitting into three clearly separated route lines that leave at different angles, with a small probability dial drawn as an arc sitting on the junction. Keep the three routes distinct and unlabelled.",
+      "caption": "One message arrives, one intent and one confidence come back, and the routing rule spends them."
     },
     {
       "n": 3,
@@ -92,7 +94,8 @@
           "question": "funnel=choice:Where in the funnel is this aimed?|top:Problem aware,mid:Comparing options,bottom:Ready to buy"
         }
       ],
-      "plate": "A wide horizontal band split into four equal open outlined boxes, each box holding a few short vertical hairline ticks; the third box is outlined in amber instead of ink. Hairline strokes only, mostly empty space, no filled blocks, no dark mass, no grid of solid squares, nothing else on the plate."
+      "plate": "A wide horizontal band split into four equal open outlined boxes, each box holding a few short vertical hairline ticks; the third box is outlined in amber instead of ink. Hairline strokes only, mostly empty space, no filled blocks, no dark mass, no grid of solid squares, nothing else on the plate.",
+      "caption": "Every ad is read against the same fixed taxonomy, so the hundredth ad is tagged like the first."
     },
     {
       "n": 4,
@@ -122,7 +125,8 @@
           "question": "keep=Is this passage usable as a standalone social clip without the surrounding conversation?"
         }
       ],
-      "plate": "One very long thin timeline strip drawn as a horizontal rule, with a small fraction of it drawn thicker and raised slightly above the line to suggest a peak, and a bracket beneath that thicker part. Flat geometry, generous empty space."
+      "plate": "One very long thin timeline strip drawn as a horizontal rule, with a small fraction of it drawn thicker and raised slightly above the line to suggest a peak, and a bracket beneath that thicker part. Flat geometry, generous empty space.",
+      "caption": "A long transcript becomes numbered passages, and the passages that score highest are the ones an editor gets."
     },
     {
       "n": 5,
@@ -152,7 +156,8 @@
           "question": "reach=score:How far along is the cancellation?|Just quiet,Actively drifting,Decided but not told us,Gone"
         }
       ],
-      "plate": "A single horizontal axis with three separated zones marked by thin vertical hairlines, and small identical circles migrating from the left zone toward the right zone across the axis. No text, no numbers."
+      "plate": "A single horizontal axis with three separated zones marked by thin vertical hairlines, and small identical circles migrating from the left zone toward the right zone across the axis. No text, no numbers.",
+      "caption": "Accounts move between three known states, and the state is what decides which retention play runs."
     },
     {
       "n": 6,
@@ -182,7 +187,8 @@
           "question": "worth=Would that link genuinely help a reader of this paragraph?"
         }
       ],
-      "plate": "A loose cloud of small circles on the left connected by a few short lines to a smaller cluster on the right, with exactly one long clean line crossing the gap. Most circles stay unconnected."
+      "plate": "A loose cloud of small circles on the left connected by a few short lines to a smaller cluster on the right, with exactly one long clean line crossing the gap. Most circles stay unconnected.",
+      "caption": "Every page is offered every other page as a candidate, and only the strongest match becomes a link."
     },
     {
       "n": 7,
@@ -212,7 +218,8 @@
           "question": "escalate=Does this comment need a human reply within the hour?"
         }
       ],
-      "plate": "A short row of six identical vertical hairline ticks along the top, and below them two converging hairlines that meet a small open tray holding two of those ticks. Only nine elements in total, hairline strokes, wide empty margins, no dense comb of lines, no hatching, no filled shapes."
+      "plate": "A short row of six identical vertical hairline ticks along the top, and below them two converging hairlines that meet a small open tray holding two of those ticks. Only nine elements in total, hairline strokes, wide empty margins, no dense comb of lines, no hatching, no filled shapes.",
+      "caption": "Comments arrive in bulk, and only the ones asking how to buy reach the top of the queue."
     },
     {
       "n": 8,
@@ -242,7 +249,8 @@
           "question": "category=choice:Which team owns this ticket?|billing:Payments,technical:Bugs,account:Login,general:Anything else"
         }
       ],
-      "plate": "A two-column comparison drawn as a left column of small squares and a right column of small squares, with matching pairs joined by short horizontal lines and three pairs left visibly unjoined. Flat, minimal, generous margin."
+      "plate": "A two-column comparison drawn as a left column of small squares and a right column of small squares, with matching pairs joined by short horizontal lines and three pairs left visibly unjoined. Flat, minimal, generous margin.",
+      "caption": "Known answers run through the same call, and the ones the model misses move the threshold."
     },
     {
       "n": 9,
@@ -272,7 +280,8 @@
           "question": "skill=choice:Which skill should the agent load?|xlsx:Spreadsheet work,docx:Word documents,arxiv:Paper search,email-inbox-triage:Inbox triage"
         }
       ],
-      "plate": "One small square at the left connected by a single clean line to exactly one filled square selected out of a neatly spaced grid of twelve empty squares at the right. The chosen square is solid, the rest are outlines."
+      "plate": "One small square at the left connected by a single clean line to exactly one filled square selected out of a neatly spaced grid of twelve empty squares at the right. The chosen square is solid, the rest are outlines.",
+      "caption": "A whole directory of skills becomes a menu, and the prompt picks one line from it before anything loads."
     },
     {
       "n": 10,
@@ -302,7 +311,8 @@
           "question": "model=choice:Which model tier does this request need?|cheap:Short lookup, formatting or extraction,mid:Normal edit, explanation or small refactor,frontier:Multi-step reasoning, architecture, hard bugs"
         }
       ],
-      "plate": "One horizontal hairline that splits into two diverging hairlines of the same thin weight, with a small open circle sitting on the split point. Uniform hairline strokes of equal weight, one small amber dot on the upper branch, lots of empty space, nothing else on the plate."
+      "plate": "One horizontal hairline that splits into two diverging hairlines of the same thin weight, with a small open circle sitting on the split point. Uniform hairline strokes of equal weight, one small amber dot on the upper branch, lots of empty space, nothing else on the plate.",
+      "caption": "One prompt goes in, and the price of answering it is decided before the answer is."
     },
     {
       "n": 11,
@@ -336,8 +346,21 @@
       "plate_levels": {
         "minimal": "Three flat envelope rectangles in a single row, evenly spaced; the middle one carries a small amber diagonal cross, and one arrow leaves the row to the right.",
         "readable": "Six flat envelope rectangles arriving from the left in a loose stack, passing under a single horizontal gate line that spans the frame; below the line two envelopes fall away, one of them carrying a small amber cross, while three envelopes continue right into a simple flat machine shape like a box with two dials.",
-        "detailed": "A wide open tray at the left holding nine flat envelopes of slightly different sizes; a tall vertical gate stands in the middle of the frame with a small diamond decision shape at its centre; three envelopes carrying small amber crosses tumble down into an open bin below the gate; four envelopes continue to the right into a flat desk holding a simple machine shape and a single sheet of ruled lines; a small clock outline and a paperclip sit nearby for scale."
-      }
+        "detailed": [
+          "A wide open inbox tray at the left holding seven flat envelopes of slightly different sizes. From the tray a single path leads right to a small open circle, and from that circle the path splits in two: the upper branch climbs to a flat desk holding a small machine box and one sheet of ruled lines, the lower branch drops into an open bin. Three envelopes travel along the upper branch to the desk, and two envelopes, each crossed with a small amber X, fall down the lower branch into the bin. A small clock outline stands beside the desk and a paperclip rests next to the tray.",
+          "A tall stack of nine flat envelopes at the left, the top envelope sitting slightly apart from the rest. A wide horizontal sorting rack with six slats spans the middle of the frame. Two envelopes, each crossed with a small amber X, fall from the rack into an open bin below it. Four envelopes continue to the right along a single horizontal line that ends at a small machine box with two dials, with one sheet of ruled lines beneath it. A paperclip rests beside the machine.",
+          "Three groupings joined by thick arrows with clear arrowheads: at the left a flat inbox tray holding seven envelopes stacked in it; in the middle a tall vertical sorter with six horizontal slats, with two envelopes crossed by small amber X marks tumbling from its base down into an open bin; at the right a flat desk carrying a machine box with two dials, one sheet of ruled lines, and a small clock outline beside them."
+        ],
+        "detailed_text": [
+          "A single flat mail-application window seen straight on: a title bar across its top, and a list of six message rows inside, each row a horizontal band with a small envelope square at its left and one short ruled line where the subject would be. Two of the rows carry a small amber cross at the right end, and one of those two carries a small amber tag reading SPAM. A thick arrow leaves the right edge of the window and points into a narrower second panel holding a single document sheet with ruled lines above a small outlined button, with the label DRAFT across the top of that panel. A short label reading INBOX sits above the window.",
+          "Three flat panels in a row, joined by thick arrows. The left panel is a tall rectangle holding five stacked message bars, labelled INBOX across its top. The middle panel is a narrow vertical gate with a small diamond at its centre, and two message bars carrying small amber crosses fall from the gate down into a small open bin whose tag reads SPAM. The right panel holds one document sheet with ruled lines and is labelled DRAFT across its top.",
+          "A wide product window divided into two columns by a vertical divider, seen straight on. The left column is an email list of seven horizontal rows, each with a small square at its left, two ruled lines, and a small amber cross on two of the rows; a short label reading INBOX sits above the list. The right column is a reading pane holding a wide ruled document sheet, and beneath it a smaller panel with three ruled lines and two outlined buttons, labelled DRAFT above it. A thick arrow runs from the list into the right pane."
+        ]
+      },
+      "plate_labels": {
+        "detailed_text": "INBOX, SPAM, DRAFT"
+      },
+      "caption": "Mail arrives as the state, the filter is the question, and only what survives it reaches a model that writes."
     },
     {
       "n": 12,
@@ -367,7 +390,8 @@
           "question": "hide=Is this post low-effort machine-generated filler?"
         }
       ],
-      "plate": "A vertical column of small identical rectangles, three of them drawn as faint outlines and the rest solid, with the faint ones marked by a very thin diagonal cross drawn across each. Minimal and flat."
+      "plate": "A vertical column of small identical rectangles, three of them drawn as faint outlines and the rest solid, with the faint ones marked by a very thin diagonal cross drawn across each. Minimal and flat.",
+      "caption": "Loaded text is judged before it is seen, so the flagged blocks never take up the page."
     },
     {
       "n": 13,
@@ -397,7 +421,8 @@
           "question": "hit=choice:Which section of this page answers the query?|s0:Billing,s1:Shipping,s2:Account,none:No section matches"
         }
       ],
-      "plate": "A vertical column of stacked paragraph bars drawn as thin outlined rectangles, with one bar near the middle drawn as a double outline and a short straight arrow entering it from the left. White hairline strokes only on the dark ground, exactly one amber element, no grey fills, no curved arrows, at most eight bars."
+      "plate": "A vertical column of stacked paragraph bars drawn as thin outlined rectangles, with one bar near the middle drawn as a double outline and a short straight arrow entering it from the left. White hairline strokes only on the dark ground, exactly one amber element, no grey fills, no curved arrows, at most eight bars.",
+      "caption": "The query and the sections are offered together, and the closest meaning wins, not the closest spelling."
     },
     {
       "n": 14,
@@ -427,7 +452,8 @@
           "question": "hit=choice:Which asset is the query asking for?|a1:Harbour at night,a2:Funnel diagram,a3:Studio desk,none:Nothing in the library matches"
         }
       ],
-      "plate": "A grid of small empty picture frames at the left and one larger frame pulled out and highlighted at the right, with a single line connecting the two. The frames are empty of any content."
+      "plate": "A grid of small empty picture frames at the left and one larger frame pulled out and highlighted at the right, with a single line connecting the two. The frames are empty of any content.",
+      "caption": "Every asset carries a description, and the search reads descriptions instead of file names."
     },
     {
       "n": 15,
@@ -457,7 +483,8 @@
           "question": "owner=Does this sentence name the person who will do the work?"
         }
       ],
-      "plate": "One horizontal hairline near the top with a row of short vertical ticks of varying length hanging beneath it, and one small outlined tray below holding two ticks. At most twelve elements in total, wide margins, nothing else on the plate."
+      "plate": "One horizontal hairline near the top with a row of short vertical ticks of varying length hanging beneath it, and one small outlined tray below holding two ticks. At most twelve elements in total, wide margins, nothing else on the plate.",
+      "caption": "Sentences are sorted as they are spoken: decision, action, risk or question."
     },
     {
       "n": 16,
@@ -487,7 +514,8 @@
           "question": "covered=Does the library actually cover this question?"
         }
       ],
-      "plate": "A neat grid of small identical rectangles at the left, one inbound arrow from the bottom left, and a single rectangle sliding slightly out of the grid at the right. Nothing else."
+      "plate": "A neat grid of small identical rectangles at the left, one inbound arrow from the bottom left, and a single rectangle sliding slightly out of the grid at the right. Nothing else.",
+      "caption": "A question matches a known answer, and nothing is generated in order to say so."
     },
     {
       "n": 17,
@@ -517,7 +545,8 @@
           "question": "icon=choice:Which icon matches what the user just typed?|water:Glass of water,walk:Footsteps,read:Open book,sleep:Crescent moon,meditate:Seated figure,gym:Dumbbell,none:Nothing in this set fits"
         }
       ],
-      "plate": "Three small open outlined shapes in a row (a circle, a square, a triangle) of equal size, with one amber outline drawn around the square. Outline strokes only, no filled shapes, no large coloured area, wide empty margins, nothing else on the plate."
+      "plate": "Three small open outlined shapes in a row (a circle, a square, a triangle) of equal size, with one amber outline drawn around the square. Outline strokes only, no filled shapes, no large coloured area, wide empty margins, nothing else on the plate.",
+      "caption": "Typed text chooses the icon, and the interface keeps up with the typing."
     },
     {
       "n": 18,
@@ -547,7 +576,8 @@
           "question": "proof=choice:Which proof module fits this visitor?|logos:Customer logos,caseStudy:One case study,quote:A single customer quote,none:No proof block"
         }
       ],
-      "plate": "A wireframe of a single page drawn as empty outlined blocks in a vertical stack at the right, with three alternative small blocks drawn separately at the left and one short line pointing from one of them into the top slot."
+      "plate": "A wireframe of a single page drawn as empty outlined blocks in a vertical stack at the right, with three alternative small blocks drawn separately at the left and one short line pointing from one of them into the top slot.",
+      "caption": "Visitor signals pick the modules, and the page is assembled before it is read."
     },
     {
       "n": 19,
@@ -577,7 +607,8 @@
           "question": "fits=Could this step be answered by picking between options you could write down in advance?"
         }
       ],
-      "plate": "A long horizontal process line made of many small evenly spaced squares, with three of the squares picked out by small vertical brackets beneath them and the rest left plain. Wide margins, flat geometry."
+      "plate": "A long horizontal process line made of many small evenly spaced squares, with three of the squares picked out by small vertical brackets beneath them and the rest left plain. Wide margins, flat geometry.",
+      "caption": "Every step of an existing workflow is asked the same question, and the answers sort the steps into work a model can take."
     }
   ]
 }

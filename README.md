@@ -38,3 +38,17 @@ The case list, its order and the running times come from
 Anything quoted from the video says so on the card that uses it. The latency, token
 count and cost figures were measured on the machine that built the page, against the
 live route.
+
+## Plates
+
+One diagram per case, rendered by `scripts/gen_plates.py` with the `muse-image`
+model and shipped as trimmed, normalised WebP by `scripts/compress_plates.py`.
+
+House rule: **a plate carries no lettering.** These models invent glyphs for any
+text they are asked to draw, and a garbled label is worse than no label, so the
+words that explain a plate live in the caption and the card copy, set in real
+type. A plate describes its case by objects and flow alone.
+
+`scripts/plate_variants.py <case>` renders one case at several levels of
+description (minimal, readable, detailed) into `lab/variants/`, so the level can
+be chosen deliberately rather than by accident. It never touches `assets/plates`.
