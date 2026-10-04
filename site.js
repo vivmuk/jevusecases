@@ -90,13 +90,13 @@
     var openers = Array.prototype.slice.call(document.querySelectorAll("[data-index-toggle]"));
     if (!panel) return;
 
-    function setOpen(open) {
+    function setOpen(open, keepFocus) {
       panel.setAttribute("data-open", open ? "true" : "false");
       openers.forEach(function (b) { b.setAttribute("aria-expanded", open ? "true" : "false"); });
       if (open) {
         var first = panel.querySelector("a");
         if (first) first.focus({ preventScroll: true });
-      } else {
+      } else if (!keepFocus) {
         var btn = document.querySelector("[data-index-toggle]");
         if (btn) btn.focus({ preventScroll: true });
       }
@@ -108,7 +108,17 @@
       });
     });
     panel.addEventListener("click", function (e) {
-      if (e.target.closest("a")) setOpen(false);
+      var a = e.target.closest("a");
+      if (!a) return;
+      /* A jump should leave the caret at the case, not back on the button at the
+         top of the page: the reader's next keystroke belongs to what they chose. */
+      setOpen(false, true);
+      var id = (a.getAttribute("href") || "").slice(1);
+      var target = id ? document.getElementById(id) : null;
+      if (target) {
+        if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+        target.focus({ preventScroll: true });
+      }
     });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && panel.getAttribute("data-open") === "true") setOpen(false);

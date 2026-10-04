@@ -270,11 +270,11 @@ TEMPLATE = """<!doctype html>
     <div data-sc-stage data-sc-spotlight class="sc-wrap anatomy">
       <h2 class="sc-display sc-display--md anatomy__h" id="anatomy-h" data-sc-cue="0 0.34 0" data-sc-kinetic="lines">One message, three typed questions, one call.</h2>
       <div class="anatomy__grid">
-        <div class="anatomy__card" data-sc-cue="0 0.42 0">
+        <div class="anatomy__card" data-sc-cue="0.14 1 0.2 0">
           <h3>The state</h3>
           <p class="anatomy__state">{state}</p>
         </div>
-        <div class="anatomy__card" data-sc-cue="0.16 0.62">
+        <div class="anatomy__card" data-sc-cue="0.14 1 0.2 0">
           <h3>The questions</h3>
           <dl class="shape shape--tight">
             <div class="shape__row"><dt>noul</dt><dd>yes or no, returned as a probability</dd></div>
@@ -282,9 +282,8 @@ TEMPLATE = """<!doctype html>
             <div class="shape__row"><dt>score</dt><dd>where it lands on four urgency levels</dd></div>
           </dl>
         </div>
-      </div>
-      <div class="anatomy__card anatomy__answers" data-sc-cue="0.4 1 0.2 0">
-        <h3>The answers, as they came back</h3>
+        <div class="anatomy__card anatomy__answers" data-sc-cue="0.4 1 0.2 0">
+          <h3>The answers, as they came back</h3>
         <div class="answers">
           <div class="answer">
             <p class="answer__q">asking for a refund?</p>

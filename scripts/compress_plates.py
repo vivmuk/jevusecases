@@ -16,6 +16,50 @@ WIDTH = 1600
 QUALITY = 80
 
 
+def plate_command(png, webp):
+    """Trim to the drawing, re-pad evenly, then resize.
+
+    The model frames its diagram with a lot of empty paper, and it does so
+    unevenly (one plate's subject covers a tenth of the frame, another fills it).
+    At card scale that means identical strokes end up at different apparent
+    weights, and the small subjects dissolve into the paper. Trimming to the
+    content and re-padding by a fixed share of the frame normalises every plate
+    to the same subject scale, which is what makes the set read as one shoot.
+    """
+    probe = subprocess.run(
+        ["magick", "identify", "-format", "%w %h", str(png)],
+        capture_output=True, text=True, check=True)
+    w, h = (int(v) for v in probe.stdout.split())
+    trimmed = subprocess.run(
+        ["magick", str(png), "-fuzz", "6%", "-trim", "-format", "%w %h", "info:"],
+        capture_output=True, text=True, check=True)
+    try:
+        tw, th = (int(v) for v in trimmed.stdout.split())
+    except ValueError:
+        tw, th = w, h
+    # A trim that took almost everything is a failed read, not a tight subject.
+    if tw < w * 0.25 or th < h * 0.25:
+        tw, th = w, h
+        trim = False
+    else:
+        trim = True
+    pad = round(max(tw, th) * 0.09)
+    # Re-pad to a 16:9 frame, so every plate on the page keeps the same shape
+    # while the drawing inside it fills as much of that frame as its own aspect
+    # allows.
+    cw = max(tw + 2 * pad, round((th + 2 * pad) * 16 / 9))
+    ch = round(cw * 9 / 16)
+    args = ["magick", str(png)]
+    if trim:
+        args += ["-fuzz", "6%", "-trim", "+repage"]
+    args += ["-bordercolor", "#f1f2f4", "-border", f"{pad}",
+             "-background", "#f1f2f4", "-gravity", "center",
+             "-extent", f"{cw}x{ch}"]
+    args += ["-resize", f"{WIDTH}x", "-strip", "-quality", str(QUALITY),
+             "-define", "webp:method=6", str(webp)]
+    return args
+
+
 def main(force=False):
     pngs = sorted(PLATES.glob("plate-*.png"))
     if not pngs:
@@ -27,11 +71,7 @@ def main(force=False):
         if webp.exists() and not force and webp.stat().st_mtime > png.stat().st_mtime:
             skipped += 1
             continue
-        subprocess.run(
-            ["magick", str(png), "-resize", f"{WIDTH}x", "-strip",
-             "-quality", str(QUALITY), "-define", "webp:method=6", str(webp)],
-            check=True,
-        )
+        subprocess.run(plate_command(png, webp), check=True)
         done += 1
     total = sum(p.stat().st_size for p in PLATES.glob("plate-*.webp"))
     raw = sum(p.stat().st_size for p in PLATES.glob("plate-*.png"))

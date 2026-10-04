@@ -28,7 +28,7 @@
           "question": "category=choice:Which budget category?|utilities:Power, water, internet,rent:Housing,subs:Subscriptions,ignore:Not a real expense"
         }
       ],
-      "plate": "A single long horizontal bar of stacked identical tally marks on the left, a narrow vertical gate, and four separate open bins on the right receiving marks; the marks enter the gate one at a time and continue to one bin only. Show the four bins clearly separated with generous space between them."
+      "plate": "A single wide horizontal open rectangle divided by four thin vertical hairlines into five empty cells, each cell holding one short horizontal hairline of a different length; the middle cell's hairline is amber instead of ink. Outline strokes only, at most nine elements, wide empty margins, no grid of small squares, no hatch texture, no filled blocks."
     },
     {
       "n": 2,
