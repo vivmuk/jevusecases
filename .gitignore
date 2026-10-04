@@ -4,3 +4,5 @@ lab/
 .scrollcraft.json
 node_modules/
 .DS_Store
+# plates ship as webp; the pngs are generation sources
+assets/plates/*.png

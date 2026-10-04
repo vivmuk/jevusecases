@@ -92,7 +92,7 @@
           "question": "funnel=choice:Where in the funnel is this aimed?|top:Problem aware,mid:Comparing options,bottom:Ready to buy"
         }
       ],
-      "plate": "A dense field of many small identical rectangles at the left thinning into three neat stacks at the right, each stack a different height. No text on any rectangle."
+      "plate": "A wide horizontal band split into four equal open outlined boxes, each box holding a few short vertical hairline ticks; the third box is outlined in amber instead of ink. Hairline strokes only, mostly empty space, no filled blocks, no dark mass, no grid of solid squares, nothing else on the plate."
     },
     {
       "n": 4,
@@ -212,7 +212,7 @@
           "question": "escalate=Does this comment need a human reply within the hour?"
         }
       ],
-      "plate": "A wide band of many short identical vertical hairline strokes along the top, and below it a narrow outlined funnel shape narrowing to a small open tray that holds three of those strokes; every other stroke stays in the band. Line work only: no stipple, no halftone dots, no filled texture."
+      "plate": "A short row of six identical vertical hairline ticks along the top, and below them two converging hairlines that meet a small open tray holding two of those ticks. Only nine elements in total, hairline strokes, wide empty margins, no dense comb of lines, no hatching, no filled shapes."
     },
     {
       "n": 8,
@@ -302,7 +302,7 @@
           "question": "model=choice:Which model tier does this request need?|cheap:Short lookup, formatting or extraction,mid:Normal edit, explanation or small refactor,frontier:Multi-step reasoning, architecture, hard bugs"
         }
       ],
-      "plate": "One inbound line at the left meeting a small junction, with two outgoing lines of clearly different weight and thickness leaving to the right. Nothing else on the plate."
+      "plate": "One horizontal hairline that splits into two diverging hairlines of the same thin weight, with a small open circle sitting on the split point. Uniform hairline strokes of equal weight, one small amber dot on the upper branch, lots of empty space, nothing else on the plate."
     },
     {
       "n": 11,
@@ -512,7 +512,7 @@
           "question": "icon=choice:Which icon matches what the user just typed?|water:Glass of water,walk:Footsteps,read:Open book,sleep:Crescent moon,meditate:Seated figure,gym:Dumbbell,none:Nothing in this set fits"
         }
       ],
-      "plate": "A short line of simple drawn symbols in a row at the bottom, all pale outlines, with one single symbol lifted out and rendered larger and solid directly above the row."
+      "plate": "Three small open outlined shapes in a row (a circle, a square, a triangle) of equal size, with one amber outline drawn around the square. Outline strokes only, no filled shapes, no large coloured area, wide empty margins, nothing else on the plate."
     },
     {
       "n": 18,

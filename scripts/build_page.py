@@ -100,7 +100,7 @@ def card(case, index):
         </div>
         <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-{n:02d}.png" width="2048" height="1152"
+            <img src="assets/plates/plate-{n:02d}.webp" width="1600" height="900"
                  alt="{alt}" loading="lazy" decoding="async">
           </div>
           <figcaption>Plate {n:02d}. The shape of the job, drawn without labels on purpose.</figcaption>
@@ -202,13 +202,14 @@ TEMPLATE = """<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Jev use cases: nineteen closed-answer jobs for a decision model</title>
 <meta name="description" content="Nineteen ways to replace an open-ended language-model call with a typed decision. For each one: what the decision is, the code that asks it, and the prompts that run it.">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f1f2f4">
 <meta property="og:title" content="Jev use cases">
 <meta property="og:description" content="Nineteen closed-answer jobs for a decision model, each with its code and its prompts.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{site}">
 <link rel="canonical" href="{site}">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230a0c0e'/><rect x='9' y='7' width='3' height='18' fill='%23ede7da'/><rect x='15' y='7' width='8' height='3' fill='%23e8a33d'/><rect x='15' y='14' width='8' height='3' fill='%23ede7da'/><rect x='15' y='21' width='5' height='3' fill='%23ede7da'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23f1f2f4'/><rect x='9' y='7' width='3' height='18' fill='%2315181c'/><rect x='15' y='7' width='8' height='3' fill='%239c5a10'/><rect x='15' y='14' width='8' height='3' fill='%2315181c'/><rect x='15' y='21' width='5' height='3' fill='%2315181c'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
@@ -269,11 +270,11 @@ TEMPLATE = """<!doctype html>
     <div data-sc-stage data-sc-spotlight class="sc-wrap anatomy">
       <h2 class="sc-display sc-display--md anatomy__h" id="anatomy-h" data-sc-cue="0 0.34 0" data-sc-kinetic="lines">One message, three typed questions, one call.</h2>
       <div class="anatomy__grid">
-        <div class="anatomy__card" data-sc-cue="0 0.3 0">
+        <div class="anatomy__card" data-sc-cue="0 0.42 0">
           <h3>The state</h3>
           <p class="anatomy__state">{state}</p>
         </div>
-        <div class="anatomy__card" data-sc-cue="0.2 0.52">
+        <div class="anatomy__card" data-sc-cue="0.16 0.62">
           <h3>The questions</h3>
           <dl class="shape shape--tight">
             <div class="shape__row"><dt>noul</dt><dd>yes or no, returned as a probability</dd></div>
@@ -282,7 +283,7 @@ TEMPLATE = """<!doctype html>
           </dl>
         </div>
       </div>
-      <div class="anatomy__card anatomy__answers" data-sc-cue="0.46 1 0.2 0">
+      <div class="anatomy__card anatomy__answers" data-sc-cue="0.4 1 0.2 0">
         <h3>The answers, as they came back</h3>
         <div class="answers">
           <div class="answer">

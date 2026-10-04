@@ -22,12 +22,12 @@ MODEL = os.environ.get("PLATE_MODEL", "muse-image")
 ENDPOINT = "https://api.venice.ai/api/v1/image/generate"
 
 STYLE = (
-    "Minimalist editorial diagram on a near-black ground, flat vector geometry only. "
+    "Minimalist editorial diagram printed on light paper, flat vector geometry only. "
     "Thin even strokes, solid fills, no gradients, no perspective, no photographic shading, "
-    "no 3D, no clay, no glow. Palette: bone white #EDE7DA lines on a #0C0F12 ground with a "
-    "single amber #E8A33D accent used on exactly one element. Generous negative space, "
-    "centred composition, wide even margins, quiet and precise, like a page from a technical "
-    "manual. Scene: {scene} "
+    "no 3D, no clay, no glow, no drop shadow. Palette: near-black ink #15181C lines on a "
+    "cool light grey paper ground #F1F2F4, with a single deep amber #B4721A accent used on "
+    "exactly one element. Generous negative space, centred composition, wide even margins, "
+    "quiet and precise, like a page from a technical manual. Scene: {scene} "
     "Absolutely no text, no letters, no numbers, no words, no captions, no labels, no "
     "watermark, no logo, no signature, no initials, no people, no faces, no emoji. "
     "The picture is unsigned, unlettered and unlabelled."
