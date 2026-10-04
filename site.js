@@ -56,12 +56,27 @@
        midpoint test answers "which case is under the reader" in every state,
        including the gaps where nothing intersects at all. */
     var current = -1;
+    var bounds = null, lastDocH = 0;
+
+    function measure() {
+      bounds = cases.map(function (c) {
+        var r = c.getBoundingClientRect();
+        var top = r.top + window.scrollY;
+        return { top: top, bottom: top + r.height };
+      });
+      lastDocH = document.documentElement.scrollHeight;
+    }
 
     function whichCase() {
-      var mid = window.innerHeight / 2, best = 0, bestD = Infinity;
-      for (var i = 0; i < cases.length; i++) {
-        var r = cases[i].getBoundingClientRect();
-        var d = r.top > mid ? r.top - mid : (r.bottom < mid ? mid - r.bottom : 0);
+      /* One layout read per frame, not nineteen: the case boundaries only move
+         when the page re-lays out, and the document height catches that. Lazy
+         plate images changing height is the common case. */
+      var docH = document.documentElement.scrollHeight;
+      if (!bounds || docH !== lastDocH) measure();
+      var mid = window.scrollY + window.innerHeight / 2, best = 0, bestD = Infinity;
+      for (var i = 0; i < bounds.length; i++) {
+        var b = bounds[i];
+        var d = b.top > mid ? b.top - mid : (b.bottom < mid ? mid - b.bottom : 0);
         if (d < bestD) { bestD = d; best = i; }
       }
       return best;

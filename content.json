@@ -3,7 +3,7 @@
     {
       "n": 1,
       "slug": "spreadsheet-categorisation",
-      "title": "Spreadsheet data categorisation",
+      "title": "Spreadsheet Data Categorisation",
       "tier": "easy",
       "at": "00:53",
       "what": "Give every row one label from a fixed list, and nothing outside the list.",
@@ -28,12 +28,12 @@
           "question": "category=choice:Which budget category?|utilities:Power, water, internet,rent:Housing,subs:Subscriptions,ignore:Not a real expense"
         }
       ],
-      "plate": "A single wide horizontal open rectangle divided by four thin vertical hairlines into five empty cells, each cell holding one short horizontal hairline of a different length; the middle cell's hairline is amber instead of ink. Outline strokes only, at most nine elements, wide empty margins, no grid of small squares, no hatch texture, no filled blocks."
+      "plate": "A single wide horizontal open rectangle divided by four thin vertical hairlines into five empty cells, each cell holding one short horizontal hairline of a different length; the middle cell’s hairline is amber instead of ink. Outline strokes only, at most nine elements, wide empty margins, no grid of small squares, no hatch texture, no filled blocks."
     },
     {
       "n": 2,
       "slug": "inquiry-triage",
-      "title": "Customer inquiry triage and routing",
+      "title": "Customer Inquiry Triage and Routing",
       "tier": "easy",
       "at": "01:31",
       "what": "Read intent from an incoming message and send it down the right path.",
@@ -54,7 +54,7 @@
           "question": "dept=choice:Which team owns this?|billing:Payments,technical:Bugs,account:Login,general:Anything else"
         },
         {
-          "state": "The export button has done nothing since yesterday's release, three of us are blocked.",
+          "state": "The export button has done nothing since yesterday’s release, three of us are blocked.",
           "question": "urgency=score:How urgent is this?|Calm,Concerned,Urgent,Emergency"
         },
         {
@@ -67,12 +67,12 @@
     {
       "n": 3,
       "slug": "competitor-ad-intelligence",
-      "title": "Competitor advertisement intelligence",
+      "title": "Competitor Advertisement Intelligence",
       "tier": "easy",
       "at": "02:35",
       "what": "Turn hundreds of competitor ad variants into a pattern you can read.",
       "shape": {
-        "state": "one ad's copy, as collected",
+        "state": "one ad’s copy, as collected",
         "question": "choice for format, choice for call to action, choice for funnel stage",
         "answer": "three tags per ad, aggregate them yourself"
       },
@@ -97,7 +97,7 @@
     {
       "n": 4,
       "slug": "clip-extraction",
-      "title": "Clip extraction from long recordings",
+      "title": "Video and Audio Clip Extraction",
       "tier": "easy",
       "at": "03:09",
       "what": "Find the ten minutes worth publishing inside four hours of audio.",
@@ -114,11 +114,11 @@
       },
       "prompts": [
         {
-          "state": "[00:41:12] ... and that is the bit everyone gets wrong, you do not need a bigger model, you need a smaller question ...",
+          "state": "[00:41:12] … and that is the bit everyone gets wrong, you do not need a bigger model, you need a smaller question …",
           "question": "clip=score:How strong is this passage as a standalone short clip?|Fluff,Context,Useful,Quotable,Clip gold"
         },
         {
-          "state": "[00:15:40] ... so anyway we were late for the flight and the bags never made it ...",
+          "state": "[00:15:40] … so anyway we were late for the flight and the bags never made it …",
           "question": "keep=Is this passage usable as a standalone social clip without the surrounding conversation?"
         }
       ],
@@ -127,12 +127,12 @@
     {
       "n": 5,
       "slug": "churn-risk",
-      "title": "Churn risk profiling",
+      "title": "Customer Churn Risk Profiling",
       "tier": "easy",
       "at": "03:37",
       "what": "Sort accounts into bands your retention workflow can act on.",
       "shape": {
-        "state": "one account's facts, named fields",
+        "state": "one account’s facts, named fields",
         "question": "choice over your bands, score for how far along the risk is",
         "answer": "a band per account, routed by your code"
       },
@@ -157,7 +157,7 @@
     {
       "n": 6,
       "slug": "internal-linking",
-      "title": "Internal linking and knowledge base graphing",
+      "title": "Automated Internal Linking and Knowledge Base Graphing",
       "tier": "easy",
       "at": "04:03",
       "what": "Connect pages or notes to each other without hand-picking the links.",
@@ -187,7 +187,7 @@
     {
       "n": 7,
       "slug": "purchase-intent",
-      "title": "Social purchase intent",
+      "title": "Social Media Purchase Intent Identification",
       "tier": "easy",
       "at": "04:38",
       "what": "Pull the buyers out of a comment section.",
@@ -217,16 +217,16 @@
     {
       "n": 8,
       "slug": "verification-and-calibration",
-      "title": "Output verification and model calibration",
+      "title": "Output Verification and Model Calibration",
       "tier": "easy",
       "at": "05:04",
       "what": "Measure how often the decision is right before you trust it with anything.",
       "shape": {
         "state": "one record from a labelled set, with the answer withheld",
         "question": "the same question you will ask in production",
-        "answer": "the model's pick, for you to compare against the human answer"
+        "answer": "the model’s pick, for you to compare against the human answer"
       },
-      "use": "Build a validation set of a few dozen to a few hundred records a human has already labelled, run the loop without showing the answers, and count the matches. Misclassifications tell you where the labels are ambiguous, and the spread of probabilities tells you where the confidence cutoff belongs. The video's own advice is fifty records or more before production; tune the cutoff on one set and hold some records back.",
+      "use": "Build a validation set of a few dozen to a few hundred records a human has already labelled, run the loop without showing the answers, and count the matches. Misclassifications tell you where the labels are ambiguous, and the spread of probabilities tells you where the confidence cutoff belongs. The video’s own advice is fifty records or more before production; tune the cutoff on one set and hold some records back.",
       "code": {
         "lang": "python",
         "label": "a labelled set, a match rate, a cutoff",
@@ -247,16 +247,16 @@
     {
       "n": 9,
       "slug": "skill-selection",
-      "title": "Agent skill selection",
+      "title": "Agent Skill Selection",
       "tier": "intermediate",
       "at": "06:21",
       "what": "Let the agent pick the right skill before it loads any of them.",
       "shape": {
-        "state": "the user's prompt",
+        "state": "the user’s prompt",
         "question": "choice, one option per skill in the library",
         "answer": "the skill to load, plus how sure it is"
       },
-      "use": "You do not have to put every skill description in the context window to choose one. Register the skills as the options, send the prompt, and load only the winner. In the video's own counting, 145 skills were matched in about five seconds across fourteen tests against roughly thirty for the larger model, and a separate test over 182 skills cut wrong picks by more than half. Keep the option list to the skills that are real candidates for this agent.",
+      "use": "You do not have to put every skill description in the context window to choose one. Register the skills as the options, send the prompt, and load only the winner. In the video’s own counting, 145 skills were matched in about five seconds across fourteen tests against roughly thirty for the larger model, and a separate test over 182 skills cut wrong picks by more than half. Keep the option list to the skills that are real candidates for this agent.",
       "code": {
         "lang": "bash",
         "label": "the skill library is the menu",
@@ -277,12 +277,12 @@
     {
       "n": 10,
       "slug": "model-routing",
-      "title": "Intelligent multi model routing",
+      "title": "Intelligent Multi Model Routing",
       "tier": "intermediate",
       "at": "07:02",
       "what": "Send the easy question to the cheap model and the hard one to the expensive model.",
       "shape": {
-        "state": "the user's message",
+        "state": "the user’s message",
         "question": "choice over the models you have wired up",
         "answer": "the model to call, decided in about a third of a second"
       },
@@ -307,7 +307,7 @@
     {
       "n": 11,
       "slug": "inbox-pre-filtering",
-      "title": "Inbox pre filtering for AI agents",
+      "title": "Inbox Pre Filtering for AI Agents",
       "tier": "intermediate",
       "at": "07:37",
       "what": "Stop paying a frontier model to read spam.",
@@ -316,7 +316,7 @@
         "question": "choice over the buckets you act on",
         "answer": "one bucket per message; only the useful ones continue downstream"
       },
-      "use": "Put the decision in front of the writing. Each message is bucketed as an actionable inquiry, a sponsorship, spam or phishing; spam and phishing are dropped, and only the messages that need a reply reach the model that drafts. In the video's own run, 1,700 messages were sorted for eighteen cents. Keep the state to the fields the question needs, because the rest of the message is a distraction.",
+      "use": "Put the decision in front of the writing. Each message is bucketed as an actionable inquiry, a sponsorship, spam or phishing; spam and phishing are dropped, and only the messages that need a reply reach the model that drafts. In the video’s own run, 1,700 messages were sorted for eighteen cents. Keep the state to the fields the question needs, because the rest of the message is a distraction.",
       "code": {
         "lang": "python",
         "label": "read the headers, drop the noise",
@@ -337,7 +337,7 @@
     {
       "n": 12,
       "slug": "feed-cleansing",
-      "title": "Browser feed cleansing and element removal",
+      "title": "Browser Feed Cleansing and Element Removal",
       "tier": "intermediate",
       "at": "08:07",
       "what": "Judge each item as it loads and hide what does not earn the space.",
@@ -346,7 +346,7 @@
         "question": "a single noul question, asked hundreds of times",
         "answer": "a probability per item; your code hides or keeps"
       },
-      "use": "A content script walks the loaded items, asks one narrow question of each, and collapses the ones that fail. The video's example hides posts that read as machine-generated filler; the same shape hides ads or cookie notices. Because one call answers in a fraction of a second, the page still feels instant if you judge only the items actually in view.",
+      "use": "A content script walks the loaded items, asks one narrow question of each, and collapses the ones that fail. The video’s example hides posts that read as machine-generated filler; the same shape hides ads or cookie notices. Because one call answers in a fraction of a second, the page still feels instant if you judge only the items actually in view.",
       "code": {
         "lang": "javascript",
         "label": "one question per post, in the page",
@@ -367,7 +367,7 @@
     {
       "n": 13,
       "slug": "semantic-search",
-      "title": "Semantic in page search",
+      "title": "Semantic In Page Search",
       "tier": "intermediate",
       "at": "08:39",
       "what": "Find the paragraph you meant, not the words you typed.",
@@ -397,7 +397,7 @@
     {
       "n": 14,
       "slug": "asset-retrieval",
-      "title": "Image and asset retrieval via metadata",
+      "title": "Image and Asset Retrieval via Metadata",
       "tier": "intermediate",
       "at": "09:13",
       "what": "Search a media library by what is in the picture, not by file name.",
@@ -406,7 +406,7 @@
         "question": "choice over asset keys",
         "answer": "the asset to open, or no match"
       },
-      "use": "File names are a poor index, so every asset gets text first: the prompt it was generated from, or a caption written by a cheap multimodal model at indexing time. Searching then becomes one typed decision over those records. The video's own note is that captions are nearly free at this scale, and the index is worth more than the model that wrote it.",
+      "use": "File names are a poor index, so every asset gets text first: the prompt it was generated from, or a caption written by a cheap multimodal model at indexing time. Searching then becomes one typed decision over those records. The video’s own note is that captions are nearly free at this scale, and the index is worth more than the model that wrote it.",
       "code": {
         "lang": "python",
         "label": "caption once, decide on every search",
@@ -427,7 +427,7 @@
     {
       "n": 15,
       "slug": "live-speech-classification",
-      "title": "Live meeting and speech classification",
+      "title": "Live Meeting and Speech Classification",
       "tier": "advanced",
       "at": "10:00",
       "what": "Tag sentences while they are still being spoken.",
@@ -436,7 +436,7 @@
         "question": "choice over your categories, plus a noul for whether it is an action",
         "answer": "one tag per sentence, accumulating into live notes"
       },
-      "use": "Stream the audio through speech to text, and send each finished sentence as its own call, because a sentence is short and the answer comes back before the next one lands. Sentences are sorted into decisions, action items, risks and questions, which is a meeting record written as it happens. The video's example on the same shape scores a debate as it is spoken, one sentence at a time.",
+      "use": "Stream the audio through speech to text, and send each finished sentence as its own call, because a sentence is short and the answer comes back before the next one lands. Sentences are sorted into decisions, action items, risks and questions, which is a meeting record written as it happens. The video’s example on the same shape scores a debate as it is spoken, one sentence at a time.",
       "code": {
         "lang": "python",
         "label": "one finished sentence, one tag",
@@ -445,7 +445,7 @@
       "prompts": [
         {
           "state": "Priya said: let us ship the smaller version on Thursday and keep the migration for next month.",
-          "question": "kind=choice:How should Priya's sentence be filed in the minutes?|decision:A choice the room committed to,action:Something one named person will do,risk:A problem or dependency raised,question:Something still unanswered"
+          "question": "kind=choice:How should Priya’s sentence be filed in the minutes?|decision:A choice the room committed to,action:Something one named person will do,risk:A problem or dependency raised,question:Something still unanswered"
         },
         {
           "state": "Sam said: I will get the pricing page rewritten before the launch review.",
@@ -457,12 +457,12 @@
     {
       "n": 16,
       "slug": "retrieval-engine",
-      "title": "Zero LLM retrieval engine",
+      "title": "Zero LLM Retrieval Engine",
       "tier": "advanced",
       "at": "10:30",
       "what": "Answer narrow questions from a fixed corpus with no text generation at all.",
       "shape": {
-        "state": "the visitor's question",
+        "state": "the visitor’s question",
         "question": "choice over indexed topic units, plus a noul for whether the corpus covers it",
         "answer": "the matching item and its timestamp; no prose"
       },
@@ -487,7 +487,7 @@
     {
       "n": 17,
       "slug": "icon-selection",
-      "title": "Dynamic UI icon selection",
+      "title": "Dynamic UI Asset and Icon Selection",
       "tier": "advanced",
       "at": "11:13",
       "what": "Pick the picture that matches what the user just typed.",
@@ -517,12 +517,12 @@
     {
       "n": 18,
       "slug": "page-assembly",
-      "title": "Just in time page assembly",
+      "title": "Dynamic Just In Time Webpage Assembly",
       "tier": "advanced",
       "at": "11:59",
       "what": "Choose the parts a visitor needs and build the page from them.",
       "shape": {
-        "state": "the visitor's signals, written as facts",
+        "state": "the visitor’s signals, written as facts",
         "question": "one choice per slot in the layout",
         "answer": "which module fills each slot; your code renders them"
       },
@@ -547,7 +547,7 @@
     {
       "n": 19,
       "slug": "use-case-audit",
-      "title": "Workflow use case auditing",
+      "title": "Workflow Use Case Auditing",
       "tier": "advanced",
       "at": "12:23",
       "what": "Find the steps in your own work that should have been a decision, not a model call.",

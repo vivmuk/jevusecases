@@ -3,18 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Jev use cases: nineteen closed-answer jobs for a decision model</title>
-<meta name="description" content="Nineteen ways to replace an open-ended language-model call with a typed decision. For each one: what the decision is, the code that asks it, and the prompts that run it.">
+<title>Jev use cases: 19 closed-answer jobs for a decision model</title>
+<meta name="description" content="19 ways to replace an open-ended language-model call with a typed decision. For each one: what the decision is, the code that asks it, and the prompts that run it.">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#f1f2f4">
 <meta property="og:title" content="Jev use cases">
-<meta property="og:description" content="Nineteen closed-answer jobs for a decision model, each with its code and its prompts.">
+<meta property="og:description" content="19 closed-answer jobs for a decision model, each with its code and its prompts.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://jevusecases-production.up.railway.app/">
 <link rel="canonical" href="https://jevusecases-production.up.railway.app/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23f1f2f4'/><rect x='9' y='7' width='3' height='18' fill='%2315181c'/><rect x='15' y='7' width='8' height='3' fill='%239c5a10'/><rect x='15' y='14' width='8' height='3' fill='%2315181c'/><rect x='15' y='21' width='5' height='3' fill='%2315181c'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="scrollcraft.css">
 <link rel="stylesheet" href="site.css">
@@ -28,55 +29,14 @@
 <header class="site-bar">
   <p class="site-bar__mark">Jev <span>/</span> use cases</p>
   <button class="btn btn--ghost" type="button" data-index-toggle aria-expanded="false" aria-controls="index-panel">Cases</button>
-  <a class="btn btn--solid" href="https://github.com/vivmuk/jevusecases" rel="noreferrer">Open the source</a>
+  <a class="btn btn--solid" href="https://github.com/vivmuk/jevusecases" rel="noreferrer">Open the Source</a>
 </header>
-
-<nav class="index-panel" id="index-panel" data-open="false" aria-label="All nineteen cases">
-  <div class="index-panel__inner">
-    <h2>All nineteen cases</h2>
-    <p>Grouped the way the video groups them. Every one is a closed-answer job: the possible answers can be written down before the question is asked.</p>
-      <div class="index-group">
-        <h3>Cases 01 to 08</h3>
-        <ul class="index-list">
-          <li><a href="#case-1"><span class="n">01</span><span class="t">Spreadsheet data categorisation</span><span class="at">00:53</span></a></li>
-          <li><a href="#case-2"><span class="n">02</span><span class="t">Customer inquiry triage and routing</span><span class="at">01:31</span></a></li>
-          <li><a href="#case-3"><span class="n">03</span><span class="t">Competitor advertisement intelligence</span><span class="at">02:35</span></a></li>
-          <li><a href="#case-4"><span class="n">04</span><span class="t">Clip extraction from long recordings</span><span class="at">03:09</span></a></li>
-          <li><a href="#case-5"><span class="n">05</span><span class="t">Churn risk profiling</span><span class="at">03:37</span></a></li>
-          <li><a href="#case-6"><span class="n">06</span><span class="t">Internal linking and knowledge base graphing</span><span class="at">04:03</span></a></li>
-          <li><a href="#case-7"><span class="n">07</span><span class="t">Social purchase intent</span><span class="at">04:38</span></a></li>
-          <li><a href="#case-8"><span class="n">08</span><span class="t">Output verification and model calibration</span><span class="at">05:04</span></a></li>
-        </ul>
-      </div>
-      <div class="index-group">
-        <h3>Cases 09 to 14</h3>
-        <ul class="index-list">
-          <li><a href="#case-9"><span class="n">09</span><span class="t">Agent skill selection</span><span class="at">06:21</span></a></li>
-          <li><a href="#case-10"><span class="n">10</span><span class="t">Intelligent multi model routing</span><span class="at">07:02</span></a></li>
-          <li><a href="#case-11"><span class="n">11</span><span class="t">Inbox pre filtering for AI agents</span><span class="at">07:37</span></a></li>
-          <li><a href="#case-12"><span class="n">12</span><span class="t">Browser feed cleansing and element removal</span><span class="at">08:07</span></a></li>
-          <li><a href="#case-13"><span class="n">13</span><span class="t">Semantic in page search</span><span class="at">08:39</span></a></li>
-          <li><a href="#case-14"><span class="n">14</span><span class="t">Image and asset retrieval via metadata</span><span class="at">09:13</span></a></li>
-        </ul>
-      </div>
-      <div class="index-group">
-        <h3>Cases 15 to 19</h3>
-        <ul class="index-list">
-          <li><a href="#case-15"><span class="n">15</span><span class="t">Live meeting and speech classification</span><span class="at">10:00</span></a></li>
-          <li><a href="#case-16"><span class="n">16</span><span class="t">Zero LLM retrieval engine</span><span class="at">10:30</span></a></li>
-          <li><a href="#case-17"><span class="n">17</span><span class="t">Dynamic UI icon selection</span><span class="at">11:13</span></a></li>
-          <li><a href="#case-18"><span class="n">18</span><span class="t">Just in time page assembly</span><span class="at">11:59</span></a></li>
-          <li><a href="#case-19"><span class="n">19</span><span class="t">Workflow use case auditing</span><span class="at">12:23</span></a></li>
-        </ul>
-      </div>
-  </div>
-</nav>
 
 <main id="top">
 
   <section class="sc-section" data-sc-act="pin" data-sc-span="2" aria-labelledby="open-h">
     <div data-sc-stage class="sc-wrap open">
-      <h1 class="sc-display sc-display--xl" id="open-h" data-sc-cue="0 0.72 0" data-sc-kinetic="lines">Nineteen jobs for a model that answers in half a second.</h1>
+      <h1 class="sc-display sc-display--xl" id="open-h" data-sc-cue="0 0.72 0" data-sc-kinetic="lines">19 Jobs for a Model That Answers in Half a Second.</h1>
       <p class="open__lede sc-body" data-sc-cue="0 0.72 0">Each card carries the decision, the code that asks it, and the prompts that run it.</p>
       <dl class="open__facts" data-sc-cue="0.5 1 0.3 0.5">
         <div><dt>cases, from the video</dt><dd data-sc-count="0 19">0</dd></div>
@@ -90,101 +50,101 @@
   <section data-sc-act="pan" data-sc-span="3.4" aria-labelledby="rail-h">
     <div data-sc-stage>
       <div class="rail-head sc-wrap">
-        <h2 class="sc-display sc-display--md" id="rail-h">The whole set, side by side.</h2>
-        <p>Nineteen tabs, in the order the video walks them. Pick any one to jump to its card, and the rail at the bottom of the screen keeps your place.</p>
+        <h2 class="sc-display sc-display--md" id="rail-h">The Whole Set, Side by Side.</h2>
+        <p>19 tabs, in the order the video walks them. Pick any one to jump to its card, and the rail at the bottom of the screen keeps your place.</p>
       </div>
       <div class="rail" data-sc-pan="0.06">
-        <a class="rail__tab" href="#case-1" title="Spreadsheet data categorisation">
+        <a class="rail__tab" href="#case-1" title="Spreadsheet Data Categorisation">
           <span class="n">01</span>
           <span class="t">Row labelling</span>
           <span class="d">easy</span>
         </a>
-        <a class="rail__tab" href="#case-2" title="Customer inquiry triage and routing">
+        <a class="rail__tab" href="#case-2" title="Customer Inquiry Triage and Routing">
           <span class="n">02</span>
           <span class="t">Inquiry triage</span>
           <span class="d">easy</span>
         </a>
-        <a class="rail__tab" href="#case-3" title="Competitor advertisement intelligence">
+        <a class="rail__tab" href="#case-3" title="Competitor Advertisement Intelligence">
           <span class="n">03</span>
           <span class="t">Ad intelligence</span>
           <span class="d">easy</span>
         </a>
-        <a class="rail__tab" href="#case-4" title="Clip extraction from long recordings">
+        <a class="rail__tab" href="#case-4" title="Video and Audio Clip Extraction">
           <span class="n">04</span>
           <span class="t">Clip hunting</span>
           <span class="d">easy</span>
         </a>
-        <a class="rail__tab" href="#case-5" title="Churn risk profiling">
+        <a class="rail__tab" href="#case-5" title="Customer Churn Risk Profiling">
           <span class="n">05</span>
           <span class="t">Churn bands</span>
           <span class="d">easy</span>
         </a>
-        <a class="rail__tab" href="#case-6" title="Internal linking and knowledge base graphing">
+        <a class="rail__tab" href="#case-6" title="Automated Internal Linking and Knowledge Base Graphing">
           <span class="n">06</span>
           <span class="t">Internal links</span>
           <span class="d">easy</span>
         </a>
-        <a class="rail__tab" href="#case-7" title="Social purchase intent">
+        <a class="rail__tab" href="#case-7" title="Social Media Purchase Intent Identification">
           <span class="n">07</span>
           <span class="t">Purchase intent</span>
           <span class="d">easy</span>
         </a>
-        <a class="rail__tab" href="#case-8" title="Output verification and model calibration">
+        <a class="rail__tab" href="#case-8" title="Output Verification and Model Calibration">
           <span class="n">08</span>
           <span class="t">Calibration</span>
           <span class="d">easy</span>
         </a>
-        <a class="rail__tab" href="#case-9" title="Agent skill selection">
+        <a class="rail__tab" href="#case-9" title="Agent Skill Selection">
           <span class="n">09</span>
           <span class="t">Skill picking</span>
           <span class="d">intermediate</span>
         </a>
-        <a class="rail__tab" href="#case-10" title="Intelligent multi model routing">
+        <a class="rail__tab" href="#case-10" title="Intelligent Multi Model Routing">
           <span class="n">10</span>
           <span class="t">Model routing</span>
           <span class="d">intermediate</span>
         </a>
-        <a class="rail__tab" href="#case-11" title="Inbox pre filtering for AI agents">
+        <a class="rail__tab" href="#case-11" title="Inbox Pre Filtering for AI Agents">
           <span class="n">11</span>
           <span class="t">Inbox gate</span>
           <span class="d">intermediate</span>
         </a>
-        <a class="rail__tab" href="#case-12" title="Browser feed cleansing and element removal">
+        <a class="rail__tab" href="#case-12" title="Browser Feed Cleansing and Element Removal">
           <span class="n">12</span>
           <span class="t">Feed cleansing</span>
           <span class="d">intermediate</span>
         </a>
-        <a class="rail__tab" href="#case-13" title="Semantic in page search">
+        <a class="rail__tab" href="#case-13" title="Semantic In Page Search">
           <span class="n">13</span>
           <span class="t">Semantic find</span>
           <span class="d">intermediate</span>
         </a>
-        <a class="rail__tab" href="#case-14" title="Image and asset retrieval via metadata">
+        <a class="rail__tab" href="#case-14" title="Image and Asset Retrieval via Metadata">
           <span class="n">14</span>
           <span class="t">Asset search</span>
           <span class="d">intermediate</span>
         </a>
-        <a class="rail__tab" href="#case-15" title="Live meeting and speech classification">
+        <a class="rail__tab" href="#case-15" title="Live Meeting and Speech Classification">
           <span class="n">15</span>
           <span class="t">Live sentences</span>
           <span class="d">advanced</span>
         </a>
-        <a class="rail__tab" href="#case-16" title="Zero LLM retrieval engine">
+        <a class="rail__tab" href="#case-16" title="Zero LLM Retrieval Engine">
           <span class="n">16</span>
           <span class="t">No-LLM answers</span>
           <span class="d">advanced</span>
         </a>
-        <a class="rail__tab" href="#case-17" title="Dynamic UI icon selection">
+        <a class="rail__tab" href="#case-17" title="Dynamic UI Asset and Icon Selection">
           <span class="n">17</span>
           <span class="t">Icon picking</span>
           <span class="d">advanced</span>
         </a>
-        <a class="rail__tab" href="#case-18" title="Just in time page assembly">
+        <a class="rail__tab" href="#case-18" title="Dynamic Just In Time Webpage Assembly">
           <span class="n">18</span>
           <span class="t">Page assembly</span>
           <span class="d">advanced</span>
         </a>
-        <a class="rail__tab" href="#case-19" title="Workflow use case auditing">
+        <a class="rail__tab" href="#case-19" title="Workflow Use Case Auditing">
           <span class="n">19</span>
           <span class="t">Work audit</span>
           <span class="d">advanced</span>
@@ -203,12 +163,12 @@
       </div>
     </section>
 
-    <article class="case case--flip" id="case-1" data-case="01" data-title="Spreadsheet data categorisation"
+    <article class="case case--flip" id="case-1" data-case="01" data-title="Spreadsheet Data Categorisation"
              aria-labelledby="case-1-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 01<span class="case__tier">easy</span></p>
-          <h3 class="case__title" id="case-1-t">Spreadsheet data categorisation</h3>
+          <h3 class="case__title" id="case-1-t">Spreadsheet Data Categorisation</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=53s" rel="noreferrer">00:53 in the video</a></p>
           <p class="case__what">Give every row one label from a fixed list, and nothing outside the list.</p>
           <dl class="shape">
@@ -223,7 +183,7 @@
             <span class="code__lang">python</span>
             <button class="copy" type="button" data-copy="c1">Copy</button>
           </figcaption>
-          <pre id="c1"><code>import json, urllib.request
+          <pre id="c1" translate="no"><code>import json, urllib.request
 
 CATS = {&quot;groceries&quot;: &quot;Food and groceries&quot;,
         &quot;transport&quot;: &quot;Travel and transport&quot;,
@@ -268,19 +228,19 @@ question: category=choice:Which budget category?|utilities:Power, water, interne
         <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
             <img src="assets/plates/plate-01.webp" width="1600" height="900"
-                 alt="Minimalist diagram for case 1: a single wide horizontal open rectangle divided by four thin vertical hairlines into five empty cells, each cell holding one short horizontal hairline of a different length; the middle cell&#x27;s hairline is amber instead of ink." loading="lazy" decoding="async">
+                 alt="Minimalist diagram for case 1: a single wide horizontal open rectangle divided by four thin vertical hairlines into five empty cells, each cell holding one short horizontal hairline of a different length; the middle cell’s hairline is amber instead of ink." loading="lazy" decoding="async">
           </div>
           <figcaption>Plate 01. The shape of the job, drawn without labels on purpose.</figcaption>
         </figure>
       </div>
     </article>
 
-    <article class="case case--wide" id="case-2" data-case="02" data-title="Customer inquiry triage and routing"
+    <article class="case case--wide" id="case-2" data-case="02" data-title="Customer Inquiry Triage and Routing"
              aria-labelledby="case-2-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 02<span class="case__tier">easy</span></p>
-          <h3 class="case__title" id="case-2-t">Customer inquiry triage and routing</h3>
+          <h3 class="case__title" id="case-2-t">Customer Inquiry Triage and Routing</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=91s" rel="noreferrer">01:31 in the video</a></p>
           <p class="case__what">Read intent from an incoming message and send it down the right path.</p>
           <dl class="shape">
@@ -295,7 +255,7 @@ question: category=choice:Which budget category?|utilities:Power, water, interne
             <span class="code__lang">bash</span>
             <button class="copy" type="button" data-copy="c2">Copy</button>
           </figcaption>
-          <pre id="c2"><code>jev-decide --state &quot;Order A-104 was charged twice. Please refund the duplicate.&quot; \
+          <pre id="c2" translate="no"><code>jev-decide --state &quot;Order A-104 was charged twice. Please refund the duplicate.&quot; \
   --yes &#x27;refund=Is the customer asking for a refund?&#x27; \
   --ask &#x27;dept=choice:Which team owns this?|billing:Payments,technical:Bugs,account:Login&#x27; \
   --ask &#x27;urgency=score:How urgent is this?|Calm,Concerned,Urgent,Emergency&#x27;
@@ -319,7 +279,7 @@ question: dept=choice:Which team owns this?|billing:Payments,technical:Bugs,acco
             <span class="prompt__tag">state + question</span>
             <button class="copy" type="button" data-copy="p2-2">Copy</button>
           </div>
-          <pre id="p2-2">state: The export button has done nothing since yesterday&#x27;s release, three of us are blocked.
+          <pre id="p2-2">state: The export button has done nothing since yesterday’s release, three of us are blocked.
 
 question: urgency=score:How urgent is this?|Calm,Concerned,Urgent,Emergency</pre>
         </div>
@@ -344,16 +304,16 @@ question: auto=Is this message answerable from the public documentation without 
       </div>
     </article>
 
-    <article class="case" id="case-3" data-case="03" data-title="Competitor advertisement intelligence"
+    <article class="case" id="case-3" data-case="03" data-title="Competitor Advertisement Intelligence"
              aria-labelledby="case-3-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 03<span class="case__tier">easy</span></p>
-          <h3 class="case__title" id="case-3-t">Competitor advertisement intelligence</h3>
+          <h3 class="case__title" id="case-3-t">Competitor Advertisement Intelligence</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=155s" rel="noreferrer">02:35 in the video</a></p>
           <p class="case__what">Turn hundreds of competitor ad variants into a pattern you can read.</p>
           <dl class="shape">
-            <div class="shape__row"><dt>state</dt><dd>one ad&#x27;s copy, as collected</dd></div>
+            <div class="shape__row"><dt>state</dt><dd>one ad’s copy, as collected</dd></div>
             <div class="shape__row"><dt>question</dt><dd>choice for format, choice for call to action, choice for funnel stage</dd></div>
             <div class="shape__row"><dt>answer</dt><dd>three tags per ad, aggregate them yourself</dd></div>
           </dl>
@@ -364,7 +324,7 @@ question: auto=Is this message answerable from the public documentation without 
             <span class="code__lang">python</span>
             <button class="copy" type="button" data-copy="c3">Copy</button>
           </figcaption>
-          <pre id="c3"><code>TAX = {
+          <pre id="c3" translate="no"><code>TAX = {
   &quot;format&quot;: {&quot;ugc&quot;: &quot;Phone-shot testimonial&quot;, &quot;studio&quot;: &quot;Studio product shot&quot;,
              &quot;static&quot;: &quot;Still image with text overlay&quot;, &quot;carousel&quot;: &quot;Multi-image carousel&quot;},
   &quot;cta&quot;:    {&quot;trial&quot;: &quot;Free trial&quot;, &quot;demo&quot;: &quot;Book a demo&quot;, &quot;shop&quot;: &quot;Shop now&quot;,
@@ -409,12 +369,12 @@ question: funnel=choice:Where in the funnel is this aimed?|top:Problem aware,mid
       </div>
     </article>
 
-    <article class="case case--flip" id="case-4" data-case="04" data-title="Clip extraction from long recordings"
+    <article class="case case--flip" id="case-4" data-case="04" data-title="Video and Audio Clip Extraction"
              aria-labelledby="case-4-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 04<span class="case__tier">easy</span></p>
-          <h3 class="case__title" id="case-4-t">Clip extraction from long recordings</h3>
+          <h3 class="case__title" id="case-4-t">Video and Audio Clip Extraction</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=189s" rel="noreferrer">03:09 in the video</a></p>
           <p class="case__what">Find the ten minutes worth publishing inside four hours of audio.</p>
           <dl class="shape">
@@ -429,7 +389,7 @@ question: funnel=choice:Where in the funnel is this aimed?|top:Problem aware,mid
             <span class="code__lang">python</span>
             <button class="copy" type="button" data-copy="c4">Copy</button>
           </figcaption>
-          <pre id="c4"><code>RUBRIC = [&quot;Fluff&quot;, &quot;Context&quot;, &quot;Useful&quot;, &quot;Quotable&quot;, &quot;Clip gold&quot;]
+          <pre id="c4" translate="no"><code>RUBRIC = [&quot;Fluff&quot;, &quot;Context&quot;, &quot;Useful&quot;, &quot;Quotable&quot;, &quot;Clip gold&quot;]
 
 def score(chunk):
     qs = {&quot;clip&quot;: {&quot;type&quot;: &quot;score&quot;, &quot;criteria&quot;: RUBRIC,
@@ -447,7 +407,7 @@ for c in top:
             <span class="prompt__tag">state + question</span>
             <button class="copy" type="button" data-copy="p4-1">Copy</button>
           </div>
-          <pre id="p4-1">state: [00:41:12] ... and that is the bit everyone gets wrong, you do not need a bigger model, you need a smaller question ...
+          <pre id="p4-1">state: [00:41:12] … and that is the bit everyone gets wrong, you do not need a bigger model, you need a smaller question …
 
 question: clip=score:How strong is this passage as a standalone short clip?|Fluff,Context,Useful,Quotable,Clip gold</pre>
         </div>
@@ -457,7 +417,7 @@ question: clip=score:How strong is this passage as a standalone short clip?|Fluf
             <span class="prompt__tag">state + question</span>
             <button class="copy" type="button" data-copy="p4-2">Copy</button>
           </div>
-          <pre id="p4-2">state: [00:15:40] ... so anyway we were late for the flight and the bags never made it ...
+          <pre id="p4-2">state: [00:15:40] … so anyway we were late for the flight and the bags never made it …
 
 question: keep=Is this passage usable as a standalone social clip without the surrounding conversation?</pre>
         </div>
@@ -472,16 +432,16 @@ question: keep=Is this passage usable as a standalone social clip without the su
       </div>
     </article>
 
-    <article class="case case--wide" id="case-5" data-case="05" data-title="Churn risk profiling"
+    <article class="case case--wide" id="case-5" data-case="05" data-title="Customer Churn Risk Profiling"
              aria-labelledby="case-5-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 05<span class="case__tier">easy</span></p>
-          <h3 class="case__title" id="case-5-t">Churn risk profiling</h3>
+          <h3 class="case__title" id="case-5-t">Customer Churn Risk Profiling</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=217s" rel="noreferrer">03:37 in the video</a></p>
           <p class="case__what">Sort accounts into bands your retention workflow can act on.</p>
           <dl class="shape">
-            <div class="shape__row"><dt>state</dt><dd>one account&#x27;s facts, named fields</dd></div>
+            <div class="shape__row"><dt>state</dt><dd>one account’s facts, named fields</dd></div>
             <div class="shape__row"><dt>question</dt><dd>choice over your bands, score for how far along the risk is</dd></div>
             <div class="shape__row"><dt>answer</dt><dd>a band per account, routed by your code</dd></div>
           </dl>
@@ -492,7 +452,7 @@ question: keep=Is this passage usable as a standalone social clip without the su
             <span class="code__lang">python</span>
             <button class="copy" type="button" data-copy="c5">Copy</button>
           </figcaption>
-          <pre id="c5"><code>BANDS = {&quot;healthy&quot;: &quot;Using it weekly and growing&quot;,
+          <pre id="c5" translate="no"><code>BANDS = {&quot;healthy&quot;: &quot;Using it weekly and growing&quot;,
          &quot;watch&quot;: &quot;Usage slipping but still active&quot;,
          &quot;risk&quot;: &quot;Likely to cancel in the next quarter&quot;}
 
@@ -537,12 +497,12 @@ question: reach=score:How far along is the cancellation?|Just quiet,Actively dri
       </div>
     </article>
 
-    <article class="case" id="case-6" data-case="06" data-title="Internal linking and knowledge base graphing"
+    <article class="case" id="case-6" data-case="06" data-title="Automated Internal Linking and Knowledge Base Graphing"
              aria-labelledby="case-6-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 06<span class="case__tier">easy</span></p>
-          <h3 class="case__title" id="case-6-t">Internal linking and knowledge base graphing</h3>
+          <h3 class="case__title" id="case-6-t">Automated Internal Linking and Knowledge Base Graphing</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=243s" rel="noreferrer">04:03 in the video</a></p>
           <p class="case__what">Connect pages or notes to each other without hand-picking the links.</p>
           <dl class="shape">
@@ -557,7 +517,7 @@ question: reach=score:How far along is the cancellation?|Just quiet,Actively dri
             <span class="code__lang">python</span>
             <button class="copy" type="button" data-copy="c6">Copy</button>
           </figcaption>
-          <pre id="c6"><code>def link_for(paragraph, pages):
+          <pre id="c6" translate="no"><code>def link_for(paragraph, pages):
     targets = {p[&quot;slug&quot;]: p[&quot;title&quot;] for p in pages}
     targets[&quot;none&quot;] = &quot;No useful target in this list&quot;
     qs = {
@@ -602,12 +562,12 @@ question: worth=Would that link genuinely help a reader of this paragraph?</pre>
       </div>
     </article>
 
-    <article class="case case--flip" id="case-7" data-case="07" data-title="Social purchase intent"
+    <article class="case case--flip" id="case-7" data-case="07" data-title="Social Media Purchase Intent Identification"
              aria-labelledby="case-7-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 07<span class="case__tier">easy</span></p>
-          <h3 class="case__title" id="case-7-t">Social purchase intent</h3>
+          <h3 class="case__title" id="case-7-t">Social Media Purchase Intent Identification</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=278s" rel="noreferrer">04:38 in the video</a></p>
           <p class="case__what">Pull the buyers out of a comment section.</p>
           <dl class="shape">
@@ -622,7 +582,7 @@ question: worth=Would that link genuinely help a reader of this paragraph?</pre>
             <span class="code__lang">python</span>
             <button class="copy" type="button" data-copy="c7">Copy</button>
           </figcaption>
-          <pre id="c7"><code>KINDS = {&quot;buy&quot;: &quot;Wants to buy, needs a link or price&quot;,
+          <pre id="c7" translate="no"><code>KINDS = {&quot;buy&quot;: &quot;Wants to buy, needs a link or price&quot;,
          &quot;ask&quot;: &quot;Question about the product or shipping&quot;,
          &quot;moan&quot;: &quot;Complaint or bad experience&quot;,
          &quot;chat&quot;: &quot;Comment with no commercial content&quot;}
@@ -666,27 +626,27 @@ question: escalate=Does this comment need a human reply within the hour?</pre>
       </div>
     </article>
 
-    <article class="case case--wide" id="case-8" data-case="08" data-title="Output verification and model calibration"
+    <article class="case case--wide" id="case-8" data-case="08" data-title="Output Verification and Model Calibration"
              aria-labelledby="case-8-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 08<span class="case__tier">easy</span></p>
-          <h3 class="case__title" id="case-8-t">Output verification and model calibration</h3>
+          <h3 class="case__title" id="case-8-t">Output Verification and Model Calibration</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=304s" rel="noreferrer">05:04 in the video</a></p>
           <p class="case__what">Measure how often the decision is right before you trust it with anything.</p>
           <dl class="shape">
             <div class="shape__row"><dt>state</dt><dd>one record from a labelled set, with the answer withheld</dd></div>
             <div class="shape__row"><dt>question</dt><dd>the same question you will ask in production</dd></div>
-            <div class="shape__row"><dt>answer</dt><dd>the model&#x27;s pick, for you to compare against the human answer</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>the model’s pick, for you to compare against the human answer</dd></div>
           </dl>
-          <p class="case__use">Build a validation set of a few dozen to a few hundred records a human has already labelled, run the loop without showing the answers, and count the matches. Misclassifications tell you where the labels are ambiguous, and the spread of probabilities tells you where the confidence cutoff belongs. The video&#x27;s own advice is fifty records or more before production; tune the cutoff on one set and hold some records back.</p>
+          <p class="case__use">Build a validation set of a few dozen to a few hundred records a human has already labelled, run the loop without showing the answers, and count the matches. Misclassifications tell you where the labels are ambiguous, and the spread of probabilities tells you where the confidence cutoff belongs. The video’s own advice is fifty records or more before production; tune the cutoff on one set and hold some records back.</p>
         <figure class="code">
           <figcaption class="code__head">
             <p class="code__title">a labelled set, a match rate, a cutoff</p>
             <span class="code__lang">python</span>
             <button class="copy" type="button" data-copy="c8">Copy</button>
           </figcaption>
-          <pre id="c8"><code>rows = json.load(open(&quot;labelled.json&quot;))      # state + human label
+          <pre id="c8" translate="no"><code>rows = json.load(open(&quot;labelled.json&quot;))      # state + human label
 
 hits, conf = 0, []
 for r in rows:
@@ -741,27 +701,27 @@ question: category=choice:Which team owns this ticket?|billing:Payments,technica
       </div>
     </section>
 
-    <article class="case case--flip" id="case-9" data-case="09" data-title="Agent skill selection"
+    <article class="case case--flip" id="case-9" data-case="09" data-title="Agent Skill Selection"
              aria-labelledby="case-9-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 09<span class="case__tier">intermediate</span></p>
-          <h3 class="case__title" id="case-9-t">Agent skill selection</h3>
+          <h3 class="case__title" id="case-9-t">Agent Skill Selection</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=381s" rel="noreferrer">06:21 in the video</a></p>
           <p class="case__what">Let the agent pick the right skill before it loads any of them.</p>
           <dl class="shape">
-            <div class="shape__row"><dt>state</dt><dd>the user&#x27;s prompt</dd></div>
+            <div class="shape__row"><dt>state</dt><dd>the user’s prompt</dd></div>
             <div class="shape__row"><dt>question</dt><dd>choice, one option per skill in the library</dd></div>
             <div class="shape__row"><dt>answer</dt><dd>the skill to load, plus how sure it is</dd></div>
           </dl>
-          <p class="case__use">You do not have to put every skill description in the context window to choose one. Register the skills as the options, send the prompt, and load only the winner. In the video&#x27;s own counting, 145 skills were matched in about five seconds across fourteen tests against roughly thirty for the larger model, and a separate test over 182 skills cut wrong picks by more than half. Keep the option list to the skills that are real candidates for this agent.</p>
+          <p class="case__use">You do not have to put every skill description in the context window to choose one. Register the skills as the options, send the prompt, and load only the winner. In the video’s own counting, 145 skills were matched in about five seconds across fourteen tests against roughly thirty for the larger model, and a separate test over 182 skills cut wrong picks by more than half. Keep the option list to the skills that are real candidates for this agent.</p>
         <figure class="code">
           <figcaption class="code__head">
             <p class="code__title">the skill library is the menu</p>
             <span class="code__lang">bash</span>
             <button class="copy" type="button" data-copy="c9">Copy</button>
           </figcaption>
-          <pre id="c9"><code>jev-decide --state &quot;Turn this call recording into invoice-ready line items.&quot; \
+          <pre id="c9" translate="no"><code>jev-decide --state &quot;Turn this call recording into invoice-ready line items.&quot; \
   --ask &#x27;skill=choice:Which skill should the agent load?|xlsx:Spreadsheet work,youtube-content:Transcripts to summaries,email-inbox-triage:Inbox triage,docx:Word documents,arxiv:Paper search&#x27; \
   --ask &#x27;fit=score:How well does the chosen skill fit?|Wrong,Poor,Workable,Good,Exact&#x27;
 
@@ -799,16 +759,16 @@ question: skill=choice:Which skill should the agent load?|xlsx:Spreadsheet work,
       </div>
     </article>
 
-    <article class="case case--wide" id="case-10" data-case="10" data-title="Intelligent multi model routing"
+    <article class="case case--wide" id="case-10" data-case="10" data-title="Intelligent Multi Model Routing"
              aria-labelledby="case-10-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 10<span class="case__tier">intermediate</span></p>
-          <h3 class="case__title" id="case-10-t">Intelligent multi model routing</h3>
+          <h3 class="case__title" id="case-10-t">Intelligent Multi Model Routing</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=422s" rel="noreferrer">07:02 in the video</a></p>
           <p class="case__what">Send the easy question to the cheap model and the hard one to the expensive model.</p>
           <dl class="shape">
-            <div class="shape__row"><dt>state</dt><dd>the user&#x27;s message</dd></div>
+            <div class="shape__row"><dt>state</dt><dd>the user’s message</dd></div>
             <div class="shape__row"><dt>question</dt><dd>choice over the models you have wired up</dd></div>
             <div class="shape__row"><dt>answer</dt><dd>the model to call, decided in about a third of a second</dd></div>
           </dl>
@@ -819,7 +779,7 @@ question: skill=choice:Which skill should the agent load?|xlsx:Spreadsheet work,
             <span class="code__lang">python</span>
             <button class="copy" type="button" data-copy="c10">Copy</button>
           </figcaption>
-          <pre id="c10"><code>MODELS = {
+          <pre id="c10" translate="no"><code>MODELS = {
   &quot;cheap&quot;: &quot;Short lookup, formatting or extraction&quot;,
   &quot;mid&quot;: &quot;Normal edit, explanation or small refactor&quot;,
   &quot;frontier&quot;: &quot;Multi-step reasoning, architecture, hard bugs&quot;}
@@ -863,12 +823,12 @@ question: model=choice:Which model tier does this request need?|cheap:Short look
       </div>
     </article>
 
-    <article class="case" id="case-11" data-case="11" data-title="Inbox pre filtering for AI agents"
+    <article class="case" id="case-11" data-case="11" data-title="Inbox Pre Filtering for AI Agents"
              aria-labelledby="case-11-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 11<span class="case__tier">intermediate</span></p>
-          <h3 class="case__title" id="case-11-t">Inbox pre filtering for AI agents</h3>
+          <h3 class="case__title" id="case-11-t">Inbox Pre Filtering for AI Agents</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=457s" rel="noreferrer">07:37 in the video</a></p>
           <p class="case__what">Stop paying a frontier model to read spam.</p>
           <dl class="shape">
@@ -876,14 +836,14 @@ question: model=choice:Which model tier does this request need?|cheap:Short look
             <div class="shape__row"><dt>question</dt><dd>choice over the buckets you act on</dd></div>
             <div class="shape__row"><dt>answer</dt><dd>one bucket per message; only the useful ones continue downstream</dd></div>
           </dl>
-          <p class="case__use">Put the decision in front of the writing. Each message is bucketed as an actionable inquiry, a sponsorship, spam or phishing; spam and phishing are dropped, and only the messages that need a reply reach the model that drafts. In the video&#x27;s own run, 1,700 messages were sorted for eighteen cents. Keep the state to the fields the question needs, because the rest of the message is a distraction.</p>
+          <p class="case__use">Put the decision in front of the writing. Each message is bucketed as an actionable inquiry, a sponsorship, spam or phishing; spam and phishing are dropped, and only the messages that need a reply reach the model that drafts. In the video’s own run, 1,700 messages were sorted for eighteen cents. Keep the state to the fields the question needs, because the rest of the message is a distraction.</p>
         <figure class="code">
           <figcaption class="code__head">
             <p class="code__title">read the headers, drop the noise</p>
             <span class="code__lang">python</span>
             <button class="copy" type="button" data-copy="c11">Copy</button>
           </figcaption>
-          <pre id="c11"><code>BUCKETS = {&quot;inquiry&quot;: &quot;A real person who needs a reply&quot;,
+          <pre id="c11" translate="no"><code>BUCKETS = {&quot;inquiry&quot;: &quot;A real person who needs a reply&quot;,
            &quot;sponsor&quot;: &quot;A commercial pitch, route to the deals file&quot;,
            &quot;spam&quot;: &quot;Bulk marketing, no reply&quot;,
            &quot;phish&quot;: &quot;Attempting to take credentials or money&quot;}
@@ -928,12 +888,12 @@ question: bucket=choice:Which bucket does this message belong in?|inquiry:A real
       </div>
     </article>
 
-    <article class="case case--flip" id="case-12" data-case="12" data-title="Browser feed cleansing and element removal"
+    <article class="case case--flip" id="case-12" data-case="12" data-title="Browser Feed Cleansing and Element Removal"
              aria-labelledby="case-12-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 12<span class="case__tier">intermediate</span></p>
-          <h3 class="case__title" id="case-12-t">Browser feed cleansing and element removal</h3>
+          <h3 class="case__title" id="case-12-t">Browser Feed Cleansing and Element Removal</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=487s" rel="noreferrer">08:07 in the video</a></p>
           <p class="case__what">Judge each item as it loads and hide what does not earn the space.</p>
           <dl class="shape">
@@ -941,14 +901,14 @@ question: bucket=choice:Which bucket does this message belong in?|inquiry:A real
             <div class="shape__row"><dt>question</dt><dd>a single noul question, asked hundreds of times</dd></div>
             <div class="shape__row"><dt>answer</dt><dd>a probability per item; your code hides or keeps</dd></div>
           </dl>
-          <p class="case__use">A content script walks the loaded items, asks one narrow question of each, and collapses the ones that fail. The video&#x27;s example hides posts that read as machine-generated filler; the same shape hides ads or cookie notices. Because one call answers in a fraction of a second, the page still feels instant if you judge only the items actually in view.</p>
+          <p class="case__use">A content script walks the loaded items, asks one narrow question of each, and collapses the ones that fail. The video’s example hides posts that read as machine-generated filler; the same shape hides ads or cookie notices. Because one call answers in a fraction of a second, the page still feels instant if you judge only the items actually in view.</p>
         <figure class="code">
           <figcaption class="code__head">
             <p class="code__title">one question per post, in the page</p>
             <span class="code__lang">javascript</span>
             <button class="copy" type="button" data-copy="c12">Copy</button>
           </figcaption>
-          <pre id="c12"><code>async function judge(text) {
+          <pre id="c12" translate="no"><code>async function judge(text) {
   const r = await fetch(&#x27;https://api.venice.ai/api/v1/decisions&#x27;, {
     method: &#x27;POST&#x27;,
     headers: { &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
@@ -999,12 +959,12 @@ question: hide=Is this post low-effort machine-generated filler?</pre>
       </div>
     </article>
 
-    <article class="case case--wide" id="case-13" data-case="13" data-title="Semantic in page search"
+    <article class="case case--wide" id="case-13" data-case="13" data-title="Semantic In Page Search"
              aria-labelledby="case-13-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 13<span class="case__tier">intermediate</span></p>
-          <h3 class="case__title" id="case-13-t">Semantic in page search</h3>
+          <h3 class="case__title" id="case-13-t">Semantic In Page Search</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=519s" rel="noreferrer">08:39 in the video</a></p>
           <p class="case__what">Find the paragraph you meant, not the words you typed.</p>
           <dl class="shape">
@@ -1019,7 +979,7 @@ question: hide=Is this post low-effort machine-generated filler?</pre>
             <span class="code__lang">javascript</span>
             <button class="copy" type="button" data-copy="c13">Copy</button>
           </figcaption>
-          <pre id="c13"><code>async function findOnPage(query, sections) {
+          <pre id="c13" translate="no"><code>async function findOnPage(query, sections) {
   const criteria = Object.fromEntries(sections.map((s, i) =&gt;
     [&#x27;s&#x27; + i, s.heading + &#x27;: &#x27; + s.text.slice(0, 120)]));
   criteria.none = &#x27;No section matches&#x27;;
@@ -1069,12 +1029,12 @@ question: hit=choice:Which section of this page answers the query?|s0:Billing,s1
       </div>
     </article>
 
-    <article class="case" id="case-14" data-case="14" data-title="Image and asset retrieval via metadata"
+    <article class="case" id="case-14" data-case="14" data-title="Image and Asset Retrieval via Metadata"
              aria-labelledby="case-14-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 14<span class="case__tier">intermediate</span></p>
-          <h3 class="case__title" id="case-14-t">Image and asset retrieval via metadata</h3>
+          <h3 class="case__title" id="case-14-t">Image and Asset Retrieval via Metadata</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=553s" rel="noreferrer">09:13 in the video</a></p>
           <p class="case__what">Search a media library by what is in the picture, not by file name.</p>
           <dl class="shape">
@@ -1082,14 +1042,14 @@ question: hit=choice:Which section of this page answers the query?|s0:Billing,s1
             <div class="shape__row"><dt>question</dt><dd>choice over asset keys</dd></div>
             <div class="shape__row"><dt>answer</dt><dd>the asset to open, or no match</dd></div>
           </dl>
-          <p class="case__use">File names are a poor index, so every asset gets text first: the prompt it was generated from, or a caption written by a cheap multimodal model at indexing time. Searching then becomes one typed decision over those records. The video&#x27;s own note is that captions are nearly free at this scale, and the index is worth more than the model that wrote it.</p>
+          <p class="case__use">File names are a poor index, so every asset gets text first: the prompt it was generated from, or a caption written by a cheap multimodal model at indexing time. Searching then becomes one typed decision over those records. The video’s own note is that captions are nearly free at this scale, and the index is worth more than the model that wrote it.</p>
         <figure class="code">
           <figcaption class="code__head">
             <p class="code__title">caption once, decide on every search</p>
             <span class="code__lang">python</span>
             <button class="copy" type="button" data-copy="c14">Copy</button>
           </figcaption>
-          <pre id="c14"><code>def find(query, assets):
+          <pre id="c14" translate="no"><code>def find(query, assets):
     criteria = {a[&quot;id&quot;]: a[&quot;caption&quot;][:140] for a in assets}
     criteria[&quot;none&quot;] = &quot;Nothing in the library matches&quot;
     qs = {&quot;hit&quot;: {&quot;type&quot;: &quot;choice&quot;, &quot;criteria&quot;: criteria,
@@ -1140,12 +1100,12 @@ question: hit=choice:Which asset is the query asking for?|a1:Harbour at night,a2
       </div>
     </section>
 
-    <article class="case case--wide" id="case-15" data-case="15" data-title="Live meeting and speech classification"
+    <article class="case case--wide" id="case-15" data-case="15" data-title="Live Meeting and Speech Classification"
              aria-labelledby="case-15-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 15<span class="case__tier">advanced</span></p>
-          <h3 class="case__title" id="case-15-t">Live meeting and speech classification</h3>
+          <h3 class="case__title" id="case-15-t">Live Meeting and Speech Classification</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=600s" rel="noreferrer">10:00 in the video</a></p>
           <p class="case__what">Tag sentences while they are still being spoken.</p>
           <dl class="shape">
@@ -1153,14 +1113,14 @@ question: hit=choice:Which asset is the query asking for?|a1:Harbour at night,a2
             <div class="shape__row"><dt>question</dt><dd>choice over your categories, plus a noul for whether it is an action</dd></div>
             <div class="shape__row"><dt>answer</dt><dd>one tag per sentence, accumulating into live notes</dd></div>
           </dl>
-          <p class="case__use">Stream the audio through speech to text, and send each finished sentence as its own call, because a sentence is short and the answer comes back before the next one lands. Sentences are sorted into decisions, action items, risks and questions, which is a meeting record written as it happens. The video&#x27;s example on the same shape scores a debate as it is spoken, one sentence at a time.</p>
+          <p class="case__use">Stream the audio through speech to text, and send each finished sentence as its own call, because a sentence is short and the answer comes back before the next one lands. Sentences are sorted into decisions, action items, risks and questions, which is a meeting record written as it happens. The video’s example on the same shape scores a debate as it is spoken, one sentence at a time.</p>
         <figure class="code">
           <figcaption class="code__head">
             <p class="code__title">one finished sentence, one tag</p>
             <span class="code__lang">python</span>
             <button class="copy" type="button" data-copy="c15">Copy</button>
           </figcaption>
-          <pre id="c15"><code>KINDS = {&quot;decision&quot;: &quot;A choice the room committed to&quot;,
+          <pre id="c15" translate="no"><code>KINDS = {&quot;decision&quot;: &quot;A choice the room committed to&quot;,
          &quot;action&quot;: &quot;Something one named person will do&quot;,
          &quot;risk&quot;: &quot;A problem or dependency raised&quot;,
          &quot;question&quot;: &quot;Something still unanswered&quot;}
@@ -1182,7 +1142,7 @@ def on_sentence(sentence, speaker):
           </div>
           <pre id="p15-1">state: Priya said: let us ship the smaller version on Thursday and keep the migration for next month.
 
-question: kind=choice:How should Priya&#x27;s sentence be filed in the minutes?|decision:A choice the room committed to,action:Something one named person will do,risk:A problem or dependency raised,question:Something still unanswered</pre>
+question: kind=choice:How should Priya’s sentence be filed in the minutes?|decision:A choice the room committed to,action:Something one named person will do,risk:A problem or dependency raised,question:Something still unanswered</pre>
         </div>
         <div class="prompt">
           <div class="prompt__head">
@@ -1205,16 +1165,16 @@ question: owner=Does this sentence name the person who will do the work?</pre>
       </div>
     </article>
 
-    <article class="case" id="case-16" data-case="16" data-title="Zero LLM retrieval engine"
+    <article class="case" id="case-16" data-case="16" data-title="Zero LLM Retrieval Engine"
              aria-labelledby="case-16-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 16<span class="case__tier">advanced</span></p>
-          <h3 class="case__title" id="case-16-t">Zero LLM retrieval engine</h3>
+          <h3 class="case__title" id="case-16-t">Zero LLM Retrieval Engine</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=630s" rel="noreferrer">10:30 in the video</a></p>
           <p class="case__what">Answer narrow questions from a fixed corpus with no text generation at all.</p>
           <dl class="shape">
-            <div class="shape__row"><dt>state</dt><dd>the visitor&#x27;s question</dd></div>
+            <div class="shape__row"><dt>state</dt><dd>the visitor’s question</dd></div>
             <div class="shape__row"><dt>question</dt><dd>choice over indexed topic units, plus a noul for whether the corpus covers it</dd></div>
             <div class="shape__row"><dt>answer</dt><dd>the matching item and its timestamp; no prose</dd></div>
           </dl>
@@ -1225,7 +1185,7 @@ question: owner=Does this sentence name the person who will do the work?</pre>
             <span class="code__lang">python</span>
             <button class="copy" type="button" data-copy="c16">Copy</button>
           </figcaption>
-          <pre id="c16"><code># units: one per video or document, with a written description and a start time
+          <pre id="c16" translate="no"><code># units: one per video or document, with a written description and a start time
 criteria = {u[&quot;id&quot;]: u[&quot;topic&quot;] for u in units}
 criteria[&quot;none&quot;] = &quot;Nothing in this library covers it&quot;
 
@@ -1272,12 +1232,12 @@ question: covered=Does the library actually cover this question?</pre>
       </div>
     </article>
 
-    <article class="case case--flip" id="case-17" data-case="17" data-title="Dynamic UI icon selection"
+    <article class="case case--flip" id="case-17" data-case="17" data-title="Dynamic UI Asset and Icon Selection"
              aria-labelledby="case-17-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 17<span class="case__tier">advanced</span></p>
-          <h3 class="case__title" id="case-17-t">Dynamic UI icon selection</h3>
+          <h3 class="case__title" id="case-17-t">Dynamic UI Asset and Icon Selection</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=673s" rel="noreferrer">11:13 in the video</a></p>
           <p class="case__what">Pick the picture that matches what the user just typed.</p>
           <dl class="shape">
@@ -1292,7 +1252,7 @@ question: covered=Does the library actually cover this question?</pre>
             <span class="code__lang">javascript</span>
             <button class="copy" type="button" data-copy="c17">Copy</button>
           </figcaption>
-          <pre id="c17"><code>const ICONS = {
+          <pre id="c17" translate="no"><code>const ICONS = {
   water: &#x27;Glass of water&#x27;, walk: &#x27;Footsteps&#x27;, read: &#x27;Open book&#x27;,
   sleep: &#x27;Crescent moon&#x27;, meditate: &#x27;Seated figure&#x27;, gym: &#x27;Dumbbell&#x27;,
   none: &#x27;Nothing in this set fits&#x27;
@@ -1340,16 +1300,16 @@ question: icon=choice:Which icon matches what the user just typed?|water:Glass o
       </div>
     </article>
 
-    <article class="case case--wide" id="case-18" data-case="18" data-title="Just in time page assembly"
+    <article class="case case--wide" id="case-18" data-case="18" data-title="Dynamic Just In Time Webpage Assembly"
              aria-labelledby="case-18-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 18<span class="case__tier">advanced</span></p>
-          <h3 class="case__title" id="case-18-t">Just in time page assembly</h3>
+          <h3 class="case__title" id="case-18-t">Dynamic Just In Time Webpage Assembly</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=719s" rel="noreferrer">11:59 in the video</a></p>
           <p class="case__what">Choose the parts a visitor needs and build the page from them.</p>
           <dl class="shape">
-            <div class="shape__row"><dt>state</dt><dd>the visitor&#x27;s signals, written as facts</dd></div>
+            <div class="shape__row"><dt>state</dt><dd>the visitor’s signals, written as facts</dd></div>
             <div class="shape__row"><dt>question</dt><dd>one choice per slot in the layout</dd></div>
             <div class="shape__row"><dt>answer</dt><dd>which module fills each slot; your code renders them</dd></div>
           </dl>
@@ -1360,7 +1320,7 @@ question: icon=choice:Which icon matches what the user just typed?|water:Glass o
             <span class="code__lang">javascript</span>
             <button class="copy" type="button" data-copy="c18">Copy</button>
           </figcaption>
-          <pre id="c18"><code>const SLOTS = {
+          <pre id="c18" translate="no"><code>const SLOTS = {
   hero:   { trial: &#x27;Start a free trial&#x27;, demo: &#x27;Book a 20 minute demo&#x27;,
             docs: &#x27;Read the documentation&#x27; },
   proof:  { logos: &#x27;Customer logos&#x27;, caseStudy: &#x27;One case study&#x27;,
@@ -1414,12 +1374,12 @@ question: proof=choice:Which proof module fits this visitor?|logos:Customer logo
       </div>
     </article>
 
-    <article class="case" id="case-19" data-case="19" data-title="Workflow use case auditing"
+    <article class="case" id="case-19" data-case="19" data-title="Workflow Use Case Auditing"
              aria-labelledby="case-19-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
           <p class="case__no">Case 19<span class="case__tier">advanced</span></p>
-          <h3 class="case__title" id="case-19-t">Workflow use case auditing</h3>
+          <h3 class="case__title" id="case-19-t">Workflow Use Case Auditing</h3>
           <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=743s" rel="noreferrer">12:23 in the video</a></p>
           <p class="case__what">Find the steps in your own work that should have been a decision, not a model call.</p>
           <dl class="shape">
@@ -1434,7 +1394,7 @@ question: proof=choice:Which proof module fits this visitor?|logos:Customer logo
             <span class="code__lang">python</span>
             <button class="copy" type="button" data-copy="c19">Copy</button>
           </figcaption>
-          <pre id="c19"><code>SHAPES = {&quot;decision&quot;: &quot;A closed pick, score or yes and no&quot;,
+          <pre id="c19" translate="no"><code>SHAPES = {&quot;decision&quot;: &quot;A closed pick, score or yes and no&quot;,
           &quot;writing&quot;: &quot;Needs text back, keep the language model&quot;,
           &quot;count&quot;: &quot;Arithmetic or counting, do it in code&quot;,
           &quot;lookup&quot;: &quot;Fetching a fact, not judging it&quot;}
@@ -1485,14 +1445,14 @@ question: fits=Could this step be answered by picking between options you could 
 
   <section class="sc-section" data-sc-act="pin" data-sc-span="3.4" aria-labelledby="anatomy-h">
     <div data-sc-stage data-sc-spotlight class="sc-wrap anatomy">
-      <h2 class="sc-display sc-display--md anatomy__h" id="anatomy-h" data-sc-cue="0 0.34 0" data-sc-kinetic="lines">One message, three typed questions, one call.</h2>
+      <h2 class="sc-display sc-display--md anatomy__h" id="anatomy-h" data-sc-cue="0 0.34 0" data-sc-kinetic="lines">One Message, Three Typed Questions, One Call.</h2>
       <div class="anatomy__grid">
         <div class="anatomy__card" data-sc-cue="0.14 1 0.2 0">
-          <h3>The state</h3>
+          <h3>The State</h3>
           <p class="anatomy__state">Order A-104 was charged twice this morning. I need the duplicate charge refunded.</p>
         </div>
         <div class="anatomy__card" data-sc-cue="0.14 1 0.2 0">
-          <h3>The questions</h3>
+          <h3>The Questions</h3>
           <dl class="shape shape--tight">
             <div class="shape__row"><dt>noul</dt><dd>yes or no, returned as a probability</dd></div>
             <div class="shape__row"><dt>choice</dt><dd>one of four teams, a probability each</dd></div>
@@ -1500,7 +1460,7 @@ question: fits=Could this step be answered by picking between options you could 
           </dl>
         </div>
         <div class="anatomy__card anatomy__answers" data-sc-cue="0.4 1 0.2 0">
-          <h3>The answers, as they came back</h3>
+          <h3>The Answers, as They Came Back</h3>
         <div class="answers">
           <div class="answer">
             <p class="answer__q">asking for a refund?</p>
@@ -1518,7 +1478,7 @@ question: fits=Could this step be answered by picking between options you could 
             <div class="bar"><i style="width:37%"></i></div>
           </div>
         </div>
-        <p class="anatomy__note">That 1.48 is the part to notice. It is not a rounding error, it is the model saying it sits between two levels, and the rule that decides what to do about that lives in your code. 411 input tokens, 0.0000173 dollars, about four tenths of a second.</p>
+        <p class="anatomy__note">That 1.48 is the part to notice. It is not a rounding error, it is the model saying it sits between two levels, and the rule that decides what to do about that lives in your code. 411&nbsp;input tokens, 0.0000173&nbsp;dollars, about four tenths of a second.</p>
       </div>
     </div>
   </section>
@@ -1527,22 +1487,22 @@ question: fits=Could this step be answered by picking between options you could 
     <div class="sc-wrap deploy__grid">
       <div data-sc-in data-sc-stagger="70">
         <p class="eyebrow">Putting one in production</p>
-        <h2 class="sc-display sc-display--md" id="deploy-h">Four steps, and the failure that costs you the most.</h2>
+        <h2 class="sc-display sc-display--md" id="deploy-h">Four Steps, and the Failure That Costs You the Most.</h2>
         <ol class="steps">
           <li>
-            <h3>Get one key</h3>
+            <h3>Get One Key</h3>
             <p>One of <code>TYPESAFE_API_KEY</code>, <code>OPENROUTER_API_KEY</code>, or a Venice key set as <code>VENICE_API_KEY</code>. The transports are interchangeable, so keep the fallback in your config rather than in your head.</p>
           </li>
           <li>
-            <h3>Send a state and typed questions</h3>
+            <h3>Send a State and Typed Questions</h3>
             <p>One <code>POST</code> with the text to judge and a map of questions. Name every item you are asking about inside the question itself, and send only the fields the question needs.</p>
           </li>
           <li>
-            <h3>Write the thresholds in your code</h3>
+            <h3>Write the Thresholds in Your Code</h3>
             <p>High confidence acts, medium confirms, low goes to a person. Keep one cutoff per risk rather than one number for the whole system, and never carry a yes-or-no cutoff over to a choice.</p>
           </li>
           <li>
-            <h3>Prove it on fifty records first</h3>
+            <h3>Prove It on 50 Records First</h3>
             <p>Labelled records, answers withheld, count the matches, then sweep the cutoff and see what each one costs you in coverage. This is the step that separates a decision model you trust from one you hope works.</p>
           </li>
         </ol>
@@ -1576,20 +1536,64 @@ question: fits=Could this step be answered by picking between options you could 
 
   <section id="close" data-sc-act="pin" data-sc-span="1.45" aria-labelledby="close-h">
     <div data-sc-stage class="sc-wrap close-act">
-      <h2 class="sc-display sc-display--lg" id="close-h" data-sc-cue="0.08" data-sc-kinetic="lines">Every job on this page is a question with a napkin-sized answer.</h2>
+      <h2 class="sc-display sc-display--lg" id="close-h" data-sc-cue="0.08" data-sc-kinetic="lines">Every Job on This Page Is a Question with a Napkin-Sized Answer.</h2>
       <div class="close-act__row">
         <button class="btn btn--ghost" type="button" data-index-toggle aria-expanded="false" aria-controls="index-panel">Cases</button>
-        <a class="btn btn--solid" href="https://github.com/vivmuk/jevusecases" data-sc-magnet="0.26" data-sc-cue="0.08" data-sc-rise="0" rel="noreferrer">Open the source</a>
+        <a class="btn btn--solid" href="https://github.com/vivmuk/jevusecases" data-sc-magnet="0.26" data-sc-cue="0.08" data-sc-rise="0" rel="noreferrer">Open the Source</a>
       </div>
       <footer class="colophon">
-        <p>Sources: the nineteen cases, their order and their running times come from <a href="https://youtube.com/watch?v=3iDiWTt8lok" rel="noreferrer">These 19 Jev-Claude use cases are blowing people's minds</a>, and each card links to its moment in the video.</p>
-        <p>Measured on 4 October 2026 on the machine that built this page: the 0.39 second probe, and the 411 token call above at 0.0000173 dollars. Figures quoted from the video say so on the card that uses them.</p>
+        <p>Sources: the 19 cases, their order and their running times come from <a href="https://youtube.com/watch?v=3iDiWTt8lok" rel="noreferrer">These 19 Jev-Claude use cases are blowing people’s minds</a>, and each card links to its moment in the video.</p>
+        <p>Measured on 4 October 2026 on the machine that built this page: the 0.39 second probe, and the 411&nbsp;token call above at 0.0000173&nbsp;dollars. Figures quoted from the video say so on the card that uses them.</p>
         <p>Scroll work by scrollcraft, plates by the muse-image model, static output so it costs a page load and nothing else.</p>
       </footer>
     </div>
   </section>
 
 </main>
+
+<!-- The index overlay sits after the main content on purpose: it carries
+     headings, and headings inside a nav that comes before the h1 break the
+     document outline. Being fixed, it renders in the same place either way. -->
+<nav class="index-panel" id="index-panel" data-open="false" aria-label="All 19 cases">
+  <div class="index-panel__inner">
+    <h2>All 19 Cases</h2>
+    <p>Grouped the way the video groups them. Every one is a closed-answer job: the possible answers can be written down before the question is asked.</p>
+      <div class="index-group">
+        <h3>Cases 01 to 08</h3>
+        <ul class="index-list">
+          <li><a href="#case-1"><span class="n">01</span><span class="t">Spreadsheet Data Categorisation</span><span class="at">00:53</span></a></li>
+          <li><a href="#case-2"><span class="n">02</span><span class="t">Customer Inquiry Triage and Routing</span><span class="at">01:31</span></a></li>
+          <li><a href="#case-3"><span class="n">03</span><span class="t">Competitor Advertisement Intelligence</span><span class="at">02:35</span></a></li>
+          <li><a href="#case-4"><span class="n">04</span><span class="t">Video and Audio Clip Extraction</span><span class="at">03:09</span></a></li>
+          <li><a href="#case-5"><span class="n">05</span><span class="t">Customer Churn Risk Profiling</span><span class="at">03:37</span></a></li>
+          <li><a href="#case-6"><span class="n">06</span><span class="t">Automated Internal Linking and Knowledge Base Graphing</span><span class="at">04:03</span></a></li>
+          <li><a href="#case-7"><span class="n">07</span><span class="t">Social Media Purchase Intent Identification</span><span class="at">04:38</span></a></li>
+          <li><a href="#case-8"><span class="n">08</span><span class="t">Output Verification and Model Calibration</span><span class="at">05:04</span></a></li>
+        </ul>
+      </div>
+      <div class="index-group">
+        <h3>Cases 09 to 14</h3>
+        <ul class="index-list">
+          <li><a href="#case-9"><span class="n">09</span><span class="t">Agent Skill Selection</span><span class="at">06:21</span></a></li>
+          <li><a href="#case-10"><span class="n">10</span><span class="t">Intelligent Multi Model Routing</span><span class="at">07:02</span></a></li>
+          <li><a href="#case-11"><span class="n">11</span><span class="t">Inbox Pre Filtering for AI Agents</span><span class="at">07:37</span></a></li>
+          <li><a href="#case-12"><span class="n">12</span><span class="t">Browser Feed Cleansing and Element Removal</span><span class="at">08:07</span></a></li>
+          <li><a href="#case-13"><span class="n">13</span><span class="t">Semantic In Page Search</span><span class="at">08:39</span></a></li>
+          <li><a href="#case-14"><span class="n">14</span><span class="t">Image and Asset Retrieval via Metadata</span><span class="at">09:13</span></a></li>
+        </ul>
+      </div>
+      <div class="index-group">
+        <h3>Cases 15 to 19</h3>
+        <ul class="index-list">
+          <li><a href="#case-15"><span class="n">15</span><span class="t">Live Meeting and Speech Classification</span><span class="at">10:00</span></a></li>
+          <li><a href="#case-16"><span class="n">16</span><span class="t">Zero LLM Retrieval Engine</span><span class="at">10:30</span></a></li>
+          <li><a href="#case-17"><span class="n">17</span><span class="t">Dynamic UI Asset and Icon Selection</span><span class="at">11:13</span></a></li>
+          <li><a href="#case-18"><span class="n">18</span><span class="t">Dynamic Just In Time Webpage Assembly</span><span class="at">11:59</span></a></li>
+          <li><a href="#case-19"><span class="n">19</span><span class="t">Workflow Use Case Auditing</span><span class="at">12:23</span></a></li>
+        </ul>
+      </div>
+  </div>
+</nav>
 
 <div class="ledger" role="navigation" aria-label="Case progress">
   <p class="ledger__label">Your place</p>

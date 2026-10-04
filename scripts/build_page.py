@@ -12,7 +12,7 @@ import pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 VIDEO = "https://youtube.com/watch?v=3iDiWTt8lok"
 SITE = "https://jevusecases-production.up.railway.app/"
-SOURCE = "These 19 Jev-Claude use cases are blowing people's minds"
+SOURCE = "These 19 Jev-Claude use cases are blowing people\u2019s minds"
 REPO = "https://github.com/vivmuk/jevusecases"
 
 SHORT = {
@@ -54,7 +54,7 @@ def code_block(case):
             <span class="code__lang">%s</span>
             <button class="copy" type="button" data-copy="%s">Copy</button>
           </figcaption>
-          <pre id="%s"><code>%s</code></pre>
+          <pre id="%s" translate="no"><code>%s</code></pre>
         </figure>""" % (e(case["code"]["label"]), e(case["code"]["lang"]), cid, cid,
                          e(case["code"]["src"]))
 
@@ -200,18 +200,19 @@ TEMPLATE = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Jev use cases: nineteen closed-answer jobs for a decision model</title>
-<meta name="description" content="Nineteen ways to replace an open-ended language-model call with a typed decision. For each one: what the decision is, the code that asks it, and the prompts that run it.">
+<title>Jev use cases: 19 closed-answer jobs for a decision model</title>
+<meta name="description" content="19 ways to replace an open-ended language-model call with a typed decision. For each one: what the decision is, the code that asks it, and the prompts that run it.">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#f1f2f4">
 <meta property="og:title" content="Jev use cases">
-<meta property="og:description" content="Nineteen closed-answer jobs for a decision model, each with its code and its prompts.">
+<meta property="og:description" content="19 closed-answer jobs for a decision model, each with its code and its prompts.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{site}">
 <link rel="canonical" href="{site}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23f1f2f4'/><rect x='9' y='7' width='3' height='18' fill='%2315181c'/><rect x='15' y='7' width='8' height='3' fill='%239c5a10'/><rect x='15' y='14' width='8' height='3' fill='%2315181c'/><rect x='15' y='21' width='5' height='3' fill='%2315181c'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="scrollcraft.css">
 <link rel="stylesheet" href="site.css">
@@ -225,22 +226,14 @@ TEMPLATE = """<!doctype html>
 <header class="site-bar">
   <p class="site-bar__mark">Jev <span>/</span> use cases</p>
   <button class="btn btn--ghost" type="button" data-index-toggle aria-expanded="false" aria-controls="index-panel">Cases</button>
-  <a class="btn btn--solid" href="{repo}" rel="noreferrer">Open the source</a>
+  <a class="btn btn--solid" href="{repo}" rel="noreferrer">Open the Source</a>
 </header>
-
-<nav class="index-panel" id="index-panel" data-open="false" aria-label="All nineteen cases">
-  <div class="index-panel__inner">
-    <h2>All nineteen cases</h2>
-    <p>Grouped the way the video groups them. Every one is a closed-answer job: the possible answers can be written down before the question is asked.</p>
-{index_groups}
-  </div>
-</nav>
 
 <main id="top">
 
   <section class="sc-section" data-sc-act="pin" data-sc-span="2" aria-labelledby="open-h">
     <div data-sc-stage class="sc-wrap open">
-      <h1 class="sc-display sc-display--xl" id="open-h" data-sc-cue="0 0.72 0" data-sc-kinetic="lines">Nineteen jobs for a model that answers in half a second.</h1>
+      <h1 class="sc-display sc-display--xl" id="open-h" data-sc-cue="0 0.72 0" data-sc-kinetic="lines">19 Jobs for a Model That Answers in Half a Second.</h1>
       <p class="open__lede sc-body" data-sc-cue="0 0.72 0">Each card carries the decision, the code that asks it, and the prompts that run it.</p>
       <dl class="open__facts" data-sc-cue="0.5 1 0.3 0.5">
         <div><dt>cases, from the video</dt><dd data-sc-count="0 19">0</dd></div>
@@ -254,8 +247,8 @@ TEMPLATE = """<!doctype html>
   <section data-sc-act="pan" data-sc-span="3.4" aria-labelledby="rail-h">
     <div data-sc-stage>
       <div class="rail-head sc-wrap">
-        <h2 class="sc-display sc-display--md" id="rail-h">The whole set, side by side.</h2>
-        <p>Nineteen tabs, in the order the video walks them. Pick any one to jump to its card, and the rail at the bottom of the screen keeps your place.</p>
+        <h2 class="sc-display sc-display--md" id="rail-h">The Whole Set, Side by Side.</h2>
+        <p>19 tabs, in the order the video walks them. Pick any one to jump to its card, and the rail at the bottom of the screen keeps your place.</p>
       </div>
       <div class="rail" data-sc-pan="0.06">
 {rail_tabs}
@@ -268,14 +261,14 @@ TEMPLATE = """<!doctype html>
 
   <section class="sc-section" data-sc-act="pin" data-sc-span="3.4" aria-labelledby="anatomy-h">
     <div data-sc-stage data-sc-spotlight class="sc-wrap anatomy">
-      <h2 class="sc-display sc-display--md anatomy__h" id="anatomy-h" data-sc-cue="0 0.34 0" data-sc-kinetic="lines">One message, three typed questions, one call.</h2>
+      <h2 class="sc-display sc-display--md anatomy__h" id="anatomy-h" data-sc-cue="0 0.34 0" data-sc-kinetic="lines">One Message, Three Typed Questions, One Call.</h2>
       <div class="anatomy__grid">
         <div class="anatomy__card" data-sc-cue="0.14 1 0.2 0">
-          <h3>The state</h3>
+          <h3>The State</h3>
           <p class="anatomy__state">{state}</p>
         </div>
         <div class="anatomy__card" data-sc-cue="0.14 1 0.2 0">
-          <h3>The questions</h3>
+          <h3>The Questions</h3>
           <dl class="shape shape--tight">
             <div class="shape__row"><dt>noul</dt><dd>yes or no, returned as a probability</dd></div>
             <div class="shape__row"><dt>choice</dt><dd>one of four teams, a probability each</dd></div>
@@ -283,7 +276,7 @@ TEMPLATE = """<!doctype html>
           </dl>
         </div>
         <div class="anatomy__card anatomy__answers" data-sc-cue="0.4 1 0.2 0">
-          <h3>The answers, as they came back</h3>
+          <h3>The Answers, as They Came Back</h3>
         <div class="answers">
           <div class="answer">
             <p class="answer__q">asking for a refund?</p>
@@ -301,7 +294,7 @@ TEMPLATE = """<!doctype html>
             <div class="bar"><i style="width:37%"></i></div>
           </div>
         </div>
-        <p class="anatomy__note">That 1.48 is the part to notice. It is not a rounding error, it is the model saying it sits between two levels, and the rule that decides what to do about that lives in your code. {tokens} input tokens, {cost} dollars, about four tenths of a second.</p>
+        <p class="anatomy__note">That 1.48 is the part to notice. It is not a rounding error, it is the model saying it sits between two levels, and the rule that decides what to do about that lives in your code. {tokens}&nbsp;input tokens, {cost}&nbsp;dollars, about four tenths of a second.</p>
       </div>
     </div>
   </section>
@@ -310,22 +303,22 @@ TEMPLATE = """<!doctype html>
     <div class="sc-wrap deploy__grid">
       <div data-sc-in data-sc-stagger="70">
         <p class="eyebrow">Putting one in production</p>
-        <h2 class="sc-display sc-display--md" id="deploy-h">Four steps, and the failure that costs you the most.</h2>
+        <h2 class="sc-display sc-display--md" id="deploy-h">Four Steps, and the Failure That Costs You the Most.</h2>
         <ol class="steps">
           <li>
-            <h3>Get one key</h3>
+            <h3>Get One Key</h3>
             <p>One of <code>TYPESAFE_API_KEY</code>, <code>OPENROUTER_API_KEY</code>, or a Venice key set as <code>VENICE_API_KEY</code>. The transports are interchangeable, so keep the fallback in your config rather than in your head.</p>
           </li>
           <li>
-            <h3>Send a state and typed questions</h3>
+            <h3>Send a State and Typed Questions</h3>
             <p>One <code>POST</code> with the text to judge and a map of questions. Name every item you are asking about inside the question itself, and send only the fields the question needs.</p>
           </li>
           <li>
-            <h3>Write the thresholds in your code</h3>
+            <h3>Write the Thresholds in Your Code</h3>
             <p>High confidence acts, medium confirms, low goes to a person. Keep one cutoff per risk rather than one number for the whole system, and never carry a yes-or-no cutoff over to a choice.</p>
           </li>
           <li>
-            <h3>Prove it on fifty records first</h3>
+            <h3>Prove It on 50 Records First</h3>
             <p>Labelled records, answers withheld, count the matches, then sweep the cutoff and see what each one costs you in coverage. This is the step that separates a decision model you trust from one you hope works.</p>
           </li>
         </ol>
@@ -359,20 +352,31 @@ TEMPLATE = """<!doctype html>
 
   <section id="close" data-sc-act="pin" data-sc-span="1.45" aria-labelledby="close-h">
     <div data-sc-stage class="sc-wrap close-act">
-      <h2 class="sc-display sc-display--lg" id="close-h" data-sc-cue="0.08" data-sc-kinetic="lines">Every job on this page is a question with a napkin-sized answer.</h2>
+      <h2 class="sc-display sc-display--lg" id="close-h" data-sc-cue="0.08" data-sc-kinetic="lines">Every Job on This Page Is a Question with a Napkin-Sized Answer.</h2>
       <div class="close-act__row">
         <button class="btn btn--ghost" type="button" data-index-toggle aria-expanded="false" aria-controls="index-panel">Cases</button>
-        <a class="btn btn--solid" href="{repo}" data-sc-magnet="0.26" data-sc-cue="0.08" data-sc-rise="0" rel="noreferrer">Open the source</a>
+        <a class="btn btn--solid" href="{repo}" data-sc-magnet="0.26" data-sc-cue="0.08" data-sc-rise="0" rel="noreferrer">Open the Source</a>
       </div>
       <footer class="colophon">
-        <p>Sources: the nineteen cases, their order and their running times come from <a href="{video}" rel="noreferrer">{source}</a>, and each card links to its moment in the video.</p>
-        <p>Measured on 4 October 2026 on the machine that built this page: the 0.39 second probe, and the {tokens} token call above at {cost} dollars. Figures quoted from the video say so on the card that uses them.</p>
+        <p>Sources: the 19 cases, their order and their running times come from <a href="{video}" rel="noreferrer">{source}</a>, and each card links to its moment in the video.</p>
+        <p>Measured on 4 October 2026 on the machine that built this page: the 0.39 second probe, and the {tokens}&nbsp;token call above at {cost}&nbsp;dollars. Figures quoted from the video say so on the card that uses them.</p>
         <p>Scroll work by scrollcraft, plates by the muse-image model, static output so it costs a page load and nothing else.</p>
       </footer>
     </div>
   </section>
 
 </main>
+
+<!-- The index overlay sits after the main content on purpose: it carries
+     headings, and headings inside a nav that comes before the h1 break the
+     document outline. Being fixed, it renders in the same place either way. -->
+<nav class="index-panel" id="index-panel" data-open="false" aria-label="All 19 cases">
+  <div class="index-panel__inner">
+    <h2>All 19 Cases</h2>
+    <p>Grouped the way the video groups them. Every one is a closed-answer job: the possible answers can be written down before the question is asked.</p>
+{index_groups}
+  </div>
+</nav>
 
 <div class="ledger" role="navigation" aria-label="Case progress">
   <p class="ledger__label">Your place</p>
