@@ -1,0 +1,216 @@
+[
+  {
+    "n": 1,
+    "slug": "spreadsheet-categorisation",
+    "title": "Spreadsheet data categorisation",
+    "tier": "easy",
+    "at": "00:53",
+    "what": "Give every row one label from a fixed list, and nothing outside the list.",
+    "shape": {
+      "state": "one row of raw text, on its own",
+      "question": "choice, over the labels you allow",
+      "answer": "one label plus its probability"
+    },
+    "use": "A sheet script posts each row to Jev together with the allowed categories, and writes the winning label into the target column. Because the categories are declared in the request, a label outside them cannot come back, which is what keeps a hand-checked column from growing invented values. Rows under your confidence threshold are left blank for a human.",
+    "code": {
+      "lang": "python",
+      "label": "one row in, one label out",
+      "src": "import json, urllib.request\n\nCATS = {\"groceries\": \"Food and groceries\",\n        \"transport\": \"Travel and transport\",\n        \"subs\": \"Subscriptions\",\n        \"ignore\": \"Not a real expense\"}\n\ndef label(row):\n    body = {\"model\": \"jev-latest\", \"state\": row, \"questions\": {\n        \"category\": {\"type\": \"choice\",\n                     \"instructions\": \"Which budget category does this bank line belong to?\",\n                     \"criteria\": CATS}}}\n    req = urllib.request.Request(\n        \"https://api.venice.ai/api/v1/decisions\",\n        data=json.dumps(body).encode(),\n        headers={\"Authorization\": \"Bearer \" + KEY,\n                 \"Content-Type\": \"application/json\"})\n    ans = json.load(urllib.request.urlopen(req))[\"answers\"][\"category\"]\n    return ans[\"choice\"] if ans[\"confidence\"] > 0.6 else None"
+    },
+    "prompts": [
+      {
+        "state": "CARD PAYMENT 04/10 SQ *BLUE BOTTLE 4.80",
+        "question": "category=choice:Which budget category does this bank line belong to?|groceries:Food and groceries,transport:Travel and transport,subs:Subscriptions,ignore:Not a real expense"
+      },
+      {
+        "state": "DIRECT DEBIT NORTHWIND POWER 61.20 OCT",
+        "question": "category=choice:Which budget category?|utilities:Power, water, internet,rent:Housing,subs:Subscriptions,ignore:Not a real expense"
+      }
+    ],
+    "plate": "A single long horizontal bar of stacked identical tally marks on the left, a narrow vertical gate, and four separate open bins on the right receiving marks; the marks enter the gate one at a time and continue to one bin only. Show the four bins clearly separated with generous space between them."
+  },
+  {
+    "n": 2,
+    "slug": "inquiry-triage",
+    "title": "Customer inquiry triage and routing",
+    "tier": "easy",
+    "at": "01:31",
+    "what": "Read intent from an incoming message and send it down the right path.",
+    "shape": {
+      "state": "the message body",
+      "question": "choice for intent, a noul for each gate, a score for urgency",
+      "answer": "labels and probabilities your routing rule reads"
+    },
+    "use": "An automation tool hands the inquiry text to Jev and gets back both a category and a confidence. The routing rule lives in your code: high confidence goes to the automated path, low confidence goes to a person. The probability is the useful half of the answer, because it is the model telling you it does not know.",
+    "code": {
+      "lang": "bash",
+      "label": "three questions, one call",
+      "src": "jev-decide --state \"Order A-104 was charged twice. Please refund the duplicate.\" \\\n  --yes 'refund=Is the customer asking for a refund?' \\\n  --ask 'dept=choice:Which team owns this?|billing:Payments,technical:Bugs,account:Login' \\\n  --ask 'urgency=score:How urgent is this?|Calm,Concerned,Urgent,Emergency'\n\n# {\"refund\": 0.97} {\"dept\": \"billing\", 0.91} {\"urgency\": 2.4}"
+    },
+    "prompts": [
+      {
+        "state": "Hi, my card was charged twice for order A-104 this morning. Please refund the extra charge.",
+        "question": "dept=choice:Which team owns this?|billing:Payments,technical:Bugs,account:Login,general:Anything else"
+      },
+      {
+        "state": "The export button has done nothing since yesterday's release, three of us are blocked.",
+        "question": "urgency=score:How urgent is this?|Calm,Concerned,Urgent,Emergency"
+      },
+      {
+        "state": "Do you have documentation for the webhook retry behaviour?",
+        "question": "auto=Is this message answerable from the public documentation without a human?"
+      }
+    ],
+    "plate": "One inbound arrow at the left splitting into three clearly separated route lines that leave at different angles, with a small probability dial drawn as an arc sitting on the junction. Keep the three routes distinct and unlabelled."
+  },
+  {
+    "n": 3,
+    "slug": "competitor-ad-intelligence",
+    "title": "Competitor advertisement intelligence",
+    "tier": "easy",
+    "at": "02:35",
+    "what": "Turn hundreds of competitor ad variants into a pattern you can read.",
+    "shape": {
+      "state": "one ad's copy, as collected",
+      "question": "choice for format, choice for call to action, choice for funnel stage",
+      "answer": "three tags per ad, aggregate them yourself"
+    },
+    "use": "A scraper or extension collects ad copy from public ad libraries, then each ad is classified against a taxonomy you fix in advance. The output lands in a table or swipe file, and the patterns are what you count afterwards: which formats dominate, which calls to action repeat, where the funnel is crowded.",
+    "code": {
+      "lang": "python",
+      "label": "a fixed taxonomy, one ad at a time",
+      "src": "TAX = {\n  \"format\": {\"ugc\": \"Phone-shot testimonial\", \"studio\": \"Studio product shot\",\n             \"static\": \"Still image with text overlay\", \"carousel\": \"Multi-image carousel\"},\n  \"cta\":    {\"trial\": \"Free trial\", \"demo\": \"Book a demo\", \"shop\": \"Shop now\",\n             \"learn\": \"Learn more\", \"none\": \"No call to action\"},\n  \"funnel\": {\"top\": \"Problem aware\", \"mid\": \"Comparing options\",\n             \"bottom\": \"Ready to buy\"}}\n\ndef tag(ad_copy):\n    qs = {k: {\"type\": \"choice\", \"criteria\": v,\n              \"instructions\": \"Which %s is this ad?\" % k} for k, v in TAX.items()}\n    return decide(ad_copy, qs)   # one call, three typed tags"
+    },
+    "prompts": [
+      {
+        "state": "Tired of paying for five tools? One workspace does it all. Start free, no card needed.",
+        "question": "cta=choice:Which call to action is this?|trial:Free trial,demo:Book a demo,shop:Shop now,learn:Learn more,none:No call to action"
+      },
+      {
+        "state": "60 second demo: watch a finance team close the month in one afternoon instead of three days.",
+        "question": "funnel=choice:Where in the funnel is this aimed?|top:Problem aware,mid:Comparing options,bottom:Ready to buy"
+      }
+    ],
+    "plate": "A dense field of many small identical rectangles at the left thinning into three neat stacks at the right, each stack a different height. No text on any rectangle."
+  },
+  {
+    "n": 4,
+    "slug": "clip-extraction",
+    "title": "Clip extraction from long recordings",
+    "tier": "easy",
+    "at": "03:09",
+    "what": "Find the ten minutes worth publishing inside four hours of audio.",
+    "shape": {
+      "state": "one timecoded passage",
+      "question": "score against your own rubric, plus a noul per candidate",
+      "answer": "a score per passage, sorted in code"
+    },
+    "use": "Transcribe the recording with timecodes, cut it into timestamped chunks, and score each chunk against the criteria that actually make your clips work. Sort in code, keep the top ten with their timestamps, and hand those to an editor or an automated cutter. Ask one question per chunk, never one question for a list of chunks.",
+    "code": {
+      "lang": "python",
+      "label": "score every passage, sort in code",
+      "src": "RUBRIC = [\"Fluff\", \"Context\", \"Useful\", \"Quotable\", \"Clip gold\"]\n\ndef score(chunk):\n    qs = {\"clip\": {\"type\": \"score\", \"criteria\": RUBRIC,\n          \"instructions\": \"Consider only this passage. How strong is it as a standalone short clip?\"}}\n    return decide(chunk[\"text\"], qs)[\"clip\"][\"score\"]\n\ntop = sorted(chunks, key=score, reverse=True)[:10]\nfor c in top:\n    print(c[\"start\"], c[\"end\"], c[\"text\"][:60])"
+    },
+    "prompts": [
+      {
+        "state": "[00:41:12] ... and that is the bit everyone gets wrong, you do not need a bigger model, you need a smaller question ...",
+        "question": "clip=score:How strong is this passage as a standalone short clip?|Fluff,Context,Useful,Quotable,Clip gold"
+      },
+      {
+        "state": "[00:15:40] ... so anyway we were late for the flight and the bags never made it ...",
+        "question": "keep=Is this passage usable as a standalone social clip without the surrounding conversation?"
+      }
+    ],
+    "plate": "One very long thin timeline strip drawn as a horizontal rule, with a small fraction of it drawn thicker and raised slightly above the line to suggest a peak, and a bracket beneath that thicker part. Flat geometry, generous empty space."
+  },
+  {
+    "n": 5,
+    "slug": "churn-risk",
+    "title": "Churn risk profiling",
+    "tier": "easy",
+    "at": "03:37",
+    "what": "Sort accounts into bands your retention workflow can act on.",
+    "shape": {
+      "state": "one account's facts, named fields",
+      "question": "choice over your bands, score for how far along the risk is",
+      "answer": "a band per account, routed by your code"
+    },
+    "use": "Export the activity you already have (tenure, tier, seats, logins, support threads) and send one account per call with its fields named, because a bare list of ten accounts returns one answer ten times. High risk accounts go to a retention queue, and the band thresholds stay in your code where you can tune them.",
+    "code": {
+      "lang": "python",
+      "label": "named fields, one account per call",
+      "src": "BANDS = {\"healthy\": \"Using it weekly and growing\",\n         \"watch\": \"Usage slipping but still active\",\n         \"risk\": \"Likely to cancel in the next quarter\"}\n\ndef band(acct):\n    state = (\"Account %s. Plan %s. Seats %d of %d used. Logins last 30 days %d \"\n             \"(previous 30 days %d). Open support threads: %s.\") % (\n        acct[\"name\"], acct[\"plan\"], acct[\"seats_used\"], acct[\"seats\"],\n        acct[\"logins_30\"], acct[\"logins_prev30\"], acct[\"open_threads\"])\n    qs = {\"band\": {\"type\": \"choice\", \"criteria\": BANDS,\n          \"instructions\": \"Which retention band does %s belong in?\" % acct[\"name\"]}}\n    return decide(state, qs)[\"band\"]"
+    },
+    "prompts": [
+      {
+        "state": "Account Meridian Labs. Plan Team. Seats 4 of 25 used. Logins last 30 days 2 (previous 30 days 19). Open support threads: billing question about the last invoice.",
+        "question": "band=choice:Which retention band does Meridian Labs belong in?|healthy:Using it weekly and growing,watch:Usage slipping but still active,risk:Likely to cancel in the next quarter"
+      },
+      {
+        "state": "Account Kestrel Studio. Plan Solo. Logins last 30 days 0. Card declined twice, no reply to two emails.",
+        "question": "reach=score:How far along is the cancellation?|Just quiet,Actively drifting,Decided but not told us,Gone"
+      }
+    ],
+    "plate": "A single horizontal axis with three separated zones marked by thin vertical hairlines, and small identical circles migrating from the left zone toward the right zone across the axis. No text, no numbers."
+  },
+  {
+    "n": 6,
+    "slug": "internal-linking",
+    "title": "Internal linking and knowledge base graphing",
+    "tier": "easy",
+    "at": "04:03",
+    "what": "Connect pages or notes to each other without hand-picking the links.",
+    "shape": {
+      "state": "the page text, plus the candidate target titles",
+      "question": "choice over the candidates, plus a noul for whether any link belongs at all",
+      "answer": "the best target, or nothing"
+    },
+    "use": "Send the page text with the list of possible targets and let Jev choose, one call per paragraph or per section. Insert the markdown link where the question was asked, and let the no-link case come back empty rather than forcing a link onto a paragraph that has nothing to point at.",
+    "code": {
+      "lang": "python",
+      "label": "choose a target, or decline",
+      "src": "def link_for(paragraph, pages):\n    targets = {p[\"slug\"]: p[\"title\"] for p in pages}\n    targets[\"none\"] = \"No useful target in this list\"\n    qs = {\n      \"target\": {\"type\": \"choice\", \"criteria\": targets,\n        \"instructions\": \"Which existing page should this paragraph link to?\"},\n      \"worth\": {\"type\": \"noul\",\n        \"instructions\": \"Would that link genuinely help a reader of this paragraph?\"}}\n    ans = decide(paragraph, qs)\n    if ans[\"worth\"][\"noul\"] < 0.7 or ans[\"target\"][\"choice\"] == \"none\":\n        return None\n    return ans[\"target\"][\"choice\"]"
+    },
+    "prompts": [
+      {
+        "state": "Paragraph: Every request is signed, so a leaked key cannot be replayed against another workspace.",
+        "question": "target=choice:Which existing page should this paragraph link to?|auth:Signing requests,keys:Key rotation,limits:Rate limits,billing:Invoices and plans,none:No useful target in this list"
+      },
+      {
+        "state": "Paragraph: We ship on Thursdays, and a release note goes out the same afternoon.",
+        "question": "worth=Would that link genuinely help a reader of this paragraph?"
+      }
+    ],
+    "plate": "A loose cloud of small circles on the left connected by a few short lines to a smaller cluster on the right, with exactly one long clean line crossing the gap. Most circles stay unconnected."
+  },
+  {
+    "n": 7,
+    "slug": "purchase-intent",
+    "title": "Social purchase intent",
+    "tier": "easy",
+    "at": "04:38",
+    "what": "Pull the buyers out of a comment section.",
+    "shape": {
+      "state": "one comment, with the post it sits under",
+      "question": "choice over comment type, plus a noul for whether it is a buying signal",
+      "answer": "a tag per comment, purchase signals surfaced"
+    },
+    "use": "A scraper collects new comments and each one is classified as a purchase signal, a question or a complaint. Signals move to the top of the sales queue with their timestamp and handle attached, so the reply happens while the intent is still warm. Ask about the comment text only, and keep the post context in the state when the comment is ambiguous on its own.",
+    "code": {
+      "lang": "python",
+      "label": "tag the comment, surface the buyers",
+      "src": "KINDS = {\"buy\": \"Wants to buy, needs a link or price\",\n         \"ask\": \"Question about the product or shipping\",\n         \"moan\": \"Complaint or bad experience\",\n         \"chat\": \"Comment with no commercial content\"}\n\ndef tag(comment):\n    state = \"Post about: %s. Comment: %s\" % (comment[\"post\"], comment[\"text\"])\n    qs = {\"kind\": {\"type\": \"choice\", \"criteria\": KINDS,\n                    \"instructions\": \"How should this comment be handled?\"}}\n    ans = decide(state, qs)[\"kind\"]\n    return ans if ans[\"confidence\"] > 0.55 else {\"choice\": \"chat\"}"
+    },
+    "prompts": [
+      {
+        "state": "Post about: the new travel backpack. Comment: where can I get this, do you ship to Ireland?",
+        "question": "kind=choice:How should this comment be handled?|buy:Wants to buy, needs a link or price,ask:Question about the product or shipping,moan:Complaint or bad experience,chat:Comment with no commercial content"
+      },
+      {
+        "state": "Comment: mine arrived with a broken zip, second time this has happened.",
+        "question": "escalate=Does this comment need a human reply within the hour?"
+      }
+    ],
+    "plate": "A wide band of many tiny identical dots at the top, with a small number of dots falling through a narrow funnel shape and landing in a small collecting tray at the bottom. Most dots stay in the band."
+  }
+]

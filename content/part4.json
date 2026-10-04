@@ -1,0 +1,152 @@
+[
+  {
+    "n": 15,
+    "slug": "live-speech-classification",
+    "title": "Live meeting and speech classification",
+    "tier": "advanced",
+    "at": "10:00",
+    "what": "Tag sentences while they are still being spoken.",
+    "shape": {
+      "state": "one transcribed sentence, with the speaker",
+      "question": "choice over your categories, plus a noul for whether it is an action",
+      "answer": "one tag per sentence, accumulating into live notes"
+    },
+    "use": "Stream the audio through speech to text, and send each finished sentence as its own call, because a sentence is short and the answer comes back before the next one lands. Sentences are sorted into decisions, action items, risks and questions, which is a meeting record written as it happens. The video's example on the same shape scores a debate as it is spoken, one sentence at a time.",
+    "code": {
+      "lang": "python",
+      "label": "one finished sentence, one tag",
+      "src": "KINDS = {\"decision\": \"A choice the room committed to\",\n         \"action\": \"Something one named person will do\",\n         \"risk\": \"A problem or dependency raised\",\n         \"question\": \"Something still unanswered\"}\n\ndef on_sentence(sentence, speaker):\n    state = \"%s said: %s\" % (speaker, sentence)\n    qs = {\"kind\": {\"type\": \"choice\", \"criteria\": KINDS,\n          \"instructions\": \"How should %s's sentence be filed in the minutes?\" % speaker},\n          \"owner\": {\"type\": \"noul\",\n          \"instructions\": \"Does this sentence name the person who will do the work?\"}}\n    return decide(state, qs)"
+    },
+    "prompts": [
+      {
+        "state": "Priya said: let us ship the smaller version on Thursday and keep the migration for next month.",
+        "question": "kind=choice:How should Priya's sentence be filed in the minutes?|decision:A choice the room committed to,action:Something one named person will do,risk:A problem or dependency raised,question:Something still unanswered"
+      },
+      {
+        "state": "Sam said: I will get the pricing page rewritten before the launch review.",
+        "question": "owner=Does this sentence name the person who will do the work?"
+      }
+    ],
+    "plate": "A single horizontal waveform rule at the top with short vertical ticks hanging beneath it at irregular spacing, and four small separate trays arranged along the bottom, each holding a couple of ticks."
+  },
+  {
+    "n": 16,
+    "slug": "retrieval-engine",
+    "title": "Zero LLM retrieval engine",
+    "tier": "advanced",
+    "at": "10:30",
+    "what": "Answer narrow questions from a fixed corpus with no text generation at all.",
+    "shape": {
+      "state": "the visitor's question",
+      "question": "choice over indexed topic units, plus a noul for whether the corpus covers it",
+      "answer": "the matching item and its timestamp; no prose"
+    },
+    "use": "Turn the transcripts you already have into topic units with a short description each, then match the question against them. The visitor gets the actual answer slot, a lesson number or a video timestamp, which is more useful than a paragraph about it and costs nothing to generate. The corpus has to be genuinely finite for this to work, and the no-match case must be allowed to come back empty.",
+    "code": {
+      "lang": "python",
+      "label": "index once, answer from the list",
+      "src": "# units: one per video or document, with a written description and a start time\ncriteria = {u[\"id\"]: u[\"topic\"] for u in units}\ncriteria[\"none\"] = \"Nothing in this library covers it\"\n\ndef look_up(question):\n    qs = {\"unit\": {\"type\": \"choice\", \"criteria\": criteria,\n          \"instructions\": \"Which lesson covers this question?\"},\n          \"covered\": {\"type\": \"noul\",\n          \"instructions\": \"Does the library actually cover this question?\"}}\n    ans = decide(\"Visitor asked: \" + question, qs)\n    if ans[\"covered\"][\"noul\"] < 0.6:\n        return \"No lesson covers this yet.\"\n    u = by_id[ans[\"unit\"][\"choice\"]]\n    return \"%s, from %s\" % (u[\"title\"], u[\"start\"])"
+    },
+    "prompts": [
+      {
+        "state": "Visitor asked: which lesson explains how to keep costs down when sorting a big list?",
+        "question": "unit=choice:Which lesson covers this question?|l4:Sorting 1,700 messages for cents,l9:Putting a decision in front of an agent,l2:Typed questions and thresholds,none:Nothing in this library covers it"
+      },
+      {
+        "state": "Visitor asked: can it write my newsletter for me?",
+        "question": "covered=Does the library actually cover this question?"
+      }
+    ],
+    "plate": "A neat grid of small identical rectangles at the left, one inbound arrow from the bottom left, and a single rectangle sliding slightly out of the grid at the right. Nothing else."
+  },
+  {
+    "n": 17,
+    "slug": "icon-selection",
+    "title": "Dynamic UI icon selection",
+    "tier": "advanced",
+    "at": "11:13",
+    "what": "Pick the picture that matches what the user just typed.",
+    "shape": {
+      "state": "the text the user typed",
+      "question": "choice over icon keys in your set",
+      "answer": "the icon to render, immediately"
+    },
+    "use": "Map a fixed icon set to descriptive keys and choose between them as the field changes. A habit tracker draws the water glass when someone types drink more water; a mood log draws the face that matches the entry. The alternative is a keyword matcher that misses and an LLM call that costs far more for the same answer.",
+    "code": {
+      "lang": "javascript",
+      "label": "text in, icon key out",
+      "src": "const ICONS = {\n  water: 'Glass of water', walk: 'Footsteps', read: 'Open book',\n  sleep: 'Crescent moon', meditate: 'Seated figure', gym: 'Dumbbell',\n  none: 'Nothing in this set fits'\n};\n\nconst pickIcon = txt => decide({\n  model: 'jev-latest',\n  state: txt,\n  questions: { icon: { type: 'choice', criteria: ICONS,\n    instructions: 'Which icon matches what the user just typed?' } }\n}).then(a => a.icon.choice);\n\nfield.addEventListener('input', () =>\n  renderIcon(await pickIcon(field.value));"
+    },
+    "prompts": [
+      {
+        "state": "drink more water every morning before coffee",
+        "question": "icon=choice:Which icon matches what the user just typed?|water:Glass of water,walk:Footsteps,read:Open book,sleep:Crescent moon,meditate:Seated figure,gym:Dumbbell,none:Nothing in this set fits"
+      },
+      {
+        "state": "get to bed before midnight on weekdays",
+        "question": "icon=choice:Which icon matches what the user just typed?|water:Glass of water,walk:Footsteps,read:Open book,sleep:Crescent moon,meditate:Seated figure,gym:Dumbbell,none:Nothing in this set fits"
+      }
+    ],
+    "plate": "A short line of simple drawn symbols in a row at the bottom, all pale outlines, with one single symbol lifted out and rendered larger and solid directly above the row."
+  },
+  {
+    "n": 18,
+    "slug": "page-assembly",
+    "title": "Just in time page assembly",
+    "tier": "advanced",
+    "at": "11:59",
+    "what": "Choose the parts a visitor needs and build the page from them.",
+    "shape": {
+      "state": "the visitor's signals, written as facts",
+      "question": "one choice per slot in the layout",
+      "answer": "which module fills each slot; your code renders them"
+    },
+    "use": "Build a library of finished components, forms, buttons, sign-up boxes, headings and type presets, and let Jev choose which one fills each slot for this visitor. Nothing is generated at request time, so the page costs a normal page load: the model is choosing between things you already built, and every branch stays reviewable in code. Ask one question per slot, and keep a default for every slot.",
+    "code": {
+      "lang": "javascript",
+      "label": "one question per slot, parts already built",
+      "src": "const SLOTS = {\n  hero:   { trial: 'Start a free trial', demo: 'Book a 20 minute demo',\n            docs: 'Read the documentation' },\n  proof:  { logos: 'Customer logos', caseStudy: 'One case study',\n            quote: 'A single customer quote', none: 'No proof block' },\n  cta:    { trial: 'Free trial', demo: 'Book a demo',\n            waitlist: 'Join the waitlist' }\n};\n\nconst state = [\n  'Referrer: ' + referrer,\n  'Campaign: ' + (utm || 'none'),\n  'Company size: ' + (size || 'unknown'),\n  'Returning: ' + (isReturning ? 'yes' : 'no')\n].join('. ');\n\nconst questions = Object.fromEntries(Object.entries(SLOTS).map(\n  ([slot, opts]) => [slot, { type: 'choice', criteria: opts,\n    instructions: 'Which ' + slot + ' module fits this visitor?' }]));\n\nrender(await decide({ model: 'jev-latest', state, questions }));"
+    },
+    "prompts": [
+      {
+        "state": "Referrer: documentation site. Campaign: none. Company size: unknown. Returning: yes.",
+        "question": "hero=choice:Which hero module fits this visitor?|trial:Start a free trial,demo:Book a 20 minute demo,docs:Read the documentation"
+      },
+      {
+        "state": "Referrer: paid social. Campaign: launch week. Company size: 200 or more. Returning: no.",
+        "question": "proof=choice:Which proof module fits this visitor?|logos:Customer logos,caseStudy:One case study,quote:A single customer quote,none:No proof block"
+      }
+    ],
+    "plate": "A wireframe of a single page drawn as empty outlined blocks in a vertical stack at the right, with three alternative small blocks drawn separately at the left and one short line pointing from one of them into the top slot."
+  },
+  {
+    "n": 19,
+    "slug": "use-case-audit",
+    "title": "Workflow use case auditing",
+    "tier": "advanced",
+    "at": "12:23",
+    "what": "Find the steps in your own work that should have been a decision, not a model call.",
+    "shape": {
+      "state": "one step from a log or a process document",
+      "question": "choice for the shape of the step, a noul for whether a decision model fits",
+      "answer": "a list of candidate steps, sorted by how well they fit"
+    },
+    "use": "Walk your own logs or process notes and ask, of each step, whether a typed decision would have done the job. The answer space is closed: either a decision fits, or the step needs writing, or it is a count and belongs in code. The same audit runs over a public catalogue of use cases when you are looking for ideas rather than for your own work.",
+    "code": {
+      "lang": "python",
+      "label": "label each step, sort in code",
+      "src": "SHAPES = {\"decision\": \"A closed pick, score or yes and no\",\n          \"writing\": \"Needs text back, keep the language model\",\n          \"count\": \"Arithmetic or counting, do it in code\",\n          \"lookup\": \"Fetching a fact, not judging it\"}\n\ndef audit(step):\n    qs = {\"shape\": {\"type\": \"choice\", \"criteria\": SHAPES,\n          \"instructions\": \"What kind of step is this?\"},\n          \"fits\": {\"type\": \"noul\",\n          \"instructions\": \"Could this step be answered by picking between options you could write down in advance?\"}}\n    return decide(step, qs)\n\nfor step in steps:\n    ans = audit(step[\"text\"])\n    if ans[\"shape\"][\"choice\"] == \"decision\" and ans[\"fits\"][\"noul\"] > 0.6:\n        print(step[\"id\"], step[\"text\"][:70])"
+    },
+    "prompts": [
+      {
+        "state": "Step 14: after each support email, decide whether it is urgent enough to interrupt the day.",
+        "question": "shape=choice:What kind of step is this?|decision:A closed pick, score or yes and no,writing:Needs text back, keep the language model,count:Arithmetic or counting, do it in code,lookup:Fetching a fact, not judging it"
+      },
+      {
+        "state": "Step 22: read the meeting notes and write a summary for the client.",
+        "question": "fits=Could this step be answered by picking between options you could write down in advance?"
+      }
+    ],
+    "plate": "A long horizontal process line made of many small evenly spaced squares, with three of the squares picked out by small vertical brackets beneath them and the rest left plain. Wide margins, flat geometry."
+  }
+]

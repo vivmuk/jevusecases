@@ -1,0 +1,122 @@
+[
+  {
+    "n": 8,
+    "slug": "verification-and-calibration",
+    "title": "Output verification and model calibration",
+    "tier": "easy",
+    "at": "05:04",
+    "what": "Measure how often the decision is right before you trust it with anything.",
+    "shape": {
+      "state": "one record from a labelled set, with the answer withheld",
+      "question": "the same question you will ask in production",
+      "answer": "the model's pick, for you to compare against the human answer"
+    },
+    "use": "Build a validation set of a few dozen to a few hundred records a human has already labelled, run the loop without showing the answers, and count the matches. Misclassifications tell you where the labels are ambiguous, and the spread of probabilities tells you where the confidence cutoff belongs. The video's own advice is fifty records or more before production; tune the cutoff on one set and hold some records back.",
+    "code": {
+      "lang": "python",
+      "label": "a labelled set, a match rate, a cutoff",
+      "src": "rows = json.load(open(\"labelled.json\"))      # state + human label\n\nhits, conf = 0, []\nfor r in rows:\n    ans = decide(r[\"state\"], LABEL_QUESTION)[\"category\"]\n    hits += ans[\"choice\"] == r[\"label\"]\n    conf.append((ans[\"confidence\"], ans[\"choice\"] == r[\"label\"]))\n\nprint(\"agreement %.1f%% of %d\" % (100 * hits / len(rows), len(rows)))\nfor cut in (0.5, 0.6, 0.7, 0.8, 0.9):\n    kept = [c for c in conf if c[0] >= cut]\n    right = [c[1] for c in kept]\n    print(\"cutoff %.1f keeps %d rows at %.1f%% correct\"\n          % (cut, len(kept), 100 * sum(right) / max(len(right), 1)))"
+    },
+    "prompts": [
+      {
+        "state": "Labelled example 1 of 50. Ticket: the CSV export arrives empty when a filter is applied. Human label: technical.",
+        "question": "category=choice:Which team owns this ticket?|billing:Payments,technical:Bugs,account:Login,general:Anything else"
+      },
+      {
+        "state": "Labelled example 2 of 50. Ticket: I want to move to the annual plan. Human label: billing.",
+        "question": "category=choice:Which team owns this ticket?|billing:Payments,technical:Bugs,account:Login,general:Anything else"
+      }
+    ],
+    "plate": "A two-column comparison drawn as a left column of small squares and a right column of small squares, with matching pairs joined by short horizontal lines and three pairs left visibly unjoined. Flat, minimal, generous margin."
+  },
+  {
+    "n": 9,
+    "slug": "skill-selection",
+    "title": "Agent skill selection",
+    "tier": "intermediate",
+    "at": "06:21",
+    "what": "Let the agent pick the right skill before it loads any of them.",
+    "shape": {
+      "state": "the user's prompt",
+      "question": "choice, one option per skill in the library",
+      "answer": "the skill to load, plus how sure it is"
+    },
+    "use": "You do not have to put every skill description in the context window to choose one. Register the skills as the options, send the prompt, and load only the winner. In the video's own counting, 145 skills were matched in about five seconds across fourteen tests against roughly thirty for the larger model, and a separate test over 182 skills cut wrong picks by more than half. Keep the option list to the skills that are real candidates for this agent.",
+    "code": {
+      "lang": "bash",
+      "label": "the skill library is the menu",
+      "src": "jev-decide --state \"Turn this call recording into invoice-ready line items.\" \\\n  --ask 'skill=choice:Which skill should the agent load?|xlsx:Spreadsheet work,youtube-content:Transcripts to summaries,email-inbox-triage:Inbox triage,docx:Word documents,arxiv:Paper search' \\\n  --ask 'fit=score:How well does the chosen skill fit?|Wrong,Poor,Workable,Good,Exact'\n\n# {\"skill\": \"xlsx\", 0.79}"
+    },
+    "prompts": [
+      {
+        "state": "Find the papers behind this benchmark and summarise the method section.",
+        "question": "skill=choice:Which skill should the agent load?|arxiv:Paper search,youtube-content:Transcripts to summaries,docx:Word documents,xlsx:Spreadsheet work,email-inbox-triage:Inbox triage"
+      },
+      {
+        "state": "Take the last four weeks of invoices and give me a spend breakdown by vendor.",
+        "question": "skill=choice:Which skill should the agent load?|xlsx:Spreadsheet work,docx:Word documents,arxiv:Paper search,email-inbox-triage:Inbox triage"
+      }
+    ],
+    "plate": "One small square at the left connected by a single clean line to exactly one filled square selected out of a neatly spaced grid of twelve empty squares at the right. The chosen square is solid, the rest are outlines."
+  },
+  {
+    "n": 10,
+    "slug": "model-routing",
+    "title": "Intelligent multi model routing",
+    "tier": "intermediate",
+    "at": "07:02",
+    "what": "Send the easy question to the cheap model and the hard one to the expensive model.",
+    "shape": {
+      "state": "the user's message",
+      "question": "choice over the models you have wired up",
+      "answer": "the model to call, decided in about a third of a second"
+    },
+    "use": "A slash command or gateway in front of the agent asks Jev which model fits the message, then dispatches. File path lookups go to the cheapest model in the family, work that needs a frontier model goes there, and the bill follows the work rather than the habit. The same shape works in any agent platform: anything that can route a request can read a typed answer first.",
+    "code": {
+      "lang": "python",
+      "label": "a router in front of the agent",
+      "src": "MODELS = {\n  \"cheap\": \"Short lookup, formatting or extraction\",\n  \"mid\": \"Normal edit, explanation or small refactor\",\n  \"frontier\": \"Multi-step reasoning, architecture, hard bugs\"}\n\ndef route(message):\n    qs = {\"model\": {\"type\": \"choice\", \"criteria\": MODELS,\n          \"instructions\": \"Which model tier does this request need?\"}}\n    ans = decide(message, qs)[\"model\"]\n    # the cutoff lives here, not in the prompt\n    return \"frontier\" if ans[\"probabilities\"].get(\"frontier\", 0) > 0.45 else ans[\"choice\"]"
+    },
+    "prompts": [
+      {
+        "state": "where is the config file for the deploy job",
+        "question": "model=choice:Which model tier does this request need?|cheap:Short lookup, formatting or extraction,mid:Normal edit, explanation or small refactor,frontier:Multi-step reasoning, architecture, hard bugs"
+      },
+      {
+        "state": "Explain why the retry queue drops messages when two workers hold the same lease, then fix it.",
+        "question": "model=choice:Which model tier does this request need?|cheap:Short lookup, formatting or extraction,mid:Normal edit, explanation or small refactor,frontier:Multi-step reasoning, architecture, hard bugs"
+      }
+    ],
+    "plate": "One inbound line at the left meeting a small junction, with two outgoing lines of clearly different weight and thickness leaving to the right. Nothing else on the plate."
+  },
+  {
+    "n": 11,
+    "slug": "inbox-pre-filtering",
+    "title": "Inbox pre filtering for AI agents",
+    "tier": "intermediate",
+    "at": "07:37",
+    "what": "Stop paying a frontier model to read spam.",
+    "shape": {
+      "state": "one message, sender and subject kept",
+      "question": "choice over the buckets you act on",
+      "answer": "one bucket per message; only the useful ones continue downstream"
+    },
+    "use": "Put the decision in front of the writing. Each message is bucketed as an actionable inquiry, a sponsorship, spam or phishing; spam and phishing are dropped, and only the messages that need a reply reach the model that drafts. In the video's own run, 1,700 messages were sorted for eighteen cents. Keep the state to the fields the question needs, because the rest of the message is a distraction.",
+    "code": {
+      "lang": "python",
+      "label": "read the headers, drop the noise",
+      "src": "BUCKETS = {\"inquiry\": \"A real person who needs a reply\",\n           \"sponsor\": \"A commercial pitch, route to the deals file\",\n           \"spam\": \"Bulk marketing, no reply\",\n           \"phish\": \"Attempting to take credentials or money\"}\n\nfor m in inbox(limit=500):\n    state = \"From %s. Subject %s. First 400 characters: %s\" % (\n        m[\"from\"], m[\"subject\"], m[\"body\"][:400])\n    ans = decide(state, {\"bucket\": {\"type\": \"choice\", \"criteria\": BUCKETS,\n          \"instructions\": \"Which bucket does this message belong in?\"}})[\"bucket\"]\n    if ans[\"choice\"] in (\"inquiry\", \"sponsor\"):\n        hand_to_drafter(m, ans[\"choice\"], ans[\"confidence\"])"
+    },
+    "prompts": [
+      {
+        "state": "From billing at northwind-power. Subject: Your invoice is overdue, click here to avoid disconnection.",
+        "question": "bucket=choice:Which bucket does this message belong in?|inquiry:A real person who needs a reply,sponsor:A commercial pitch, route to the deals file,spam:Bulk marketing, no reply,phish:Attempting to take credentials or money"
+      },
+      {
+        "state": "From a partner agency. Subject: Paid collaboration for your next three videos, budget attached.",
+        "question": "bucket=choice:Which bucket does this message belong in?|inquiry:A real person who needs a reply,sponsor:A commercial pitch, route to the deals file,spam:Bulk marketing, no reply,phish:Attempting to take credentials or money"
+      }
+    ],
+    "plate": "A tall stack of many thin horizontal rectangles at the left, a wide gate in the middle, and two small trays at the right holding just a few rectangles. The bulk of the rectangles stop at the gate."
+  }
+]

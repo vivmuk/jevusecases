@@ -1,0 +1,1602 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jev use cases: nineteen closed-answer jobs for a decision model</title>
+<meta name="description" content="Nineteen ways to replace an open-ended language-model call with a typed decision. For each one: what the decision is, the code that asks it, and the prompts that run it.">
+<meta name="color-scheme" content="dark">
+<meta property="og:title" content="Jev use cases">
+<meta property="og:description" content="Nineteen closed-answer jobs for a decision model, each with its code and its prompts.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230a0c0e'/><rect x='9' y='7' width='3' height='18' fill='%23ede7da'/><rect x='15' y='7' width='8' height='3' fill='%23e8a33d'/><rect x='15' y='14' width='8' height='3' fill='%23ede7da'/><rect x='15' y='21' width='5' height='3' fill='%23ede7da'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="scrollcraft.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<a class="skip" href="#case-1">Skip to the cases</a>
+<span data-sc-progress></span>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<header class="site-bar">
+  <p class="site-bar__mark">Jev <span>/</span> use cases</p>
+  <button class="btn btn--ghost" type="button" data-index-toggle aria-expanded="false" aria-controls="index-panel">Cases</button>
+  <a class="btn btn--solid" href="https://github.com/vivmuk/jevusecases" rel="noreferrer">Open the source</a>
+</header>
+
+<nav class="index-panel" id="index-panel" data-open="false" aria-label="All nineteen cases">
+  <div class="index-panel__inner">
+    <h2>All nineteen cases</h2>
+    <p>Grouped the way the video groups them. Every one is a closed-answer job: the possible answers can be written down before the question is asked.</p>
+      <div class="index-group">
+        <h3>Cases 01 to 08</h3>
+        <ul class="index-list">
+          <li><a href="#case-1"><span class="n">01</span><span class="t">Spreadsheet data categorisation</span><span class="at">00:53</span></a></li>
+          <li><a href="#case-2"><span class="n">02</span><span class="t">Customer inquiry triage and routing</span><span class="at">01:31</span></a></li>
+          <li><a href="#case-3"><span class="n">03</span><span class="t">Competitor advertisement intelligence</span><span class="at">02:35</span></a></li>
+          <li><a href="#case-4"><span class="n">04</span><span class="t">Clip extraction from long recordings</span><span class="at">03:09</span></a></li>
+          <li><a href="#case-5"><span class="n">05</span><span class="t">Churn risk profiling</span><span class="at">03:37</span></a></li>
+          <li><a href="#case-6"><span class="n">06</span><span class="t">Internal linking and knowledge base graphing</span><span class="at">04:03</span></a></li>
+          <li><a href="#case-7"><span class="n">07</span><span class="t">Social purchase intent</span><span class="at">04:38</span></a></li>
+          <li><a href="#case-8"><span class="n">08</span><span class="t">Output verification and model calibration</span><span class="at">05:04</span></a></li>
+        </ul>
+      </div>
+      <div class="index-group">
+        <h3>Cases 09 to 14</h3>
+        <ul class="index-list">
+          <li><a href="#case-9"><span class="n">09</span><span class="t">Agent skill selection</span><span class="at">06:21</span></a></li>
+          <li><a href="#case-10"><span class="n">10</span><span class="t">Intelligent multi model routing</span><span class="at">07:02</span></a></li>
+          <li><a href="#case-11"><span class="n">11</span><span class="t">Inbox pre filtering for AI agents</span><span class="at">07:37</span></a></li>
+          <li><a href="#case-12"><span class="n">12</span><span class="t">Browser feed cleansing and element removal</span><span class="at">08:07</span></a></li>
+          <li><a href="#case-13"><span class="n">13</span><span class="t">Semantic in page search</span><span class="at">08:39</span></a></li>
+          <li><a href="#case-14"><span class="n">14</span><span class="t">Image and asset retrieval via metadata</span><span class="at">09:13</span></a></li>
+        </ul>
+      </div>
+      <div class="index-group">
+        <h3>Cases 15 to 19</h3>
+        <ul class="index-list">
+          <li><a href="#case-15"><span class="n">15</span><span class="t">Live meeting and speech classification</span><span class="at">10:00</span></a></li>
+          <li><a href="#case-16"><span class="n">16</span><span class="t">Zero LLM retrieval engine</span><span class="at">10:30</span></a></li>
+          <li><a href="#case-17"><span class="n">17</span><span class="t">Dynamic UI icon selection</span><span class="at">11:13</span></a></li>
+          <li><a href="#case-18"><span class="n">18</span><span class="t">Just in time page assembly</span><span class="at">11:59</span></a></li>
+          <li><a href="#case-19"><span class="n">19</span><span class="t">Workflow use case auditing</span><span class="at">12:23</span></a></li>
+        </ul>
+      </div>
+  </div>
+</nav>
+
+<main id="top">
+
+  <section class="sc-section" data-sc-act="pin" data-sc-span="2" aria-labelledby="open-h">
+    <div data-sc-stage class="sc-wrap open">
+      <h1 class="sc-display sc-display--xl" id="open-h" data-sc-cue="0 0.72 0" data-sc-kinetic="lines">Nineteen jobs for a model that answers in half a second.</h1>
+      <p class="open__lede sc-body" data-sc-cue="0 0.72 0">Each card carries the decision, the code that asks it, and the prompts that run it.</p>
+      <dl class="open__facts" data-sc-cue="0.5 1 0.3 0.5">
+        <div><dt>cases, from the video</dt><dd data-sc-count="0 19">0</dd></div>
+        <div><dt>seconds, measured round trip</dt><dd>0.39</dd></div>
+        <div><dt>dollars per million input tokens</dt><dd>0.042</dd></div>
+        <div><dt>dollars for the output</dt><dd>0</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section data-sc-act="pan" data-sc-span="3.4" aria-labelledby="rail-h">
+    <div data-sc-stage>
+      <div class="rail-head sc-wrap">
+        <h2 class="sc-display sc-display--md" id="rail-h">The whole set, side by side.</h2>
+        <p>Nineteen tabs, in the order the video walks them. Pick any one to jump to its card, and the rail at the bottom of the screen keeps your place.</p>
+      </div>
+      <div class="rail" data-sc-pan="0.06">
+        <a class="rail__tab" href="#case-1" title="Spreadsheet data categorisation">
+          <span class="n">01</span>
+          <span class="t">Row labelling</span>
+          <span class="d">easy</span>
+        </a>
+        <a class="rail__tab" href="#case-2" title="Customer inquiry triage and routing">
+          <span class="n">02</span>
+          <span class="t">Inquiry triage</span>
+          <span class="d">easy</span>
+        </a>
+        <a class="rail__tab" href="#case-3" title="Competitor advertisement intelligence">
+          <span class="n">03</span>
+          <span class="t">Ad intelligence</span>
+          <span class="d">easy</span>
+        </a>
+        <a class="rail__tab" href="#case-4" title="Clip extraction from long recordings">
+          <span class="n">04</span>
+          <span class="t">Clip hunting</span>
+          <span class="d">easy</span>
+        </a>
+        <a class="rail__tab" href="#case-5" title="Churn risk profiling">
+          <span class="n">05</span>
+          <span class="t">Churn bands</span>
+          <span class="d">easy</span>
+        </a>
+        <a class="rail__tab" href="#case-6" title="Internal linking and knowledge base graphing">
+          <span class="n">06</span>
+          <span class="t">Internal links</span>
+          <span class="d">easy</span>
+        </a>
+        <a class="rail__tab" href="#case-7" title="Social purchase intent">
+          <span class="n">07</span>
+          <span class="t">Purchase intent</span>
+          <span class="d">easy</span>
+        </a>
+        <a class="rail__tab" href="#case-8" title="Output verification and model calibration">
+          <span class="n">08</span>
+          <span class="t">Calibration</span>
+          <span class="d">easy</span>
+        </a>
+        <a class="rail__tab" href="#case-9" title="Agent skill selection">
+          <span class="n">09</span>
+          <span class="t">Skill picking</span>
+          <span class="d">intermediate</span>
+        </a>
+        <a class="rail__tab" href="#case-10" title="Intelligent multi model routing">
+          <span class="n">10</span>
+          <span class="t">Model routing</span>
+          <span class="d">intermediate</span>
+        </a>
+        <a class="rail__tab" href="#case-11" title="Inbox pre filtering for AI agents">
+          <span class="n">11</span>
+          <span class="t">Inbox gate</span>
+          <span class="d">intermediate</span>
+        </a>
+        <a class="rail__tab" href="#case-12" title="Browser feed cleansing and element removal">
+          <span class="n">12</span>
+          <span class="t">Feed cleansing</span>
+          <span class="d">intermediate</span>
+        </a>
+        <a class="rail__tab" href="#case-13" title="Semantic in page search">
+          <span class="n">13</span>
+          <span class="t">Semantic find</span>
+          <span class="d">intermediate</span>
+        </a>
+        <a class="rail__tab" href="#case-14" title="Image and asset retrieval via metadata">
+          <span class="n">14</span>
+          <span class="t">Asset search</span>
+          <span class="d">intermediate</span>
+        </a>
+        <a class="rail__tab" href="#case-15" title="Live meeting and speech classification">
+          <span class="n">15</span>
+          <span class="t">Live sentences</span>
+          <span class="d">advanced</span>
+        </a>
+        <a class="rail__tab" href="#case-16" title="Zero LLM retrieval engine">
+          <span class="n">16</span>
+          <span class="t">No-LLM answers</span>
+          <span class="d">advanced</span>
+        </a>
+        <a class="rail__tab" href="#case-17" title="Dynamic UI icon selection">
+          <span class="n">17</span>
+          <span class="t">Icon picking</span>
+          <span class="d">advanced</span>
+        </a>
+        <a class="rail__tab" href="#case-18" title="Just in time page assembly">
+          <span class="n">18</span>
+          <span class="t">Page assembly</span>
+          <span class="d">advanced</span>
+        </a>
+        <a class="rail__tab" href="#case-19" title="Workflow use case auditing">
+          <span class="n">19</span>
+          <span class="t">Work audit</span>
+          <span class="d">advanced</span>
+        </a>
+        <p class="rail__close">Three of them are the ones most people wire up first: labelling rows, gating an inbox, and choosing which model answers.</p>
+      </div>
+    </div>
+  </section>
+
+
+    <section class="sc-section tier" data-sc-act="flow" data-tier="easy">
+      <div class="sc-wrap sc-stack" data-sc-in data-sc-stagger="70">
+        <p class="eyebrow">Cases 01 to 08</p>
+        <h2 class="sc-display sc-display--md">The ones you can wire up this afternoon</h2>
+        <p>A single call in front of work you already do. Nothing here needs a queue, an index or a new service: one state in, one typed answer out, and your existing code decides what to do with it.</p>
+      </div>
+    </section>
+
+    <article class="case case--flip" id="case-1" data-case="01" data-title="Spreadsheet data categorisation"
+             aria-labelledby="case-1-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 01<span class="case__tier">easy</span></p>
+          <h3 class="case__title" id="case-1-t">Spreadsheet data categorisation</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=53s" rel="noreferrer">00:53 in the video</a></p>
+          <p class="case__what">Give every row one label from a fixed list, and nothing outside the list.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>one row of raw text, on its own</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>choice, over the labels you allow</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>one label plus its probability</dd></div>
+          </dl>
+          <p class="case__use">A sheet script posts each row to Jev together with the allowed categories, and writes the winning label into the target column. Because the categories are declared in the request, a label outside them cannot come back, which is what keeps a hand-checked column from growing invented values. Rows under your confidence threshold are left blank for a human.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">one row in, one label out</p>
+            <span class="code__lang">python</span>
+            <button class="copy" type="button" data-copy="c1">Copy</button>
+          </figcaption>
+          <pre id="c1"><code>import json, urllib.request
+
+CATS = {&quot;groceries&quot;: &quot;Food and groceries&quot;,
+        &quot;transport&quot;: &quot;Travel and transport&quot;,
+        &quot;subs&quot;: &quot;Subscriptions&quot;,
+        &quot;ignore&quot;: &quot;Not a real expense&quot;}
+
+def label(row):
+    body = {&quot;model&quot;: &quot;jev-latest&quot;, &quot;state&quot;: row, &quot;questions&quot;: {
+        &quot;category&quot;: {&quot;type&quot;: &quot;choice&quot;,
+                     &quot;instructions&quot;: &quot;Which budget category does this bank line belong to?&quot;,
+                     &quot;criteria&quot;: CATS}}}
+    req = urllib.request.Request(
+        &quot;https://api.venice.ai/api/v1/decisions&quot;,
+        data=json.dumps(body).encode(),
+        headers={&quot;Authorization&quot;: &quot;Bearer &quot; + KEY,
+                 &quot;Content-Type&quot;: &quot;application/json&quot;})
+    ans = json.load(urllib.request.urlopen(req))[&quot;answers&quot;][&quot;category&quot;]
+    return ans[&quot;choice&quot;] if ans[&quot;confidence&quot;] &gt; 0.6 else None</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p1-1">Copy</button>
+          </div>
+          <pre id="p1-1">state: CARD PAYMENT 04/10 SQ *BLUE BOTTLE 4.80
+
+question: category=choice:Which budget category does this bank line belong to?|groceries:Food and groceries,transport:Travel and transport,subs:Subscriptions,ignore:Not a real expense</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p1-2">Copy</button>
+          </div>
+          <pre id="p1-2">state: DIRECT DEBIT NORTHWIND POWER 61.20 OCT
+
+question: category=choice:Which budget category?|utilities:Power, water, internet,rent:Housing,subs:Subscriptions,ignore:Not a real expense</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-01.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 1: a single long horizontal bar of stacked identical tally marks on the left, a narrow vertical gate, and four separate open bins on the right receiving marks; the marks enter the gate one at a time and continue to one bin only." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 01. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case case--wide" id="case-2" data-case="02" data-title="Customer inquiry triage and routing"
+             aria-labelledby="case-2-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 02<span class="case__tier">easy</span></p>
+          <h3 class="case__title" id="case-2-t">Customer inquiry triage and routing</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=91s" rel="noreferrer">01:31 in the video</a></p>
+          <p class="case__what">Read intent from an incoming message and send it down the right path.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>the message body</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>choice for intent, a noul for each gate, a score for urgency</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>labels and probabilities your routing rule reads</dd></div>
+          </dl>
+          <p class="case__use">An automation tool hands the inquiry text to Jev and gets back both a category and a confidence. The routing rule lives in your code: high confidence goes to the automated path, low confidence goes to a person. The probability is the useful half of the answer, because it is the model telling you it does not know.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">three questions, one call</p>
+            <span class="code__lang">bash</span>
+            <button class="copy" type="button" data-copy="c2">Copy</button>
+          </figcaption>
+          <pre id="c2"><code>jev-decide --state &quot;Order A-104 was charged twice. Please refund the duplicate.&quot; \
+  --yes &#x27;refund=Is the customer asking for a refund?&#x27; \
+  --ask &#x27;dept=choice:Which team owns this?|billing:Payments,technical:Bugs,account:Login&#x27; \
+  --ask &#x27;urgency=score:How urgent is this?|Calm,Concerned,Urgent,Emergency&#x27;
+
+# {&quot;refund&quot;: 0.97} {&quot;dept&quot;: &quot;billing&quot;, 0.91} {&quot;urgency&quot;: 2.4}</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 3</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p2-1">Copy</button>
+          </div>
+          <pre id="p2-1">state: Hi, my card was charged twice for order A-104 this morning. Please refund the extra charge.
+
+question: dept=choice:Which team owns this?|billing:Payments,technical:Bugs,account:Login,general:Anything else</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 3</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p2-2">Copy</button>
+          </div>
+          <pre id="p2-2">state: The export button has done nothing since yesterday&#x27;s release, three of us are blocked.
+
+question: urgency=score:How urgent is this?|Calm,Concerned,Urgent,Emergency</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 3 of 3</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p2-3">Copy</button>
+          </div>
+          <pre id="p2-3">state: Do you have documentation for the webhook retry behaviour?
+
+question: auto=Is this message answerable from the public documentation without a human?</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-02.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 2: one inbound arrow at the left splitting into three clearly separated route lines that leave at different angles, with a small probability dial drawn as an arc sitting on the junction." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 02. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case" id="case-3" data-case="03" data-title="Competitor advertisement intelligence"
+             aria-labelledby="case-3-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 03<span class="case__tier">easy</span></p>
+          <h3 class="case__title" id="case-3-t">Competitor advertisement intelligence</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=155s" rel="noreferrer">02:35 in the video</a></p>
+          <p class="case__what">Turn hundreds of competitor ad variants into a pattern you can read.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>one ad&#x27;s copy, as collected</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>choice for format, choice for call to action, choice for funnel stage</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>three tags per ad, aggregate them yourself</dd></div>
+          </dl>
+          <p class="case__use">A scraper or extension collects ad copy from public ad libraries, then each ad is classified against a taxonomy you fix in advance. The output lands in a table or swipe file, and the patterns are what you count afterwards: which formats dominate, which calls to action repeat, where the funnel is crowded.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">a fixed taxonomy, one ad at a time</p>
+            <span class="code__lang">python</span>
+            <button class="copy" type="button" data-copy="c3">Copy</button>
+          </figcaption>
+          <pre id="c3"><code>TAX = {
+  &quot;format&quot;: {&quot;ugc&quot;: &quot;Phone-shot testimonial&quot;, &quot;studio&quot;: &quot;Studio product shot&quot;,
+             &quot;static&quot;: &quot;Still image with text overlay&quot;, &quot;carousel&quot;: &quot;Multi-image carousel&quot;},
+  &quot;cta&quot;:    {&quot;trial&quot;: &quot;Free trial&quot;, &quot;demo&quot;: &quot;Book a demo&quot;, &quot;shop&quot;: &quot;Shop now&quot;,
+             &quot;learn&quot;: &quot;Learn more&quot;, &quot;none&quot;: &quot;No call to action&quot;},
+  &quot;funnel&quot;: {&quot;top&quot;: &quot;Problem aware&quot;, &quot;mid&quot;: &quot;Comparing options&quot;,
+             &quot;bottom&quot;: &quot;Ready to buy&quot;}}
+
+def tag(ad_copy):
+    qs = {k: {&quot;type&quot;: &quot;choice&quot;, &quot;criteria&quot;: v,
+              &quot;instructions&quot;: &quot;Which %s is this ad?&quot; % k} for k, v in TAX.items()}
+    return decide(ad_copy, qs)   # one call, three typed tags</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p3-1">Copy</button>
+          </div>
+          <pre id="p3-1">state: Tired of paying for five tools? One workspace does it all. Start free, no card needed.
+
+question: cta=choice:Which call to action is this?|trial:Free trial,demo:Book a demo,shop:Shop now,learn:Learn more,none:No call to action</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p3-2">Copy</button>
+          </div>
+          <pre id="p3-2">state: 60 second demo: watch a finance team close the month in one afternoon instead of three days.
+
+question: funnel=choice:Where in the funnel is this aimed?|top:Problem aware,mid:Comparing options,bottom:Ready to buy</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-03.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 3: a dense field of many small identical rectangles at the left thinning into three neat stacks at the right, each stack a different height." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 03. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case case--flip" id="case-4" data-case="04" data-title="Clip extraction from long recordings"
+             aria-labelledby="case-4-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 04<span class="case__tier">easy</span></p>
+          <h3 class="case__title" id="case-4-t">Clip extraction from long recordings</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=189s" rel="noreferrer">03:09 in the video</a></p>
+          <p class="case__what">Find the ten minutes worth publishing inside four hours of audio.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>one timecoded passage</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>score against your own rubric, plus a noul per candidate</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>a score per passage, sorted in code</dd></div>
+          </dl>
+          <p class="case__use">Transcribe the recording with timecodes, cut it into timestamped chunks, and score each chunk against the criteria that actually make your clips work. Sort in code, keep the top ten with their timestamps, and hand those to an editor or an automated cutter. Ask one question per chunk, never one question for a list of chunks.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">score every passage, sort in code</p>
+            <span class="code__lang">python</span>
+            <button class="copy" type="button" data-copy="c4">Copy</button>
+          </figcaption>
+          <pre id="c4"><code>RUBRIC = [&quot;Fluff&quot;, &quot;Context&quot;, &quot;Useful&quot;, &quot;Quotable&quot;, &quot;Clip gold&quot;]
+
+def score(chunk):
+    qs = {&quot;clip&quot;: {&quot;type&quot;: &quot;score&quot;, &quot;criteria&quot;: RUBRIC,
+          &quot;instructions&quot;: &quot;Consider only this passage. How strong is it as a standalone short clip?&quot;}}
+    return decide(chunk[&quot;text&quot;], qs)[&quot;clip&quot;][&quot;score&quot;]
+
+top = sorted(chunks, key=score, reverse=True)[:10]
+for c in top:
+    print(c[&quot;start&quot;], c[&quot;end&quot;], c[&quot;text&quot;][:60])</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p4-1">Copy</button>
+          </div>
+          <pre id="p4-1">state: [00:41:12] ... and that is the bit everyone gets wrong, you do not need a bigger model, you need a smaller question ...
+
+question: clip=score:How strong is this passage as a standalone short clip?|Fluff,Context,Useful,Quotable,Clip gold</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p4-2">Copy</button>
+          </div>
+          <pre id="p4-2">state: [00:15:40] ... so anyway we were late for the flight and the bags never made it ...
+
+question: keep=Is this passage usable as a standalone social clip without the surrounding conversation?</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-04.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 4: one very long thin timeline strip drawn as a horizontal rule, with a small fraction of it drawn thicker and raised slightly above the line to suggest a peak, and a bracket beneath that thicker part." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 04. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case case--wide" id="case-5" data-case="05" data-title="Churn risk profiling"
+             aria-labelledby="case-5-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 05<span class="case__tier">easy</span></p>
+          <h3 class="case__title" id="case-5-t">Churn risk profiling</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=217s" rel="noreferrer">03:37 in the video</a></p>
+          <p class="case__what">Sort accounts into bands your retention workflow can act on.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>one account&#x27;s facts, named fields</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>choice over your bands, score for how far along the risk is</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>a band per account, routed by your code</dd></div>
+          </dl>
+          <p class="case__use">Export the activity you already have (tenure, tier, seats, logins, support threads) and send one account per call with its fields named, because a bare list of ten accounts returns one answer ten times. High risk accounts go to a retention queue, and the band thresholds stay in your code where you can tune them.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">named fields, one account per call</p>
+            <span class="code__lang">python</span>
+            <button class="copy" type="button" data-copy="c5">Copy</button>
+          </figcaption>
+          <pre id="c5"><code>BANDS = {&quot;healthy&quot;: &quot;Using it weekly and growing&quot;,
+         &quot;watch&quot;: &quot;Usage slipping but still active&quot;,
+         &quot;risk&quot;: &quot;Likely to cancel in the next quarter&quot;}
+
+def band(acct):
+    state = (&quot;Account %s. Plan %s. Seats %d of %d used. Logins last 30 days %d &quot;
+             &quot;(previous 30 days %d). Open support threads: %s.&quot;) % (
+        acct[&quot;name&quot;], acct[&quot;plan&quot;], acct[&quot;seats_used&quot;], acct[&quot;seats&quot;],
+        acct[&quot;logins_30&quot;], acct[&quot;logins_prev30&quot;], acct[&quot;open_threads&quot;])
+    qs = {&quot;band&quot;: {&quot;type&quot;: &quot;choice&quot;, &quot;criteria&quot;: BANDS,
+          &quot;instructions&quot;: &quot;Which retention band does %s belong in?&quot; % acct[&quot;name&quot;]}}
+    return decide(state, qs)[&quot;band&quot;]</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p5-1">Copy</button>
+          </div>
+          <pre id="p5-1">state: Account Meridian Labs. Plan Team. Seats 4 of 25 used. Logins last 30 days 2 (previous 30 days 19). Open support threads: billing question about the last invoice.
+
+question: band=choice:Which retention band does Meridian Labs belong in?|healthy:Using it weekly and growing,watch:Usage slipping but still active,risk:Likely to cancel in the next quarter</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p5-2">Copy</button>
+          </div>
+          <pre id="p5-2">state: Account Kestrel Studio. Plan Solo. Logins last 30 days 0. Card declined twice, no reply to two emails.
+
+question: reach=score:How far along is the cancellation?|Just quiet,Actively drifting,Decided but not told us,Gone</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-05.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 5: a single horizontal axis with three separated zones marked by thin vertical hairlines, and small identical circles migrating from the left zone toward the right zone across the axis." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 05. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case" id="case-6" data-case="06" data-title="Internal linking and knowledge base graphing"
+             aria-labelledby="case-6-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 06<span class="case__tier">easy</span></p>
+          <h3 class="case__title" id="case-6-t">Internal linking and knowledge base graphing</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=243s" rel="noreferrer">04:03 in the video</a></p>
+          <p class="case__what">Connect pages or notes to each other without hand-picking the links.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>the page text, plus the candidate target titles</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>choice over the candidates, plus a noul for whether any link belongs at all</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>the best target, or nothing</dd></div>
+          </dl>
+          <p class="case__use">Send the page text with the list of possible targets and let Jev choose, one call per paragraph or per section. Insert the markdown link where the question was asked, and let the no-link case come back empty rather than forcing a link onto a paragraph that has nothing to point at.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">choose a target, or decline</p>
+            <span class="code__lang">python</span>
+            <button class="copy" type="button" data-copy="c6">Copy</button>
+          </figcaption>
+          <pre id="c6"><code>def link_for(paragraph, pages):
+    targets = {p[&quot;slug&quot;]: p[&quot;title&quot;] for p in pages}
+    targets[&quot;none&quot;] = &quot;No useful target in this list&quot;
+    qs = {
+      &quot;target&quot;: {&quot;type&quot;: &quot;choice&quot;, &quot;criteria&quot;: targets,
+        &quot;instructions&quot;: &quot;Which existing page should this paragraph link to?&quot;},
+      &quot;worth&quot;: {&quot;type&quot;: &quot;noul&quot;,
+        &quot;instructions&quot;: &quot;Would that link genuinely help a reader of this paragraph?&quot;}}
+    ans = decide(paragraph, qs)
+    if ans[&quot;worth&quot;][&quot;noul&quot;] &lt; 0.7 or ans[&quot;target&quot;][&quot;choice&quot;] == &quot;none&quot;:
+        return None
+    return ans[&quot;target&quot;][&quot;choice&quot;]</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p6-1">Copy</button>
+          </div>
+          <pre id="p6-1">state: Paragraph: Every request is signed, so a leaked key cannot be replayed against another workspace.
+
+question: target=choice:Which existing page should this paragraph link to?|auth:Signing requests,keys:Key rotation,limits:Rate limits,billing:Invoices and plans,none:No useful target in this list</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p6-2">Copy</button>
+          </div>
+          <pre id="p6-2">state: Paragraph: We ship on Thursdays, and a release note goes out the same afternoon.
+
+question: worth=Would that link genuinely help a reader of this paragraph?</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-06.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 6: a loose cloud of small circles on the left connected by a few short lines to a smaller cluster on the right, with exactly one long clean line crossing the gap." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 06. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case case--flip" id="case-7" data-case="07" data-title="Social purchase intent"
+             aria-labelledby="case-7-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 07<span class="case__tier">easy</span></p>
+          <h3 class="case__title" id="case-7-t">Social purchase intent</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=278s" rel="noreferrer">04:38 in the video</a></p>
+          <p class="case__what">Pull the buyers out of a comment section.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>one comment, with the post it sits under</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>choice over comment type, plus a noul for whether it is a buying signal</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>a tag per comment, purchase signals surfaced</dd></div>
+          </dl>
+          <p class="case__use">A scraper collects new comments and each one is classified as a purchase signal, a question or a complaint. Signals move to the top of the sales queue with their timestamp and handle attached, so the reply happens while the intent is still warm. Ask about the comment text only, and keep the post context in the state when the comment is ambiguous on its own.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">tag the comment, surface the buyers</p>
+            <span class="code__lang">python</span>
+            <button class="copy" type="button" data-copy="c7">Copy</button>
+          </figcaption>
+          <pre id="c7"><code>KINDS = {&quot;buy&quot;: &quot;Wants to buy, needs a link or price&quot;,
+         &quot;ask&quot;: &quot;Question about the product or shipping&quot;,
+         &quot;moan&quot;: &quot;Complaint or bad experience&quot;,
+         &quot;chat&quot;: &quot;Comment with no commercial content&quot;}
+
+def tag(comment):
+    state = &quot;Post about: %s. Comment: %s&quot; % (comment[&quot;post&quot;], comment[&quot;text&quot;])
+    qs = {&quot;kind&quot;: {&quot;type&quot;: &quot;choice&quot;, &quot;criteria&quot;: KINDS,
+                    &quot;instructions&quot;: &quot;How should this comment be handled?&quot;}}
+    ans = decide(state, qs)[&quot;kind&quot;]
+    return ans if ans[&quot;confidence&quot;] &gt; 0.55 else {&quot;choice&quot;: &quot;chat&quot;}</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p7-1">Copy</button>
+          </div>
+          <pre id="p7-1">state: Post about: the new travel backpack. Comment: where can I get this, do you ship to Ireland?
+
+question: kind=choice:How should this comment be handled?|buy:Wants to buy, needs a link or price,ask:Question about the product or shipping,moan:Complaint or bad experience,chat:Comment with no commercial content</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p7-2">Copy</button>
+          </div>
+          <pre id="p7-2">state: Comment: mine arrived with a broken zip, second time this has happened.
+
+question: escalate=Does this comment need a human reply within the hour?</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-07.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 7: a wide band of many short identical vertical hairline strokes along the top, and below it a narrow outlined funnel shape narrowing to a small open tray that holds three of those strokes; every other stroke stays in the band." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 07. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case case--wide" id="case-8" data-case="08" data-title="Output verification and model calibration"
+             aria-labelledby="case-8-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 08<span class="case__tier">easy</span></p>
+          <h3 class="case__title" id="case-8-t">Output verification and model calibration</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=304s" rel="noreferrer">05:04 in the video</a></p>
+          <p class="case__what">Measure how often the decision is right before you trust it with anything.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>one record from a labelled set, with the answer withheld</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>the same question you will ask in production</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>the model&#x27;s pick, for you to compare against the human answer</dd></div>
+          </dl>
+          <p class="case__use">Build a validation set of a few dozen to a few hundred records a human has already labelled, run the loop without showing the answers, and count the matches. Misclassifications tell you where the labels are ambiguous, and the spread of probabilities tells you where the confidence cutoff belongs. The video&#x27;s own advice is fifty records or more before production; tune the cutoff on one set and hold some records back.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">a labelled set, a match rate, a cutoff</p>
+            <span class="code__lang">python</span>
+            <button class="copy" type="button" data-copy="c8">Copy</button>
+          </figcaption>
+          <pre id="c8"><code>rows = json.load(open(&quot;labelled.json&quot;))      # state + human label
+
+hits, conf = 0, []
+for r in rows:
+    ans = decide(r[&quot;state&quot;], LABEL_QUESTION)[&quot;category&quot;]
+    hits += ans[&quot;choice&quot;] == r[&quot;label&quot;]
+    conf.append((ans[&quot;confidence&quot;], ans[&quot;choice&quot;] == r[&quot;label&quot;]))
+
+print(&quot;agreement %.1f%% of %d&quot; % (100 * hits / len(rows), len(rows)))
+for cut in (0.5, 0.6, 0.7, 0.8, 0.9):
+    kept = [c for c in conf if c[0] &gt;= cut]
+    right = [c[1] for c in kept]
+    print(&quot;cutoff %.1f keeps %d rows at %.1f%% correct&quot;
+          % (cut, len(kept), 100 * sum(right) / max(len(right), 1)))</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p8-1">Copy</button>
+          </div>
+          <pre id="p8-1">state: Labelled example 1 of 50. Ticket: the CSV export arrives empty when a filter is applied. Human label: technical.
+
+question: category=choice:Which team owns this ticket?|billing:Payments,technical:Bugs,account:Login,general:Anything else</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p8-2">Copy</button>
+          </div>
+          <pre id="p8-2">state: Labelled example 2 of 50. Ticket: I want to move to the annual plan. Human label: billing.
+
+question: category=choice:Which team owns this ticket?|billing:Payments,technical:Bugs,account:Login,general:Anything else</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-08.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 8: a two-column comparison drawn as a left column of small squares and a right column of small squares, with matching pairs joined by short horizontal lines and three pairs left visibly unjoined." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 08. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <section class="sc-section tier" data-sc-act="flow" data-tier="intermediate">
+      <div class="sc-wrap sc-stack" data-sc-in data-sc-stagger="70">
+        <p class="eyebrow">Cases 09 to 14</p>
+        <h2 class="sc-display sc-display--md">The ones that change how your stack routes</h2>
+        <p>These sit inside the machinery rather than beside it: which skill loads, which model answers, which message reaches the model at all. They pay for themselves in tokens and in latency.</p>
+      </div>
+    </section>
+
+    <article class="case case--flip" id="case-9" data-case="09" data-title="Agent skill selection"
+             aria-labelledby="case-9-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 09<span class="case__tier">intermediate</span></p>
+          <h3 class="case__title" id="case-9-t">Agent skill selection</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=381s" rel="noreferrer">06:21 in the video</a></p>
+          <p class="case__what">Let the agent pick the right skill before it loads any of them.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>the user&#x27;s prompt</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>choice, one option per skill in the library</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>the skill to load, plus how sure it is</dd></div>
+          </dl>
+          <p class="case__use">You do not have to put every skill description in the context window to choose one. Register the skills as the options, send the prompt, and load only the winner. In the video&#x27;s own counting, 145 skills were matched in about five seconds across fourteen tests against roughly thirty for the larger model, and a separate test over 182 skills cut wrong picks by more than half. Keep the option list to the skills that are real candidates for this agent.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">the skill library is the menu</p>
+            <span class="code__lang">bash</span>
+            <button class="copy" type="button" data-copy="c9">Copy</button>
+          </figcaption>
+          <pre id="c9"><code>jev-decide --state &quot;Turn this call recording into invoice-ready line items.&quot; \
+  --ask &#x27;skill=choice:Which skill should the agent load?|xlsx:Spreadsheet work,youtube-content:Transcripts to summaries,email-inbox-triage:Inbox triage,docx:Word documents,arxiv:Paper search&#x27; \
+  --ask &#x27;fit=score:How well does the chosen skill fit?|Wrong,Poor,Workable,Good,Exact&#x27;
+
+# {&quot;skill&quot;: &quot;xlsx&quot;, 0.79}</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p9-1">Copy</button>
+          </div>
+          <pre id="p9-1">state: Find the papers behind this benchmark and summarise the method section.
+
+question: skill=choice:Which skill should the agent load?|arxiv:Paper search,youtube-content:Transcripts to summaries,docx:Word documents,xlsx:Spreadsheet work,email-inbox-triage:Inbox triage</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p9-2">Copy</button>
+          </div>
+          <pre id="p9-2">state: Take the last four weeks of invoices and give me a spend breakdown by vendor.
+
+question: skill=choice:Which skill should the agent load?|xlsx:Spreadsheet work,docx:Word documents,arxiv:Paper search,email-inbox-triage:Inbox triage</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-09.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 9: one small square at the left connected by a single clean line to exactly one filled square selected out of a neatly spaced grid of twelve empty squares at the right." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 09. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case case--wide" id="case-10" data-case="10" data-title="Intelligent multi model routing"
+             aria-labelledby="case-10-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 10<span class="case__tier">intermediate</span></p>
+          <h3 class="case__title" id="case-10-t">Intelligent multi model routing</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=422s" rel="noreferrer">07:02 in the video</a></p>
+          <p class="case__what">Send the easy question to the cheap model and the hard one to the expensive model.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>the user&#x27;s message</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>choice over the models you have wired up</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>the model to call, decided in about a third of a second</dd></div>
+          </dl>
+          <p class="case__use">A slash command or gateway in front of the agent asks Jev which model fits the message, then dispatches. File path lookups go to the cheapest model in the family, work that needs a frontier model goes there, and the bill follows the work rather than the habit. The same shape works in any agent platform: anything that can route a request can read a typed answer first.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">a router in front of the agent</p>
+            <span class="code__lang">python</span>
+            <button class="copy" type="button" data-copy="c10">Copy</button>
+          </figcaption>
+          <pre id="c10"><code>MODELS = {
+  &quot;cheap&quot;: &quot;Short lookup, formatting or extraction&quot;,
+  &quot;mid&quot;: &quot;Normal edit, explanation or small refactor&quot;,
+  &quot;frontier&quot;: &quot;Multi-step reasoning, architecture, hard bugs&quot;}
+
+def route(message):
+    qs = {&quot;model&quot;: {&quot;type&quot;: &quot;choice&quot;, &quot;criteria&quot;: MODELS,
+          &quot;instructions&quot;: &quot;Which model tier does this request need?&quot;}}
+    ans = decide(message, qs)[&quot;model&quot;]
+    # the cutoff lives here, not in the prompt
+    return &quot;frontier&quot; if ans[&quot;probabilities&quot;].get(&quot;frontier&quot;, 0) &gt; 0.45 else ans[&quot;choice&quot;]</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p10-1">Copy</button>
+          </div>
+          <pre id="p10-1">state: where is the config file for the deploy job
+
+question: model=choice:Which model tier does this request need?|cheap:Short lookup, formatting or extraction,mid:Normal edit, explanation or small refactor,frontier:Multi-step reasoning, architecture, hard bugs</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p10-2">Copy</button>
+          </div>
+          <pre id="p10-2">state: Explain why the retry queue drops messages when two workers hold the same lease, then fix it.
+
+question: model=choice:Which model tier does this request need?|cheap:Short lookup, formatting or extraction,mid:Normal edit, explanation or small refactor,frontier:Multi-step reasoning, architecture, hard bugs</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-10.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 10: one inbound line at the left meeting a small junction, with two outgoing lines of clearly different weight and thickness leaving to the right." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 10. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case" id="case-11" data-case="11" data-title="Inbox pre filtering for AI agents"
+             aria-labelledby="case-11-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 11<span class="case__tier">intermediate</span></p>
+          <h3 class="case__title" id="case-11-t">Inbox pre filtering for AI agents</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=457s" rel="noreferrer">07:37 in the video</a></p>
+          <p class="case__what">Stop paying a frontier model to read spam.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>one message, sender and subject kept</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>choice over the buckets you act on</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>one bucket per message; only the useful ones continue downstream</dd></div>
+          </dl>
+          <p class="case__use">Put the decision in front of the writing. Each message is bucketed as an actionable inquiry, a sponsorship, spam or phishing; spam and phishing are dropped, and only the messages that need a reply reach the model that drafts. In the video&#x27;s own run, 1,700 messages were sorted for eighteen cents. Keep the state to the fields the question needs, because the rest of the message is a distraction.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">read the headers, drop the noise</p>
+            <span class="code__lang">python</span>
+            <button class="copy" type="button" data-copy="c11">Copy</button>
+          </figcaption>
+          <pre id="c11"><code>BUCKETS = {&quot;inquiry&quot;: &quot;A real person who needs a reply&quot;,
+           &quot;sponsor&quot;: &quot;A commercial pitch, route to the deals file&quot;,
+           &quot;spam&quot;: &quot;Bulk marketing, no reply&quot;,
+           &quot;phish&quot;: &quot;Attempting to take credentials or money&quot;}
+
+for m in inbox(limit=500):
+    state = &quot;From %s. Subject %s. First 400 characters: %s&quot; % (
+        m[&quot;from&quot;], m[&quot;subject&quot;], m[&quot;body&quot;][:400])
+    ans = decide(state, {&quot;bucket&quot;: {&quot;type&quot;: &quot;choice&quot;, &quot;criteria&quot;: BUCKETS,
+          &quot;instructions&quot;: &quot;Which bucket does this message belong in?&quot;}})[&quot;bucket&quot;]
+    if ans[&quot;choice&quot;] in (&quot;inquiry&quot;, &quot;sponsor&quot;):
+        hand_to_drafter(m, ans[&quot;choice&quot;], ans[&quot;confidence&quot;])</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p11-1">Copy</button>
+          </div>
+          <pre id="p11-1">state: From billing at northwind-power. Subject: Your invoice is overdue, click here to avoid disconnection.
+
+question: bucket=choice:Which bucket does this message belong in?|inquiry:A real person who needs a reply,sponsor:A commercial pitch, route to the deals file,spam:Bulk marketing, no reply,phish:Attempting to take credentials or money</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p11-2">Copy</button>
+          </div>
+          <pre id="p11-2">state: From a partner agency. Subject: Paid collaboration for your next three videos, budget attached.
+
+question: bucket=choice:Which bucket does this message belong in?|inquiry:A real person who needs a reply,sponsor:A commercial pitch, route to the deals file,spam:Bulk marketing, no reply,phish:Attempting to take credentials or money</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-11.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 11: a tall stack of many thin horizontal rectangles at the left, a wide gate in the middle, and two small trays at the right holding just a few rectangles." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 11. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case case--flip" id="case-12" data-case="12" data-title="Browser feed cleansing and element removal"
+             aria-labelledby="case-12-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 12<span class="case__tier">intermediate</span></p>
+          <h3 class="case__title" id="case-12-t">Browser feed cleansing and element removal</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=487s" rel="noreferrer">08:07 in the video</a></p>
+          <p class="case__what">Judge each item as it loads and hide what does not earn the space.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>the text of one feed item</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>a single noul question, asked hundreds of times</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>a probability per item; your code hides or keeps</dd></div>
+          </dl>
+          <p class="case__use">A content script walks the loaded items, asks one narrow question of each, and collapses the ones that fail. The video&#x27;s example hides posts that read as machine-generated filler; the same shape hides ads or cookie notices. Because one call answers in a fraction of a second, the page still feels instant if you judge only the items actually in view.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">one question per post, in the page</p>
+            <span class="code__lang">javascript</span>
+            <button class="copy" type="button" data-copy="c12">Copy</button>
+          </figcaption>
+          <pre id="c12"><code>async function judge(text) {
+  const r = await fetch(&#x27;https://api.venice.ai/api/v1/decisions&#x27;, {
+    method: &#x27;POST&#x27;,
+    headers: { &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
+               Authorization: &#x27;Bearer &#x27; + KEY },
+    body: JSON.stringify({
+      model: &#x27;jev-latest&#x27;,
+      state: text.slice(0, 600),
+      questions: { slop: { type: &#x27;noul&#x27;,
+        instructions: &#x27;Is this post low-effort machine-generated filler?&#x27; } }
+    })
+  });
+  return (await r.json()).answers.slop.noul;
+}
+
+for (const el of document.querySelectorAll(&#x27;.feed-item&#x27;)) {
+  if (await judge(el.innerText) &gt; 0.7) el.style.display = &#x27;none&#x27;;
+}</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p12-1">Copy</button>
+          </div>
+          <pre id="p12-1">state: Post text: 5 AI tools that will change everything. Number 3 blew my mind. Thread below.
+
+question: hide=Is this post low-effort machine-generated filler?</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p12-2">Copy</button>
+          </div>
+          <pre id="p12-2">state: Post text: Spent the morning re-doing our onboarding copy. Cut nine screens down to four, reply rate went from 11% to 26%.
+
+question: hide=Is this post low-effort machine-generated filler?</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-12.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 12: a vertical column of small identical rectangles, three of them drawn as faint outlines and the rest solid, with the faint ones marked by a very thin diagonal cross drawn across each." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 12. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case case--wide" id="case-13" data-case="13" data-title="Semantic in page search"
+             aria-labelledby="case-13-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 13<span class="case__tier">intermediate</span></p>
+          <h3 class="case__title" id="case-13-t">Semantic in page search</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=519s" rel="noreferrer">08:39 in the video</a></p>
+          <p class="case__what">Find the paragraph you meant, not the words you typed.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>the query, plus the candidate sections</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>choice over the sections, by key</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>the section to scroll to, or no match</dd></div>
+          </dl>
+          <p class="case__use">Split the document into sections, name each one, and ask which matches the query in meaning. Because the answer is a typed key rather than a sentence, the interface can scroll straight to the element it names. It is fast enough to run while the visitor is still typing, which is what makes it feel like a native find.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">query in, section out, scroll</p>
+            <span class="code__lang">javascript</span>
+            <button class="copy" type="button" data-copy="c13">Copy</button>
+          </figcaption>
+          <pre id="c13"><code>async function findOnPage(query, sections) {
+  const criteria = Object.fromEntries(sections.map((s, i) =&gt;
+    [&#x27;s&#x27; + i, s.heading + &#x27;: &#x27; + s.text.slice(0, 120)]));
+  criteria.none = &#x27;No section matches&#x27;;
+
+  const ans = await decide({
+    model: &#x27;jev-latest&#x27;,
+    state: &#x27;Query: &#x27; + query,
+    questions: { hit: { type: &#x27;choice&#x27;, criteria,
+      instructions: &#x27;Which section of this page answers the query?&#x27; } }
+  });
+
+  if (ans.hit.choice !== &#x27;none&#x27;) {
+    sections[Number(ans.hit.choice.slice(1))]
+      .el.scrollIntoView({ behavior: &#x27;smooth&#x27; });
+  }
+}</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p13-1">Copy</button>
+          </div>
+          <pre id="p13-1">state: Query: how do I cancel. Sections: s0 Billing: plans, invoices, refunds. s1 Shipping: dispatch times. s2 Account: password, email, two factor. s3 Cancelling: downgrade and end a subscription.
+
+question: hit=choice:Which section of this page answers the query?|s0:Billing,s1:Shipping,s2:Account,s3:Cancelling,none:No section matches</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p13-2">Copy</button>
+          </div>
+          <pre id="p13-2">state: Query: refund window. Sections: s0 Billing: plans, invoices, refunds within 30 days. s1 Shipping: dispatch times. s2 Account: password, email.
+
+question: hit=choice:Which section of this page answers the query?|s0:Billing,s1:Shipping,s2:Account,none:No section matches</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-13.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 13: a vertical column of stacked paragraph bars drawn as thin outlined rectangles, with one bar near the middle drawn as a double outline and a short straight arrow entering it from the left." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 13. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case" id="case-14" data-case="14" data-title="Image and asset retrieval via metadata"
+             aria-labelledby="case-14-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 14<span class="case__tier">intermediate</span></p>
+          <h3 class="case__title" id="case-14-t">Image and asset retrieval via metadata</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=553s" rel="noreferrer">09:13 in the video</a></p>
+          <p class="case__what">Search a media library by what is in the picture, not by file name.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>the search term, plus the asset records</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>choice over asset keys</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>the asset to open, or no match</dd></div>
+          </dl>
+          <p class="case__use">File names are a poor index, so every asset gets text first: the prompt it was generated from, or a caption written by a cheap multimodal model at indexing time. Searching then becomes one typed decision over those records. The video&#x27;s own note is that captions are nearly free at this scale, and the index is worth more than the model that wrote it.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">caption once, decide on every search</p>
+            <span class="code__lang">python</span>
+            <button class="copy" type="button" data-copy="c14">Copy</button>
+          </figcaption>
+          <pre id="c14"><code>def find(query, assets):
+    criteria = {a[&quot;id&quot;]: a[&quot;caption&quot;][:140] for a in assets}
+    criteria[&quot;none&quot;] = &quot;Nothing in the library matches&quot;
+    qs = {&quot;hit&quot;: {&quot;type&quot;: &quot;choice&quot;, &quot;criteria&quot;: criteria,
+      &quot;instructions&quot;: &quot;Which asset is the query asking for?&quot;}}
+    ans = decide(&quot;Query: &quot; + query, qs)[&quot;hit&quot;]
+    return None if ans[&quot;choice&quot;] == &quot;none&quot; else ans[&quot;choice&quot;]
+
+# indexing side, once per asset:
+# caption = cheap_vision_model(&quot;Describe this image in one sentence, no text.&quot;)</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p14-1">Copy</button>
+          </div>
+          <pre id="p14-1">state: Query: a dark illustration of a harbour at night. Library: a1 flat diagram of a funnel, a2 dark harbour illustration at night, a3 photograph of a studio desk, a4 line drawing of a bicycle.
+
+question: hit=choice:Which asset is the query asking for?|a1:Diagram of a funnel,a2:Harbour at night,a3:Studio desk,a4:Line drawing of a bicycle,none:Nothing in the library matches</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p14-2">Copy</button>
+          </div>
+          <pre id="p14-2">state: Query: the one I made for the podcast cover. Library: a1 harbour at night, a2 flat funnel diagram, a3 studio desk photograph.
+
+question: hit=choice:Which asset is the query asking for?|a1:Harbour at night,a2:Funnel diagram,a3:Studio desk,none:Nothing in the library matches</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-14.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 14: a grid of small empty picture frames at the left and one larger frame pulled out and highlighted at the right, with a single line connecting the two." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 14. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <section class="sc-section tier" data-sc-act="flow" data-tier="advanced">
+      <div class="sc-wrap sc-stack" data-sc-in data-sc-stagger="70">
+        <p class="eyebrow">Cases 15 to 19</p>
+        <h2 class="sc-display sc-display--md">The ones that make a page or a product behave differently</h2>
+        <p>Decisions fast enough to run while someone is still talking or typing, plus the audit that finds the remaining candidates in your own workflow.</p>
+      </div>
+    </section>
+
+    <article class="case case--wide" id="case-15" data-case="15" data-title="Live meeting and speech classification"
+             aria-labelledby="case-15-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 15<span class="case__tier">advanced</span></p>
+          <h3 class="case__title" id="case-15-t">Live meeting and speech classification</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=600s" rel="noreferrer">10:00 in the video</a></p>
+          <p class="case__what">Tag sentences while they are still being spoken.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>one transcribed sentence, with the speaker</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>choice over your categories, plus a noul for whether it is an action</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>one tag per sentence, accumulating into live notes</dd></div>
+          </dl>
+          <p class="case__use">Stream the audio through speech to text, and send each finished sentence as its own call, because a sentence is short and the answer comes back before the next one lands. Sentences are sorted into decisions, action items, risks and questions, which is a meeting record written as it happens. The video&#x27;s example on the same shape scores a debate as it is spoken, one sentence at a time.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">one finished sentence, one tag</p>
+            <span class="code__lang">python</span>
+            <button class="copy" type="button" data-copy="c15">Copy</button>
+          </figcaption>
+          <pre id="c15"><code>KINDS = {&quot;decision&quot;: &quot;A choice the room committed to&quot;,
+         &quot;action&quot;: &quot;Something one named person will do&quot;,
+         &quot;risk&quot;: &quot;A problem or dependency raised&quot;,
+         &quot;question&quot;: &quot;Something still unanswered&quot;}
+
+def on_sentence(sentence, speaker):
+    state = &quot;%s said: %s&quot; % (speaker, sentence)
+    qs = {&quot;kind&quot;: {&quot;type&quot;: &quot;choice&quot;, &quot;criteria&quot;: KINDS,
+          &quot;instructions&quot;: &quot;How should %s&#x27;s sentence be filed in the minutes?&quot; % speaker},
+          &quot;owner&quot;: {&quot;type&quot;: &quot;noul&quot;,
+          &quot;instructions&quot;: &quot;Does this sentence name the person who will do the work?&quot;}}
+    return decide(state, qs)</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p15-1">Copy</button>
+          </div>
+          <pre id="p15-1">state: Priya said: let us ship the smaller version on Thursday and keep the migration for next month.
+
+question: kind=choice:How should Priya&#x27;s sentence be filed in the minutes?|decision:A choice the room committed to,action:Something one named person will do,risk:A problem or dependency raised,question:Something still unanswered</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p15-2">Copy</button>
+          </div>
+          <pre id="p15-2">state: Sam said: I will get the pricing page rewritten before the launch review.
+
+question: owner=Does this sentence name the person who will do the work?</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-15.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 15: one horizontal hairline near the top with a row of short vertical ticks of varying length hanging beneath it, and one small outlined tray below holding two ticks." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 15. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case" id="case-16" data-case="16" data-title="Zero LLM retrieval engine"
+             aria-labelledby="case-16-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 16<span class="case__tier">advanced</span></p>
+          <h3 class="case__title" id="case-16-t">Zero LLM retrieval engine</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=630s" rel="noreferrer">10:30 in the video</a></p>
+          <p class="case__what">Answer narrow questions from a fixed corpus with no text generation at all.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>the visitor&#x27;s question</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>choice over indexed topic units, plus a noul for whether the corpus covers it</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>the matching item and its timestamp; no prose</dd></div>
+          </dl>
+          <p class="case__use">Turn the transcripts you already have into topic units with a short description each, then match the question against them. The visitor gets the actual answer slot, a lesson number or a video timestamp, which is more useful than a paragraph about it and costs nothing to generate. The corpus has to be genuinely finite for this to work, and the no-match case must be allowed to come back empty.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">index once, answer from the list</p>
+            <span class="code__lang">python</span>
+            <button class="copy" type="button" data-copy="c16">Copy</button>
+          </figcaption>
+          <pre id="c16"><code># units: one per video or document, with a written description and a start time
+criteria = {u[&quot;id&quot;]: u[&quot;topic&quot;] for u in units}
+criteria[&quot;none&quot;] = &quot;Nothing in this library covers it&quot;
+
+def look_up(question):
+    qs = {&quot;unit&quot;: {&quot;type&quot;: &quot;choice&quot;, &quot;criteria&quot;: criteria,
+          &quot;instructions&quot;: &quot;Which lesson covers this question?&quot;},
+          &quot;covered&quot;: {&quot;type&quot;: &quot;noul&quot;,
+          &quot;instructions&quot;: &quot;Does the library actually cover this question?&quot;}}
+    ans = decide(&quot;Visitor asked: &quot; + question, qs)
+    if ans[&quot;covered&quot;][&quot;noul&quot;] &lt; 0.6:
+        return &quot;No lesson covers this yet.&quot;
+    u = by_id[ans[&quot;unit&quot;][&quot;choice&quot;]]
+    return &quot;%s, from %s&quot; % (u[&quot;title&quot;], u[&quot;start&quot;])</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p16-1">Copy</button>
+          </div>
+          <pre id="p16-1">state: Visitor asked: which lesson explains how to keep costs down when sorting a big list?
+
+question: unit=choice:Which lesson covers this question?|l4:Sorting 1,700 messages for cents,l9:Putting a decision in front of an agent,l2:Typed questions and thresholds,none:Nothing in this library covers it</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p16-2">Copy</button>
+          </div>
+          <pre id="p16-2">state: Visitor asked: can it write my newsletter for me?
+
+question: covered=Does the library actually cover this question?</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-16.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 16: a neat grid of small identical rectangles at the left, one inbound arrow from the bottom left, and a single rectangle sliding slightly out of the grid at the right." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 16. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case case--flip" id="case-17" data-case="17" data-title="Dynamic UI icon selection"
+             aria-labelledby="case-17-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 17<span class="case__tier">advanced</span></p>
+          <h3 class="case__title" id="case-17-t">Dynamic UI icon selection</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=673s" rel="noreferrer">11:13 in the video</a></p>
+          <p class="case__what">Pick the picture that matches what the user just typed.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>the text the user typed</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>choice over icon keys in your set</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>the icon to render, immediately</dd></div>
+          </dl>
+          <p class="case__use">Map a fixed icon set to descriptive keys and choose between them as the field changes. A habit tracker draws the water glass when someone types drink more water; a mood log draws the face that matches the entry. The alternative is a keyword matcher that misses and an LLM call that costs far more for the same answer.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">text in, icon key out</p>
+            <span class="code__lang">javascript</span>
+            <button class="copy" type="button" data-copy="c17">Copy</button>
+          </figcaption>
+          <pre id="c17"><code>const ICONS = {
+  water: &#x27;Glass of water&#x27;, walk: &#x27;Footsteps&#x27;, read: &#x27;Open book&#x27;,
+  sleep: &#x27;Crescent moon&#x27;, meditate: &#x27;Seated figure&#x27;, gym: &#x27;Dumbbell&#x27;,
+  none: &#x27;Nothing in this set fits&#x27;
+};
+
+const pickIcon = txt =&gt; decide({
+  model: &#x27;jev-latest&#x27;,
+  state: txt,
+  questions: { icon: { type: &#x27;choice&#x27;, criteria: ICONS,
+    instructions: &#x27;Which icon matches what the user just typed?&#x27; } }
+}).then(a =&gt; a.icon.choice);
+
+field.addEventListener(&#x27;input&#x27;, () =&gt;
+  renderIcon(await pickIcon(field.value));</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p17-1">Copy</button>
+          </div>
+          <pre id="p17-1">state: drink more water every morning before coffee
+
+question: icon=choice:Which icon matches what the user just typed?|water:Glass of water,walk:Footsteps,read:Open book,sleep:Crescent moon,meditate:Seated figure,gym:Dumbbell,none:Nothing in this set fits</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p17-2">Copy</button>
+          </div>
+          <pre id="p17-2">state: get to bed before midnight on weekdays
+
+question: icon=choice:Which icon matches what the user just typed?|water:Glass of water,walk:Footsteps,read:Open book,sleep:Crescent moon,meditate:Seated figure,gym:Dumbbell,none:Nothing in this set fits</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-17.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 17: a short line of simple drawn symbols in a row at the bottom, all pale outlines, with one single symbol lifted out and rendered larger and solid directly above the row." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 17. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case case--wide" id="case-18" data-case="18" data-title="Just in time page assembly"
+             aria-labelledby="case-18-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 18<span class="case__tier">advanced</span></p>
+          <h3 class="case__title" id="case-18-t">Just in time page assembly</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=719s" rel="noreferrer">11:59 in the video</a></p>
+          <p class="case__what">Choose the parts a visitor needs and build the page from them.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>the visitor&#x27;s signals, written as facts</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>one choice per slot in the layout</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>which module fills each slot; your code renders them</dd></div>
+          </dl>
+          <p class="case__use">Build a library of finished components, forms, buttons, sign-up boxes, headings and type presets, and let Jev choose which one fills each slot for this visitor. Nothing is generated at request time, so the page costs a normal page load: the model is choosing between things you already built, and every branch stays reviewable in code. Ask one question per slot, and keep a default for every slot.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">one question per slot, parts already built</p>
+            <span class="code__lang">javascript</span>
+            <button class="copy" type="button" data-copy="c18">Copy</button>
+          </figcaption>
+          <pre id="c18"><code>const SLOTS = {
+  hero:   { trial: &#x27;Start a free trial&#x27;, demo: &#x27;Book a 20 minute demo&#x27;,
+            docs: &#x27;Read the documentation&#x27; },
+  proof:  { logos: &#x27;Customer logos&#x27;, caseStudy: &#x27;One case study&#x27;,
+            quote: &#x27;A single customer quote&#x27;, none: &#x27;No proof block&#x27; },
+  cta:    { trial: &#x27;Free trial&#x27;, demo: &#x27;Book a demo&#x27;,
+            waitlist: &#x27;Join the waitlist&#x27; }
+};
+
+const state = [
+  &#x27;Referrer: &#x27; + referrer,
+  &#x27;Campaign: &#x27; + (utm || &#x27;none&#x27;),
+  &#x27;Company size: &#x27; + (size || &#x27;unknown&#x27;),
+  &#x27;Returning: &#x27; + (isReturning ? &#x27;yes&#x27; : &#x27;no&#x27;)
+].join(&#x27;. &#x27;);
+
+const questions = Object.fromEntries(Object.entries(SLOTS).map(
+  ([slot, opts]) =&gt; [slot, { type: &#x27;choice&#x27;, criteria: opts,
+    instructions: &#x27;Which &#x27; + slot + &#x27; module fits this visitor?&#x27; }]));
+
+render(await decide({ model: &#x27;jev-latest&#x27;, state, questions }));</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p18-1">Copy</button>
+          </div>
+          <pre id="p18-1">state: Referrer: documentation site. Campaign: none. Company size: unknown. Returning: yes.
+
+question: hero=choice:Which hero module fits this visitor?|trial:Start a free trial,demo:Book a 20 minute demo,docs:Read the documentation</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p18-2">Copy</button>
+          </div>
+          <pre id="p18-2">state: Referrer: paid social. Campaign: launch week. Company size: 200 or more. Returning: no.
+
+question: proof=choice:Which proof module fits this visitor?|logos:Customer logos,caseStudy:One case study,quote:A single customer quote,none:No proof block</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-18.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 18: a wireframe of a single page drawn as empty outlined blocks in a vertical stack at the right, with three alternative small blocks drawn separately at the left and one short line pointing from one of them into the top slot." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 18. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case" id="case-19" data-case="19" data-title="Workflow use case auditing"
+             aria-labelledby="case-19-t">
+      <div class="sc-wrap case__grid">
+        <div class="case__text" data-sc-in data-sc-stagger="60">
+          <p class="case__no">Case 19<span class="case__tier">advanced</span></p>
+          <h3 class="case__title" id="case-19-t">Workflow use case auditing</h3>
+          <p class="case__src"><a href="https://youtube.com/watch?v=3iDiWTt8lok&amp;t=743s" rel="noreferrer">12:23 in the video</a></p>
+          <p class="case__what">Find the steps in your own work that should have been a decision, not a model call.</p>
+          <dl class="shape">
+            <div class="shape__row"><dt>state</dt><dd>one step from a log or a process document</dd></div>
+            <div class="shape__row"><dt>question</dt><dd>choice for the shape of the step, a noul for whether a decision model fits</dd></div>
+            <div class="shape__row"><dt>answer</dt><dd>a list of candidate steps, sorted by how well they fit</dd></div>
+          </dl>
+          <p class="case__use">Walk your own logs or process notes and ask, of each step, whether a typed decision would have done the job. The answer space is closed: either a decision fits, or the step needs writing, or it is a count and belongs in code. The same audit runs over a public catalogue of use cases when you are looking for ideas rather than for your own work.</p>
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">label each step, sort in code</p>
+            <span class="code__lang">python</span>
+            <button class="copy" type="button" data-copy="c19">Copy</button>
+          </figcaption>
+          <pre id="c19"><code>SHAPES = {&quot;decision&quot;: &quot;A closed pick, score or yes and no&quot;,
+          &quot;writing&quot;: &quot;Needs text back, keep the language model&quot;,
+          &quot;count&quot;: &quot;Arithmetic or counting, do it in code&quot;,
+          &quot;lookup&quot;: &quot;Fetching a fact, not judging it&quot;}
+
+def audit(step):
+    qs = {&quot;shape&quot;: {&quot;type&quot;: &quot;choice&quot;, &quot;criteria&quot;: SHAPES,
+          &quot;instructions&quot;: &quot;What kind of step is this?&quot;},
+          &quot;fits&quot;: {&quot;type&quot;: &quot;noul&quot;,
+          &quot;instructions&quot;: &quot;Could this step be answered by picking between options you could write down in advance?&quot;}}
+    return decide(step, qs)
+
+for step in steps:
+    ans = audit(step[&quot;text&quot;])
+    if ans[&quot;shape&quot;][&quot;choice&quot;] == &quot;decision&quot; and ans[&quot;fits&quot;][&quot;noul&quot;] &gt; 0.6:
+        print(step[&quot;id&quot;], step[&quot;text&quot;][:70])</code></pre>
+        </figure>
+        <p class="prompts__head">Example prompts</p>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 1 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p19-1">Copy</button>
+          </div>
+          <pre id="p19-1">state: Step 14: after each support email, decide whether it is urgent enough to interrupt the day.
+
+question: shape=choice:What kind of step is this?|decision:A closed pick, score or yes and no,writing:Needs text back, keep the language model,count:Arithmetic or counting, do it in code,lookup:Fetching a fact, not judging it</pre>
+        </div>
+        <div class="prompt">
+          <div class="prompt__head">
+            <p class="code__title">Prompt 2 of 2</p>
+            <span class="prompt__tag">state + question</span>
+            <button class="copy" type="button" data-copy="p19-2">Copy</button>
+          </div>
+          <pre id="p19-2">state: Step 22: read the meeting notes and write a summary for the client.
+
+question: fits=Could this step be answered by picking between options you could write down in advance?</pre>
+        </div>
+        </div>
+        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+          <div class="plate__frame" data-sc-tilt="5">
+            <img src="assets/plates/plate-19.png" width="2048" height="1152"
+                 alt="Minimalist diagram for case 19: a long horizontal process line made of many small evenly spaced squares, with three of the squares picked out by small vertical brackets beneath them and the rest left plain." loading="lazy" decoding="async">
+          </div>
+          <figcaption>Plate 19. The shape of the job, drawn without labels on purpose.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+  <section class="sc-section" data-sc-act="pin" data-sc-span="3.4" aria-labelledby="anatomy-h">
+    <div data-sc-stage data-sc-spotlight class="sc-wrap anatomy">
+      <h2 class="sc-display sc-display--md anatomy__h" id="anatomy-h" data-sc-cue="0 0.34 0" data-sc-kinetic="lines">One message, three typed questions, one call.</h2>
+      <div class="anatomy__grid">
+        <div class="anatomy__card" data-sc-cue="0 0.3 0">
+          <h3>The state</h3>
+          <p class="anatomy__state">Order A-104 was charged twice this morning. I need the duplicate charge refunded.</p>
+        </div>
+        <div class="anatomy__card" data-sc-cue="0.2 0.52">
+          <h3>The questions</h3>
+          <dl class="shape shape--tight">
+            <div class="shape__row"><dt>noul</dt><dd>yes or no, returned as a probability</dd></div>
+            <div class="shape__row"><dt>choice</dt><dd>one of four teams, a probability each</dd></div>
+            <div class="shape__row"><dt>score</dt><dd>where it lands on four urgency levels</dd></div>
+          </dl>
+        </div>
+      </div>
+      <div class="anatomy__card anatomy__answers" data-sc-cue="0.46 1 0.2 0">
+        <h3>The answers, as they came back</h3>
+        <div class="answers">
+          <div class="answer">
+            <p class="answer__q">asking for a refund?</p>
+            <p class="answer__v"><b>0.99</b><span>yes</span></p>
+            <div class="bar"><i style="width:99%"></i></div>
+          </div>
+          <div class="answer">
+            <p class="answer__q">which team owns it?</p>
+            <p class="answer__v"><b>billing</b><span>1.00</span></p>
+            <div class="bar"><i style="width:100%"></i></div>
+          </div>
+          <div class="answer">
+            <p class="answer__q">how urgent?</p>
+            <p class="answer__v"><b>1.48</b><span>concerned 0.50, urgent 0.49</span></p>
+            <div class="bar"><i style="width:37%"></i></div>
+          </div>
+        </div>
+        <p class="anatomy__note">That 1.48 is the part to notice. It is not a rounding error, it is the model saying it sits between two levels, and the rule that decides what to do about that lives in your code. 411 input tokens, 0.0000173 dollars, about four tenths of a second.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sc-section deploy" data-sc-act="flow" aria-labelledby="deploy-h">
+    <div class="sc-wrap deploy__grid">
+      <div data-sc-in data-sc-stagger="70">
+        <p class="eyebrow">Putting one in production</p>
+        <h2 class="sc-display sc-display--md" id="deploy-h">Four steps, and the failure that costs you the most.</h2>
+        <ol class="steps">
+          <li>
+            <h3>Get one key</h3>
+            <p>One of <code>TYPESAFE_API_KEY</code>, <code>OPENROUTER_API_KEY</code>, or a Venice key set as <code>VENICE_API_KEY</code>. The transports are interchangeable, so keep the fallback in your config rather than in your head.</p>
+          </li>
+          <li>
+            <h3>Send a state and typed questions</h3>
+            <p>One <code>POST</code> with the text to judge and a map of questions. Name every item you are asking about inside the question itself, and send only the fields the question needs.</p>
+          </li>
+          <li>
+            <h3>Write the thresholds in your code</h3>
+            <p>High confidence acts, medium confirms, low goes to a person. Keep one cutoff per risk rather than one number for the whole system, and never carry a yes-or-no cutoff over to a choice.</p>
+          </li>
+          <li>
+            <h3>Prove it on fifty records first</h3>
+            <p>Labelled records, answers withheld, count the matches, then sweep the cutoff and see what each one costs you in coverage. This is the step that separates a decision model you trust from one you hope works.</p>
+          </li>
+        </ol>
+      </div>
+      <div data-sc-in data-sc-stagger="70">
+        <figure class="code">
+          <figcaption class="code__head">
+            <p class="code__title">The whole transport, in eight lines</p>
+            <span class="code__lang">bash</span>
+            <button class="copy" type="button" data-copy="deploy-curl">Copy</button>
+          </figcaption>
+          <pre id="deploy-curl"><code>curl -s https://api.venice.ai/api/v1/decisions \
+  -H "Authorization: Bearer $VENICE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model":"jev-latest",
+       "state":"Order A-104 was charged twice.",
+       "questions":{
+         "refund":{"type":"noul","instructions":"Is the customer asking for a refund?"},
+         "dept":{"type":"choice","instructions":"Which team owns this?",
+                  "criteria":{"billing":"Payments","technical":"Bugs"}}}}'</code></pre>
+        </figure>
+        <ul class="checks">
+          <li><b>Choice boundaries</b><span>If the answers can be written down before the question is asked, it is a decision. If they cannot, it is a writing job and it belongs with a language model.</span></li>
+          <li><b>Confidence safeguards</b><span>Every decision gets a floor below which a person decides instead, and the floor is written next to the risk it gates.</span></li>
+          <li><b>Validation sets</b><span>Fifty labelled records or more before it touches real traffic, and the labels themselves checked for ambiguity when two of them disagree.</span></li>
+        </ul>
+        <p class="deploy__warn"><b>Where it loses.</b> Counting and arithmetic belong in code. Multi-step reasoning, anything needing prose back, and adversarial text all want the bigger model. A confident wrong tick is still wrong, so the threshold in your code is the part that keeps you honest.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="close" data-sc-act="pin" data-sc-span="1.45" aria-labelledby="close-h">
+    <div data-sc-stage class="sc-wrap close-act">
+      <h2 class="sc-display sc-display--lg" id="close-h" data-sc-cue="0.08" data-sc-kinetic="lines">Every job on this page is a question with a napkin-sized answer.</h2>
+      <div class="close-act__row">
+        <button class="btn btn--ghost" type="button" data-index-toggle aria-expanded="false" aria-controls="index-panel">Cases</button>
+        <a class="btn btn--solid" href="https://github.com/vivmuk/jevusecases" data-sc-magnet="0.26" data-sc-cue="0.08" data-sc-rise="0" rel="noreferrer">Open the source</a>
+      </div>
+      <footer class="colophon">
+        <p>Sources: the nineteen cases, their order and their running times come from <a href="https://youtube.com/watch?v=3iDiWTt8lok" rel="noreferrer">These 19 Jev-Claude use cases are blowing people's minds</a>, and each card links to its moment in the video.</p>
+        <p>Measured on 4 October 2026 on the machine that built this page: the 0.39 second probe, and the 411 token call above at 0.0000173 dollars. Figures quoted from the video say so on the card that uses them.</p>
+        <p>Scroll work by scrollcraft, plates by the muse-image model, static output so it costs a page load and nothing else.</p>
+      </footer>
+    </div>
+  </section>
+
+</main>
+
+<div class="ledger" role="navigation" aria-label="Case progress">
+  <p class="ledger__label">Your place</p>
+  <div class="ledger__track"></div>
+  <p class="ledger__now" aria-live="polite"></p>
+</div>
+
+<script src="scrollcraft.js"></script>
+<script>ScrollCraft.mount(document.body);</script>
+<script src="site.js"></script>
+</body>
+</html>

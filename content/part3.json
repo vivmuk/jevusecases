@@ -1,0 +1,92 @@
+[
+  {
+    "n": 12,
+    "slug": "feed-cleansing",
+    "title": "Browser feed cleansing and element removal",
+    "tier": "intermediate",
+    "at": "08:07",
+    "what": "Judge each item as it loads and hide what does not earn the space.",
+    "shape": {
+      "state": "the text of one feed item",
+      "question": "a single noul question, asked hundreds of times",
+      "answer": "a probability per item; your code hides or keeps"
+    },
+    "use": "A content script walks the loaded items, asks one narrow question of each, and collapses the ones that fail. The video's example hides posts that read as machine-generated filler; the same shape hides ads or cookie notices. Because one call answers in a fraction of a second, the page still feels instant if you judge only the items actually in view.",
+    "code": {
+      "lang": "javascript",
+      "label": "one question per post, in the page",
+      "src": "async function judge(text) {\n  const r = await fetch('https://api.venice.ai/api/v1/decisions', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json',\n               Authorization: 'Bearer ' + KEY },\n    body: JSON.stringify({\n      model: 'jev-latest',\n      state: text.slice(0, 600),\n      questions: { slop: { type: 'noul',\n        instructions: 'Is this post low-effort machine-generated filler?' } }\n    })\n  });\n  return (await r.json()).answers.slop.noul;\n}\n\nfor (const el of document.querySelectorAll('.feed-item')) {\n  if (await judge(el.innerText) > 0.7) el.style.display = 'none';\n}"
+    },
+    "prompts": [
+      {
+        "state": "Post text: 5 AI tools that will change everything. Number 3 blew my mind. Thread below.",
+        "question": "hide=Is this post low-effort machine-generated filler?"
+      },
+      {
+        "state": "Post text: Spent the morning re-doing our onboarding copy. Cut nine screens down to four, reply rate went from 11% to 26%.",
+        "question": "hide=Is this post low-effort machine-generated filler?"
+      }
+    ],
+    "plate": "A vertical column of small identical rectangles, three of them drawn as faint outlines and the rest solid, with the faint ones marked by a very thin diagonal cross drawn across each. Minimal and flat."
+  },
+  {
+    "n": 13,
+    "slug": "semantic-search",
+    "title": "Semantic in page search",
+    "tier": "intermediate",
+    "at": "08:39",
+    "what": "Find the paragraph you meant, not the words you typed.",
+    "shape": {
+      "state": "the query, plus the candidate sections",
+      "question": "choice over the sections, by key",
+      "answer": "the section to scroll to, or no match"
+    },
+    "use": "Split the document into sections, name each one, and ask which matches the query in meaning. Because the answer is a typed key rather than a sentence, the interface can scroll straight to the element it names. It is fast enough to run while the visitor is still typing, which is what makes it feel like a native find.",
+    "code": {
+      "lang": "javascript",
+      "label": "query in, section out, scroll",
+      "src": "async function findOnPage(query, sections) {\n  const criteria = Object.fromEntries(sections.map((s, i) =>\n    ['s' + i, s.heading + ': ' + s.text.slice(0, 120)]));\n  criteria.none = 'No section matches';\n\n  const ans = await decide({\n    model: 'jev-latest',\n    state: 'Query: ' + query,\n    questions: { hit: { type: 'choice', criteria,\n      instructions: 'Which section of this page answers the query?' } }\n  });\n\n  if (ans.hit.choice !== 'none') {\n    sections[Number(ans.hit.choice.slice(1))]\n      .el.scrollIntoView({ behavior: 'smooth' });\n  }\n}"
+    },
+    "prompts": [
+      {
+        "state": "Query: how do I cancel. Sections: s0 Billing: plans, invoices, refunds. s1 Shipping: dispatch times. s2 Account: password, email, two factor. s3 Cancelling: downgrade and end a subscription.",
+        "question": "hit=choice:Which section of this page answers the query?|s0:Billing,s1:Shipping,s2:Account,s3:Cancelling,none:No section matches"
+      },
+      {
+        "state": "Query: refund window. Sections: s0 Billing: plans, invoices, refunds within 30 days. s1 Shipping: dispatch times. s2 Account: password, email.",
+        "question": "hit=choice:Which section of this page answers the query?|s0:Billing,s1:Shipping,s2:Account,none:No section matches"
+      }
+    ],
+    "plate": "A column of stacked paragraphs drawn as simple grey bars, with one bar highlighted by a thin outline and a small arrow curving into it from the left. The rest of the column is quiet."
+  },
+  {
+    "n": 14,
+    "slug": "asset-retrieval",
+    "title": "Image and asset retrieval via metadata",
+    "tier": "intermediate",
+    "at": "09:13",
+    "what": "Search a media library by what is in the picture, not by file name.",
+    "shape": {
+      "state": "the search term, plus the asset records",
+      "question": "choice over asset keys",
+      "answer": "the asset to open, or no match"
+    },
+    "use": "File names are a poor index, so every asset gets text first: the prompt it was generated from, or a caption written by a cheap multimodal model at indexing time. Searching then becomes one typed decision over those records. The video's own note is that captions are nearly free at this scale, and the index is worth more than the model that wrote it.",
+    "code": {
+      "lang": "python",
+      "label": "caption once, decide on every search",
+      "src": "def find(query, assets):\n    criteria = {a[\"id\"]: a[\"caption\"][:140] for a in assets}\n    criteria[\"none\"] = \"Nothing in the library matches\"\n    qs = {\"hit\": {\"type\": \"choice\", \"criteria\": criteria,\n      \"instructions\": \"Which asset is the query asking for?\"}}\n    ans = decide(\"Query: \" + query, qs)[\"hit\"]\n    return None if ans[\"choice\"] == \"none\" else ans[\"choice\"]\n\n# indexing side, once per asset:\n# caption = cheap_vision_model(\"Describe this image in one sentence, no text.\")"
+    },
+    "prompts": [
+      {
+        "state": "Query: a dark illustration of a harbour at night. Library: a1 flat diagram of a funnel, a2 dark harbour illustration at night, a3 photograph of a studio desk, a4 line drawing of a bicycle.",
+        "question": "hit=choice:Which asset is the query asking for?|a1:Diagram of a funnel,a2:Harbour at night,a3:Studio desk,a4:Line drawing of a bicycle,none:Nothing in the library matches"
+      },
+      {
+        "state": "Query: the one I made for the podcast cover. Library: a1 harbour at night, a2 flat funnel diagram, a3 studio desk photograph.",
+        "question": "hit=choice:Which asset is the query asking for?|a1:Harbour at night,a2:Funnel diagram,a3:Studio desk,none:Nothing in the library matches"
+      }
+    ],
+    "plate": "A grid of small empty picture frames at the left and one larger frame pulled out and highlighted at the right, with a single line connecting the two. The frames are empty of any content."
+  }
+]

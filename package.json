@@ -1,0 +1,12 @@
+{
+  "name": "jevusecases",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nineteen closed-answer jobs for a decision model: the code, the prompts, the plates.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

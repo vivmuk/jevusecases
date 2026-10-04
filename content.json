@@ -1,0 +1,578 @@
+{
+  "cases": [
+    {
+      "n": 1,
+      "slug": "spreadsheet-categorisation",
+      "title": "Spreadsheet data categorisation",
+      "tier": "easy",
+      "at": "00:53",
+      "what": "Give every row one label from a fixed list, and nothing outside the list.",
+      "shape": {
+        "state": "one row of raw text, on its own",
+        "question": "choice, over the labels you allow",
+        "answer": "one label plus its probability"
+      },
+      "use": "A sheet script posts each row to Jev together with the allowed categories, and writes the winning label into the target column. Because the categories are declared in the request, a label outside them cannot come back, which is what keeps a hand-checked column from growing invented values. Rows under your confidence threshold are left blank for a human.",
+      "code": {
+        "lang": "python",
+        "label": "one row in, one label out",
+        "src": "import json, urllib.request\n\nCATS = {\"groceries\": \"Food and groceries\",\n        \"transport\": \"Travel and transport\",\n        \"subs\": \"Subscriptions\",\n        \"ignore\": \"Not a real expense\"}\n\ndef label(row):\n    body = {\"model\": \"jev-latest\", \"state\": row, \"questions\": {\n        \"category\": {\"type\": \"choice\",\n                     \"instructions\": \"Which budget category does this bank line belong to?\",\n                     \"criteria\": CATS}}}\n    req = urllib.request.Request(\n        \"https://api.venice.ai/api/v1/decisions\",\n        data=json.dumps(body).encode(),\n        headers={\"Authorization\": \"Bearer \" + KEY,\n                 \"Content-Type\": \"application/json\"})\n    ans = json.load(urllib.request.urlopen(req))[\"answers\"][\"category\"]\n    return ans[\"choice\"] if ans[\"confidence\"] > 0.6 else None"
+      },
+      "prompts": [
+        {
+          "state": "CARD PAYMENT 04/10 SQ *BLUE BOTTLE 4.80",
+          "question": "category=choice:Which budget category does this bank line belong to?|groceries:Food and groceries,transport:Travel and transport,subs:Subscriptions,ignore:Not a real expense"
+        },
+        {
+          "state": "DIRECT DEBIT NORTHWIND POWER 61.20 OCT",
+          "question": "category=choice:Which budget category?|utilities:Power, water, internet,rent:Housing,subs:Subscriptions,ignore:Not a real expense"
+        }
+      ],
+      "plate": "A single long horizontal bar of stacked identical tally marks on the left, a narrow vertical gate, and four separate open bins on the right receiving marks; the marks enter the gate one at a time and continue to one bin only. Show the four bins clearly separated with generous space between them."
+    },
+    {
+      "n": 2,
+      "slug": "inquiry-triage",
+      "title": "Customer inquiry triage and routing",
+      "tier": "easy",
+      "at": "01:31",
+      "what": "Read intent from an incoming message and send it down the right path.",
+      "shape": {
+        "state": "the message body",
+        "question": "choice for intent, a noul for each gate, a score for urgency",
+        "answer": "labels and probabilities your routing rule reads"
+      },
+      "use": "An automation tool hands the inquiry text to Jev and gets back both a category and a confidence. The routing rule lives in your code: high confidence goes to the automated path, low confidence goes to a person. The probability is the useful half of the answer, because it is the model telling you it does not know.",
+      "code": {
+        "lang": "bash",
+        "label": "three questions, one call",
+        "src": "jev-decide --state \"Order A-104 was charged twice. Please refund the duplicate.\" \\\n  --yes 'refund=Is the customer asking for a refund?' \\\n  --ask 'dept=choice:Which team owns this?|billing:Payments,technical:Bugs,account:Login' \\\n  --ask 'urgency=score:How urgent is this?|Calm,Concerned,Urgent,Emergency'\n\n# {\"refund\": 0.97} {\"dept\": \"billing\", 0.91} {\"urgency\": 2.4}"
+      },
+      "prompts": [
+        {
+          "state": "Hi, my card was charged twice for order A-104 this morning. Please refund the extra charge.",
+          "question": "dept=choice:Which team owns this?|billing:Payments,technical:Bugs,account:Login,general:Anything else"
+        },
+        {
+          "state": "The export button has done nothing since yesterday's release, three of us are blocked.",
+          "question": "urgency=score:How urgent is this?|Calm,Concerned,Urgent,Emergency"
+        },
+        {
+          "state": "Do you have documentation for the webhook retry behaviour?",
+          "question": "auto=Is this message answerable from the public documentation without a human?"
+        }
+      ],
+      "plate": "One inbound arrow at the left splitting into three clearly separated route lines that leave at different angles, with a small probability dial drawn as an arc sitting on the junction. Keep the three routes distinct and unlabelled."
+    },
+    {
+      "n": 3,
+      "slug": "competitor-ad-intelligence",
+      "title": "Competitor advertisement intelligence",
+      "tier": "easy",
+      "at": "02:35",
+      "what": "Turn hundreds of competitor ad variants into a pattern you can read.",
+      "shape": {
+        "state": "one ad's copy, as collected",
+        "question": "choice for format, choice for call to action, choice for funnel stage",
+        "answer": "three tags per ad, aggregate them yourself"
+      },
+      "use": "A scraper or extension collects ad copy from public ad libraries, then each ad is classified against a taxonomy you fix in advance. The output lands in a table or swipe file, and the patterns are what you count afterwards: which formats dominate, which calls to action repeat, where the funnel is crowded.",
+      "code": {
+        "lang": "python",
+        "label": "a fixed taxonomy, one ad at a time",
+        "src": "TAX = {\n  \"format\": {\"ugc\": \"Phone-shot testimonial\", \"studio\": \"Studio product shot\",\n             \"static\": \"Still image with text overlay\", \"carousel\": \"Multi-image carousel\"},\n  \"cta\":    {\"trial\": \"Free trial\", \"demo\": \"Book a demo\", \"shop\": \"Shop now\",\n             \"learn\": \"Learn more\", \"none\": \"No call to action\"},\n  \"funnel\": {\"top\": \"Problem aware\", \"mid\": \"Comparing options\",\n             \"bottom\": \"Ready to buy\"}}\n\ndef tag(ad_copy):\n    qs = {k: {\"type\": \"choice\", \"criteria\": v,\n              \"instructions\": \"Which %s is this ad?\" % k} for k, v in TAX.items()}\n    return decide(ad_copy, qs)   # one call, three typed tags"
+      },
+      "prompts": [
+        {
+          "state": "Tired of paying for five tools? One workspace does it all. Start free, no card needed.",
+          "question": "cta=choice:Which call to action is this?|trial:Free trial,demo:Book a demo,shop:Shop now,learn:Learn more,none:No call to action"
+        },
+        {
+          "state": "60 second demo: watch a finance team close the month in one afternoon instead of three days.",
+          "question": "funnel=choice:Where in the funnel is this aimed?|top:Problem aware,mid:Comparing options,bottom:Ready to buy"
+        }
+      ],
+      "plate": "A dense field of many small identical rectangles at the left thinning into three neat stacks at the right, each stack a different height. No text on any rectangle."
+    },
+    {
+      "n": 4,
+      "slug": "clip-extraction",
+      "title": "Clip extraction from long recordings",
+      "tier": "easy",
+      "at": "03:09",
+      "what": "Find the ten minutes worth publishing inside four hours of audio.",
+      "shape": {
+        "state": "one timecoded passage",
+        "question": "score against your own rubric, plus a noul per candidate",
+        "answer": "a score per passage, sorted in code"
+      },
+      "use": "Transcribe the recording with timecodes, cut it into timestamped chunks, and score each chunk against the criteria that actually make your clips work. Sort in code, keep the top ten with their timestamps, and hand those to an editor or an automated cutter. Ask one question per chunk, never one question for a list of chunks.",
+      "code": {
+        "lang": "python",
+        "label": "score every passage, sort in code",
+        "src": "RUBRIC = [\"Fluff\", \"Context\", \"Useful\", \"Quotable\", \"Clip gold\"]\n\ndef score(chunk):\n    qs = {\"clip\": {\"type\": \"score\", \"criteria\": RUBRIC,\n          \"instructions\": \"Consider only this passage. How strong is it as a standalone short clip?\"}}\n    return decide(chunk[\"text\"], qs)[\"clip\"][\"score\"]\n\ntop = sorted(chunks, key=score, reverse=True)[:10]\nfor c in top:\n    print(c[\"start\"], c[\"end\"], c[\"text\"][:60])"
+      },
+      "prompts": [
+        {
+          "state": "[00:41:12] ... and that is the bit everyone gets wrong, you do not need a bigger model, you need a smaller question ...",
+          "question": "clip=score:How strong is this passage as a standalone short clip?|Fluff,Context,Useful,Quotable,Clip gold"
+        },
+        {
+          "state": "[00:15:40] ... so anyway we were late for the flight and the bags never made it ...",
+          "question": "keep=Is this passage usable as a standalone social clip without the surrounding conversation?"
+        }
+      ],
+      "plate": "One very long thin timeline strip drawn as a horizontal rule, with a small fraction of it drawn thicker and raised slightly above the line to suggest a peak, and a bracket beneath that thicker part. Flat geometry, generous empty space."
+    },
+    {
+      "n": 5,
+      "slug": "churn-risk",
+      "title": "Churn risk profiling",
+      "tier": "easy",
+      "at": "03:37",
+      "what": "Sort accounts into bands your retention workflow can act on.",
+      "shape": {
+        "state": "one account's facts, named fields",
+        "question": "choice over your bands, score for how far along the risk is",
+        "answer": "a band per account, routed by your code"
+      },
+      "use": "Export the activity you already have (tenure, tier, seats, logins, support threads) and send one account per call with its fields named, because a bare list of ten accounts returns one answer ten times. High risk accounts go to a retention queue, and the band thresholds stay in your code where you can tune them.",
+      "code": {
+        "lang": "python",
+        "label": "named fields, one account per call",
+        "src": "BANDS = {\"healthy\": \"Using it weekly and growing\",\n         \"watch\": \"Usage slipping but still active\",\n         \"risk\": \"Likely to cancel in the next quarter\"}\n\ndef band(acct):\n    state = (\"Account %s. Plan %s. Seats %d of %d used. Logins last 30 days %d \"\n             \"(previous 30 days %d). Open support threads: %s.\") % (\n        acct[\"name\"], acct[\"plan\"], acct[\"seats_used\"], acct[\"seats\"],\n        acct[\"logins_30\"], acct[\"logins_prev30\"], acct[\"open_threads\"])\n    qs = {\"band\": {\"type\": \"choice\", \"criteria\": BANDS,\n          \"instructions\": \"Which retention band does %s belong in?\" % acct[\"name\"]}}\n    return decide(state, qs)[\"band\"]"
+      },
+      "prompts": [
+        {
+          "state": "Account Meridian Labs. Plan Team. Seats 4 of 25 used. Logins last 30 days 2 (previous 30 days 19). Open support threads: billing question about the last invoice.",
+          "question": "band=choice:Which retention band does Meridian Labs belong in?|healthy:Using it weekly and growing,watch:Usage slipping but still active,risk:Likely to cancel in the next quarter"
+        },
+        {
+          "state": "Account Kestrel Studio. Plan Solo. Logins last 30 days 0. Card declined twice, no reply to two emails.",
+          "question": "reach=score:How far along is the cancellation?|Just quiet,Actively drifting,Decided but not told us,Gone"
+        }
+      ],
+      "plate": "A single horizontal axis with three separated zones marked by thin vertical hairlines, and small identical circles migrating from the left zone toward the right zone across the axis. No text, no numbers."
+    },
+    {
+      "n": 6,
+      "slug": "internal-linking",
+      "title": "Internal linking and knowledge base graphing",
+      "tier": "easy",
+      "at": "04:03",
+      "what": "Connect pages or notes to each other without hand-picking the links.",
+      "shape": {
+        "state": "the page text, plus the candidate target titles",
+        "question": "choice over the candidates, plus a noul for whether any link belongs at all",
+        "answer": "the best target, or nothing"
+      },
+      "use": "Send the page text with the list of possible targets and let Jev choose, one call per paragraph or per section. Insert the markdown link where the question was asked, and let the no-link case come back empty rather than forcing a link onto a paragraph that has nothing to point at.",
+      "code": {
+        "lang": "python",
+        "label": "choose a target, or decline",
+        "src": "def link_for(paragraph, pages):\n    targets = {p[\"slug\"]: p[\"title\"] for p in pages}\n    targets[\"none\"] = \"No useful target in this list\"\n    qs = {\n      \"target\": {\"type\": \"choice\", \"criteria\": targets,\n        \"instructions\": \"Which existing page should this paragraph link to?\"},\n      \"worth\": {\"type\": \"noul\",\n        \"instructions\": \"Would that link genuinely help a reader of this paragraph?\"}}\n    ans = decide(paragraph, qs)\n    if ans[\"worth\"][\"noul\"] < 0.7 or ans[\"target\"][\"choice\"] == \"none\":\n        return None\n    return ans[\"target\"][\"choice\"]"
+      },
+      "prompts": [
+        {
+          "state": "Paragraph: Every request is signed, so a leaked key cannot be replayed against another workspace.",
+          "question": "target=choice:Which existing page should this paragraph link to?|auth:Signing requests,keys:Key rotation,limits:Rate limits,billing:Invoices and plans,none:No useful target in this list"
+        },
+        {
+          "state": "Paragraph: We ship on Thursdays, and a release note goes out the same afternoon.",
+          "question": "worth=Would that link genuinely help a reader of this paragraph?"
+        }
+      ],
+      "plate": "A loose cloud of small circles on the left connected by a few short lines to a smaller cluster on the right, with exactly one long clean line crossing the gap. Most circles stay unconnected."
+    },
+    {
+      "n": 7,
+      "slug": "purchase-intent",
+      "title": "Social purchase intent",
+      "tier": "easy",
+      "at": "04:38",
+      "what": "Pull the buyers out of a comment section.",
+      "shape": {
+        "state": "one comment, with the post it sits under",
+        "question": "choice over comment type, plus a noul for whether it is a buying signal",
+        "answer": "a tag per comment, purchase signals surfaced"
+      },
+      "use": "A scraper collects new comments and each one is classified as a purchase signal, a question or a complaint. Signals move to the top of the sales queue with their timestamp and handle attached, so the reply happens while the intent is still warm. Ask about the comment text only, and keep the post context in the state when the comment is ambiguous on its own.",
+      "code": {
+        "lang": "python",
+        "label": "tag the comment, surface the buyers",
+        "src": "KINDS = {\"buy\": \"Wants to buy, needs a link or price\",\n         \"ask\": \"Question about the product or shipping\",\n         \"moan\": \"Complaint or bad experience\",\n         \"chat\": \"Comment with no commercial content\"}\n\ndef tag(comment):\n    state = \"Post about: %s. Comment: %s\" % (comment[\"post\"], comment[\"text\"])\n    qs = {\"kind\": {\"type\": \"choice\", \"criteria\": KINDS,\n                    \"instructions\": \"How should this comment be handled?\"}}\n    ans = decide(state, qs)[\"kind\"]\n    return ans if ans[\"confidence\"] > 0.55 else {\"choice\": \"chat\"}"
+      },
+      "prompts": [
+        {
+          "state": "Post about: the new travel backpack. Comment: where can I get this, do you ship to Ireland?",
+          "question": "kind=choice:How should this comment be handled?|buy:Wants to buy, needs a link or price,ask:Question about the product or shipping,moan:Complaint or bad experience,chat:Comment with no commercial content"
+        },
+        {
+          "state": "Comment: mine arrived with a broken zip, second time this has happened.",
+          "question": "escalate=Does this comment need a human reply within the hour?"
+        }
+      ],
+      "plate": "A wide band of many short identical vertical hairline strokes along the top, and below it a narrow outlined funnel shape narrowing to a small open tray that holds three of those strokes; every other stroke stays in the band. Line work only: no stipple, no halftone dots, no filled texture."
+    },
+    {
+      "n": 8,
+      "slug": "verification-and-calibration",
+      "title": "Output verification and model calibration",
+      "tier": "easy",
+      "at": "05:04",
+      "what": "Measure how often the decision is right before you trust it with anything.",
+      "shape": {
+        "state": "one record from a labelled set, with the answer withheld",
+        "question": "the same question you will ask in production",
+        "answer": "the model's pick, for you to compare against the human answer"
+      },
+      "use": "Build a validation set of a few dozen to a few hundred records a human has already labelled, run the loop without showing the answers, and count the matches. Misclassifications tell you where the labels are ambiguous, and the spread of probabilities tells you where the confidence cutoff belongs. The video's own advice is fifty records or more before production; tune the cutoff on one set and hold some records back.",
+      "code": {
+        "lang": "python",
+        "label": "a labelled set, a match rate, a cutoff",
+        "src": "rows = json.load(open(\"labelled.json\"))      # state + human label\n\nhits, conf = 0, []\nfor r in rows:\n    ans = decide(r[\"state\"], LABEL_QUESTION)[\"category\"]\n    hits += ans[\"choice\"] == r[\"label\"]\n    conf.append((ans[\"confidence\"], ans[\"choice\"] == r[\"label\"]))\n\nprint(\"agreement %.1f%% of %d\" % (100 * hits / len(rows), len(rows)))\nfor cut in (0.5, 0.6, 0.7, 0.8, 0.9):\n    kept = [c for c in conf if c[0] >= cut]\n    right = [c[1] for c in kept]\n    print(\"cutoff %.1f keeps %d rows at %.1f%% correct\"\n          % (cut, len(kept), 100 * sum(right) / max(len(right), 1)))"
+      },
+      "prompts": [
+        {
+          "state": "Labelled example 1 of 50. Ticket: the CSV export arrives empty when a filter is applied. Human label: technical.",
+          "question": "category=choice:Which team owns this ticket?|billing:Payments,technical:Bugs,account:Login,general:Anything else"
+        },
+        {
+          "state": "Labelled example 2 of 50. Ticket: I want to move to the annual plan. Human label: billing.",
+          "question": "category=choice:Which team owns this ticket?|billing:Payments,technical:Bugs,account:Login,general:Anything else"
+        }
+      ],
+      "plate": "A two-column comparison drawn as a left column of small squares and a right column of small squares, with matching pairs joined by short horizontal lines and three pairs left visibly unjoined. Flat, minimal, generous margin."
+    },
+    {
+      "n": 9,
+      "slug": "skill-selection",
+      "title": "Agent skill selection",
+      "tier": "intermediate",
+      "at": "06:21",
+      "what": "Let the agent pick the right skill before it loads any of them.",
+      "shape": {
+        "state": "the user's prompt",
+        "question": "choice, one option per skill in the library",
+        "answer": "the skill to load, plus how sure it is"
+      },
+      "use": "You do not have to put every skill description in the context window to choose one. Register the skills as the options, send the prompt, and load only the winner. In the video's own counting, 145 skills were matched in about five seconds across fourteen tests against roughly thirty for the larger model, and a separate test over 182 skills cut wrong picks by more than half. Keep the option list to the skills that are real candidates for this agent.",
+      "code": {
+        "lang": "bash",
+        "label": "the skill library is the menu",
+        "src": "jev-decide --state \"Turn this call recording into invoice-ready line items.\" \\\n  --ask 'skill=choice:Which skill should the agent load?|xlsx:Spreadsheet work,youtube-content:Transcripts to summaries,email-inbox-triage:Inbox triage,docx:Word documents,arxiv:Paper search' \\\n  --ask 'fit=score:How well does the chosen skill fit?|Wrong,Poor,Workable,Good,Exact'\n\n# {\"skill\": \"xlsx\", 0.79}"
+      },
+      "prompts": [
+        {
+          "state": "Find the papers behind this benchmark and summarise the method section.",
+          "question": "skill=choice:Which skill should the agent load?|arxiv:Paper search,youtube-content:Transcripts to summaries,docx:Word documents,xlsx:Spreadsheet work,email-inbox-triage:Inbox triage"
+        },
+        {
+          "state": "Take the last four weeks of invoices and give me a spend breakdown by vendor.",
+          "question": "skill=choice:Which skill should the agent load?|xlsx:Spreadsheet work,docx:Word documents,arxiv:Paper search,email-inbox-triage:Inbox triage"
+        }
+      ],
+      "plate": "One small square at the left connected by a single clean line to exactly one filled square selected out of a neatly spaced grid of twelve empty squares at the right. The chosen square is solid, the rest are outlines."
+    },
+    {
+      "n": 10,
+      "slug": "model-routing",
+      "title": "Intelligent multi model routing",
+      "tier": "intermediate",
+      "at": "07:02",
+      "what": "Send the easy question to the cheap model and the hard one to the expensive model.",
+      "shape": {
+        "state": "the user's message",
+        "question": "choice over the models you have wired up",
+        "answer": "the model to call, decided in about a third of a second"
+      },
+      "use": "A slash command or gateway in front of the agent asks Jev which model fits the message, then dispatches. File path lookups go to the cheapest model in the family, work that needs a frontier model goes there, and the bill follows the work rather than the habit. The same shape works in any agent platform: anything that can route a request can read a typed answer first.",
+      "code": {
+        "lang": "python",
+        "label": "a router in front of the agent",
+        "src": "MODELS = {\n  \"cheap\": \"Short lookup, formatting or extraction\",\n  \"mid\": \"Normal edit, explanation or small refactor\",\n  \"frontier\": \"Multi-step reasoning, architecture, hard bugs\"}\n\ndef route(message):\n    qs = {\"model\": {\"type\": \"choice\", \"criteria\": MODELS,\n          \"instructions\": \"Which model tier does this request need?\"}}\n    ans = decide(message, qs)[\"model\"]\n    # the cutoff lives here, not in the prompt\n    return \"frontier\" if ans[\"probabilities\"].get(\"frontier\", 0) > 0.45 else ans[\"choice\"]"
+      },
+      "prompts": [
+        {
+          "state": "where is the config file for the deploy job",
+          "question": "model=choice:Which model tier does this request need?|cheap:Short lookup, formatting or extraction,mid:Normal edit, explanation or small refactor,frontier:Multi-step reasoning, architecture, hard bugs"
+        },
+        {
+          "state": "Explain why the retry queue drops messages when two workers hold the same lease, then fix it.",
+          "question": "model=choice:Which model tier does this request need?|cheap:Short lookup, formatting or extraction,mid:Normal edit, explanation or small refactor,frontier:Multi-step reasoning, architecture, hard bugs"
+        }
+      ],
+      "plate": "One inbound line at the left meeting a small junction, with two outgoing lines of clearly different weight and thickness leaving to the right. Nothing else on the plate."
+    },
+    {
+      "n": 11,
+      "slug": "inbox-pre-filtering",
+      "title": "Inbox pre filtering for AI agents",
+      "tier": "intermediate",
+      "at": "07:37",
+      "what": "Stop paying a frontier model to read spam.",
+      "shape": {
+        "state": "one message, sender and subject kept",
+        "question": "choice over the buckets you act on",
+        "answer": "one bucket per message; only the useful ones continue downstream"
+      },
+      "use": "Put the decision in front of the writing. Each message is bucketed as an actionable inquiry, a sponsorship, spam or phishing; spam and phishing are dropped, and only the messages that need a reply reach the model that drafts. In the video's own run, 1,700 messages were sorted for eighteen cents. Keep the state to the fields the question needs, because the rest of the message is a distraction.",
+      "code": {
+        "lang": "python",
+        "label": "read the headers, drop the noise",
+        "src": "BUCKETS = {\"inquiry\": \"A real person who needs a reply\",\n           \"sponsor\": \"A commercial pitch, route to the deals file\",\n           \"spam\": \"Bulk marketing, no reply\",\n           \"phish\": \"Attempting to take credentials or money\"}\n\nfor m in inbox(limit=500):\n    state = \"From %s. Subject %s. First 400 characters: %s\" % (\n        m[\"from\"], m[\"subject\"], m[\"body\"][:400])\n    ans = decide(state, {\"bucket\": {\"type\": \"choice\", \"criteria\": BUCKETS,\n          \"instructions\": \"Which bucket does this message belong in?\"}})[\"bucket\"]\n    if ans[\"choice\"] in (\"inquiry\", \"sponsor\"):\n        hand_to_drafter(m, ans[\"choice\"], ans[\"confidence\"])"
+      },
+      "prompts": [
+        {
+          "state": "From billing at northwind-power. Subject: Your invoice is overdue, click here to avoid disconnection.",
+          "question": "bucket=choice:Which bucket does this message belong in?|inquiry:A real person who needs a reply,sponsor:A commercial pitch, route to the deals file,spam:Bulk marketing, no reply,phish:Attempting to take credentials or money"
+        },
+        {
+          "state": "From a partner agency. Subject: Paid collaboration for your next three videos, budget attached.",
+          "question": "bucket=choice:Which bucket does this message belong in?|inquiry:A real person who needs a reply,sponsor:A commercial pitch, route to the deals file,spam:Bulk marketing, no reply,phish:Attempting to take credentials or money"
+        }
+      ],
+      "plate": "A tall stack of many thin horizontal rectangles at the left, a wide gate in the middle, and two small trays at the right holding just a few rectangles. The bulk of the rectangles stop at the gate."
+    },
+    {
+      "n": 12,
+      "slug": "feed-cleansing",
+      "title": "Browser feed cleansing and element removal",
+      "tier": "intermediate",
+      "at": "08:07",
+      "what": "Judge each item as it loads and hide what does not earn the space.",
+      "shape": {
+        "state": "the text of one feed item",
+        "question": "a single noul question, asked hundreds of times",
+        "answer": "a probability per item; your code hides or keeps"
+      },
+      "use": "A content script walks the loaded items, asks one narrow question of each, and collapses the ones that fail. The video's example hides posts that read as machine-generated filler; the same shape hides ads or cookie notices. Because one call answers in a fraction of a second, the page still feels instant if you judge only the items actually in view.",
+      "code": {
+        "lang": "javascript",
+        "label": "one question per post, in the page",
+        "src": "async function judge(text) {\n  const r = await fetch('https://api.venice.ai/api/v1/decisions', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json',\n               Authorization: 'Bearer ' + KEY },\n    body: JSON.stringify({\n      model: 'jev-latest',\n      state: text.slice(0, 600),\n      questions: { slop: { type: 'noul',\n        instructions: 'Is this post low-effort machine-generated filler?' } }\n    })\n  });\n  return (await r.json()).answers.slop.noul;\n}\n\nfor (const el of document.querySelectorAll('.feed-item')) {\n  if (await judge(el.innerText) > 0.7) el.style.display = 'none';\n}"
+      },
+      "prompts": [
+        {
+          "state": "Post text: 5 AI tools that will change everything. Number 3 blew my mind. Thread below.",
+          "question": "hide=Is this post low-effort machine-generated filler?"
+        },
+        {
+          "state": "Post text: Spent the morning re-doing our onboarding copy. Cut nine screens down to four, reply rate went from 11% to 26%.",
+          "question": "hide=Is this post low-effort machine-generated filler?"
+        }
+      ],
+      "plate": "A vertical column of small identical rectangles, three of them drawn as faint outlines and the rest solid, with the faint ones marked by a very thin diagonal cross drawn across each. Minimal and flat."
+    },
+    {
+      "n": 13,
+      "slug": "semantic-search",
+      "title": "Semantic in page search",
+      "tier": "intermediate",
+      "at": "08:39",
+      "what": "Find the paragraph you meant, not the words you typed.",
+      "shape": {
+        "state": "the query, plus the candidate sections",
+        "question": "choice over the sections, by key",
+        "answer": "the section to scroll to, or no match"
+      },
+      "use": "Split the document into sections, name each one, and ask which matches the query in meaning. Because the answer is a typed key rather than a sentence, the interface can scroll straight to the element it names. It is fast enough to run while the visitor is still typing, which is what makes it feel like a native find.",
+      "code": {
+        "lang": "javascript",
+        "label": "query in, section out, scroll",
+        "src": "async function findOnPage(query, sections) {\n  const criteria = Object.fromEntries(sections.map((s, i) =>\n    ['s' + i, s.heading + ': ' + s.text.slice(0, 120)]));\n  criteria.none = 'No section matches';\n\n  const ans = await decide({\n    model: 'jev-latest',\n    state: 'Query: ' + query,\n    questions: { hit: { type: 'choice', criteria,\n      instructions: 'Which section of this page answers the query?' } }\n  });\n\n  if (ans.hit.choice !== 'none') {\n    sections[Number(ans.hit.choice.slice(1))]\n      .el.scrollIntoView({ behavior: 'smooth' });\n  }\n}"
+      },
+      "prompts": [
+        {
+          "state": "Query: how do I cancel. Sections: s0 Billing: plans, invoices, refunds. s1 Shipping: dispatch times. s2 Account: password, email, two factor. s3 Cancelling: downgrade and end a subscription.",
+          "question": "hit=choice:Which section of this page answers the query?|s0:Billing,s1:Shipping,s2:Account,s3:Cancelling,none:No section matches"
+        },
+        {
+          "state": "Query: refund window. Sections: s0 Billing: plans, invoices, refunds within 30 days. s1 Shipping: dispatch times. s2 Account: password, email.",
+          "question": "hit=choice:Which section of this page answers the query?|s0:Billing,s1:Shipping,s2:Account,none:No section matches"
+        }
+      ],
+      "plate": "A vertical column of stacked paragraph bars drawn as thin outlined rectangles, with one bar near the middle drawn as a double outline and a short straight arrow entering it from the left. White hairline strokes only on the dark ground, exactly one amber element, no grey fills, no curved arrows, at most eight bars."
+    },
+    {
+      "n": 14,
+      "slug": "asset-retrieval",
+      "title": "Image and asset retrieval via metadata",
+      "tier": "intermediate",
+      "at": "09:13",
+      "what": "Search a media library by what is in the picture, not by file name.",
+      "shape": {
+        "state": "the search term, plus the asset records",
+        "question": "choice over asset keys",
+        "answer": "the asset to open, or no match"
+      },
+      "use": "File names are a poor index, so every asset gets text first: the prompt it was generated from, or a caption written by a cheap multimodal model at indexing time. Searching then becomes one typed decision over those records. The video's own note is that captions are nearly free at this scale, and the index is worth more than the model that wrote it.",
+      "code": {
+        "lang": "python",
+        "label": "caption once, decide on every search",
+        "src": "def find(query, assets):\n    criteria = {a[\"id\"]: a[\"caption\"][:140] for a in assets}\n    criteria[\"none\"] = \"Nothing in the library matches\"\n    qs = {\"hit\": {\"type\": \"choice\", \"criteria\": criteria,\n      \"instructions\": \"Which asset is the query asking for?\"}}\n    ans = decide(\"Query: \" + query, qs)[\"hit\"]\n    return None if ans[\"choice\"] == \"none\" else ans[\"choice\"]\n\n# indexing side, once per asset:\n# caption = cheap_vision_model(\"Describe this image in one sentence, no text.\")"
+      },
+      "prompts": [
+        {
+          "state": "Query: a dark illustration of a harbour at night. Library: a1 flat diagram of a funnel, a2 dark harbour illustration at night, a3 photograph of a studio desk, a4 line drawing of a bicycle.",
+          "question": "hit=choice:Which asset is the query asking for?|a1:Diagram of a funnel,a2:Harbour at night,a3:Studio desk,a4:Line drawing of a bicycle,none:Nothing in the library matches"
+        },
+        {
+          "state": "Query: the one I made for the podcast cover. Library: a1 harbour at night, a2 flat funnel diagram, a3 studio desk photograph.",
+          "question": "hit=choice:Which asset is the query asking for?|a1:Harbour at night,a2:Funnel diagram,a3:Studio desk,none:Nothing in the library matches"
+        }
+      ],
+      "plate": "A grid of small empty picture frames at the left and one larger frame pulled out and highlighted at the right, with a single line connecting the two. The frames are empty of any content."
+    },
+    {
+      "n": 15,
+      "slug": "live-speech-classification",
+      "title": "Live meeting and speech classification",
+      "tier": "advanced",
+      "at": "10:00",
+      "what": "Tag sentences while they are still being spoken.",
+      "shape": {
+        "state": "one transcribed sentence, with the speaker",
+        "question": "choice over your categories, plus a noul for whether it is an action",
+        "answer": "one tag per sentence, accumulating into live notes"
+      },
+      "use": "Stream the audio through speech to text, and send each finished sentence as its own call, because a sentence is short and the answer comes back before the next one lands. Sentences are sorted into decisions, action items, risks and questions, which is a meeting record written as it happens. The video's example on the same shape scores a debate as it is spoken, one sentence at a time.",
+      "code": {
+        "lang": "python",
+        "label": "one finished sentence, one tag",
+        "src": "KINDS = {\"decision\": \"A choice the room committed to\",\n         \"action\": \"Something one named person will do\",\n         \"risk\": \"A problem or dependency raised\",\n         \"question\": \"Something still unanswered\"}\n\ndef on_sentence(sentence, speaker):\n    state = \"%s said: %s\" % (speaker, sentence)\n    qs = {\"kind\": {\"type\": \"choice\", \"criteria\": KINDS,\n          \"instructions\": \"How should %s's sentence be filed in the minutes?\" % speaker},\n          \"owner\": {\"type\": \"noul\",\n          \"instructions\": \"Does this sentence name the person who will do the work?\"}}\n    return decide(state, qs)"
+      },
+      "prompts": [
+        {
+          "state": "Priya said: let us ship the smaller version on Thursday and keep the migration for next month.",
+          "question": "kind=choice:How should Priya's sentence be filed in the minutes?|decision:A choice the room committed to,action:Something one named person will do,risk:A problem or dependency raised,question:Something still unanswered"
+        },
+        {
+          "state": "Sam said: I will get the pricing page rewritten before the launch review.",
+          "question": "owner=Does this sentence name the person who will do the work?"
+        }
+      ],
+      "plate": "One horizontal hairline near the top with a row of short vertical ticks of varying length hanging beneath it, and one small outlined tray below holding two ticks. At most twelve elements in total, wide margins, nothing else on the plate."
+    },
+    {
+      "n": 16,
+      "slug": "retrieval-engine",
+      "title": "Zero LLM retrieval engine",
+      "tier": "advanced",
+      "at": "10:30",
+      "what": "Answer narrow questions from a fixed corpus with no text generation at all.",
+      "shape": {
+        "state": "the visitor's question",
+        "question": "choice over indexed topic units, plus a noul for whether the corpus covers it",
+        "answer": "the matching item and its timestamp; no prose"
+      },
+      "use": "Turn the transcripts you already have into topic units with a short description each, then match the question against them. The visitor gets the actual answer slot, a lesson number or a video timestamp, which is more useful than a paragraph about it and costs nothing to generate. The corpus has to be genuinely finite for this to work, and the no-match case must be allowed to come back empty.",
+      "code": {
+        "lang": "python",
+        "label": "index once, answer from the list",
+        "src": "# units: one per video or document, with a written description and a start time\ncriteria = {u[\"id\"]: u[\"topic\"] for u in units}\ncriteria[\"none\"] = \"Nothing in this library covers it\"\n\ndef look_up(question):\n    qs = {\"unit\": {\"type\": \"choice\", \"criteria\": criteria,\n          \"instructions\": \"Which lesson covers this question?\"},\n          \"covered\": {\"type\": \"noul\",\n          \"instructions\": \"Does the library actually cover this question?\"}}\n    ans = decide(\"Visitor asked: \" + question, qs)\n    if ans[\"covered\"][\"noul\"] < 0.6:\n        return \"No lesson covers this yet.\"\n    u = by_id[ans[\"unit\"][\"choice\"]]\n    return \"%s, from %s\" % (u[\"title\"], u[\"start\"])"
+      },
+      "prompts": [
+        {
+          "state": "Visitor asked: which lesson explains how to keep costs down when sorting a big list?",
+          "question": "unit=choice:Which lesson covers this question?|l4:Sorting 1,700 messages for cents,l9:Putting a decision in front of an agent,l2:Typed questions and thresholds,none:Nothing in this library covers it"
+        },
+        {
+          "state": "Visitor asked: can it write my newsletter for me?",
+          "question": "covered=Does the library actually cover this question?"
+        }
+      ],
+      "plate": "A neat grid of small identical rectangles at the left, one inbound arrow from the bottom left, and a single rectangle sliding slightly out of the grid at the right. Nothing else."
+    },
+    {
+      "n": 17,
+      "slug": "icon-selection",
+      "title": "Dynamic UI icon selection",
+      "tier": "advanced",
+      "at": "11:13",
+      "what": "Pick the picture that matches what the user just typed.",
+      "shape": {
+        "state": "the text the user typed",
+        "question": "choice over icon keys in your set",
+        "answer": "the icon to render, immediately"
+      },
+      "use": "Map a fixed icon set to descriptive keys and choose between them as the field changes. A habit tracker draws the water glass when someone types drink more water; a mood log draws the face that matches the entry. The alternative is a keyword matcher that misses and an LLM call that costs far more for the same answer.",
+      "code": {
+        "lang": "javascript",
+        "label": "text in, icon key out",
+        "src": "const ICONS = {\n  water: 'Glass of water', walk: 'Footsteps', read: 'Open book',\n  sleep: 'Crescent moon', meditate: 'Seated figure', gym: 'Dumbbell',\n  none: 'Nothing in this set fits'\n};\n\nconst pickIcon = txt => decide({\n  model: 'jev-latest',\n  state: txt,\n  questions: { icon: { type: 'choice', criteria: ICONS,\n    instructions: 'Which icon matches what the user just typed?' } }\n}).then(a => a.icon.choice);\n\nfield.addEventListener('input', () =>\n  renderIcon(await pickIcon(field.value));"
+      },
+      "prompts": [
+        {
+          "state": "drink more water every morning before coffee",
+          "question": "icon=choice:Which icon matches what the user just typed?|water:Glass of water,walk:Footsteps,read:Open book,sleep:Crescent moon,meditate:Seated figure,gym:Dumbbell,none:Nothing in this set fits"
+        },
+        {
+          "state": "get to bed before midnight on weekdays",
+          "question": "icon=choice:Which icon matches what the user just typed?|water:Glass of water,walk:Footsteps,read:Open book,sleep:Crescent moon,meditate:Seated figure,gym:Dumbbell,none:Nothing in this set fits"
+        }
+      ],
+      "plate": "A short line of simple drawn symbols in a row at the bottom, all pale outlines, with one single symbol lifted out and rendered larger and solid directly above the row."
+    },
+    {
+      "n": 18,
+      "slug": "page-assembly",
+      "title": "Just in time page assembly",
+      "tier": "advanced",
+      "at": "11:59",
+      "what": "Choose the parts a visitor needs and build the page from them.",
+      "shape": {
+        "state": "the visitor's signals, written as facts",
+        "question": "one choice per slot in the layout",
+        "answer": "which module fills each slot; your code renders them"
+      },
+      "use": "Build a library of finished components, forms, buttons, sign-up boxes, headings and type presets, and let Jev choose which one fills each slot for this visitor. Nothing is generated at request time, so the page costs a normal page load: the model is choosing between things you already built, and every branch stays reviewable in code. Ask one question per slot, and keep a default for every slot.",
+      "code": {
+        "lang": "javascript",
+        "label": "one question per slot, parts already built",
+        "src": "const SLOTS = {\n  hero:   { trial: 'Start a free trial', demo: 'Book a 20 minute demo',\n            docs: 'Read the documentation' },\n  proof:  { logos: 'Customer logos', caseStudy: 'One case study',\n            quote: 'A single customer quote', none: 'No proof block' },\n  cta:    { trial: 'Free trial', demo: 'Book a demo',\n            waitlist: 'Join the waitlist' }\n};\n\nconst state = [\n  'Referrer: ' + referrer,\n  'Campaign: ' + (utm || 'none'),\n  'Company size: ' + (size || 'unknown'),\n  'Returning: ' + (isReturning ? 'yes' : 'no')\n].join('. ');\n\nconst questions = Object.fromEntries(Object.entries(SLOTS).map(\n  ([slot, opts]) => [slot, { type: 'choice', criteria: opts,\n    instructions: 'Which ' + slot + ' module fits this visitor?' }]));\n\nrender(await decide({ model: 'jev-latest', state, questions }));"
+      },
+      "prompts": [
+        {
+          "state": "Referrer: documentation site. Campaign: none. Company size: unknown. Returning: yes.",
+          "question": "hero=choice:Which hero module fits this visitor?|trial:Start a free trial,demo:Book a 20 minute demo,docs:Read the documentation"
+        },
+        {
+          "state": "Referrer: paid social. Campaign: launch week. Company size: 200 or more. Returning: no.",
+          "question": "proof=choice:Which proof module fits this visitor?|logos:Customer logos,caseStudy:One case study,quote:A single customer quote,none:No proof block"
+        }
+      ],
+      "plate": "A wireframe of a single page drawn as empty outlined blocks in a vertical stack at the right, with three alternative small blocks drawn separately at the left and one short line pointing from one of them into the top slot."
+    },
+    {
+      "n": 19,
+      "slug": "use-case-audit",
+      "title": "Workflow use case auditing",
+      "tier": "advanced",
+      "at": "12:23",
+      "what": "Find the steps in your own work that should have been a decision, not a model call.",
+      "shape": {
+        "state": "one step from a log or a process document",
+        "question": "choice for the shape of the step, a noul for whether a decision model fits",
+        "answer": "a list of candidate steps, sorted by how well they fit"
+      },
+      "use": "Walk your own logs or process notes and ask, of each step, whether a typed decision would have done the job. The answer space is closed: either a decision fits, or the step needs writing, or it is a count and belongs in code. The same audit runs over a public catalogue of use cases when you are looking for ideas rather than for your own work.",
+      "code": {
+        "lang": "python",
+        "label": "label each step, sort in code",
+        "src": "SHAPES = {\"decision\": \"A closed pick, score or yes and no\",\n          \"writing\": \"Needs text back, keep the language model\",\n          \"count\": \"Arithmetic or counting, do it in code\",\n          \"lookup\": \"Fetching a fact, not judging it\"}\n\ndef audit(step):\n    qs = {\"shape\": {\"type\": \"choice\", \"criteria\": SHAPES,\n          \"instructions\": \"What kind of step is this?\"},\n          \"fits\": {\"type\": \"noul\",\n          \"instructions\": \"Could this step be answered by picking between options you could write down in advance?\"}}\n    return decide(step, qs)\n\nfor step in steps:\n    ans = audit(step[\"text\"])\n    if ans[\"shape\"][\"choice\"] == \"decision\" and ans[\"fits\"][\"noul\"] > 0.6:\n        print(step[\"id\"], step[\"text\"][:70])"
+      },
+      "prompts": [
+        {
+          "state": "Step 14: after each support email, decide whether it is urgent enough to interrupt the day.",
+          "question": "shape=choice:What kind of step is this?|decision:A closed pick, score or yes and no,writing:Needs text back, keep the language model,count:Arithmetic or counting, do it in code,lookup:Fetching a fact, not judging it"
+        },
+        {
+          "state": "Step 22: read the meeting notes and write a summary for the client.",
+          "question": "fits=Could this step be answered by picking between options you could write down in advance?"
+        }
+      ],
+      "plate": "A long horizontal process line made of many small evenly spaced squares, with three of the squares picked out by small vertical brackets beneath them and the rest left plain. Wide margins, flat geometry."
+    }
+  ]
+}

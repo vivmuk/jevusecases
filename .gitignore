@@ -1,0 +1,6 @@
+# build and QC output, not part of the site
+out/
+lab/
+.scrollcraft.json
+node_modules/
+.DS_Store
