@@ -37,6 +37,15 @@ TIERS = [
 ]
 
 
+def tier_range(cases, tier):
+    """A tier's heading is computed from the cases in it, so adding case 20 never
+    leaves a stale 'Cases 01 to 08' behind."""
+    ns = sorted(c["n"] for c in cases if c["tier"] == tier)
+    if not ns:
+        return "No Cases Yet"
+    return "Case %02d" % ns[0] if len(ns) == 1 else "Cases %02d to %02d" % (ns[0], ns[-1])
+
+
 def e(text):
     return html.escape(str(text), quote=True)
 
@@ -120,7 +129,8 @@ def secs(stamp):
 
 def index_panel(cases):
     groups = []
-    for tier, label, title, blurb in TIERS:
+    for tier, _static, title, blurb in TIERS:
+        label = tier_range(cases, tier)
         rows = [c for c in cases if c["tier"] == tier]
         items = "\n".join(
             """          <li><a href="#case-%d"><span class="n">%02d</span><span class="t">%s</span><span class="at">%s</span></a></li>"""
@@ -140,13 +150,14 @@ def rail(cases):
           <span class="n">%02d</span>
           <span class="t">%s</span>
           <span class="d">%s</span>
-        </a>""" % (c["n"], e(c["title"]), c["n"], e(SHORT[c["n"]]), e(c["tier"]))
+        </a>""" % (c["n"], e(c["title"]), c["n"], e(SHORT.get(c["n"], c["title"].split()[0])), e(c["tier"]))
         for c in cases)
     return tabs
 
 
-def tier_divider(tier):
-    label, rng, title, blurb = [t for t in TIERS if t[0] == tier][0]
+def tier_divider(tier, cases):
+    rng = tier_range(cases, tier)
+    _label, _rng, title, blurb = [t for t in TIERS if t[0] == tier][0]
     return """
     <section class="sc-section tier" data-sc-act="flow" data-tier="%s">
       <div class="sc-wrap sc-stack" data-sc-in data-sc-stagger="70">
@@ -168,11 +179,11 @@ def build():
     rendered = []
     for case in cases:
         if case["n"] == 1:
-            rendered.append(tier_divider("easy"))
+            rendered.append(tier_divider("easy", cases))
         if case["n"] == 9:
-            rendered.append(tier_divider("intermediate"))
+            rendered.append(tier_divider("intermediate", cases))
         if case["n"] == 15:
-            rendered.append(tier_divider("advanced"))
+            rendered.append(tier_divider("advanced", cases))
         rendered.append(card(case, len(rendered)))
     body.append("\n".join(rendered))
 
@@ -200,12 +211,12 @@ TEMPLATE = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Jev use cases: 19 closed-answer jobs for a decision model</title>
-<meta name="description" content="19 ways to replace an open-ended language-model call with a typed decision. For each one: what the decision is, the code that asks it, and the prompts that run it.">
+<title>Jev use cases: closed-answer jobs for a decision model</title>
+<meta name="description" content="The closed-answer jobs that replace an open-ended language-model call with a typed decision. For each one: what the decision is, the code that asks it, and the prompts that run it.">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#f1f2f4">
 <meta property="og:title" content="Jev use cases">
-<meta property="og:description" content="19 closed-answer jobs for a decision model, each with its code and its prompts.">
+<meta property="og:description" content="Closed-answer jobs for a decision model, each with its code and its prompts.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{site}">
 <link rel="canonical" href="{site}">
@@ -233,10 +244,10 @@ TEMPLATE = """<!doctype html>
 
   <section class="sc-section" data-sc-act="pin" data-sc-span="2" aria-labelledby="open-h">
     <div data-sc-stage class="sc-wrap open">
-      <h1 class="sc-display sc-display--xl" id="open-h" data-sc-cue="0 0.72 0" data-sc-kinetic="lines">19 Jobs for a Model That Answers in Half a Second.</h1>
+      <h1 class="sc-display sc-display--xl" id="open-h" data-sc-cue="0 0.72 0" data-sc-kinetic="lines">Every Job a Model Can Answer in Half a Second.</h1>
       <p class="open__lede sc-body" data-sc-cue="0 0.72 0">Each card carries the decision, the code that asks it, and the prompts that run it.</p>
       <dl class="open__facts" data-sc-cue="0.5 1 0.3 0.5">
-        <div><dt>cases, from the video</dt><dd data-sc-count="0 19">0</dd></div>
+        <div><dt>cases on this page</dt><dd data-sc-count="0 {cases}">0</dd></div>
         <div><dt>seconds, measured round trip</dt><dd>0.39</dd></div>
         <div><dt>dollars per million input tokens</dt><dd>0.042</dd></div>
         <div><dt>dollars for the output</dt><dd>0</dd></div>
@@ -248,7 +259,7 @@ TEMPLATE = """<!doctype html>
     <div data-sc-stage>
       <div class="rail-head sc-wrap">
         <h2 class="sc-display sc-display--md" id="rail-h">The Whole Set, Side by Side.</h2>
-        <p>19 tabs, in the order the video walks them. Pick any one to jump to its card, and the rail at the bottom of the screen keeps your place.</p>
+        <p>Every case, in the order the video walks them. Pick any one to jump to its card, and the rail at the bottom of the screen keeps your place.</p>
       </div>
       <div class="rail" data-sc-pan="0.06">
 {rail_tabs}
@@ -358,7 +369,7 @@ TEMPLATE = """<!doctype html>
         <a class="btn btn--solid" href="{repo}" data-sc-magnet="0.26" data-sc-cue="0.08" data-sc-rise="0" rel="noreferrer">Open the Source</a>
       </div>
       <footer class="colophon">
-        <p>Sources: the 19 cases, their order and their running times come from <a href="{video}" rel="noreferrer">{source}</a>, and each card links to its moment in the video.</p>
+        <p>Sources: every case here, its order and its running time come from <a href="{video}" rel="noreferrer">{source}</a>, and each card links to its moment in the video.</p>
         <p>Measured on 4 October 2026 on the machine that built this page: the 0.39 second probe, and the {tokens}&nbsp;token call above at {cost}&nbsp;dollars. Figures quoted from the video say so on the card that uses them.</p>
         <p>Scroll work by scrollcraft, plates by the muse-image model, static output so it costs a page load and nothing else.</p>
       </footer>
@@ -370,9 +381,9 @@ TEMPLATE = """<!doctype html>
 <!-- The index overlay sits after the main content on purpose: it carries
      headings, and headings inside a nav that comes before the h1 break the
      document outline. Being fixed, it renders in the same place either way. -->
-<nav class="index-panel" id="index-panel" data-open="false" aria-label="All 19 cases">
+<nav class="index-panel" id="index-panel" data-open="false" aria-label="Every case on this page">
   <div class="index-panel__inner">
-    <h2>All 19 Cases</h2>
+    <h2>Every Case, Grouped</h2>
     <p>Grouped the way the video groups them. Every one is a closed-answer job: the possible answers can be written down before the question is asked.</p>
 {index_groups}
   </div>

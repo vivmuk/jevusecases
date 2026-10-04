@@ -332,7 +332,12 @@
           "question": "bucket=choice:Which bucket does this message belong in?|inquiry:A real person who needs a reply,sponsor:A commercial pitch, route to the deals file,spam:Bulk marketing, no reply,phish:Attempting to take credentials or money"
         }
       ],
-      "plate": "A tall stack of many thin horizontal rectangles at the left, a wide gate in the middle, and two small trays at the right holding just a few rectangles. The bulk of the rectangles stop at the gate."
+      "plate": "A tall stack of many thin horizontal rectangles at the left, a wide gate in the middle, and two small trays at the right holding just a few rectangles. The bulk of the rectangles stop at the gate.",
+      "plate_levels": {
+        "minimal": "Three flat envelope rectangles in a single row, evenly spaced; the middle one carries a small amber diagonal cross, and one arrow leaves the row to the right.",
+        "readable": "Six flat envelope rectangles arriving from the left in a loose stack, passing under a single horizontal gate line that spans the frame; below the line two envelopes fall away, one of them carrying a small amber cross, while three envelopes continue right into a simple flat machine shape like a box with two dials.",
+        "detailed": "A wide open tray at the left holding nine flat envelopes of slightly different sizes; a tall vertical gate stands in the middle of the frame with a small diamond decision shape at its centre; three envelopes carrying small amber crosses tumble down into an open bin below the gate; four envelopes continue to the right into a flat desk holding a simple machine shape and a single sheet of ruled lines; a small clock outline and a paperclip sit nearby for scale."
+      }
     },
     {
       "n": 12,
