@@ -826,3 +826,86 @@ p em, li em, .plain em, figcaption em { font-style: normal; font-weight: 700; }
 
 .sizebar__label { font-family: var(--sc-font-text); font-size: .78rem; color: var(--sc-ink-soft); }
 .sizebar button { min-width: 2.4rem; text-align: center; }
+
+/* ---------------------------------------------------------------------------
+   The top of the page is static content now: no pinning, no panning, nothing that
+   makes a reader scroll through screens of nothing before the cases arrive. A
+   pinned act centred its own content under the fixed bar, which clipped the
+   headline on a phone and left a third of the screen empty.
+   --------------------------------------------------------------------------- */
+:root { --bar-h: 3.9rem; }
+/* the bar is taller on a phone, where the pills and the wordmark wrap */
+@media (max-width: 46rem) { :root { --bar-h: 5.4rem; } }
+main { padding-top: calc(var(--bar-h) + 1.2rem + env(safe-area-inset-top)); }
+#index, .case, .anatomy-sec, #close { scroll-margin-top: calc(var(--bar-h) + 1.2rem); }
+body { padding-bottom: calc(var(--rail-h, 3rem) + 2rem + env(safe-area-inset-bottom)); }
+
+.hero { padding-block: clamp(1rem, 3vh, 2rem) clamp(1.6rem, 5vh, 3rem); }
+@media (max-width: 62rem) { .hero { padding-block: .8rem 1rem; } .open__facts { padding-top: .9rem; gap: .9rem 1.4rem; }
+  .index-sec { padding-block: 1.1rem 2rem; }
+  /* four facts in a tidy two-by-two block, never three plus an orphan */
+  .hero .open__facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.hero__in {
+  display: grid; grid-template-columns: minmax(0, 36rem) minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2.6rem); align-items: center;
+}
+.hero__text { display: grid; gap: clamp(1rem, 2.4vh, 1.6rem); align-content: start; }
+.hero h1 { font-size: clamp(2.1rem, 6vw, 4rem); margin: 0; letter-spacing: -.015em; }
+#open-h em { color: var(--sc-green); font-style: normal; font-weight: 600; }
+.hero__art img {
+  display: block; width: 100%; height: auto; max-height: 60vh; object-fit: cover;
+  -webkit-mask-image: radial-gradient(80% 78% at 52% 46%, #000 58%, transparent 100%);
+          mask-image: radial-gradient(80% 78% at 52% 46%, #000 58%, transparent 100%);
+}
+.hero__jump { margin: 0; }
+@media (max-width: 62rem) {
+  .hero__in { grid-template-columns: minmax(0, 1fr); }
+  .hero__art { order: 2; }
+  /* a band of the artwork on a phone, so the whole set starts inside the first
+     screen instead of one full screen below it */
+  .hero__art img { max-height: 18vh; object-position: 52% 40%; }
+}
+
+.index-sec { padding-block: clamp(1.6rem, 5vh, 3rem); border-top: 1px solid var(--line); }
+.index-sec__lede { max-width: var(--sc-measure); color: var(--sc-ink-soft); }
+.idxgrid {
+  list-style: none; margin: clamp(1.2rem, 3vh, 2rem) 0 0; padding: 0;
+  display: grid; gap: .55rem;
+  grid-template-columns: repeat(auto-fill, minmax(14.5rem, 1fr));
+}
+.idx {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .1rem .7rem;
+  align-items: baseline; text-decoration: none; color: var(--sc-ink);
+  background: var(--sc-surface); border: 1px solid var(--line);
+  border-radius: var(--r); padding: .7rem .85rem; height: 100%;
+}
+.idx:hover, .idx:focus-visible { border-color: var(--sc-accent); background: color-mix(in oklab, var(--sc-accent) 6%, var(--sc-surface)); }
+.idx__no { font-family: var(--sc-font-mono); font-size: .72rem; letter-spacing: .1em; color: var(--sc-accent); }
+.idx__t { font-family: var(--sc-font-display); font-weight: 500; font-size: 1rem; line-height: 1.25; }
+.idx__d { grid-column: 2; font-size: .82rem; color: var(--sc-ink-soft); }
+
+/* ---------------------------------------------------------------------------
+   Desktop composition of the static hero, and the nav pills.
+   --------------------------------------------------------------------------- */
+/* the artwork fills its column instead of sitting as a small block with air above
+   and below it, and the facts line up on shared tracks instead of content-sized ones */
+.hero__in { align-items: stretch; }
+/* the artwork matches the height of the text beside it, so neither column ends in
+   a block of empty paper */
+.hero__art { display: flex; align-items: stretch; }
+.hero__art img { height: 100%; min-height: 14rem; object-fit: cover; }
+.hero .open__facts {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  gap: 1.1rem 1.2rem;
+}
+/* the pills wrap differently from one another on a phone, and they carry the
+   browser's link underline because they are anchors */
+.site-bar .btn { text-decoration: none; white-space: nowrap; }
+@media (max-width: 46rem) {
+  .site-bar .btn { font-size: .78rem; padding: .36rem .6rem; }
+  .site-bar { gap: .45rem; }
+}
+/* the tick strip scrolls on its own where it has to, without drawing a second
+   scrollbar across the bottom of the page */
+.ledger__track { scrollbar-width: none; }
+.ledger__track::-webkit-scrollbar { display: none; }

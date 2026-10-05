@@ -147,7 +147,7 @@ def card(case, index):
     <article class="{cls}" id="case-{n}" data-case="{n:02d}" data-title="{title}"
              aria-labelledby="case-{n}-t">
       <div class="sc-wrap case__grid">
-        <div class="case__text" data-sc-in data-sc-stagger="60">
+        <div class="case__text">
           <p class="case__no">Case {n:02d}<span class="case__tier">{tier}</span></p>
           <h3 class="case__title" id="case-{n}-t">{title}</h3>
           <p class="case__src"><a href="{video}&amp;t={sec}s" rel="noreferrer">{at} in the video</a></p>
@@ -159,8 +159,8 @@ def card(case, index):
 {code}
 {prompts}
         </div>
-        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
-          <div class="plate__frame" data-sc-tilt="5">
+        <figure class="case__plate plate plate--fused">
+          <div class="plate__frame">
             <button class="plate__open" type="button" data-full="{art}"
                     aria-label="Open the drawing for case {n} at full size">
               <img src="{art}" width="2000" height="1125"
@@ -184,6 +184,20 @@ def card(case, index):
 def secs(stamp):
     m, s = stamp.split(":")
     return int(m) * 60 + int(s)
+
+
+def index_grid(cases):
+    """All nineteen, up front, as links: the reader sees the whole set without
+    scrolling through anything to reach it."""
+    rows = []
+    for c in cases:
+        rows.append(
+            '        <li><a class="idx" href="#case-%d">'
+            '<span class="idx__no">%02d</span>'
+            '<span class="idx__t">%s</span>'
+            '<span class="idx__d">%s</span></a></li>'
+            % (c["n"], c["n"], e(c["title"]), e(c.get("tier", ""))))
+    return "\n".join(rows)
 
 
 def index_panel(cases):
@@ -218,8 +232,8 @@ def tier_divider(tier, cases):
     rng = tier_range(cases, tier)
     _label, _rng, title, blurb = [t for t in TIERS if t[0] == tier][0]
     return """
-    <section class="sc-section tier" data-sc-act="flow" data-tier="%s">
-      <div class="sc-wrap sc-stack" data-sc-in data-sc-stagger="70">
+    <section class="sc-section tier" data-tier="%s">
+      <div class="sc-wrap sc-stack">
         <p class="eyebrow">%s</p>
         <h2 class="sc-display sc-display--md">%s</h2>
         <p>%s</p>
@@ -255,6 +269,7 @@ def build():
         cases=len(cases),
         index_groups=index_panel(cases),
         rail_tabs=rail(cases),
+        index_cards=index_grid(cases),
         anatomy=anat,
         anat=a,
         tokens=tokens,
@@ -290,7 +305,6 @@ TEMPLATE = """<!doctype html>
 <body>
 
 <a class="skip" href="#case-1">Skip to the cases</a>
-<span data-sc-progress></span>
 <div class="sc-grain" aria-hidden="true"></div>
 
 <header class="site-bar">
@@ -309,49 +323,47 @@ TEMPLATE = """<!doctype html>
 
 <main id="top">
 
-  <section class="sc-section" data-sc-act="pin" data-sc-span="2" aria-labelledby="open-h">
-    <div data-sc-stage class="sc-wrap open">
-      <div class="open__bg" aria-hidden="true">
-        <img src="assets/forest/hero.webp" width="1800" height="1013" alt="" fetchpriority="high" decoding="async">
+  <section class="hero" aria-labelledby="open-h">
+    <div class="sc-wrap hero__in">
+      <div class="hero__text">
+        <h1 class="sc-display sc-display--xl" id="open-h">Every Job a Model Can <em>Answer in Half a Second</em>.</h1>
+        <p class="open__lede sc-body">Each card carries the decision, the code that asks it, and the prompts that run it.</p>
+        <dl class="open__facts">
+          <div><dt>cases on this page</dt><dd>{cases}</dd></div>
+          <div><dt>seconds, measured round trip</dt><dd>0.39</dd></div>
+          <div><dt>dollars per million input tokens</dt><dd>0.042</dd></div>
+          <div><dt>dollars for the output</dt><dd>0</dd></div>
+        </dl>
+        <p class="hero__jump"><a class="btn btn--solid" href="#index">Jump to the whole set</a></p>
       </div>
-      <div class="open__scrim" aria-hidden="true"></div>
-      <h1 class="sc-display sc-display--xl" id="open-h" data-sc-cue="0 0.72 0" data-sc-kinetic="lines">Every Job a Model Can <em>Answer in Half a Second</em>.</h1>
-      <p class="open__lede sc-body" data-sc-cue="0 0.72 0">Each card carries the decision, the code that asks it, and the prompts that run it.</p>
-
-      <dl class="open__facts" data-sc-cue="0.5 1 0.3 0.5">
-        <div><dt>cases on this page</dt><dd data-sc-count="0 {cases}">0</dd></div>
-        <div><dt>seconds, measured round trip</dt><dd>0.39</dd></div>
-        <div><dt>dollars per million input tokens</dt><dd>0.042</dd></div>
-        <div><dt>dollars for the output</dt><dd>0</dd></div>
-      </dl>
+      <div class="hero__art" aria-hidden="true">
+        <img src="assets/forest/hero.webp" width="2000" height="1125" alt="" fetchpriority="high" decoding="async">
+      </div>
     </div>
   </section>
 
   
-<section data-sc-act="pan" data-sc-span="3.4" aria-labelledby="rail-h">
-    <div data-sc-stage>
-      <div class="rail-head sc-wrap">
-        <h2 class="sc-display sc-display--md" id="rail-h">The Whole Set, Side by Side.</h2>
-        <p>Every case, in the order the video walks them. Pick any one to jump to its card, and the rail at the bottom of the screen keeps your place.</p>
-      </div>
-      <div class="rail" data-sc-pan="0.06">
-{rail_tabs}
-        <p class="rail__close">Three of them are the ones most people wire up first: labelling rows, gating an inbox, and choosing which model answers.</p>
-      </div>
+<section class="index-sec" id="index" aria-labelledby="rail-h">
+    <div class="sc-wrap">
+      <h2 class="sc-display sc-display--md" id="rail-h">The Whole Set, in One View.</h2>
+      <p class="index-sec__lede">Every case, in the order the video walks them. Pick any one to jump to its card.</p>
+      <ol class="idxgrid">
+{index_cards}
+      </ol>
     </div>
   </section>
 
 {body}
 
-  <section class="sc-section" data-sc-act="pin" data-sc-span="3.4" aria-labelledby="anatomy-h">
-    <div data-sc-stage data-sc-spotlight class="sc-wrap anatomy">
-      <h2 class="sc-display sc-display--md anatomy__h" id="anatomy-h" data-sc-cue="0 0.34 0" data-sc-kinetic="lines">One Message, Three Typed Questions, One Call.</h2>
+  <section class="sc-section anatomy-sec" aria-labelledby="anatomy-h">
+    <div class="sc-wrap anatomy">
+      <h2 class="sc-display sc-display--md anatomy__h" id="anatomy-h">One Message, Three Typed Questions, One Call.</h2>
       <div class="anatomy__grid">
-        <div class="anatomy__card" data-sc-cue="0.14 1 0.2 0">
+        <div class="anatomy__card">
           <h3>The State</h3>
           <p class="anatomy__state">{state}</p>
         </div>
-        <div class="anatomy__card" data-sc-cue="0.14 1 0.2 0">
+        <div class="anatomy__card">
           <h3>The Questions</h3>
           <dl class="shape shape--tight">
             <div class="shape__row"><dt>noul</dt><dd>yes or no, returned as a probability</dd></div>
@@ -359,7 +371,7 @@ TEMPLATE = """<!doctype html>
             <div class="shape__row"><dt>score</dt><dd>where it lands on four urgency levels</dd></div>
           </dl>
         </div>
-        <div class="anatomy__card anatomy__answers" data-sc-cue="0.4 1 0.2 0">
+        <div class="anatomy__card anatomy__answers">
           <h3>The Answers, as They Came Back</h3>
         <div class="answers">
           <div class="answer">
@@ -383,9 +395,9 @@ TEMPLATE = """<!doctype html>
     </div>
   </section>
 
-  <section class="sc-section deploy" data-sc-act="flow" aria-labelledby="deploy-h">
+  <section class="sc-section deploy" aria-labelledby="deploy-h">
     <div class="sc-wrap deploy__grid">
-      <div data-sc-in data-sc-stagger="70">
+      <div>
         <p class="eyebrow">Putting one in production</p>
         <h2 class="sc-display sc-display--md" id="deploy-h">Four Steps, and the Failure That Costs You the Most.</h2>
         <ol class="steps">
@@ -407,7 +419,7 @@ TEMPLATE = """<!doctype html>
           </li>
         </ol>
       </div>
-      <div data-sc-in data-sc-stagger="70">
+      <div>
         <figure class="code">
           <figcaption class="code__head">
             <p class="code__title">The whole transport, in eight lines</p>
@@ -434,12 +446,12 @@ TEMPLATE = """<!doctype html>
     </div>
   </section>
 
-  <section id="close" data-sc-act="pin" data-sc-span="1.45" aria-labelledby="close-h">
-    <div data-sc-stage class="sc-wrap close-act">
-      <h2 class="sc-display sc-display--lg" id="close-h" data-sc-cue="0.08" data-sc-kinetic="lines">Every Job on This Page Is a Question with a Napkin-Sized Answer.</h2>
+  <section id="close" class="sc-section" aria-labelledby="close-h">
+    <div class="sc-wrap close-act">
+      <h2 class="sc-display sc-display--lg" id="close-h">Every Job on This Page Is a Question with a Napkin-Sized Answer.</h2>
       <div class="close-act__row">
         <button class="btn btn--ghost" type="button" data-index-toggle aria-expanded="false" aria-controls="index-panel">Cases</button>
-        <a class="btn btn--solid" href="{repo}" data-sc-magnet="0.26" data-sc-cue="0.08" data-sc-rise="0" rel="noreferrer">Open the Source</a>
+        <a class="btn btn--solid" href="{repo}" rel="noreferrer">Open the Source</a>
       </div>
       <footer class="colophon">
         <p>Sources: every case here, its order and its running time come from <a href="{video}" rel="noreferrer">{source}</a>, and each card links to its moment in the video.</p>
@@ -468,8 +480,6 @@ TEMPLATE = """<!doctype html>
   <p class="ledger__now" aria-live="polite"></p>
 </div>
 
-<script src="scrollcraft.js"></script>
-<script>ScrollCraft.mount(document.body);</script>
 <script src="site.js"></script>
 </body>
 </html>
