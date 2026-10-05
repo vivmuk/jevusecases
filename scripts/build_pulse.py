@@ -8,13 +8,14 @@ reading is set for someone who finds dense text hard, via pulse.css.
 import html
 import json
 import pathlib
+import re
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SIGNALS = ROOT / "signals.json"
 OUT = ROOT / "pulse.html"
 
 KINDS = {
-    "gap": "Not on the site yet",
+    "gap": "Jobs no case covers yet",
     "insight": "New learning",
     "usecase": "Working example",
     "resource": "Where to read more",
@@ -23,6 +24,17 @@ KINDS = {
 
 def esc(t):
     return html.escape(str(t if t is not None else ""), quote=True)
+
+
+def nice_date(stamp):
+    """2026-10-05 -> 5 October 2026, so a date reads the same everywhere."""
+    months = ("January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December")
+    m = re.match(r"(\d{4})-(\d{2})-(\d{2})", str(stamp))
+    if not m:
+        return stamp
+    y, mo, d = m.groups()
+    return "%d %s %s" % (int(d), months[int(mo) - 1], y)
 
 
 def initials(author):
@@ -98,22 +110,23 @@ def main():
         '<div class="bar">',
         '<a class="mark" href="index.html">Jev <span aria-hidden="true">/</span> use cases</a>',
         '<span class="spacer"></span>',
-        '<button type="button" data-size-btn="0" aria-pressed="true">Text size A</button>',
-        '<button type="button" data-size-btn="1" aria-pressed="false">A+</button>',
-        '<button type="button" data-size-btn="2" aria-pressed="false">A++</button>',
+        '<span class="sizelabel" aria-hidden="true">Text size</span>',
+        '<button type="button" data-size-btn="0" aria-pressed="true" aria-label="Normal text size">A</button>',
+        '<button type="button" data-size-btn="1" aria-pressed="false" aria-label="Larger text">A+</button>',
+        '<button type="button" data-size-btn="2" aria-pressed="false" aria-label="Largest text">A++</button>',
         '<a class="btn" href="about.html">About Jev</a>',
         '<a class="btn" href="index.html">The cases</a>',
         '</div>', '<main>',
         '<div class="hero"><img src="assets/forest/hero.webp" width="2000" height="1125" alt="">',
         '<h1>Pulse</h1></div>',
         '<p class="lede">What people are writing, building and arguing about with the Jev decision model: the jobs nobody has listed yet, the findings from the first independent tests, and the places to read more. <strong>Every entry links to its source.</strong> The sweep runs each Tuesday morning, so this page is always the most recent pass.</p>',
-        '<p class="count">Last collected %s &middot; %d entries &middot; %d of them are jobs the nineteen cases do not cover</p>'
-        % (esc(data.get("updated", "")), len(items), gaps),
+        '<p class="count">Last collected %s. %d entries, and %d of them are jobs no case here covers yet.</p>'
+        % (nice_date(data.get("updated", "")), len(items), gaps),
         '<p class="count">%s</p>'
         % esc(data.get("collector", "")),
         '<hr class="rule">',
         '<div class="controls" role="group" aria-label="Filter the entries">', "".join(chips), '</div>',
-        '<p class="count" id="shown" aria-live="polite">Showing all %d entries</p>' % len(items),
+        '<p class="count" id="shown" aria-live="polite">All %d entries are shown.</p>' % len(items),
         '<div class="feed" id="feed">',
     ]
     body = [post_html(it, titles) for it in items]

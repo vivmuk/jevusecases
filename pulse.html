@@ -14,9 +14,10 @@
 <div class="bar">
 <a class="mark" href="index.html">Jev <span aria-hidden="true">/</span> use cases</a>
 <span class="spacer"></span>
-<button type="button" data-size-btn="0" aria-pressed="true">Text size A</button>
-<button type="button" data-size-btn="1" aria-pressed="false">A+</button>
-<button type="button" data-size-btn="2" aria-pressed="false">A++</button>
+<span class="sizelabel" aria-hidden="true">Text size</span>
+<button type="button" data-size-btn="0" aria-pressed="true" aria-label="Normal text size">A</button>
+<button type="button" data-size-btn="1" aria-pressed="false" aria-label="Larger text">A+</button>
+<button type="button" data-size-btn="2" aria-pressed="false" aria-label="Largest text">A++</button>
 <a class="btn" href="about.html">About Jev</a>
 <a class="btn" href="index.html">The cases</a>
 </div>
@@ -24,13 +25,13 @@
 <div class="hero"><img src="assets/forest/hero.webp" width="2000" height="1125" alt="">
 <h1>Pulse</h1></div>
 <p class="lede">What people are writing, building and arguing about with the Jev decision model: the jobs nobody has listed yet, the findings from the first independent tests, and the places to read more. <strong>Every entry links to its source.</strong> The sweep runs each Tuesday morning, so this page is always the most recent pass.</p>
-<p class="count">Last collected 2026-10-05 &middot; 16 entries &middot; 7 of them are jobs the nineteen cases do not cover</p>
+<p class="count">Last collected 5 October 2026. 16 entries, and 7 of them are jobs no case here covers yet.</p>
 <p class="count">Collected on Tuesdays at 09:00 by the weekly sweep: search Twitter/X, YouTube, Reddit, Hacker News, the official docs and the blogs that cover Jev, then read what changed and add what is new here.</p>
 <hr class="rule">
 <div class="controls" role="group" aria-label="Filter the entries">
-<button type="button" class="filt" data-filter="all" aria-pressed="true">Everything <b>16</b></button><button type="button" class="filt" data-filter="gap" aria-pressed="false">Not on the site yet <b>7</b></button><button type="button" class="filt" data-filter="insight" aria-pressed="false">New learning <b>5</b></button><button type="button" class="filt" data-filter="usecase" aria-pressed="false">Working example <b>2</b></button><button type="button" class="filt" data-filter="resource" aria-pressed="false">Where to read more <b>2</b></button>
+<button type="button" class="filt" data-filter="all" aria-pressed="true">Everything <b>16</b></button><button type="button" class="filt" data-filter="gap" aria-pressed="false">Jobs no case covers yet <b>7</b></button><button type="button" class="filt" data-filter="insight" aria-pressed="false">New learning <b>5</b></button><button type="button" class="filt" data-filter="usecase" aria-pressed="false">Working example <b>2</b></button><button type="button" class="filt" data-filter="resource" aria-pressed="false">Where to read more <b>2</b></button>
 </div>
-<p class="count" id="shown" aria-live="polite">Showing all 16 entries</p>
+<p class="count" id="shown" aria-live="polite">All 16 entries are shown.</p>
 <div class="feed" id="feed">
 <article class="post" id="sig-007" data-kind="gap">
   <div class="post__ava ava--gap" aria-hidden="true">1P</div>
@@ -43,7 +44,7 @@
     <p class="post__label">Key takeaways</p>
     <ul class="post__take"><li>Not on this site yet, in this exact form: the grounding check.</li><li>The others are close relatives of cases 01, 02 and 06 and could be read as variants of them.</li><li>The page is honest about the limits: a score is not an instruction to delete a file, merge a contact or send a message.</li></ul>
     <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
-      <span class="chip chip--kind">Not on the site yet</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
       <span class="post__tags"><span class="tag">#grounding</span><span class="tag">#knowledge work</span></span>
       <a class="post__link" href="https://matthiasfrank.de/en/jev-ai-use-cases/" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
@@ -59,7 +60,7 @@
     <p class="post__label">Key takeaways</p>
     <ul class="post__take"><li>Not on this site yet. Case 08 checks an output against a promise, but not the job of replacing the model that grades everything.</li><li>Run the old grader and Jev side by side over the same traces before switching anything over.</li><li>If you have enough human labels, check against those instead: they are the better reference, and the old grader was only ever a stand-in for them.</li></ul>
     <p class="post__meta"><a class="chip chip--near" href="index.html#case-8">Touches case 08: Output Verification and Model Calibration</a>
-      <span class="chip chip--kind">Not on the site yet</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
       <span class="post__tags"><span class="tag">#evals</span><span class="tag">#judging</span><span class="tag">#cost</span></span>
       <a class="post__link" href="https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
@@ -75,7 +76,7 @@
     <p class="post__label">Key takeaways</p>
     <ul class="post__take"><li>Not on this site yet. Case 15 classifies a live meeting; this is a decision inside the conversation, turn by turn.</li><li>The job is small, frequent and needs a probability: exactly the shape Jev is built for.</li><li>Expect speaker separation, not turn detection, to be the hard part.</li></ul>
     <p class="post__meta"><a class="chip chip--near" href="index.html#case-15">Touches case 15: Live Meeting and Speech Classification</a>
-      <span class="chip chip--kind">Not on the site yet</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
       <span class="post__tags"><span class="tag">#voice</span><span class="tag">#real-time</span></span>
       <a class="post__link" href="https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
@@ -91,7 +92,7 @@
     <p class="post__label">Key takeaways</p>
     <ul class="post__take"><li>Not on this site yet, and it is the strongest addition in the thread.</li><li>Needs a threshold in code, not a feeling: act above it, escalate below it.</li><li>Same shape as the loop-detection and injection checks in the Agent Fleet work.</li></ul>
     <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
-      <span class="chip chip--kind">Not on the site yet</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
       <span class="post__tags"><span class="tag">#agents</span><span class="tag">#safety</span><span class="tag">#guardrails</span></span>
       <a class="post__link" href="https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
@@ -107,7 +108,7 @@
     <p class="post__label">Key takeaways</p>
     <ul class="post__take"><li>Not on this site yet. Case 05 profiles churn risk; this is the step that feeds such a model its features.</li><li>One call, several questions, all judged against the same line of text.</li><li>The scores are the input; the fraud or churn model keeps its own job.</li></ul>
     <p class="post__meta"><a class="chip chip--near" href="index.html#case-5">Touches case 05: Customer Churn Risk Profiling</a>
-      <span class="chip chip--kind">Not on the site yet</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
       <span class="post__tags"><span class="tag">#features</span><span class="tag">#classical ML</span></span>
       <a class="post__link" href="https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
@@ -123,7 +124,7 @@
     <p class="post__label">Key takeaways</p>
     <ul class="post__take"><li>Not on this site yet.</li><li>The output is deliberately narrow, which is what makes it countable.</li><li>Treat the numbers as a signal from a simulated panel, not as evidence about real people.</li></ul>
     <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
-      <span class="chip chip--kind">Not on the site yet</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
       <span class="post__tags"><span class="tag">#research</span><span class="tag">#testing</span></span>
       <a class="post__link" href="https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
@@ -139,7 +140,7 @@
     <p class="post__label">Key takeaways</p>
     <ul class="post__take"><li>Not on this site yet.</li><li>A clean division of labour: decisions are narrow and frequent, dialogue is open and occasional.</li><li>Read the Doom demo as structured input, not as visual understanding.</li></ul>
     <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
-      <span class="chip chip--kind">Not on the site yet</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
       <span class="post__tags"><span class="tag">#games</span><span class="tag">#agents</span></span>
       <a class="post__link" href="https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
