@@ -73,10 +73,13 @@
          plate images changing height is the common case. */
       var docH = document.documentElement.scrollHeight;
       if (!bounds || docH !== lastDocH) measure();
-      var mid = window.scrollY + window.innerHeight / 2, best = 0, bestD = Infinity;
+      /* The playhead sits a third of the way down, not at the middle: a reader
+         who can see a card's heading has arrived at that card, and a counter that
+         waits for the midpoint reads as lagging behind the page. */
+      var playhead = window.scrollY + window.innerHeight * 0.35, best = 0, bestD = Infinity;
       for (var i = 0; i < bounds.length; i++) {
         var b = bounds[i];
-        var d = b.top > mid ? b.top - mid : (b.bottom < mid ? mid - b.bottom : 0);
+        var d = b.top > playhead ? b.top - playhead : (b.bottom < playhead ? playhead - b.bottom : 0);
         if (d < bestD) { bestD = d; best = i; }
       }
       return best;

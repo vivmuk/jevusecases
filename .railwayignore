@@ -1,0 +1,7 @@
+# generation sources and QC output: the site only needs the built files
+lab/
+out/
+node_modules/
+.playwright/
+*.tmp.png
+assets/plates/*.png

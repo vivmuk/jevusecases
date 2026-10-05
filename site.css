@@ -665,3 +665,13 @@ h1 em, h2 em, .sc-display em { font-style: italic; color: var(--sc-green); font-
 /* room under the last line of code so it is never sliced by the panel's own edge */
 .code pre, .prompt pre { padding-bottom: 1.1rem; }
 .site-bar .btn { line-height: 1; }
+
+/* The pan strip is meant to run past the right edge: it moves as you scroll. A
+   half-visible card with no fade reads as a clipped layout, so both edges fade and
+   the partial card reads as "there is more down the strip". */
+.rail {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 94%, transparent 100%);
+  overscroll-behavior-x: contain;
+}
+.rail-head p { max-width: 60ch; }
