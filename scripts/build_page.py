@@ -136,9 +136,10 @@ def plain_band(case):
 
 
 def card(case, index):
-    wide = index % 3 == 2
-    flip = index % 2 == 1
-    cls = "case" + (" case--wide" if wide else "") + (" case--flip" if flip else "")
+    # Every case reads the same way: its text, then its artwork across the full
+    # width. The old alternating wide/flip classes are gone; a reader should not
+    # have to relearn the layout on every second card.
+    cls = "case"
     shape = "\n".join(
         """            <div class="shape__row"><dt>%s</dt><dd>%s</dd></div>""" %
         (e(k), e(v)) for k, v in case["shape"].items())
@@ -160,8 +161,12 @@ def card(case, index):
         </div>
         <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="{art}" width="2048" height="1152"
-                 alt="{alt}" loading="lazy" decoding="async">
+            <button class="plate__open" type="button" data-full="{art}"
+                    aria-label="Open the drawing for case {n} at full size">
+              <img src="{art}" width="2000" height="1125"
+                   alt="{alt}" loading="lazy" decoding="async">
+              <span class="plate__zoom">View full screen</span>
+            </button>
           </div>
           <figcaption><span class="plate__no">Plate {n:02d}.</span> {caption}</figcaption>
         </figure>

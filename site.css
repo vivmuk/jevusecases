@@ -675,3 +675,67 @@ h1 em, h2 em, .sc-display em { font-style: italic; color: var(--sc-green); font-
   overscroll-behavior-x: contain;
 }
 .rail-head p { max-width: 60ch; }
+
+/* ---------------------------------------------------------------------------
+   One layout for every case: its text, then the artwork across the whole content
+   width, big enough to read the lettering. The old alternating two-column and
+   one-column cards are gone.
+   --------------------------------------------------------------------------- */
+.case__grid { grid-template-columns: minmax(0, 1fr); }
+.case__plate { margin-top: .5rem; }
+.case--flip .case__text, .case--wide .case__text { order: 0; }
+
+/* a softer tail on the artwork, so the painted lettering near the bottom edge is
+   not faded away by the fusion mask */
+.plate--fused img {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%);
+}
+
+.plate__open { display: block; width: 100%; padding: 0; border: 0; background: none;
+               cursor: zoom-in; position: relative; text-align: left; }
+.plate__open img { display: block; width: 100%; height: auto; }
+.plate__zoom {
+  position: absolute; inset: auto 1rem 1rem auto;
+  font-family: var(--sc-font-text); font-size: .68rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--sc-ink);
+  background: color-mix(in oklab, var(--sc-canvas) 86%, transparent);
+  border: 1px solid var(--line-strong); border-radius: 100px; padding: .34rem .7rem;
+  opacity: .74; transition: opacity .18s ease;
+}
+.plate__open:hover .plate__zoom, .plate__open:focus-visible .plate__zoom { opacity: 1; }
+.plate__open:focus-visible { outline: 2px solid var(--sc-accent); outline-offset: 5px; }
+
+html[data-viewer="open"] { overflow: hidden; }
+
+/* The plates fade to the paper colour at their edges: that is how they fuse into
+   the page. Opening them over a dark scrim therefore showed the scrim through
+   their own edges and made each drawing look cropped and dim. The viewer is paper
+   instead: the same ground the artwork was drawn for, at full size. */
+.viewer {
+  width: 100vw; max-width: none; height: 100vh; max-height: none;
+  margin: 0; padding: 0; border: 0;
+  background: var(--sc-canvas);
+}
+.viewer::backdrop { background: var(--sc-canvas); }
+.viewer__bar {
+  position: fixed; inset: 0 0 auto 0; z-index: 2;
+  display: flex; gap: 1rem; align-items: center; justify-content: space-between;
+  padding: .7rem clamp(.8rem, 3vw, 2rem);
+  background: var(--sc-canvas); border-bottom: 1px solid var(--line);
+}
+.viewer__title {
+  margin: 0; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  font-family: var(--sc-font-mono); font-size: .72rem; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--sc-ink-soft);
+}
+.viewer__close {
+  flex: none; font-family: var(--sc-font-text); font-size: .82rem; color: var(--sc-ink);
+  background: transparent; border: 1px solid var(--line-strong);
+  border-radius: 100px; padding: .42rem 1rem; cursor: pointer;
+}
+.viewer__close:hover { border-color: var(--sc-ink); }
+.viewer img {
+  display: block; width: 100%; height: 100%; object-fit: contain;
+  padding: clamp(3.4rem, 8vh, 4.6rem) clamp(.6rem, 3vw, 2.4rem) clamp(1rem, 3vh, 2rem);
+}

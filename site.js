@@ -187,10 +187,60 @@
     });
   }
 
+  /* ------------------------------------------------------------ the artwork viewer
+     Each plate is a real button. Activating it opens the drawing at full size in a
+     <dialog>, which brings the focus trap, Escape and the modal semantics with it,
+     so none of that has to be hand-rolled. */
+  function viewer() {
+    var openers = document.querySelectorAll(".plate__open");
+    var probe = document.createElement("dialog");
+    if (!openers.length || typeof probe.showModal !== "function") return;
+    var dlg = document.createElement("dialog");
+    dlg.className = "viewer";
+    dlg.setAttribute("aria-label", "Artwork at full size");
+    dlg.innerHTML =
+      '<div class="viewer__bar">' +
+        '<p class="viewer__title"></p>' +
+        '<button class="viewer__close" type="button">Close</button>' +
+      '</div>' +
+      '<img alt="">';
+    document.body.appendChild(dlg);
+    var pic = dlg.querySelector("img");
+    var name = dlg.querySelector(".viewer__title");
+    var last = null;
+
+    function shut() { dlg.close(); }
+
+    openers.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var inner = b.querySelector("img");
+        var src = b.getAttribute("data-full") || (inner ? inner.currentSrc || inner.src : "");
+        if (!src) return;
+        pic.src = src;
+        pic.alt = inner ? inner.alt : "";
+        var card = b.closest("article.case");
+        var no = card ? card.getAttribute("data-case") : "";
+        var title = card ? card.getAttribute("data-title") : "";
+        name.textContent = no ? "Case " + no + (title ? " \u2014 " + title : "") : "";
+        last = b;
+        document.documentElement.setAttribute("data-viewer", "open");
+        dlg.showModal();
+      });
+    });
+    dlg.querySelector(".viewer__close").addEventListener("click", shut);
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) shut(); });
+    dlg.addEventListener("close", function () {
+      document.documentElement.removeAttribute("data-viewer");
+      pic.removeAttribute("src");
+      if (last) last.focus();
+    });
+  }
+
   function boot() {
     ledger();
     indexPanel();
     copyButtons();
+    viewer();
   }
 
   if (document.readyState === "loading") {
