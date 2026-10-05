@@ -1,0 +1,105 @@
+/* Pulse: the weekly feed of what the field is saying about Jev.
+   Set for a reader who finds dense text hard work: Lexend headings, Atkinson
+   Hyperlegible body, roomy lines, no italics, short measures, big targets. */
+:root {
+  --paper: #f5f1e8; --ink: #1b1f24; --ink-soft: #4a5246; --line: #ddd5c4;
+  --green: #2a654b; --orange: #c65b18; --card: #fbf8f1;
+  --display: "Lexend", system-ui, sans-serif;
+  --text: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --measure: 35rem;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+html[data-size="1"] { font-size: 112.5%; }
+html[data-size="2"] { font-size: 125%; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--text); font-size: 1.06rem; line-height: 1.75;
+  text-align: left; word-spacing: .04em;
+}
+a { color: var(--green); text-underline-offset: .18em; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+
+.bar {
+  display: flex; flex-wrap: wrap; gap: .5rem; align-items: center;
+  max-width: 72rem; margin: 0 auto; padding: .75rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+.bar .mark { font-family: var(--display); font-weight: 600; letter-spacing: -.01em; text-decoration: none; color: var(--ink); }
+.bar .spacer { flex: 1 1 auto; }
+.bar a.btn, .bar button {
+  font-family: var(--text); font-size: .84rem; color: var(--ink);
+  background: transparent; border: 1px solid var(--line); border-radius: 100px;
+  padding: .42rem .85rem; text-decoration: none; cursor: pointer;
+}
+.bar a.btn:hover, .bar button:hover { border-color: var(--ink); }
+.bar button[aria-pressed="true"] { background: var(--card); border-color: var(--ink); font-weight: 700; }
+
+main { max-width: 72rem; margin: 0 auto; padding: 1.6rem 1.1rem 4rem; }
+.hero { position: relative; margin: 0 0 2rem; }
+.hero img { display: block; width: 100%; height: clamp(140px, 22vw, 260px); object-fit: cover;
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 55%, transparent 100%); }
+.hero h1 {
+  font-family: var(--display); font-weight: 600; font-size: clamp(2rem, 5.5vw, 3.1rem);
+  letter-spacing: -.015em; margin: 1rem 0 .5rem;
+}
+.lede { max-width: var(--measure); font-size: 1.09rem; margin: 0 0 1.4rem; }
+.lede strong { font-weight: 700; }
+.rule { border: 0; border-top: 1px solid var(--line); margin: 1.6rem 0; }
+
+.controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 .4rem; }
+.filt {
+  font-family: var(--text); font-size: .88rem; color: var(--ink); background: transparent;
+  border: 1px solid var(--line); border-radius: 100px; padding: .48rem .95rem; cursor: pointer;
+}
+.filt b { font-weight: 700; font-size: .84rem; color: var(--ink-soft); }
+.filt[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.filt[aria-pressed="true"] b { color: var(--paper); }
+/* sentence case, no wide tracking and a readable size: caps plus letterspacing plus
+   small grey type is the hardest combination for a reader who struggles with text */
+.count { font-family: var(--text); font-size: .95rem; letter-spacing: 0;
+  text-transform: none; color: var(--ink-soft); max-width: var(--measure); }
+
+.feed { margin: 1.4rem 0 0; max-width: 60rem; }
+.post { display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); gap: 1rem;
+  padding: 1.6rem 0; border-top: 1px solid var(--line); }
+.post[hidden] { display: none; }
+.post__ava {
+  width: 3.2rem; height: 3.2rem; border-radius: 50%; display: grid; place-items: center;
+  font-family: var(--display); font-weight: 600; font-size: .95rem; color: var(--paper);
+}
+.ava--gap { background: var(--orange); }
+.ava--insight { background: var(--green); }
+.ava--usecase { background: var(--ink); }
+.ava--resource { background: var(--ink-soft); }
+.post__who { margin: 0 0 .25rem; display: flex; flex-wrap: wrap; gap: .45rem; align-items: baseline; }
+.post__name { font-weight: 700; }
+.post__handle, .post__date { color: var(--ink-soft); font-size: .96rem; }
+.post__dot { color: var(--ink-soft); }
+.post__title { font-family: var(--display); font-weight: 600; font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  letter-spacing: -.01em; line-height: 1.3; margin: .1rem 0 .5rem; max-width: var(--measure); }
+.post__sum { margin: 0 0 1rem; max-width: var(--measure); }
+.post__label { font-family: var(--text); font-size: .95rem; letter-spacing: 0;
+  text-transform: none; font-weight: 700; color: var(--ink); margin: 0 0 .5rem; }
+.post__take { margin: 0 0 1rem; padding: 0 0 0 1.1rem; max-width: var(--measure); }
+.post__take li { margin: 0 0 .55rem; padding-left: .2rem; }
+.post__take li::marker { color: var(--orange); }
+.post__meta { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0; }
+.chip { font-size: .8rem; border-radius: 100px; padding: .3rem .7rem; text-decoration: none;
+  border: 1px solid var(--line); color: var(--ink-soft); }
+.chip--missing { border-color: var(--orange); color: var(--orange); font-weight: 700; }
+.chip--near { border-color: var(--green); color: var(--green); }
+.chip--kind { background: var(--card); }
+.post__tags { display: inline-flex; flex-wrap: wrap; gap: .35rem; }
+.tag { font-family: var(--mono); font-size: .7rem; letter-spacing: .06em; color: var(--ink-soft); }
+.post__link { margin-left: auto; font-weight: 700; }
+footer { max-width: 72rem; margin: 0 auto; padding: 1.2rem 1.1rem 3rem; border-top: 1px solid var(--line);
+  color: var(--ink-soft); font-size: .95rem; }
+footer p { max-width: var(--measure); }
+@media (max-width: 34rem) {
+  .post { grid-template-columns: 2.4rem minmax(0, 1fr); gap: .7rem; }
+  .post__ava { width: 2.4rem; height: 2.4rem; font-size: .8rem; }
+  .post__link { margin-left: 0; }
+}

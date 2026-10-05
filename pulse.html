@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulse: what the field is saying about Jev</title>
+<meta name="description" content="A weekly sweep of what people write about the Jev decision model: new use cases, new findings, and the jobs the nineteen cases do not cover yet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="pulse.css">
+</head>
+<body>
+<div class="bar">
+<a class="mark" href="index.html">Jev <span aria-hidden="true">/</span> use cases</a>
+<span class="spacer"></span>
+<button type="button" data-size-btn="0" aria-pressed="true">Text size A</button>
+<button type="button" data-size-btn="1" aria-pressed="false">A+</button>
+<button type="button" data-size-btn="2" aria-pressed="false">A++</button>
+<a class="btn" href="about.html">About Jev</a>
+<a class="btn" href="index.html">The cases</a>
+</div>
+<main>
+<div class="hero"><img src="assets/forest/hero.webp" width="2000" height="1125" alt="">
+<h1>Pulse</h1></div>
+<p class="lede">What people are writing, building and arguing about with the Jev decision model: the jobs nobody has listed yet, the findings from the first independent tests, and the places to read more. <strong>Every entry links to its source.</strong> The sweep runs each Tuesday morning, so this page is always the most recent pass.</p>
+<p class="count">Last collected 2026-10-05 &middot; 16 entries &middot; 7 of them are jobs the nineteen cases do not cover</p>
+<p class="count">Collected on Tuesdays at 09:00 by the weekly sweep: search Twitter/X, YouTube, Reddit, Hacker News, the official docs and the blogs that cover Jev, then read what changed and add what is new here.</p>
+<hr class="rule">
+<div class="controls" role="group" aria-label="Filter the entries">
+<button type="button" class="filt" data-filter="all" aria-pressed="true">Everything <b>16</b></button><button type="button" class="filt" data-filter="gap" aria-pressed="false">Not on the site yet <b>7</b></button><button type="button" class="filt" data-filter="insight" aria-pressed="false">New learning <b>5</b></button><button type="button" class="filt" data-filter="usecase" aria-pressed="false">Working example <b>2</b></button><button type="button" class="filt" data-filter="resource" aria-pressed="false">Where to read more <b>2</b></button>
+</div>
+<p class="count" id="shown" aria-live="polite">Showing all 16 entries</p>
+<div class="feed" id="feed">
+<article class="post" id="sig-007" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">1P</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Matthias Frank</span>
+      <span class="post__handle">matthiasfrank.de</span>
+      <span class="post__date">2 October 2026</span></p>
+    <h2 class="post__title">Does this source actually support this claim?</h2>
+    <p class="post__sum">A list of fourteen knowledge-work jobs, and the one worth lifting is the source check: given a claim and a passage, does the passage support it. The same list also names duplicate detection, filing a document into projects and areas, checking a draft against your own writing rules, and deciding whether an enquiry meets your qualification criteria.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Not on this site yet, in this exact form: the grounding check.</li><li>The others are close relatives of cases 01, 02 and 06 and could be read as variants of them.</li><li>The page is honest about the limits: a score is not an instruction to delete a file, merge a contact or send a message.</li></ul>
+    <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
+      <span class="chip chip--kind">Not on the site yet</span>
+      <span class="post__tags"><span class="tag">#grounding</span><span class="tag">#knowledge work</span></span>
+      <a class="post__link" href="https://matthiasfrank.de/en/jev-ai-use-cases/" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-001" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">RA</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">thread · Interesting disruptive use cases of Jev for me</span>
+      <span class="post__handle">Reddit · r/AI_Agents</span>
+      <span class="post__date">September 2026</span></p>
+    <h2 class="post__title">Score every agent trace against a rubric, instead of paying an LLM judge</h2>
+    <p class="post__sum">The most repeated idea in the thread: instead of paying a slow model to grade every trace, ask Jev the rubric questions in milliseconds — is it grounded, does it cite a source, is the tool trace sensible. The thread&#x27;s own objection is the interesting half: the swap only saves money once the fast scorer agrees with the slow one, and the only way to know that is to run both over the same set first.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Not on this site yet. Case 08 checks an output against a promise, but not the job of replacing the model that grades everything.</li><li>Run the old grader and Jev side by side over the same traces before switching anything over.</li><li>If you have enough human labels, check against those instead: they are the better reference, and the old grader was only ever a stand-in for them.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-8">Touches case 08: Output Verification and Model Calibration</a>
+      <span class="chip chip--kind">Not on the site yet</span>
+      <span class="post__tags"><span class="tag">#evals</span><span class="tag">#judging</span><span class="tag">#cost</span></span>
+      <a class="post__link" href="https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-002" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">RA</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">thread · voice and turn-taking replies</span>
+      <span class="post__handle">Reddit · r/AI_Agents</span>
+      <span class="post__date">September 2026</span></p>
+    <h2 class="post__title">A reflex layer for voice agents, reading a rolling transcript</h2>
+    <p class="post__sum">A voice agent&#x27;s robotic feel comes from the gap between speech-to-text, deciding it is your turn, asking a big model, and speaking. The suggestion here is a Jev reflex layer over the rolling transcript, so most of the small decisions happen without touching the big model. One reply argues turn detection mostly breaks when two people talk over each other, and that separating speakers is the harder, more valuable problem.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Not on this site yet. Case 15 classifies a live meeting; this is a decision inside the conversation, turn by turn.</li><li>The job is small, frequent and needs a probability: exactly the shape Jev is built for.</li><li>Expect speaker separation, not turn detection, to be the hard part.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-15">Touches case 15: Live Meeting and Speech Classification</a>
+      <span class="chip chip--kind">Not on the site yet</span>
+      <span class="post__tags"><span class="tag">#voice</span><span class="tag">#real-time</span></span>
+      <a class="post__link" href="https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-003" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">RA</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">thread · guardrails reply</span>
+      <span class="post__handle">Reddit · r/AI_Agents</span>
+      <span class="post__date">September 2026</span></p>
+    <h2 class="post__title">Guardrails that run after every step: looping, risky action, indirect prompt injection</h2>
+    <p class="post__sum">After each step of an agent, ask whether it is going in circles, whether it is about to do something risky, and whether the text it just read is trying to instruct it. Catching those before they cascade is the point; catching them afterwards is a post-mortem. Because it runs on every step it has to be fast and cheap, which is the argument for a decision model rather than another model call.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Not on this site yet, and it is the strongest addition in the thread.</li><li>Needs a threshold in code, not a feeling: act above it, escalate below it.</li><li>Same shape as the loop-detection and injection checks in the Agent Fleet work.</li></ul>
+    <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
+      <span class="chip chip--kind">Not on the site yet</span>
+      <span class="post__tags"><span class="tag">#agents</span><span class="tag">#safety</span><span class="tag">#guardrails</span></span>
+      <a class="post__link" href="https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-004" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">RA</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">thread · classical ML reply</span>
+      <span class="post__handle">Reddit · r/AI_Agents</span>
+      <span class="post__date">September 2026</span></p>
+    <h2 class="post__title">Turn free text into numbers a fraud or churn model can use</h2>
+    <p class="post__sum">Take a messy line like “gift for mom, urgent” and ask for the probabilities and scores inside it: is this a gift, how urgent is it on a scale of ten. At scale those numbers become ordinary columns, and the trained model that already exists does the rest. It is the least glamorous idea in the thread and probably the most broadly useful.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Not on this site yet. Case 05 profiles churn risk; this is the step that feeds such a model its features.</li><li>One call, several questions, all judged against the same line of text.</li><li>The scores are the input; the fraud or churn model keeps its own job.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-5">Touches case 05: Customer Churn Risk Profiling</a>
+      <span class="chip chip--kind">Not on the site yet</span>
+      <span class="post__tags"><span class="tag">#features</span><span class="tag">#classical ML</span></span>
+      <a class="post__link" href="https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-005" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">RA</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">thread · synthetic personas reply</span>
+      <span class="post__handle">Reddit · r/AI_Agents</span>
+      <span class="post__date">September 2026</span></p>
+    <h2 class="post__title">Synthetic personas for concept and A/B testing at scale</h2>
+    <p class="post__sum">A persona answering a survey in prose is hard to count. A persona answering in probabilities and scores is a number you can average. The claim in the thread is that this is what pure language-model personas failed at, and that quantified answers make fast concept testing feasible.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Not on this site yet.</li><li>The output is deliberately narrow, which is what makes it countable.</li><li>Treat the numbers as a signal from a simulated panel, not as evidence about real people.</li></ul>
+    <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
+      <span class="chip chip--kind">Not on the site yet</span>
+      <span class="post__tags"><span class="tag">#research</span><span class="tag">#testing</span></span>
+      <a class="post__link" href="https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-006" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">CO</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">thread replies on the Doom demo</span>
+      <span class="post__handle">Reddit and Hacker News</span>
+      <span class="post__date">September 2026</span></p>
+    <h2 class="post__title">Let Jev choose what a game character does; keep the language model for what it says</h2>
+    <p class="post__sum">Several people describe the same split: the decision model picks the action, the language model writes the dialogue. It also explains the demo that went around, in which the state was fed to the model as positions rather than the model seeing rendered frames — impressive, and not the same thing as looking at the screen.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Not on this site yet.</li><li>A clean division of labour: decisions are narrow and frequent, dialogue is open and occasional.</li><li>Read the Doom demo as structured input, not as visual understanding.</li></ul>
+    <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
+      <span class="chip chip--kind">Not on the site yet</span>
+      <span class="post__tags"><span class="tag">#games</span><span class="tag">#agents</span></span>
+      <a class="post__link" href="https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-008" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">DO</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">TypeSafe AI</span>
+      <span class="post__handle">Official docs · model jaggedness</span>
+      <span class="post__date">16 September 2026</span></p>
+    <h2 class="post__title">Eight failure modes the maker lists for itself</h2>
+    <p class="post__sum">TypeSafe publishes its own defect list, which is rare enough to be worth reading closely. The eight: literal reading, arithmetic, date comparison, too many hops of indirection, a large state full of irrelevant detail, adversarial content, contradictory instructions and criteria, and generation. Counting is called out separately as unreliable — the model recognises the shape of an answer rather than tallying, and the error grows with the size of the thing being counted.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Keep every sum, every count and every date comparison in code. Ask one question per item and add the answers up yourself.</li><li>Extra state costs accuracy. Send only what the question needs.</li><li>It answers the question you wrote, not the one you meant: write the condition into the instructions, and put boundary cases into the criteria.</li><li>Ask for colour names rather than hex values, and for high-level languages rather than assembly.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-1">Touches case 01: Spreadsheet Data Categorisation</a>
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#limits</span><span class="tag">#pitfalls</span></span>
+      <a class="post__link" href="https://docs.typesafe.ai/model-jaggedness/jev-1.13" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-009" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">IB</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Deußer, Sparrenberg and Sifa</span>
+      <span class="post__handle">Research · arXiv 2609.37647</span>
+      <span class="post__date">29 September 2026</span></p>
+    <h2 class="post__title">37 datasets, 346,009 requests, under ten dollars</h2>
+    <p class="post__sum">The first independent benchmark of the model, run zero-shot over 37 datasets with one frozen template each: classification, routing, natural language inference, reading comprehension, commonsense, moderation, legal clause analysis and rubric scoring. It reaches 95 to 99 per cent on IMDB, SST-2, HellaSwag and ARC, 86.7 per cent on a reading test across 122 languages, beats Qwen on 27 of 37 datasets and Gemma on all 37. Rotating the answer options leaves accuracy unchanged, and withholding the question drops it to chance.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>The finding that changes how you deploy it: its yes/no probabilities rank well but sit badly against a fixed 0.5 line. Tuning the threshold on training data lifted micro-F1 from 0.50 to 0.75.</li><li>Choice probabilities are well calibrated, so they support acting only when the answer is clear.</li><li>It answered the calculation-heavy questions of a standard exam more accurately than the others (94 per cent against 91) — the opposite of the language models tested. Do not read that as licence to ask it sums: the maker&#x27;s own note still says keep arithmetic in code.</li><li>All three models degrade on low-resource languages, fine-grained labels and rubric judgments.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-8">Touches case 08: Output Verification and Model Calibration</a>
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#benchmark</span><span class="tag">#thresholds</span></span>
+      <a class="post__link" href="https://arxiv.org/abs/2609.37647" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-011" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">TO</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Walid, ayautomate</span>
+      <span class="post__handle">Blog · ayautomate</span>
+      <span class="post__date">October 2026</span></p>
+    <h2 class="post__title">Confidence-gated action is the pattern behind every use case</h2>
+    <p class="post__sum">Across the docs and the launch coverage, the same shape keeps appearing: act when the answer is clear, send it to a slower model when it is nearly clear, and send it to a person when it is not. Quoting Armin Ronacher, the model delegates the hallucination problem back to you — at 50 per cent, treat it as a coin toss and ignore it; at 95 per cent, act. The thresholds are yours, and they should differ by what the action costs.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>A floor of 0.6 to send anything uncertain to a human; approving a transfer needed better than 0.85 in the makers&#x27; own voice-banking example.</li><li>Cheap to check does not mean cheap to get wrong: set the threshold from the cost of the action.</li><li>Ask every question you might want in one request, even speculative ones. Questions in a request are judged in parallel, so extras add tokens and almost no time.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-10">Touches case 10: Intelligent Multi Model Routing</a>
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#gating</span><span class="tag">#thresholds</span></span>
+      <a class="post__link" href="https://www.ayautomate.com/blog/jev-use-cases" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-010" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">LT</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">explainx.ai, reading the launch thread</span>
+      <span class="post__handle">Blog · explainx.ai</span>
+      <span class="post__date">September 2026</span></p>
+    <h2 class="post__title">The failure that matters is type-valid but wrong</h2>
+    <p class="post__sum">The launch thread ran to 256 comments, and the concrete failure mode hiding among the scepticism is this: the answer is a properly formed member of the options you supplied, with a legitimate looking confidence, and it is simply incorrect — a support ticket filed as billing when it was technical. A malformed answer is easy to catch, because validation fails. This one passes every structural check, so catching it needs something downstream that checks meaning.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>“Type safe” means the answer cannot be outside your option list. It does not mean the answer is right.</li><li>Build the confidence threshold and the human review queue before you build the automation.</li><li>The loudest objection in the thread was to the phrase “frontier model”, not to the model.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-2">Touches case 02: Customer Inquiry Triage and Routing</a>
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#failure modes</span><span class="tag">#gating</span></span>
+      <a class="post__link" href="https://www.explainx.ai/blog/where-jev-actually-fails-2026" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-012" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">LP</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">community editors</span>
+      <span class="post__handle">Independent guide · typesafe-jev.com</span>
+      <span class="post__date">September 2026</span></p>
+    <h2 class="post__title">The hard walls, written down in one place</h2>
+    <p class="post__sum">An independent guide that collects the official limits and then grades the community&#x27;s claims. No text generation, text-only input, a ceiling of 64k tokens across state and the longest question, rate limits of 250k tokens a second and 1,200 requests a minute, and input at $0.042 per million tokens with output free. Images and audio have to be described in words before they go in; long documents need chunking or retrieve-then-judge.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Handle backoff at high concurrency: the rate limits are real and officially subject to change.</li><li>The site&#x27;s own verdict on the rumour that Jev is a wrapper around another model: no evidence, unverified.</li><li>Its checklist for when not to use Jev is worth copying: an open answer space, multi-step reasoning chains, a fully rule-based decision, or errors that are costly with no human review available.</li></ul>
+    <p class="post__meta">
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#limits</span><span class="tag">#operations</span></span>
+      <a class="post__link" href="https://typesafe-jev.com/en/limitations" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-014" data-kind="usecase">
+  <div class="post__ava ava--usecase" aria-hidden="true">AH</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Sydney Runkle and Hunter Lovell</span>
+      <span class="post__handle">LangChain blog</span>
+      <span class="post__date">17 September 2026</span></p>
+    <h2 class="post__title">Where the decision model sits inside an agent loop</h2>
+    <p class="post__sum">A walkthrough of putting the model into an agent harness, with two named jobs: routing a request to the right model, and an auto mode that decides how much machinery a task needs. It restates the mechanism that makes this practical — every question in one request is evaluated in parallel, so asking six things costs barely more time than asking one.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Ask several narrow questions in one call and ignore the ones you do not need yet.</li><li>Model routing is the job the vendors&#x27; own customers named first: paying a large model to choose a model is expensive.</li><li>The loop stays the same shape; only the decision steps get cheaper and faster.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-10">Touches case 10: Intelligent Multi Model Routing</a>
+      <span class="chip chip--kind">Working example</span>
+      <span class="post__tags"><span class="tag">#agents</span><span class="tag">#routing</span></span>
+      <a class="post__link" href="https://www.langchain.com/blog/building-a-harness-with-jev" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-013" data-kind="usecase">
+  <div class="post__ava ava--usecase" aria-hidden="true">NT</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Jim Le</span>
+      <span class="post__handle">n8n community</span>
+      <span class="post__date">18 September 2026</span></p>
+    <h2 class="post__title">Four working automations, including reranking and support triage</h2>
+    <p class="post__sum">An n8n builder ports four templates onto Jev and reports on each. Support triage into a project tracker from Gmail is called better in speed and comprehensiveness, and the post points out it demonstrates tool calling without a language model. The reranker is called the easiest change for the most impact. One sharp warning: as a sub-node it can be worse, so work on the results directly.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Reranking retrieved candidates is the cheapest large win in that set.</li><li>Tool choice is a decision, not a generation: it does not need a language model.</li><li>Watch the placement — a decision model buried inside the wrong node adds a hop without adding judgment.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-16">Touches case 16: Zero LLM Retrieval Engine</a>
+      <span class="chip chip--kind">Working example</span>
+      <span class="post__tags"><span class="tag">#automation</span><span class="tag">#reranking</span></span>
+      <a class="post__link" href="https://community.n8n.io/t/n8n-jev-4-awesome-examples-to-get-started/314596" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-015" data-kind="resource">
+  <div class="post__ava ava--resource" aria-hidden="true">TU</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Real Python</span>
+      <span class="post__handle">Real Python</span>
+      <span class="post__date">September 2026</span></p>
+    <h2 class="post__title">Getting started in Python, including the yes/no traps</h2>
+    <p class="post__sum">A beginner-level tutorial that starts where a reader actually gets stuck: people answer a yes-or-no question with yes, Y, no! and everything in between, which is exactly the mess a probability replaces. Useful as the plainest explanation of why a probability is more useful than a parsed word.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Good first read for anyone who has not used a decision model before.</li><li>The yes/no example is the clearest argument for returning a number rather than a word.</li></ul>
+    <p class="post__meta">
+      <span class="chip chip--kind">Where to read more</span>
+      <span class="post__tags"><span class="tag">#python</span><span class="tag">#tutorial</span></span>
+      <a class="post__link" href="https://realpython.com/jev-python/" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-016" data-kind="resource">
+  <div class="post__ava ava--resource" aria-hidden="true">TT</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">OpenRouter</span>
+      <span class="post__handle">OpenRouter blog</span>
+      <span class="post__date">September 2026</span></p>
+    <h2 class="post__title">Moderation in TypeScript through a different provider</h2>
+    <p class="post__sum">A worked moderation example in TypeScript, and a reminder that the model is reachable through more than one provider. Moderation is a use case the nineteen on this site do not cover, and it is one of the jobs the benchmark paper evaluated.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Moderation is a missing job for this site, not just a missing tutorial.</li><li>The same request shape works across providers; only the endpoint and the key change.</li></ul>
+    <p class="post__meta">
+      <span class="chip chip--kind">Where to read more</span>
+      <span class="post__tags"><span class="tag">#moderation</span><span class="tag">#typescript</span></span>
+      <a class="post__link" href="https://openrouter.ai/blog/tutorials/how-to-use-jev/" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+</div>
+</main>
+<footer>
+<p>Gathered from X, YouTube, Reddit, Hacker News, the official documentation and the blogs that cover the model. Nothing here is repeated from the nineteen cases unless it adds something to them; a link marked as not covered is a job the collection is missing.</p>
+<p>Jev is made by TypeSafe AI. This page is an independent reading of public sources and is not affiliated with TypeSafe.</p>
+</footer>
+<script>
+var btns = document.querySelectorAll("[data-size-btn]"), html = document.documentElement;
+function setSize(l){ if(l==="0"){html.removeAttribute("data-size");} else {html.setAttribute("data-size", l);}
+  btns.forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-size-btn")===l)); });
+  try { localStorage.setItem("jev-text-size", l); } catch(e){} }
+btns.forEach(function(b){ b.addEventListener("click", function(){ setSize(b.getAttribute("data-size-btn")); }); });
+try { var s = localStorage.getItem("jev-text-size"); if (s) setSize(s); } catch(e){}
+var posts = document.querySelectorAll(".post"), filts = document.querySelectorAll(".filt"), shown = document.getElementById("shown");
+var words = {all:"Showing all", gap:"Showing the jobs not covered", insight:"Showing new learnings", usecase:"Showing working examples", resource:"Showing further reading"};
+filts.forEach(function(f){ f.addEventListener("click", function(){
+  var want = f.getAttribute("data-filter"), n = 0;
+  filts.forEach(function(o){ o.setAttribute("aria-pressed", String(o===f)); });
+  posts.forEach(function(p){ var on = (want==="all") || (p.getAttribute("data-kind")===want); p.hidden = !on; if(on) n++; });
+  shown.textContent = (words[want] || "Showing") + " " + n + (n===1 ? " entry" : " entries");
+}); });
+</script>
+</body>
+</html>

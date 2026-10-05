@@ -13,8 +13,8 @@
   --sc-accent-soft: #e8d3bd;
   --sc-accent-ink: #fff8f2;
   --sc-green:      #245741;
-  --sc-font-display: "Playfair Display", Georgia, serif;
-  --sc-font-text:    "Inter", system-ui, sans-serif;
+  --sc-font-display: "Lexend", system-ui, sans-serif;
+  --sc-font-text:    "Atkinson Hyperlegible", system-ui, sans-serif;
   --sc-font-mono:    "IBM Plex Mono", ui-monospace, monospace;
 
   --page-wrap: 74rem;
@@ -536,9 +536,7 @@ h1 em, h2 em, .sc-display em { font-style: italic; color: var(--sc-green); font-
 /* The engine splits a kinetic headline into lines and drops inline markup, so the
    accented phrase is applied to the last line it produces instead. */
 #open-h .sc-split--line:last-child .sc-split__i,
-#open-h .sc-split--line:last-of-type .sc-split__i {
-  font-style: italic; color: var(--sc-green);
-}
+#open-h .sc-split--line:last-of-type .sc-split__i { font-style: normal; font-weight: 600; color: var(--sc-green); }
 .tagline { font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 500;
            color: var(--sc-ink-soft); }
 
@@ -713,11 +711,15 @@ html[data-viewer="open"] { overflow: hidden; }
    their own edges and made each drawing look cropped and dim. The viewer is paper
    instead: the same ground the artwork was drawn for, at full size. */
 .viewer {
-  width: 100vw; max-width: none; height: 100vh; max-height: none;
+  /* 100vw counts the scrollbar, which pushed ten pixels of page width out of the
+     viewport; and a display rule here would otherwise beat the browser's own rule
+     that hides a closed dialog, leaving an invisible full-width box on the page. */
+  width: 100%; max-width: none; height: 100vh; max-height: none;
   margin: 0; padding: 0; border: 0;
   background: var(--sc-canvas);
   display: flex; align-items: center; justify-content: center;
 }
+dialog.viewer:not([open]) { display: none; }
 .viewer::backdrop { background: var(--sc-canvas); }
 .viewer__bar {
   position: fixed; inset: 0 0 auto 0; z-index: 2;
@@ -770,3 +772,57 @@ html[data-viewer="open"] { overflow: hidden; }
     transform: rotate(90deg); transform-origin: center;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Reading. Every page is set for a reader who finds dense text hard work:
+   Lexend for headings and Atkinson Hyperlegible for body text, both designed
+   with readers who confuse similar letters; roomier lines; no italics in body
+   copy; and a size control in the header that remembers the choice.
+   --------------------------------------------------------------------------- */
+:root { --sc-leading: 1.75; }
+html[data-size="1"] { font-size: 112.5%; }
+html[data-size="2"] { font-size: 125%; }
+
+.sc-body, .case__what, .case__use, .plain li, .open__lede, .jevnote,
+.case__src, .plate figcaption, .lede, p, li { line-height: var(--sc-leading); }
+
+/* italics are one of the first things a reader with dyslexia loses: the words
+   they are applied to are the words that go missing */
+p em, li em, .plain em, figcaption em { font-style: normal; font-weight: 700; }
+
+/* letter shapes carry the reading, so nothing is squeezed together */
+.case__title, .plain__head h4, .open__lede, .case__what, .case__use {
+  letter-spacing: 0; word-spacing: .04em;
+}
+.case__title { letter-spacing: -.01em; }
+
+.sizebar { display: flex; gap: .35rem; align-items: center; }
+.sizebar button {
+  font-family: var(--sc-font-text); font-size: .8rem; color: var(--sc-ink);
+  background: transparent; border: 1px solid var(--line-strong);
+  border-radius: 100px; padding: .34rem .72rem; cursor: pointer;
+}
+.sizebar button[aria-pressed="true"] { border-color: var(--sc-ink); background: var(--sc-surface); font-weight: 700; }
+@media (max-width: 46rem) { .sizebar { display: none; } }
+
+/* ---------------------------------------------------------------------------
+   Reading length and contrast. Atkinson's ch unit is built on a wide glyph, so a
+   measure written as 68ch lands near ninety characters a line. Lines are capped in
+   rem instead, where the count is predictable, and the secondary ink is darkened
+   so it stops being the hardest thing on the page to read.
+   --------------------------------------------------------------------------- */
+:root { --sc-measure: 35rem; --sc-ink-soft: #4a5246; }
+.case__use, .case__what, .plain li, .open__lede, .jevnote, .rail-head p,
+.case__src, .lede { max-width: var(--sc-measure); }
+.case__what { max-width: 30rem; }
+
+/* Lexend has no true italic, so the browser fakes a slant: the emphasis is colour
+   and a heavier weight instead, which also reads better for a dyslexic reader. */
+.sc-display em, h1 em, h2 em, .case__title em { font-style: normal; font-weight: 600; }
+
+/* the small uppercase micro-labels were the least legible thing on the page */
+.plate figcaption, .case__src, .rail-head p, .ledger__now { font-size: .92rem; }
+.ledger__now { font-size: .82rem; }
+
+.sizebar__label { font-family: var(--sc-font-text); font-size: .78rem; color: var(--sc-ink-soft); }
+.sizebar button { min-width: 2.4rem; text-align: center; }

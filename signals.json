@@ -1,0 +1,294 @@
+{
+  "updated": "2026-10-05",
+  "collector": "Collected on Tuesdays at 09:00 by the weekly sweep: search Twitter/X, YouTube, Reddit, Hacker News, the official docs and the blogs that cover Jev, then read what changed and add what is new here.",
+  "items": [
+    {
+      "id": "sig-001",
+      "kind": "gap",
+      "source": "Reddit \u00b7 r/AI_Agents",
+      "author": "thread \u00b7 Interesting disruptive use cases of Jev for me",
+      "handle": "r/AI_Agents",
+      "title": "Score every agent trace against a rubric, instead of paying an LLM judge",
+      "url": "https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/",
+      "date": "September 2026",
+      "summary": "The most repeated idea in the thread: instead of paying a slow model to grade every trace, ask Jev the rubric questions in milliseconds \u2014 is it grounded, does it cite a source, is the tool trace sensible. The thread's own objection is the interesting half: the swap only saves money once the fast scorer agrees with the slow one, and the only way to know that is to run both over the same set first.",
+      "takeaways": [
+        "Not on this site yet. Case 08 checks an output against a promise, but not the job of replacing the model that grades everything.",
+        "Run the old grader and Jev side by side over the same traces before switching anything over.",
+        "If you have enough human labels, check against those instead: they are the better reference, and the old grader was only ever a stand-in for them."
+      ],
+      "near": 8,
+      "tags": ["evals", "judging", "cost"]
+    },
+    {
+      "id": "sig-002",
+      "kind": "gap",
+      "source": "Reddit \u00b7 r/AI_Agents",
+      "author": "thread \u00b7 voice and turn-taking replies",
+      "handle": "r/AI_Agents",
+      "title": "A reflex layer for voice agents, reading a rolling transcript",
+      "url": "https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/",
+      "date": "September 2026",
+      "summary": "A voice agent's robotic feel comes from the gap between speech-to-text, deciding it is your turn, asking a big model, and speaking. The suggestion here is a Jev reflex layer over the rolling transcript, so most of the small decisions happen without touching the big model. One reply argues turn detection mostly breaks when two people talk over each other, and that separating speakers is the harder, more valuable problem.",
+      "takeaways": [
+        "Not on this site yet. Case 15 classifies a live meeting; this is a decision inside the conversation, turn by turn.",
+        "The job is small, frequent and needs a probability: exactly the shape Jev is built for.",
+        "Expect speaker separation, not turn detection, to be the hard part."
+      ],
+      "near": 15,
+      "tags": ["voice", "real-time"]
+    },
+    {
+      "id": "sig-003",
+      "kind": "gap",
+      "source": "Reddit \u00b7 r/AI_Agents",
+      "author": "thread \u00b7 guardrails reply",
+      "handle": "r/AI_Agents",
+      "title": "Guardrails that run after every step: looping, risky action, indirect prompt injection",
+      "url": "https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/",
+      "date": "September 2026",
+      "summary": "After each step of an agent, ask whether it is going in circles, whether it is about to do something risky, and whether the text it just read is trying to instruct it. Catching those before they cascade is the point; catching them afterwards is a post-mortem. Because it runs on every step it has to be fast and cheap, which is the argument for a decision model rather than another model call.",
+      "takeaways": [
+        "Not on this site yet, and it is the strongest addition in the thread.",
+        "Needs a threshold in code, not a feeling: act above it, escalate below it.",
+        "Same shape as the loop-detection and injection checks in the Agent Fleet work."
+      ],
+      "near": null,
+      "tags": ["agents", "safety", "guardrails"]
+    },
+    {
+      "id": "sig-004",
+      "kind": "gap",
+      "source": "Reddit \u00b7 r/AI_Agents",
+      "author": "thread \u00b7 classical ML reply",
+      "handle": "r/AI_Agents",
+      "title": "Turn free text into numbers a fraud or churn model can use",
+      "url": "https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/",
+      "date": "September 2026",
+      "summary": "Take a messy line like \u201cgift for mom, urgent\u201d and ask for the probabilities and scores inside it: is this a gift, how urgent is it on a scale of ten. At scale those numbers become ordinary columns, and the trained model that already exists does the rest. It is the least glamorous idea in the thread and probably the most broadly useful.",
+      "takeaways": [
+        "Not on this site yet. Case 05 profiles churn risk; this is the step that feeds such a model its features.",
+        "One call, several questions, all judged against the same line of text.",
+        "The scores are the input; the fraud or churn model keeps its own job."
+      ],
+      "near": 5,
+      "tags": ["features", "classical ML"]
+    },
+    {
+      "id": "sig-005",
+      "kind": "gap",
+      "source": "Reddit \u00b7 r/AI_Agents",
+      "author": "thread \u00b7 synthetic personas reply",
+      "handle": "r/AI_Agents",
+      "title": "Synthetic personas for concept and A/B testing at scale",
+      "url": "https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/",
+      "date": "September 2026",
+      "summary": "A persona answering a survey in prose is hard to count. A persona answering in probabilities and scores is a number you can average. The claim in the thread is that this is what pure language-model personas failed at, and that quantified answers make fast concept testing feasible.",
+      "takeaways": [
+        "Not on this site yet.",
+        "The output is deliberately narrow, which is what makes it countable.",
+        "Treat the numbers as a signal from a simulated panel, not as evidence about real people."
+      ],
+      "near": null,
+      "tags": ["research", "testing"]
+    },
+    {
+      "id": "sig-006",
+      "kind": "gap",
+      "source": "Reddit and Hacker News",
+      "author": "thread replies on the Doom demo",
+      "handle": "community",
+      "title": "Let Jev choose what a game character does; keep the language model for what it says",
+      "url": "https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/",
+      "date": "September 2026",
+      "summary": "Several people describe the same split: the decision model picks the action, the language model writes the dialogue. It also explains the demo that went around, in which the state was fed to the model as positions rather than the model seeing rendered frames \u2014 impressive, and not the same thing as looking at the screen.",
+      "takeaways": [
+        "Not on this site yet.",
+        "A clean division of labour: decisions are narrow and frequent, dialogue is open and occasional.",
+        "Read the Doom demo as structured input, not as visual understanding."
+      ],
+      "near": null,
+      "tags": ["games", "agents"]
+    },
+    {
+      "id": "sig-007",
+      "kind": "gap",
+      "source": "matthiasfrank.de",
+      "author": "Matthias Frank",
+      "handle": "14 practical use cases",
+      "title": "Does this source actually support this claim?",
+      "url": "https://matthiasfrank.de/en/jev-ai-use-cases/",
+      "date": "2 October 2026",
+      "summary": "A list of fourteen knowledge-work jobs, and the one worth lifting is the source check: given a claim and a passage, does the passage support it. The same list also names duplicate detection, filing a document into projects and areas, checking a draft against your own writing rules, and deciding whether an enquiry meets your qualification criteria.",
+      "takeaways": [
+        "Not on this site yet, in this exact form: the grounding check.",
+        "The others are close relatives of cases 01, 02 and 06 and could be read as variants of them.",
+        "The page is honest about the limits: a score is not an instruction to delete a file, merge a contact or send a message."
+      ],
+      "near": null,
+      "tags": ["grounding", "knowledge work"]
+    },
+    {
+      "id": "sig-008",
+      "kind": "insight",
+      "source": "Official docs \u00b7 model jaggedness",
+      "author": "TypeSafe AI",
+      "handle": "docs.typesafe.ai",
+      "title": "Eight failure modes the maker lists for itself",
+      "url": "https://docs.typesafe.ai/model-jaggedness/jev-1.13",
+      "date": "16 September 2026",
+      "summary": "TypeSafe publishes its own defect list, which is rare enough to be worth reading closely. The eight: literal reading, arithmetic, date comparison, too many hops of indirection, a large state full of irrelevant detail, adversarial content, contradictory instructions and criteria, and generation. Counting is called out separately as unreliable \u2014 the model recognises the shape of an answer rather than tallying, and the error grows with the size of the thing being counted.",
+      "takeaways": [
+        "Keep every sum, every count and every date comparison in code. Ask one question per item and add the answers up yourself.",
+        "Extra state costs accuracy. Send only what the question needs.",
+        "It answers the question you wrote, not the one you meant: write the condition into the instructions, and put boundary cases into the criteria.",
+        "Ask for colour names rather than hex values, and for high-level languages rather than assembly."
+      ],
+      "near": 1,
+      "tags": ["limits", "pitfalls"]
+    },
+    {
+      "id": "sig-009",
+      "kind": "insight",
+      "source": "Research \u00b7 arXiv 2609.37647",
+      "author": "Deu\u00dfer, Sparrenberg and Sifa",
+      "handle": "independent benchmark",
+      "title": "37 datasets, 346,009 requests, under ten dollars",
+      "url": "https://arxiv.org/abs/2609.37647",
+      "date": "29 September 2026",
+      "summary": "The first independent benchmark of the model, run zero-shot over 37 datasets with one frozen template each: classification, routing, natural language inference, reading comprehension, commonsense, moderation, legal clause analysis and rubric scoring. It reaches 95 to 99 per cent on IMDB, SST-2, HellaSwag and ARC, 86.7 per cent on a reading test across 122 languages, beats Qwen on 27 of 37 datasets and Gemma on all 37. Rotating the answer options leaves accuracy unchanged, and withholding the question drops it to chance.",
+      "takeaways": [
+        "The finding that changes how you deploy it: its yes/no probabilities rank well but sit badly against a fixed 0.5 line. Tuning the threshold on training data lifted micro-F1 from 0.50 to 0.75.",
+        "Choice probabilities are well calibrated, so they support acting only when the answer is clear.",
+        "It answered the calculation-heavy questions of a standard exam more accurately than the others (94 per cent against 91) \u2014 the opposite of the language models tested. Do not read that as licence to ask it sums: the maker's own note still says keep arithmetic in code.",
+        "All three models degrade on low-resource languages, fine-grained labels and rubric judgments."
+      ],
+      "near": 8,
+      "tags": ["benchmark", "thresholds"]
+    },
+    {
+      "id": "sig-010",
+      "kind": "insight",
+      "source": "Blog \u00b7 explainx.ai",
+      "author": "explainx.ai, reading the launch thread",
+      "handle": "launch thread analysis",
+      "title": "The failure that matters is type-valid but wrong",
+      "url": "https://www.explainx.ai/blog/where-jev-actually-fails-2026",
+      "date": "September 2026",
+      "summary": "The launch thread ran to 256 comments, and the concrete failure mode hiding among the scepticism is this: the answer is a properly formed member of the options you supplied, with a legitimate looking confidence, and it is simply incorrect \u2014 a support ticket filed as billing when it was technical. A malformed answer is easy to catch, because validation fails. This one passes every structural check, so catching it needs something downstream that checks meaning.",
+      "takeaways": [
+        "\u201cType safe\u201d means the answer cannot be outside your option list. It does not mean the answer is right.",
+        "Build the confidence threshold and the human review queue before you build the automation.",
+        "The loudest objection in the thread was to the phrase \u201cfrontier model\u201d, not to the model."
+      ],
+      "near": 2,
+      "tags": ["failure modes", "gating"]
+    },
+    {
+      "id": "sig-011",
+      "kind": "insight",
+      "source": "Blog \u00b7 ayautomate",
+      "author": "Walid, ayautomate",
+      "handle": "the one pattern",
+      "title": "Confidence-gated action is the pattern behind every use case",
+      "url": "https://www.ayautomate.com/blog/jev-use-cases",
+      "date": "October 2026",
+      "summary": "Across the docs and the launch coverage, the same shape keeps appearing: act when the answer is clear, send it to a slower model when it is nearly clear, and send it to a person when it is not. Quoting Armin Ronacher, the model delegates the hallucination problem back to you \u2014 at 50 per cent, treat it as a coin toss and ignore it; at 95 per cent, act. The thresholds are yours, and they should differ by what the action costs.",
+      "takeaways": [
+        "A floor of 0.6 to send anything uncertain to a human; approving a transfer needed better than 0.85 in the makers' own voice-banking example.",
+        "Cheap to check does not mean cheap to get wrong: set the threshold from the cost of the action.",
+        "Ask every question you might want in one request, even speculative ones. Questions in a request are judged in parallel, so extras add tokens and almost no time."
+      ],
+      "near": 10,
+      "tags": ["gating", "thresholds"]
+    },
+    {
+      "id": "sig-012",
+      "kind": "insight",
+      "source": "Independent guide \u00b7 typesafe-jev.com",
+      "author": "community editors",
+      "handle": "limitations page",
+      "title": "The hard walls, written down in one place",
+      "url": "https://typesafe-jev.com/en/limitations",
+      "date": "September 2026",
+      "summary": "An independent guide that collects the official limits and then grades the community's claims. No text generation, text-only input, a ceiling of 64k tokens across state and the longest question, rate limits of 250k tokens a second and 1,200 requests a minute, and input at $0.042 per million tokens with output free. Images and audio have to be described in words before they go in; long documents need chunking or retrieve-then-judge.",
+      "takeaways": [
+        "Handle backoff at high concurrency: the rate limits are real and officially subject to change.",
+        "The site's own verdict on the rumour that Jev is a wrapper around another model: no evidence, unverified.",
+        "Its checklist for when not to use Jev is worth copying: an open answer space, multi-step reasoning chains, a fully rule-based decision, or errors that are costly with no human review available."
+      ],
+      "near": null,
+      "tags": ["limits", "operations"]
+    },
+    {
+      "id": "sig-013",
+      "kind": "usecase",
+      "source": "n8n community",
+      "author": "Jim Le",
+      "handle": "n8n templates",
+      "title": "Four working automations, including reranking and support triage",
+      "url": "https://community.n8n.io/t/n8n-jev-4-awesome-examples-to-get-started/314596",
+      "date": "18 September 2026",
+      "summary": "An n8n builder ports four templates onto Jev and reports on each. Support triage into a project tracker from Gmail is called better in speed and comprehensiveness, and the post points out it demonstrates tool calling without a language model. The reranker is called the easiest change for the most impact. One sharp warning: as a sub-node it can be worse, so work on the results directly.",
+      "takeaways": [
+        "Reranking retrieved candidates is the cheapest large win in that set.",
+        "Tool choice is a decision, not a generation: it does not need a language model.",
+        "Watch the placement \u2014 a decision model buried inside the wrong node adds a hop without adding judgment."
+      ],
+      "near": 16,
+      "tags": ["automation", "reranking"]
+    },
+    {
+      "id": "sig-014",
+      "kind": "usecase",
+      "source": "LangChain blog",
+      "author": "Sydney Runkle and Hunter Lovell",
+      "handle": "agent harness",
+      "title": "Where the decision model sits inside an agent loop",
+      "url": "https://www.langchain.com/blog/building-a-harness-with-jev",
+      "date": "17 September 2026",
+      "summary": "A walkthrough of putting the model into an agent harness, with two named jobs: routing a request to the right model, and an auto mode that decides how much machinery a task needs. It restates the mechanism that makes this practical \u2014 every question in one request is evaluated in parallel, so asking six things costs barely more time than asking one.",
+      "takeaways": [
+        "Ask several narrow questions in one call and ignore the ones you do not need yet.",
+        "Model routing is the job the vendors' own customers named first: paying a large model to choose a model is expensive.",
+        "The loop stays the same shape; only the decision steps get cheaper and faster."
+      ],
+      "near": 10,
+      "tags": ["agents", "routing"]
+    },
+    {
+      "id": "sig-015",
+      "kind": "resource",
+      "source": "Real Python",
+      "author": "Real Python",
+      "handle": "tutorial",
+      "title": "Getting started in Python, including the yes/no traps",
+      "url": "https://realpython.com/jev-python/",
+      "date": "September 2026",
+      "summary": "A beginner-level tutorial that starts where a reader actually gets stuck: people answer a yes-or-no question with yes, Y, no! and everything in between, which is exactly the mess a probability replaces. Useful as the plainest explanation of why a probability is more useful than a parsed word.",
+      "takeaways": [
+        "Good first read for anyone who has not used a decision model before.",
+        "The yes/no example is the clearest argument for returning a number rather than a word."
+      ],
+      "near": null,
+      "tags": ["python", "tutorial"]
+    },
+    {
+      "id": "sig-016",
+      "kind": "resource",
+      "source": "OpenRouter blog",
+      "author": "OpenRouter",
+      "handle": "TypeScript tutorial",
+      "title": "Moderation in TypeScript through a different provider",
+      "url": "https://openrouter.ai/blog/tutorials/how-to-use-jev/",
+      "date": "September 2026",
+      "summary": "A worked moderation example in TypeScript, and a reminder that the model is reachable through more than one provider. Moderation is a use case the nineteen on this site do not cover, and it is one of the jobs the benchmark paper evaluated.",
+      "takeaways": [
+        "Moderation is a missing job for this site, not just a missing tutorial.",
+        "The same request shape works across providers; only the endpoint and the key change."
+      ],
+      "near": null,
+      "tags": ["moderation", "typescript"]
+    }
+  ]
+}

@@ -282,8 +282,8 @@ TEMPLATE = """<!doctype html>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23f1f2f4'/><rect x='9' y='7' width='3' height='18' fill='%2315181c'/><rect x='15' y='7' width='8' height='3' fill='%239c5a10'/><rect x='15' y='14' width='8' height='3' fill='%2315181c'/><rect x='15' y='21' width='5' height='3' fill='%2315181c'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="scrollcraft.css">
 <link rel="stylesheet" href="site.css">
 </head>
@@ -296,7 +296,14 @@ TEMPLATE = """<!doctype html>
 <header class="site-bar">
   <p class="site-bar__mark">Jev <span>/</span> use cases</p>
   <button class="btn btn--ghost" type="button" data-index-toggle aria-expanded="false" aria-controls="index-panel">Cases</button>
+  <a class="btn btn--ghost" href="pulse.html">Pulse</a>
   <a class="btn btn--ghost" href="about.html">About Jev</a>
+  <span class="sizebar" role="group" aria-label="Text size">
+    <span class="sizebar__label" aria-hidden="true">Text size</span>
+    <button type="button" data-size-btn="0" aria-pressed="true" aria-label="Normal text size">A</button>
+    <button type="button" data-size-btn="1" aria-pressed="false" aria-label="Larger text">A+</button>
+    <button type="button" data-size-btn="2" aria-pressed="false" aria-label="Largest text">A++</button>
+  </span>
   <a class="btn btn--solid" href="{repo}" rel="noreferrer">Open the Source</a>
 </header>
 

@@ -247,11 +247,32 @@
     });
   }
 
+  /* The text-size choice is kept in the same place the About page uses, so a
+     reader sets it once and both pages remember. */
+  function textSize() {
+    var html = document.documentElement;
+    var btns = document.querySelectorAll("[data-size-btn]");
+    if (!btns.length) return;
+    function setSize(level) {
+      if (level === "0") { html.removeAttribute("data-size"); }
+      else { html.setAttribute("data-size", level); }
+      Array.prototype.forEach.call(btns, function (b) {
+        b.setAttribute("aria-pressed", String(b.getAttribute("data-size-btn") === level));
+      });
+      try { localStorage.setItem("jev-text-size", level); } catch (e) { /* private mode */ }
+    }
+    Array.prototype.forEach.call(btns, function (b) {
+      b.addEventListener("click", function () { setSize(b.getAttribute("data-size-btn")); });
+    });
+    try { var saved = localStorage.getItem("jev-text-size"); if (saved) setSize(saved); } catch (e) {}
+  }
+
   function boot() {
     ledger();
     indexPanel();
     copyButtons();
     viewer();
+    textSize();
   }
 
   if (document.readyState === "loading") {
