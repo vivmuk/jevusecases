@@ -201,6 +201,8 @@
     dlg.innerHTML =
       '<div class="viewer__bar">' +
         '<p class="viewer__title"></p>' +
+        '<p class="viewer__hint">Turn your phone to read it</p>' +
+        '<button class="viewer__turn" type="button" aria-pressed="false">Rotate</button>' +
         '<button class="viewer__close" type="button">Close</button>' +
       '</div>' +
       '<img alt="">';
@@ -228,6 +230,15 @@
       });
     });
     dlg.querySelector(".viewer__close").addEventListener("click", shut);
+    /* A 16:9 drawing on a portrait phone is a thin band across the middle, with the
+       lettering too small to read. Turning it a quarter turn makes it fill the
+       screen; the button only appears where that helps. */
+    var turn = dlg.querySelector(".viewer__turn");
+    turn.addEventListener("click", function () {
+      var on = dlg.getAttribute("data-turned") === "true";
+      dlg.setAttribute("data-turned", on ? "false" : "true");
+      turn.setAttribute("aria-pressed", on ? "false" : "true");
+    });
     dlg.addEventListener("click", function (e) { if (e.target === dlg) shut(); });
     dlg.addEventListener("close", function () {
       document.documentElement.removeAttribute("data-viewer");
