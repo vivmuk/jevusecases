@@ -2,13 +2,13 @@
    Set for a reader who finds dense text hard work: Lexend headings, Atkinson
    Hyperlegible body, roomy lines, no italics, short measures, big targets. */
 :root {
-  --paper: #f5f1e8; --ink: #1b1f24; --ink-soft: #4a5246; --line: #ddd5c4;
+  --paper: #f5f1e8; --ink: #1b1f24; --ink-soft: #444c41; --line: #ddd5c4;
   --green: #2a654b; --orange: #c65b18; --card: #fbf8f1;
   --display: "Lexend", system-ui, sans-serif;
   --text: "Atkinson Hyperlegible", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, monospace;
-  --shell: 38rem;
-  --measure: 35rem;
+  --shell: 44rem;
+  --measure: 38rem;
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -67,7 +67,7 @@ main { max-width: var(--shell); margin: 0 auto; padding: 1.6rem 1.1rem 4rem; }
 
 .feed { margin: 1.4rem 0 0; }
 .post { display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); gap: 1rem;
-  padding: 1.6rem 0; border-top: 1px solid var(--line); }
+  padding: 1.9rem 0; border-top: 1px solid #cfc5b1; }
 .post[hidden] { display: none; }
 .post__ava {
   width: 3.2rem; height: 3.2rem; border-radius: 50%; display: grid; place-items: center;
@@ -77,12 +77,17 @@ main { max-width: var(--shell); margin: 0 auto; padding: 1.6rem 1.1rem 4rem; }
 .ava--insight { background: var(--green); }
 .ava--usecase { background: var(--ink); }
 .ava--resource { background: var(--ink-soft); }
-.post__who { margin: 0 0 .25rem; display: flex; flex-wrap: wrap; gap: .45rem; align-items: baseline; }
+.post__who { margin: 0; display: flex; flex-wrap: wrap; gap: .5rem; align-items: baseline; }
+.post__where { margin: .15rem 0 0; display: flex; flex-wrap: wrap; gap: .5rem; align-items: baseline;
+  font-size: .95rem; }
+.post__sep { color: var(--ink-soft); }
+.post__source { color: var(--ink); }
 .post__name { font-weight: 700; }
-.post__handle, .post__date { color: var(--ink-soft); font-size: .96rem; }
+.post__handle { color: var(--ink-soft); font-size: .96rem; }
+.post__date { color: var(--ink-soft); }
 .post__dot { color: var(--ink-soft); }
 .post__title { font-family: var(--display); font-weight: 600; font-size: clamp(1.15rem, 2.4vw, 1.45rem);
-  letter-spacing: -.01em; line-height: 1.3; margin: .1rem 0 .5rem; max-width: var(--measure); }
+  letter-spacing: -.01em; line-height: 1.3; margin: 1rem 0 .8rem; max-width: var(--measure); text-wrap: pretty; }
 .post__sum { margin: 0 0 1rem; max-width: var(--measure); }
 .post__label { font-family: var(--text); font-size: .95rem; letter-spacing: 0;
   text-transform: none; font-weight: 700; color: var(--ink); margin: 0 0 .5rem; }
@@ -90,14 +95,16 @@ main { max-width: var(--shell); margin: 0 auto; padding: 1.6rem 1.1rem 4rem; }
 .post__take li { margin: 0 0 .55rem; padding-left: .2rem; }
 .post__take li::marker { color: var(--orange); }
 .post__meta { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0; }
+.post__meta .post__link { flex-basis: 100%; }
 .chip { font-size: .8rem; border-radius: 100px; padding: .3rem .7rem; text-decoration: none;
   border: 1px solid var(--line); color: var(--ink-soft); }
 .chip--missing { border-color: var(--orange); color: var(--orange); font-weight: 700; }
 .chip--near { border-color: var(--green); color: var(--green); }
 .chip--kind { background: var(--card); }
 .post__tags { display: inline-flex; flex-wrap: wrap; gap: .35rem; }
-.tag { font-family: var(--mono); font-size: .7rem; letter-spacing: .06em; color: var(--ink-soft); }
-.post__link { margin-left: auto; font-weight: 700; }
+.tag { font-size: .84rem; color: var(--ink-soft); }
+.post__link { font-weight: 700; color: var(--green); text-decoration: underline; }
+.post__link:hover { color: var(--orange); }
 footer { max-width: var(--shell); margin: 0 auto; padding: 1.2rem 1.1rem 3rem; border-top: 1px solid var(--line);
   color: var(--ink-soft); font-size: .95rem; }
 footer p { max-width: var(--measure); }
