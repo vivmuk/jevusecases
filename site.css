@@ -2,35 +2,39 @@
    Only tokens are overridden here; the engine's selectors are never restyled. */
 
 :root {
-  /* Light editorial surface: cool paper, near-black ink, one amber accent.
-     Every colour below is measured against these five values in the check. */
-  --sc-canvas:     #f1f2f4;
-  --sc-surface:    #ffffff;
-  --sc-ink:        #15181c;
-  --sc-ink-soft:   #5a626b;
-  --sc-accent:     #9c5a10;
-  --sc-accent-ink: #fffaf1;
-  --sc-font-display: "Archivo", system-ui, sans-serif;
-  --sc-font-text:    "Geist", system-ui, sans-serif;
-  --sc-font-mono:    "Geist Mono", ui-monospace, monospace;
+  /* Warm paper, navy ink, and two accents taken from the artwork: emerald for what
+     you supply, burnt orange for what the model decides. Every colour below is
+     measured against these values in the check. */
+  --sc-canvas:     #f5f1e8;
+  --sc-surface:    #fbf9f4;
+  --sc-ink:        #1a2332;
+  --sc-ink-soft:   #3f4753;
+  --sc-accent:     #c25a17;
+  --sc-accent-soft: #e8d3bd;
+  --sc-accent-ink: #fff8f2;
+  --sc-green:      #245741;
+  --sc-font-display: "Playfair Display", Georgia, serif;
+  --sc-font-text:    "Inter", system-ui, sans-serif;
+  --sc-font-mono:    "IBM Plex Mono", ui-monospace, monospace;
 
   --page-wrap: 74rem;
-  --r: 10px;
-  --r-sm: 6px;
+  --gutter: clamp(1rem, 3vw, 2.5rem);
+  --sheet-edge: calc(max(var(--gutter), (100vw - var(--page-wrap)) / 2) + var(--gutter));
+  --r: 16px;
+  --r-sm: 10px;
   --rail-h: 3.5rem;
-  --line: color-mix(in oklab, var(--sc-ink) 13%, transparent);
-  --line-strong: color-mix(in oklab, var(--sc-ink) 30%, transparent);
-  --line-card: color-mix(in oklab, var(--sc-ink) 20%, transparent);
-  --panel: #ffffff;
-  --surface-2: color-mix(in oklab, var(--sc-ink) 6%, #ffffff);
-  --hover: color-mix(in oklab, var(--sc-ink) 7%, #ffffff);
-  --shadow: 0 16px 32px -26px color-mix(in oklab, var(--sc-ink) 60%, transparent);
-  --shadow-lg: 0 24px 60px -32px color-mix(in oklab, var(--sc-ink) 55%, transparent);
-  --shadow-card: 0 1px 2px color-mix(in oklab, var(--sc-ink) 7%, transparent),
-                 0 12px 28px -20px color-mix(in oklab, var(--sc-ink) 45%, transparent);
+  --line: color-mix(in oklab, var(--sc-ink) 14%, transparent);
+  --line-strong: color-mix(in oklab, var(--sc-ink) 32%, transparent);
+  --line-card: color-mix(in oklab, var(--sc-ink) 18%, transparent);
+  --panel: #fbf9f4;
+  --surface-2: color-mix(in oklab, var(--sc-ink) 5%, #fffdf8);
+  --hover: color-mix(in oklab, var(--sc-ink) 6%, #fffdf8);
+  --shadow: 0 16px 32px -26px color-mix(in oklab, var(--sc-ink) 45%, transparent);
+  --shadow-lg: 0 24px 60px -32px color-mix(in oklab, var(--sc-ink) 40%, transparent);
+  --shadow-card: 0 1px 2px color-mix(in oklab, var(--sc-ink) 6%, transparent),
+                 0 12px 28px -20px color-mix(in oklab, var(--sc-ink) 32%, transparent);
   --edge: inset 0 1px 0 #ffffff;
 }
-
 /* Controls: no double-tap zoom delay, no grey flash on tap. */
 .btn, .copy, .rail__tick, .index-list a, .index-toggle {
   touch-action: manipulation;
@@ -47,13 +51,15 @@ html { scroll-behavior: smooth; }
 
 /* the engine's grain at full strength is a dark-room texture; on paper it reads
    as noise, so it comes down to a bare tooth */
-.sc-grain { opacity: .028; }
+.sc-grain { opacity: .05; }
 
 body {
   background: var(--sc-canvas);
   color: var(--sc-ink);
   font-family: var(--sc-font-text);
+  font-weight: 300;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 a { color: inherit; }
@@ -81,6 +87,7 @@ a { color: inherit; }
   border-bottom: 1px solid var(--line);
 }
 .site-bar__mark {
+  font-family: var(--sc-font-display); font-size: 1.05rem; letter-spacing: .02em;
   font-family: var(--sc-font-display);
   font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
   font-size: .78rem; margin-right: auto; white-space: nowrap;
@@ -244,8 +251,8 @@ section[id], .case { scroll-margin-top: 4.9rem; }
 }
 
 /* act 1: opening plate */
-.open { display: grid; align-content: center; gap: clamp(1.2rem, 3vh, 2.2rem); padding-block: 4.5rem 2rem; }
-.open h1 { max-width: 30ch; font-size: clamp(2.4rem, 6.4vw, 5.4rem); margin: 0; }
+.open { position: relative; isolation: isolate; overflow-x: clip; display: grid; align-content: center; gap: clamp(1.2rem, 3vh, 2.2rem); padding-block: 4.5rem 2rem; }
+.open h1 { max-width: 22ch; font-size: clamp(2.1rem, 4.5vw, 4.3rem); margin: 0; }
 .open__lede { max-width: 46ch; color: var(--sc-ink-soft); font-size: clamp(1rem, 1.6vw, 1.18rem); }
 .open__facts {
   display: flex; flex-wrap: wrap; gap: clamp(1.4rem, 5vw, 3.4rem);
@@ -354,7 +361,7 @@ section[id], .case { scroll-margin-top: 4.9rem; }
   /* hairline diagrams lose definition at card scale on a light ground; a touch
      of contrast keeps the strokes from dissolving into the paper */
   filter: contrast(1.08) saturate(1.04); }
-.plate figcaption { margin-top: .7rem; font-size: .78rem; color: var(--sc-ink-soft); }
+.plate figcaption { margin-top: 1.15rem; font-size: .88rem; color: var(--sc-ink-soft); }
 
 .code, .prompt {
   margin: 0 0 1.2rem; border: 1px solid var(--line-strong);
@@ -503,3 +510,158 @@ section[id], .case { scroll-margin-top: 4.9rem; }
   html { scroll-behavior: auto; }
   * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
 }
+
+/* ---------------------------------------------------------------------------
+   The paper itself: a warm wash and a barely-there grid, so the page reads as
+   stock rather than as a flat fill. Sits under everything, catches no clicks.
+   --------------------------------------------------------------------------- */
+body::before {
+  content: "";
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    repeating-linear-gradient(to right, color-mix(in oklab, var(--sc-ink) 7%, transparent) 0 1px, transparent 1px 4rem),
+    repeating-linear-gradient(to bottom, color-mix(in oklab, var(--sc-ink) 7%, transparent) 0 1px, transparent 1px 4rem);
+  opacity: .68;
+  mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 100%);
+}
+
+/* Display type is a serif again, with one word italicised and tinted: the site's
+   signature move, and the reason a headline reads as written rather than set. */
+h1, h2, h3, .sc-display, .tier h2, .case__title, .plain__head h4, .jevnote {
+  font-family: var(--sc-font-display);
+  font-weight: 500;
+}
+h1 em, h2 em, .sc-display em { font-style: italic; color: var(--sc-green); font-weight: 400; }
+/* The engine splits a kinetic headline into lines and drops inline markup, so the
+   accented phrase is applied to the last line it produces instead. */
+#open-h .sc-split--line:last-child .sc-split__i,
+#open-h .sc-split--line:last-of-type .sc-split__i {
+  font-style: italic; color: var(--sc-green);
+}
+.tagline { font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 500;
+           color: var(--sc-ink-soft); }
+
+/* Art fused into the paper instead of pasted onto it: multiply lets the artwork's
+   pale ground share the cream, and the mask dissolves the bottom edge away. */
+.plate__frame { border: 0; border-radius: 0; background: transparent; overflow: visible; }
+/* the artwork now carries its own feathered alpha edge, so it needs no blend: a
+   multiply here darkened the paper inside the image's footprint and dimmed the
+   grid lines, which read as a ghost rectangle. */
+.plate img { mix-blend-mode: normal; filter: saturate(1.05) contrast(1.02); }
+.plate--fused img {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 74%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 74%, transparent 100%);
+}
+.plate figcaption { font-family: var(--sc-font-display); font-style: italic; font-size: .88rem; }
+.plate__no { color: var(--sc-green); }
+
+/* ---------------------------------------------------------------------------
+   The plain-words band: a numbered index with hairlines, printed on the page.
+   Four items, green for what you supply, orange for what comes back.
+   --------------------------------------------------------------------------- */
+.plain { margin-top: clamp(2.2rem, 5vh, 3.4rem); border-top: 1px solid var(--line-strong); padding-top: 1.5rem; }
+.plain__head { margin: 0 0 .4rem; }
+.plain__head h4 { font-size: clamp(1.25rem, 2.2vw, 1.8rem); margin: 0 0 .5rem; letter-spacing: -.01em; }
+.plain__head p { margin: 0; color: var(--sc-ink-soft); font-size: .94rem; max-width: 62ch; }
+.plain__list { list-style: none; margin: 1.6rem 0 0; padding: 0;
+               display: grid; gap: 1.7rem; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.plain__item { border-top: 3px solid var(--sc-green); padding-top: .75rem; }
+.plain__item:nth-child(n+3) { border-top-color: var(--sc-accent); }
+/* the ordering numbers carry the sequence, so they are ink, not grey */
+.plain__no { font-family: var(--sc-font-display); font-size: 1.02rem; font-style: normal;
+             font-weight: 600; color: var(--sc-ink); display: block; margin-bottom: .3rem; }
+.plain__key { display: block; margin-top: .5rem; color: var(--sc-ink-soft); }
+.plain__key b { font-weight: 600; }
+.plain__key .k-green { color: var(--sc-green); }
+.plain__key .k-orange { color: var(--sc-accent); }
+.plain__label { display: block; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+                font-weight: 600; color: var(--sc-ink); margin-bottom: .5rem; }
+.plain__text { margin: 0; font-size: .98rem; line-height: 1.55; text-wrap: pretty; }
+.jevnote { font-style: italic; font-size: clamp(1.08rem, 1.8vw, 1.4rem); line-height: 1.5;
+           border-left: 3px solid var(--sc-accent); padding: .1rem 0 .1rem 1.2rem;
+           margin: 2rem 0 0; max-width: 64ch; color: var(--sc-ink); }
+.jevnote b { font-style: normal; font-weight: 500; color: var(--sc-accent); }
+
+/* Code and prompts as specimen labels: paper stock, hairline rule, coloured spine. */
+.code, .prompt { border: 1px solid var(--line); border-left: 3px solid var(--sc-green);
+                 border-radius: var(--r-sm); background: var(--sc-surface); }
+.prompt { border-left-color: var(--sc-accent); }
+
+/* The opener carries a wide artwork band with the headline sitting on it, so the
+   first screen is pictorial rather than typographic. */
+.open__art { margin: clamp(1.4rem, 3vh, 2.4rem) 0 0; }
+.open__art img { display: block; width: 100%; height: auto; mix-blend-mode: multiply;
+                 -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%);
+                 mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%); }
+.open__art figcaption { font-family: var(--sc-font-display); font-style: italic; font-size: .88rem;
+                        color: var(--sc-ink-soft); margin-top: .4rem; }
+
+@media (max-width: 60rem) { .plain__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 34rem) { .plain__list { grid-template-columns: 1fr; gap: 1.3rem; } }
+
+/* the wide artwork band between the opener and the set */
+.artband { padding-block: clamp(1rem, 4vh, 3rem) clamp(2rem, 6vh, 4rem); }
+.artband .open__art { margin: 0; }
+.site-bar__mark span { font-family: var(--sc-font-text); font-size: .72rem; letter-spacing: .2em;
+                       text-transform: uppercase; }
+
+/* ---- the opener's artwork: a column beside the type, feathered on all four
+   sides so it reads as ink in the paper rather than a pasted panel, with a cream
+   scrim keeping the type side pale. ---- */
+.open { grid-template-columns: minmax(0, 37rem) minmax(0, 1fr); align-items: center;
+        column-gap: clamp(.5rem, 2vw, 2rem); }
+.open__bg { position: relative; grid-column: 2; grid-row: 1 / span 9; align-self: stretch;
+            min-height: clamp(15rem, 42vh, 24rem); margin-left: clamp(-5rem, -3vw, -1rem); z-index: 0; }
+.open__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 58% 44%;
+                mix-blend-mode: normal; opacity: .95;
+                -webkit-mask-image: radial-gradient(74% 66% at 60% 46%, #000 38%, transparent 92%);
+                mask-image: radial-gradient(74% 66% at 60% 46%, #000 38%, transparent 92%); }
+.open__scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+               background: linear-gradient(96deg, var(--sc-canvas) 0%,
+                           color-mix(in oklab, var(--sc-canvas) 84%, transparent) 34%,
+                           color-mix(in oklab, var(--sc-canvas) 28%, transparent) 60%,
+                           transparent 84%); }
+.open > :not(.open__bg):not(.open__scrim) { position: relative; z-index: 2; grid-column: 1; }
+@media (max-width: 60rem) {
+  .open { grid-template-columns: minmax(0, 1fr); }
+  .open__bg { grid-column: 1; grid-row: auto; order: 3; margin: 1.4rem 0 0;
+              min-height: 42vh; }
+  .open__bg img { object-position: 58% 34%; }
+  .open__scrim { background: linear-gradient(180deg, var(--sc-canvas) 0%,
+                 color-mix(in oklab, var(--sc-canvas) 78%, transparent) 46%, transparent 82%); }
+}
+
+/* Header and rail share the content column, so the page has one left edge, not two. */
+.site-bar, .ledger { padding-inline: var(--sheet-edge); }
+.site-bar__mark { font-family: var(--sc-font-display); font-size: 1.05rem; letter-spacing: .02em; }
+.site-bar__mark span { font-family: var(--sc-font-text); font-size: .7rem; letter-spacing: .2em;
+                       text-transform: uppercase; color: var(--sc-ink-soft); }
+.sc-wrap { padding-inline: var(--gutter); }
+.case__src, .case__src a, .plate figcaption { color: var(--sc-ink-soft); }
+
+.btn--solid { font-size: .78rem; padding: .5rem 1rem; }
+.btn--ghost { border-color: color-mix(in oklab, var(--sc-ink) 26%, transparent); }
+
+.case .case__plate, .case .plate__frame, .plate, .plate__frame {
+  background: transparent; background-image: none; border: 0; box-shadow: none; }
+.plate figcaption { margin-top: 1.15rem; }
+.code pre, .prompt pre { scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent; }
+.code pre::-webkit-scrollbar, .prompt pre::-webkit-scrollbar { height: 6px; }
+.code pre::-webkit-scrollbar-thumb, .prompt pre::-webkit-scrollbar-thumb {
+  background: var(--line-strong); border-radius: 3px; }
+.code pre::-webkit-scrollbar-track, .prompt pre::-webkit-scrollbar-track { background: transparent; }
+.case__what { font-size: clamp(1.02rem, 1.5vw, 1.18rem); line-height: 1.45; }
+.plain__text { font-size: 1rem; overflow-wrap: anywhere; }
+.plain__item { min-width: 0; }
+.plain__label { overflow-wrap: anywhere; }
+
+/* the source link is a footnote, not the loudest thing on a type-led page */
+.site-bar .btn--solid { background: transparent; color: var(--sc-accent);
+                        border: 1px solid var(--sc-accent); box-shadow: none; }
+.site-bar .btn--solid:hover { background: color-mix(in oklab, var(--sc-accent) 10%, transparent); }
+.site-bar .btn--ghost { border-color: var(--line-strong); }
+
+/* room under the last line of code so it is never sliced by the panel's own edge */
+.code pre, .prompt pre { padding-bottom: 1.1rem; }
+.site-bar .btn { line-height: 1; }

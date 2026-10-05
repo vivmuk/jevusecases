@@ -1,54 +1,102 @@
 # Jev use cases
 
-Nineteen closed-answer jobs for a decision model, one card each: what the decision
-is, the code that asks it, and the prompts that run it. The site is a single static
-page whose scroll is the timeline, with one generated diagram per case.
+**Nineteen jobs a decision model can take over, each with its code and its prompts.**
 
-## What is in here
+![The shape of the work: one state, a set of fixed answers, one decision, drawn as vines across a cream sheet](assets/readme/overview.jpg)
 
-| Path | What it is |
-|---|---|
-| `index.html` | the built page (generated, do not hand-edit) |
-| `scrollcraft.js`, `scrollcraft.css` | the scroll engine, copied from the scrollcraft skill and never edited per project |
-| `site.css`, `site.js` | the page's own layer: tokens, the ledger rail, the index panel, copy buttons |
-| `content/part*.json` | the nineteen cases, written by hand, merged by `scripts/merge_content.py` |
-| `content.json` | the merged source of truth for the cards |
-| `data/anatomy.json` | a real Jev response, captured live, used by the anatomy act |
-| `scripts/gen_plates.py` | generates the nineteen plates with the `muse-image` model |
-| `scripts/build_page.py` | renders `index.html` from `content.json` |
-| `server.js` | zero-dependency static server used in production |
+A language model writes an answer, and then your program has to read it, hope it is in the right shape, and cope when it is not. Jev does not write. You send it a piece of text and a set of questions whose answers you already know how to list, and it sends back one of your answers with a probability your code can test.
 
-## Rebuild
+This site is a reference to what that is good for: nineteen jobs, grouped by how much of your stack they touch, each one written in plain words as well as in code.
+
+- **Live:** <https://jevusecases-production.up.railway.app>
+- **Plain-language guide:** [about.html](about.html) — what Jev is, how to call it, and where it goes wrong, set for readers who find dense text hard work.
+- **Source of the nineteen jobs:** <https://youtube.com/watch?v=3iDiWTt8lok> (Jay E | RoboNuggets)
+
+## What is here
+
+Every case carries the same five things:
+
+1. **The decision** — the state it reads, the question it answers, the answer it returns.
+2. **In plain words** — what comes in, what you hand over, what it does, what you get back, with green marking what you supply and orange marking what the model decides and returns.
+3. **One runnable snippet** — the smallest honest version of the call.
+4. **Two or three example prompts** — the state and the question, ready to paste.
+5. **A drawn plate** — the decision itself as a forest: a seed of light enters, the stem splits into exactly as many vine branches as the case has candidate answers, and one branch carries the amber bloom that was chosen.
+
+## Easy
+
+_A single call sits in front of work you already do._
+
+- **01. Spreadsheet Data Categorisation** — `00:53` · [watch at 00:53](https://youtube.com/watch?v=3iDiWTt8lok&t=53s)
+- **02. Customer Inquiry Triage and Routing** — `01:31` · [watch at 01:31](https://youtube.com/watch?v=3iDiWTt8lok&t=91s)
+- **03. Competitor Advertisement Intelligence** — `02:35` · [watch at 02:35](https://youtube.com/watch?v=3iDiWTt8lok&t=155s)
+- **04. Video and Audio Clip Extraction** — `03:09` · [watch at 03:09](https://youtube.com/watch?v=3iDiWTt8lok&t=189s)
+- **05. Customer Churn Risk Profiling** — `03:37` · [watch at 03:37](https://youtube.com/watch?v=3iDiWTt8lok&t=217s)
+- **06. Automated Internal Linking and Knowledge Base Graphing** — `04:03` · [watch at 04:03](https://youtube.com/watch?v=3iDiWTt8lok&t=243s)
+- **07. Social Media Purchase Intent Identification** — `04:38` · [watch at 04:38](https://youtube.com/watch?v=3iDiWTt8lok&t=278s)
+- **08. Output Verification and Model Calibration** — `05:04` · [watch at 05:04](https://youtube.com/watch?v=3iDiWTt8lok&t=304s)
+
+## Intermediate
+
+_A queue, an index, or a small service appears._
+
+- **09. Agent Skill Selection** — `06:21` · [watch at 06:21](https://youtube.com/watch?v=3iDiWTt8lok&t=381s)
+- **10. Intelligent Multi Model Routing** — `07:02` · [watch at 07:02](https://youtube.com/watch?v=3iDiWTt8lok&t=422s)
+- **11. Inbox Pre Filtering for AI Agents** — `07:37` · [watch at 07:37](https://youtube.com/watch?v=3iDiWTt8lok&t=457s)
+- **12. Browser Feed Cleansing and Element Removal** — `08:07` · [watch at 08:07](https://youtube.com/watch?v=3iDiWTt8lok&t=487s)
+- **13. Semantic In Page Search** — `08:39` · [watch at 08:39](https://youtube.com/watch?v=3iDiWTt8lok&t=519s)
+- **14. Image and Asset Retrieval via Metadata** — `09:13` · [watch at 09:13](https://youtube.com/watch?v=3iDiWTt8lok&t=553s)
+
+## Advanced
+
+_A part of your stack starts making its own choices._
+
+- **15. Live Meeting and Speech Classification** — `10:00` · [watch at 10:00](https://youtube.com/watch?v=3iDiWTt8lok&t=600s)
+- **16. Zero LLM Retrieval Engine** — `10:30` · [watch at 10:30](https://youtube.com/watch?v=3iDiWTt8lok&t=630s)
+- **17. Dynamic UI Asset and Icon Selection** — `11:13` · [watch at 11:13](https://youtube.com/watch?v=3iDiWTt8lok&t=673s)
+- **18. Dynamic Just In Time Webpage Assembly** — `11:59` · [watch at 11:59](https://youtube.com/watch?v=3iDiWTt8lok&t=719s)
+- **19. Workflow Use Case Auditing** — `12:23` · [watch at 12:23](https://youtube.com/watch?v=3iDiWTt8lok&t=743s)
+
+## How the page is made
+
+| Piece | Tool |
+| --- | --- |
+| Scroll engine | `scrollcraft` (pinned, panning and flowing acts) |
+| Page build | `scripts/build_page.py` — reads `content.json`, writes `index.html` |
+| Plain-language guide | `scripts/build_about.py` — writes `about.html` |
+| Artwork | `scripts/forest_art.py` and `scripts/forest_art_text.py`, drawn with `muse-image` on the Venice API |
+| Plate pipeline | `scripts/forest_plates.py` — resize, feather the edges onto real transparency, write webp |
+| This readme | `scripts/build_readme.py` — generated from `content.json` |
+
+The plates are feathered rather than framed: a generated picture has a hard rectangular edge baked into its pixels, so each one is masked onto a transparent background. Without that it reads as a rectangle pasted on the paper, whatever the CSS blend does.
+
+## Run it locally
 
 ```bash
-python3 scripts/merge_content.py      # content/part*.json -> content.json
-python3 scripts/gen_plates.py         # assets/plates/plate-NN.png (skips what exists)
-python3 scripts/build_page.py         # content.json -> index.html
-node server.js                        # serve on $PORT, default 3000
+python3 scripts/build_page.py      # data -> index.html
+python3 scripts/build_about.py     # -> about.html
+python3 scripts/build_readme.py    # -> README.md
+python3 -m http.server 4500 --bind 127.0.0.1
 ```
 
-Plate generation reads a Venice key from `VENICE_API_KEY` or from `~/.hermes/.env`.
-It refuses to keep a blank render, and every plate is checked for a live standard
-deviation before it lands.
+Drawing new art needs a Venice API key in `HERMES_CUSTOM_API_VENICE_AI_API_KEY`. Nothing else in the build touches the network.
 
-## The numbers on the page
+## Adding a case
 
-The case list, its order and the running times come from
-"These 19 Jev-Claude use cases are blowing people's minds" (youtube.com/watch?v=3iDiWTt8lok).
-Anything quoted from the video says so on the card that uses it. The latency, token
-count and cost figures were measured on the machine that built the page, against the
-live route.
+This site is meant to grow, so adding a case is a data edit, not a code change. Add an object to `content.json` with `n`, `title`, `tier`, `at`, `what`, `shape`, `use`, `code`, `prompts`, `caption`, `plain` and `plate`, then:
 
-## Plates
+```bash
+python3 scripts/forest_art_text.py NN   # draw its plate
+python3 scripts/forest_plates.py        # feather and compress every plate
+python3 scripts/build_page.py           # rebuild the page
+python3 scripts/build_readme.py         # keep this file true
+```
 
-One diagram per case, rendered by `scripts/gen_plates.py` with the `muse-image`
-model and shipped as trimmed, normalised WebP by `scripts/compress_plates.py`.
+The tier headings on the page ("Cases 01 to 08") are computed from the case numbers in each tier, so no count is ever baked into a title.
 
-House rule: **a plate carries no lettering.** These models invent glyphs for any
-text they are asked to draw, and a garbled label is worse than no label, so the
-words that explain a plate live in the caption and the card copy, set in real
-type. A plate describes its case by objects and flow alone.
+## About the words in the pictures
 
-`scripts/plate_variants.py <case>` renders one case at several levels of
-description (minimal, readable, detailed) into `lab/variants/`, so the level can
-be chosen deliberately rather than by accident. It never touches `assets/plates`.
+The plates carry hand-painted lettering. A drawing model mangles a few letters, and that is accepted here on purpose: the picture is atmosphere, and the real labels live in the page's own type, where they are selectable, searchable and readable by a screen reader.
+
+## Credits
+
+The nineteen jobs come from [Jay E | RoboNuggets](https://youtube.com/watch?v=3iDiWTt8lok). Jev itself is made by [TypeSafe AI](https://typesafe.ai); the plain-language guide cites the maker's documentation alongside independent notes and worked implementations. This site is an independent reference and is not affiliated with TypeSafe.

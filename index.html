@@ -6,7 +6,7 @@
 <title>Jev use cases: closed-answer jobs for a decision model</title>
 <meta name="description" content="The closed-answer jobs that replace an open-ended language-model call with a typed decision. For each one: what the decision is, the code that asks it, and the prompts that run it.">
 <meta name="color-scheme" content="light">
-<meta name="theme-color" content="#f1f2f4">
+<meta name="theme-color" content="#f5f1e8">
 <meta property="og:title" content="Jev use cases">
 <meta property="og:description" content="Closed-answer jobs for a decision model, each with its code and its prompts.">
 <meta property="og:type" content="website">
@@ -15,8 +15,8 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23f1f2f4'/><rect x='9' y='7' width='3' height='18' fill='%2315181c'/><rect x='15' y='7' width='8' height='3' fill='%239c5a10'/><rect x='15' y='14' width='8' height='3' fill='%2315181c'/><rect x='15' y='21' width='5' height='3' fill='%2315181c'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="scrollcraft.css">
 <link rel="stylesheet" href="site.css">
 </head>
@@ -29,6 +29,7 @@
 <header class="site-bar">
   <p class="site-bar__mark">Jev <span>/</span> use cases</p>
   <button class="btn btn--ghost" type="button" data-index-toggle aria-expanded="false" aria-controls="index-panel">Cases</button>
+  <a class="btn btn--ghost" href="about.html">About Jev</a>
   <a class="btn btn--solid" href="https://github.com/vivmuk/jevusecases" rel="noreferrer">Open the Source</a>
 </header>
 
@@ -36,8 +37,13 @@
 
   <section class="sc-section" data-sc-act="pin" data-sc-span="2" aria-labelledby="open-h">
     <div data-sc-stage class="sc-wrap open">
-      <h1 class="sc-display sc-display--xl" id="open-h" data-sc-cue="0 0.72 0" data-sc-kinetic="lines">Every Job a Model Can Answer in Half a Second.</h1>
+      <div class="open__bg" aria-hidden="true">
+        <img src="assets/forest/hero.webp" width="1800" height="1013" alt="" fetchpriority="high" decoding="async">
+      </div>
+      <div class="open__scrim" aria-hidden="true"></div>
+      <h1 class="sc-display sc-display--xl" id="open-h" data-sc-cue="0 0.72 0" data-sc-kinetic="lines">Every Job a Model Can <em>Answer in Half a Second</em>.</h1>
       <p class="open__lede sc-body" data-sc-cue="0 0.72 0">Each card carries the decision, the code that asks it, and the prompts that run it.</p>
+
       <dl class="open__facts" data-sc-cue="0.5 1 0.3 0.5">
         <div><dt>cases on this page</dt><dd data-sc-count="0 19">0</dd></div>
         <div><dt>seconds, measured round trip</dt><dd>0.39</dd></div>
@@ -47,7 +53,8 @@
     </div>
   </section>
 
-  <section data-sc-act="pan" data-sc-span="3.4" aria-labelledby="rail-h">
+  
+<section data-sc-act="pan" data-sc-span="3.4" aria-labelledby="rail-h">
     <div data-sc-stage>
       <div class="rail-head sc-wrap">
         <h2 class="sc-display sc-display--md" id="rail-h">The Whole Set, Side by Side.</h2>
@@ -225,13 +232,44 @@ question: category=choice:Which budget category does this bank line belong to?|g
 question: category=choice:Which budget category?|utilities:Power, water, internet,rent:Housing,subs:Subscriptions,ignore:Not a real expense</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-01.webp" width="1600" height="900"
+            <img src="assets/forest/case-01.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 1: a single wide horizontal open rectangle divided by four thin vertical hairlines into five empty cells, each cell holding one short horizontal hairline of a different length; the middle cell’s hairline is amber instead of ink." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 01. Rows go in as raw text, the label list is the question, and one label plus its probability lands in the next column.</figcaption>
+          <figcaption><span class="plate__no">Plate 01.</span> Rows go in as raw text, the label list is the question, and one label plus its probability lands in the next column.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">One row from a bank export, exactly as it appears.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">The list of categories you allow, written out in advance.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Label every row the same way, so ten thousand rows read like one.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">One category per row, plus how sure it is from 0 to 1.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
@@ -294,17 +332,48 @@ question: urgency=score:How urgent is this?|Calm,Concerned,Urgent,Emergency</pre
 question: auto=Is this message answerable from the public documentation without a human?</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-02.webp" width="1600" height="900"
+            <img src="assets/forest/case-02.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 2: one inbound arrow at the left splitting into three clearly separated route lines that leave at different angles, with a small probability dial drawn as an arc sitting on the junction." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 02. One message arrives, one intent and one confidence come back, and the routing rule spends them.</figcaption>
+          <figcaption><span class="plate__no">Plate 02.</span> One message arrives, one intent and one confidence come back, and the routing rule spends them.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">One message from a customer.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">Your list of teams, and your urgency levels.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Sort each message by team and urgency, and send the unsure ones to a person.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">A team, an urgency level and how sure it is, in one reply.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
-    <article class="case" id="case-3" data-case="03" data-title="Competitor Advertisement Intelligence"
+    <article class="case case--flip" id="case-3" data-case="03" data-title="Competitor Advertisement Intelligence"
              aria-labelledby="case-3-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
@@ -359,17 +428,48 @@ question: cta=choice:Which call to action is this?|trial:Free trial,demo:Book a 
 question: funnel=choice:Where in the funnel is this aimed?|top:Problem aware,mid:Comparing options,bottom:Ready to buy</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-03.webp" width="1600" height="900"
+            <img src="assets/forest/case-03.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 3: a wide horizontal band split into four equal open outlined boxes, each box holding a few short vertical hairline ticks; the third box is outlined in amber instead of ink." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 03. Every ad is read against the same fixed taxonomy, so the hundredth ad is tagged like the first.</figcaption>
+          <figcaption><span class="plate__no">Plate 03.</span> Every ad is read against the same fixed taxonomy, so the hundredth ad is tagged like the first.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">One competitor advert, its words only.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">Your three short lists: format, call to action, funnel stage.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Tag hundreds of adverts with the same three labels, so patterns appear.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">Three tags per advert, ready to count and compare.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
-    <article class="case case--flip" id="case-4" data-case="04" data-title="Video and Audio Clip Extraction"
+    <article class="case" id="case-4" data-case="04" data-title="Video and Audio Clip Extraction"
              aria-labelledby="case-4-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
@@ -422,17 +522,48 @@ question: clip=score:How strong is this passage as a standalone short clip?|Fluf
 question: keep=Is this passage usable as a standalone social clip without the surrounding conversation?</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-04.webp" width="1600" height="900"
+            <img src="assets/forest/case-04.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 4: one very long thin timeline strip drawn as a horizontal rule, with a small fraction of it drawn thicker and raised slightly above the line to suggest a peak, and a bracket beneath that thicker part." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 04. A long transcript becomes numbered passages, and the passages that score highest are the ones an editor gets.</figcaption>
+          <figcaption><span class="plate__no">Plate 04.</span> A long transcript becomes numbered passages, and the passages that score highest are the ones an editor gets.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">One passage from a transcript, with its timecodes.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">What makes a moment good for you, as a scale from dull to unmissable.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Score every passage and keep the ones worth cutting.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">A score per passage; the top ones go to the editor.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
-    <article class="case case--wide" id="case-5" data-case="05" data-title="Customer Churn Risk Profiling"
+    <article class="case case--wide case--flip" id="case-5" data-case="05" data-title="Customer Churn Risk Profiling"
              aria-labelledby="case-5-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
@@ -487,13 +618,44 @@ question: band=choice:Which retention band does Meridian Labs belong in?|healthy
 question: reach=score:How far along is the cancellation?|Just quiet,Actively drifting,Decided but not told us,Gone</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-05.webp" width="1600" height="900"
+            <img src="assets/forest/case-05.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 5: a single horizontal axis with three separated zones marked by thin vertical hairlines, and small identical circles migrating from the left zone toward the right zone across the axis." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 05. Accounts move between three known states, and the state is what decides which retention play runs.</figcaption>
+          <figcaption><span class="plate__no">Plate 05.</span> Accounts move between three known states, and the state is what decides which retention play runs.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">One account&#x27;s facts: how long they have stayed, what they pay, what they stopped doing.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">Your three or four risk bands.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Put every account in a band, and work the risky ones first.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">One band per account, with how sure it is.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
@@ -552,13 +714,44 @@ question: target=choice:Which existing page should this paragraph link to?|auth:
 question: worth=Would that link genuinely help a reader of this paragraph?</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-06.webp" width="1600" height="900"
+            <img src="assets/forest/case-06.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 6: a loose cloud of small circles on the left connected by a few short lines to a smaller cluster on the right, with exactly one long clean line crossing the gap." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 06. Every page is offered every other page as a candidate, and only the strongest match becomes a link.</figcaption>
+          <figcaption><span class="plate__no">Plate 06.</span> Every page is offered every other page as a candidate, and only the strongest match becomes a link.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">One paragraph, and the list of pages it could link to.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">The titles of the pages on your site.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Offer every page as a candidate, then check the best match is genuinely useful.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">One page to link to, or none.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
@@ -616,13 +809,44 @@ question: kind=choice:How should this comment be handled?|buy:Wants to buy, need
 question: escalate=Does this comment need a human reply within the hour?</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-07.webp" width="1600" height="900"
+            <img src="assets/forest/case-07.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 7: a short row of six identical vertical hairline ticks along the top, and below them two converging hairlines that meet a small open tray holding two of those ticks." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 07. Comments arrive in bulk, and only the ones asking how to buy reach the top of the queue.</figcaption>
+          <figcaption><span class="plate__no">Plate 07.</span> Comments arrive in bulk, and only the ones asking how to buy reach the top of the queue.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">One comment from a post.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">The kinds of comment you care about.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Pull the buyers out of thousands of comments.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">One kind per comment; buyers go to the top of the queue.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
@@ -683,13 +907,44 @@ question: category=choice:Which team owns this ticket?|billing:Payments,technica
 question: category=choice:Which team owns this ticket?|billing:Payments,technical:Bugs,account:Login,general:Anything else</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-08.webp" width="1600" height="900"
+            <img src="assets/forest/case-08.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 8: a two-column comparison drawn as a left column of small squares and a right column of small squares, with matching pairs joined by short horizontal lines and three pairs left visibly unjoined." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 08. Known answers run through the same call, and the ones the model misses move the threshold.</figcaption>
+          <figcaption><span class="plate__no">Plate 08.</span> Known answers run through the same call, and the ones the model misses move the threshold.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">Rows you have already labelled by hand.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">The same question you ask in production.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Check the answers against your labels and find the cut-off that works.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">How often it agrees with you, and the best cut-off.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
@@ -701,7 +956,7 @@ question: category=choice:Which team owns this ticket?|billing:Payments,technica
       </div>
     </section>
 
-    <article class="case case--flip" id="case-9" data-case="09" data-title="Agent Skill Selection"
+    <article class="case" id="case-9" data-case="09" data-title="Agent Skill Selection"
              aria-labelledby="case-9-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
@@ -749,17 +1004,48 @@ question: skill=choice:Which skill should the agent load?|arxiv:Paper search,you
 question: skill=choice:Which skill should the agent load?|xlsx:Spreadsheet work,docx:Word documents,arxiv:Paper search,email-inbox-triage:Inbox triage</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-09.webp" width="1600" height="900"
+            <img src="assets/forest/case-09.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 9: one small square at the left connected by a single clean line to exactly one filled square selected out of a neatly spaced grid of twelve empty squares at the right." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 09. A whole directory of skills becomes a menu, and the prompt picks one line from it before anything loads.</figcaption>
+          <figcaption><span class="plate__no">Plate 09.</span> A whole directory of skills becomes a menu, and the prompt picks one line from it before anything loads.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">What the person just asked for.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">The list of skills your agent has.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Pick one skill before any of them start loading.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">One skill, so only that one runs.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
-    <article class="case case--wide" id="case-10" data-case="10" data-title="Intelligent Multi Model Routing"
+    <article class="case case--wide case--flip" id="case-10" data-case="10" data-title="Intelligent Multi Model Routing"
              aria-labelledby="case-10-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
@@ -813,13 +1099,44 @@ question: model=choice:Which model tier does this request need?|cheap:Short look
 question: model=choice:Which model tier does this request need?|cheap:Short lookup, formatting or extraction,mid:Normal edit, explanation or small refactor,frontier:Multi-step reasoning, architecture, hard bugs</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-10.webp" width="1600" height="900"
+            <img src="assets/forest/case-10.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 10: one horizontal hairline that splits into two diverging hairlines of the same thin weight, with a small open circle sitting on the split point." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 10. One prompt goes in, and the price of answering it is decided before the answer is.</figcaption>
+          <figcaption><span class="plate__no">Plate 10.</span> One prompt goes in, and the price of answering it is decided before the answer is.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">The incoming request.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">Your models, and what each one costs.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Send easy work to cheap models and hard work to strong ones.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">One model per request, chosen before the answer.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
@@ -878,13 +1195,44 @@ question: bucket=choice:Which bucket does this message belong in?|inquiry:A real
 question: bucket=choice:Which bucket does this message belong in?|inquiry:A real person who needs a reply,sponsor:A commercial pitch, route to the deals file,spam:Bulk marketing, no reply,phish:Attempting to take credentials or money</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-11.webp" width="1600" height="900"
+            <img src="assets/forest/case-11.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 11: a tall stack of many thin horizontal rectangles at the left, a wide gate in the middle, and two small trays at the right holding just a few rectangles." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 11. Mail arrives as the state, the filter is the question, and only what survives it reaches a model that writes.</figcaption>
+          <figcaption><span class="plate__no">Plate 11.</span> Mail arrives as the state, the filter is the question, and only what survives it reaches a model that writes.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">One email: the sender, the subject, the first part of the body.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">Your four buckets, including spam.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Drop the junk before any writing model ever sees it.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">One bucket per email; only real messages reach the writer.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
@@ -949,13 +1297,44 @@ question: hide=Is this post low-effort machine-generated filler?</pre>
 question: hide=Is this post low-effort machine-generated filler?</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-12.webp" width="1600" height="900"
+            <img src="assets/forest/case-12.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 12: a vertical column of small identical rectangles, three of them drawn as faint outlines and the rest solid, with the faint ones marked by a very thin diagonal cross drawn across each." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 12. Loaded text is judged before it is seen, so the flagged blocks never take up the page.</figcaption>
+          <figcaption><span class="plate__no">Plate 12.</span> Loaded text is judged before it is seen, so the flagged blocks never take up the page.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">One block of loaded page text.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">What counts as low-effort filler for you.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Judge each block before it is shown to anyone.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">A yes or no per block; the yes ones stay hidden.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
@@ -1019,17 +1398,48 @@ question: hit=choice:Which section of this page answers the query?|s0:Billing,s1
 question: hit=choice:Which section of this page answers the query?|s0:Billing,s1:Shipping,s2:Account,none:No section matches</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-13.webp" width="1600" height="900"
+            <img src="assets/forest/case-13.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 13: a vertical column of stacked paragraph bars drawn as thin outlined rectangles, with one bar near the middle drawn as a double outline and a short straight arrow entering it from the left." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 13. The query and the sections are offered together, and the closest meaning wins, not the closest spelling.</figcaption>
+          <figcaption><span class="plate__no">Plate 13.</span> The query and the sections are offered together, and the closest meaning wins, not the closest spelling.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">What the visitor typed, plus the sections of your page.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">The headings and openings of your sections.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Match by meaning rather than by exact words.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">The section that answers it, or none.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
-    <article class="case" id="case-14" data-case="14" data-title="Image and Asset Retrieval via Metadata"
+    <article class="case case--flip" id="case-14" data-case="14" data-title="Image and Asset Retrieval via Metadata"
              aria-labelledby="case-14-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
@@ -1082,13 +1492,44 @@ question: hit=choice:Which asset is the query asking for?|a1:Diagram of a funnel
 question: hit=choice:Which asset is the query asking for?|a1:Harbour at night,a2:Funnel diagram,a3:Studio desk,none:Nothing in the library matches</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-14.webp" width="1600" height="900"
+            <img src="assets/forest/case-14.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 14: a grid of small empty picture frames at the left and one larger frame pulled out and highlighted at the right, with a single line connecting the two." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 14. Every asset carries a description, and the search reads descriptions instead of file names.</figcaption>
+          <figcaption><span class="plate__no">Plate 14.</span> Every asset carries a description, and the search reads descriptions instead of file names.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">What someone is looking for, in their own words.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">A one-line description of every asset.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Search the descriptions instead of the file names.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">The one asset that fits, or nothing.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
@@ -1100,7 +1541,7 @@ question: hit=choice:Which asset is the query asking for?|a1:Harbour at night,a2
       </div>
     </section>
 
-    <article class="case case--wide" id="case-15" data-case="15" data-title="Live Meeting and Speech Classification"
+    <article class="case case--wide case--flip" id="case-15" data-case="15" data-title="Live Meeting and Speech Classification"
              aria-labelledby="case-15-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
@@ -1155,13 +1596,44 @@ question: kind=choice:How should Priya’s sentence be filed in the minutes?|dec
 question: owner=Does this sentence name the person who will do the work?</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-15.webp" width="1600" height="900"
+            <img src="assets/forest/case-15.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 15: one horizontal hairline near the top with a row of short vertical ticks of varying length hanging beneath it, and one small outlined tray below holding two ticks." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 15. Sentences are sorted as they are spoken: decision, action, risk or question.</figcaption>
+          <figcaption><span class="plate__no">Plate 15.</span> Sentences are sorted as they are spoken: decision, action, risk or question.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">One finished sentence, and who said it.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">Your four kinds: decision, action, risk, question.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Sort the meeting while people are still speaking.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">One tag per sentence, building the notes live.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
@@ -1222,13 +1694,44 @@ question: unit=choice:Which lesson covers this question?|l4:Sorting 1,700 messag
 question: covered=Does the library actually cover this question?</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-16.webp" width="1600" height="900"
+            <img src="assets/forest/case-16.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 16: a neat grid of small identical rectangles at the left, one inbound arrow from the bottom left, and a single rectangle sliding slightly out of the grid at the right." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 16. A question matches a known answer, and nothing is generated in order to say so.</figcaption>
+          <figcaption><span class="plate__no">Plate 16.</span> A question matches a known answer, and nothing is generated in order to say so.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">A question from a user.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">One description and a start time per video or document.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Answer without writing anything new.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">The right passage, or an honest nothing.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
@@ -1290,13 +1793,44 @@ question: icon=choice:Which icon matches what the user just typed?|water:Glass o
 question: icon=choice:Which icon matches what the user just typed?|water:Glass of water,walk:Footsteps,read:Open book,sleep:Crescent moon,meditate:Seated figure,gym:Dumbbell,none:Nothing in this set fits</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-17.webp" width="1600" height="900"
+            <img src="assets/forest/case-17.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 17: three small open outlined shapes in a row (a circle, a square, a triangle) of equal size, with one amber outline drawn around the square." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 17. Typed text chooses the icon, and the interface keeps up with the typing.</figcaption>
+          <figcaption><span class="plate__no">Plate 17.</span> Typed text chooses the icon, and the interface keeps up with the typing.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">What the person just typed.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">Your icon set, one line each.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Choose the icon while the typing is still happening.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">One icon on the screen.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
@@ -1364,17 +1898,48 @@ question: hero=choice:Which hero module fits this visitor?|trial:Start a free tr
 question: proof=choice:Which proof module fits this visitor?|logos:Customer logos,caseStudy:One case study,quote:A single customer quote,none:No proof block</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-18.webp" width="1600" height="900"
+            <img src="assets/forest/case-18.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 18: a wireframe of a single page drawn as empty outlined blocks in a vertical stack at the right, with three alternative small blocks drawn separately at the left and one short line pointing from one of them into the top slot." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 18. Visitor signals pick the modules, and the page is assembled before it is read.</figcaption>
+          <figcaption><span class="plate__no">Plate 18.</span> Visitor signals pick the modules, and the page is assembled before it is read.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">Where the visitor came from and what they have already read.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">Your page modules: hero, proof, call to action.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Build the page for this visitor, just in time.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">The modules to show, in their order.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 
-    <article class="case" id="case-19" data-case="19" data-title="Workflow Use Case Auditing"
+    <article class="case case--flip" id="case-19" data-case="19" data-title="Workflow Use Case Auditing"
              aria-labelledby="case-19-t">
       <div class="sc-wrap case__grid">
         <div class="case__text" data-sc-in data-sc-stagger="60">
@@ -1433,13 +1998,44 @@ question: shape=choice:What kind of step is this?|decision:A closed pick, score 
 question: fits=Could this step be answered by picking between options you could write down in advance?</pre>
         </div>
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-19.webp" width="1600" height="900"
+            <img src="assets/forest/case-19.webp" width="2048" height="1152"
                  alt="Minimalist diagram for case 19: a long horizontal process line made of many small evenly spaced squares, with three of the squares picked out by small vertical brackets beneath them and the rest left plain." loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate 19. Every step of an existing workflow is asked the same question, and the answers sort the steps into work a model can take.</figcaption>
+          <figcaption><span class="plate__no">Plate 19.</span> Every step of an existing workflow is asked the same question, and the answers sort the steps into work a model can take.</figcaption>
         </figure>
+      </div>
+      <div class="sc-wrap">
+        <section class="plain" aria-label="In plain words">
+          <div class="plain__head">
+            <h4>In plain words</h4>
+            <p>No jargon. Four things, in order: what comes in, what you hand it, what it does, and what you get back.<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>
+          </div>
+          <ol class="plain__list">
+            <li class="plain__item">
+              <span class="plain__no">01</span>
+              <span class="plain__label">What comes in</span>
+              <p class="plain__text">One step from a log or a process document.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">02</span>
+              <span class="plain__label">What you hand it</span>
+              <p class="plain__text">Four kinds of step: decision, writing, counting, lookup.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">03</span>
+              <span class="plain__label">What it does</span>
+              <p class="plain__text">Ask of every step whether a typed decision would have done the job.</p>
+            </li>
+            <li class="plain__item">
+              <span class="plain__no">04</span>
+              <span class="plain__label">What you get back</span>
+              <p class="plain__text">A list of steps worth replacing, best first.</p>
+            </li>
+          </ol>
+          <p class="jevnote"><b>The Jev step:</b> the choice comes from a fixed set of answers you wrote down, not from a model writing prose.</p>
+        </section>
       </div>
     </article>
 

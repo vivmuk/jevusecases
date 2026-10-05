@@ -84,9 +84,60 @@ def prompt_blocks(case):
     return "\n".join(out)
 
 
+
+def art_src(case):
+    """Each case's own artwork. Falls back to the earlier plate so a case added
+    before its art has been drawn still renders something honest."""
+    art = ROOT / "assets" / "forest" / ("case-%02d.webp" % case["n"])
+    return ("assets/forest/case-%02d.webp" % case["n"]) if art.exists() \
+        else ("assets/plates/plate-%02d.webp" % case["n"])
+
+
+PLAIN_LABELS = (("in", "What comes in"), ("give", "What you hand it"),
+                ("ways", "What it does"), ("out", "What you get back"))
+
+
+def plain_band(case):
+    """The same decision said four ways for somebody who has never used a model:
+    what arrives, what you must declare, what the model does, what comes back."""
+    plain = case.get("plain")
+    if not plain:
+        return ""
+    items = []
+    for i, (key, label) in enumerate(PLAIN_LABELS, start=1):
+        text = plain.get(key)
+        if not text:
+            continue
+        items.append(
+            '            <li class="plain__item">\n'
+            '              <span class="plain__no">%02d</span>\n'
+            '              <span class="plain__label">%s</span>\n'
+            '              <p class="plain__text">%s</p>\n'
+            '            </li>' % (i, e(label), e(text)))
+    if not items:
+        return ""
+    body = "\n".join(items)
+    return (
+        '      <div class="sc-wrap">\n'
+        '        <section class="plain" aria-label="In plain words">\n'
+        '          <div class="plain__head">\n'
+        '            <h4>In plain words</h4>\n'
+        '            <p>No jargon. Four things, in order: what comes in, what you hand '
+        'it, what it does, and what you get back.'
+        '<span class="plain__key"><b class="k-green">Green</b> is what you supply. <b class="k-orange">Orange</b> is what the model decides and returns.</span></p>\n'
+        '          </div>\n'
+        '          <ol class="plain__list">\n%s\n'
+        '          </ol>\n'
+        '          <p class="jevnote"><b>The Jev step:</b> %s</p>\n'
+        '        </section>\n'
+        '      </div>' % (body, e(case.get(
+            "jevstep",
+            "the choice comes from a fixed set of answers you wrote down, not from a model writing prose."))))
+
+
 def card(case, index):
     wide = index % 3 == 2
-    flip = index % 3 == 1
+    flip = index % 2 == 1
     cls = "case" + (" case--wide" if wide else "") + (" case--flip" if flip else "")
     shape = "\n".join(
         """            <div class="shape__row"><dt>%s</dt><dd>%s</dd></div>""" %
@@ -107,19 +158,21 @@ def card(case, index):
 {code}
 {prompts}
         </div>
-        <figure class="case__plate plate" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
+        <figure class="case__plate plate plate--fused" data-sc-reveal="left" data-sc-reveal-at="0.04 0.3">
           <div class="plate__frame" data-sc-tilt="5">
-            <img src="assets/plates/plate-{n:02d}.webp" width="1600" height="900"
+            <img src="{art}" width="2048" height="1152"
                  alt="{alt}" loading="lazy" decoding="async">
           </div>
-          <figcaption>Plate {n:02d}. {caption}</figcaption>
+          <figcaption><span class="plate__no">Plate {n:02d}.</span> {caption}</figcaption>
         </figure>
       </div>
+{plain}
     </article>""".format(
         cls=cls, n=case["n"], title=e(case["title"]), tier=e(case["tier"]),
         video=VIDEO, sec=secs(case["at"]), at=e(case["at"]), what=e(case["what"]),
         shape=shape, use=e(case["use"]), code=code_block(case),
         prompts=prompt_blocks(case), alt=e(short_alt(case)),
+        plain=plain_band(case), art=art_src(case),
         caption=e(case.get("caption", "The shape of the job.")))
 
 
@@ -215,7 +268,7 @@ TEMPLATE = """<!doctype html>
 <title>Jev use cases: closed-answer jobs for a decision model</title>
 <meta name="description" content="The closed-answer jobs that replace an open-ended language-model call with a typed decision. For each one: what the decision is, the code that asks it, and the prompts that run it.">
 <meta name="color-scheme" content="light">
-<meta name="theme-color" content="#f1f2f4">
+<meta name="theme-color" content="#f5f1e8">
 <meta property="og:title" content="Jev use cases">
 <meta property="og:description" content="Closed-answer jobs for a decision model, each with its code and its prompts.">
 <meta property="og:type" content="website">
@@ -224,8 +277,8 @@ TEMPLATE = """<!doctype html>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23f1f2f4'/><rect x='9' y='7' width='3' height='18' fill='%2315181c'/><rect x='15' y='7' width='8' height='3' fill='%239c5a10'/><rect x='15' y='14' width='8' height='3' fill='%2315181c'/><rect x='15' y='21' width='5' height='3' fill='%2315181c'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="scrollcraft.css">
 <link rel="stylesheet" href="site.css">
 </head>
@@ -238,6 +291,7 @@ TEMPLATE = """<!doctype html>
 <header class="site-bar">
   <p class="site-bar__mark">Jev <span>/</span> use cases</p>
   <button class="btn btn--ghost" type="button" data-index-toggle aria-expanded="false" aria-controls="index-panel">Cases</button>
+  <a class="btn btn--ghost" href="about.html">About Jev</a>
   <a class="btn btn--solid" href="{repo}" rel="noreferrer">Open the Source</a>
 </header>
 
@@ -245,8 +299,13 @@ TEMPLATE = """<!doctype html>
 
   <section class="sc-section" data-sc-act="pin" data-sc-span="2" aria-labelledby="open-h">
     <div data-sc-stage class="sc-wrap open">
-      <h1 class="sc-display sc-display--xl" id="open-h" data-sc-cue="0 0.72 0" data-sc-kinetic="lines">Every Job a Model Can Answer in Half a Second.</h1>
+      <div class="open__bg" aria-hidden="true">
+        <img src="assets/forest/hero.webp" width="1800" height="1013" alt="" fetchpriority="high" decoding="async">
+      </div>
+      <div class="open__scrim" aria-hidden="true"></div>
+      <h1 class="sc-display sc-display--xl" id="open-h" data-sc-cue="0 0.72 0" data-sc-kinetic="lines">Every Job a Model Can <em>Answer in Half a Second</em>.</h1>
       <p class="open__lede sc-body" data-sc-cue="0 0.72 0">Each card carries the decision, the code that asks it, and the prompts that run it.</p>
+
       <dl class="open__facts" data-sc-cue="0.5 1 0.3 0.5">
         <div><dt>cases on this page</dt><dd data-sc-count="0 {cases}">0</dd></div>
         <div><dt>seconds, measured round trip</dt><dd>0.39</dd></div>
@@ -256,7 +315,8 @@ TEMPLATE = """<!doctype html>
     </div>
   </section>
 
-  <section data-sc-act="pan" data-sc-span="3.4" aria-labelledby="rail-h">
+  
+<section data-sc-act="pan" data-sc-span="3.4" aria-labelledby="rail-h">
     <div data-sc-stage>
       <div class="rail-head sc-wrap">
         <h2 class="sc-display sc-display--md" id="rail-h">The Whole Set, Side by Side.</h2>

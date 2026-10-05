@@ -29,7 +29,13 @@
         }
       ],
       "plate": "A single wide horizontal open rectangle divided by four thin vertical hairlines into five empty cells, each cell holding one short horizontal hairline of a different length; the middle cell’s hairline is amber instead of ink. Outline strokes only, at most nine elements, wide empty margins, no grid of small squares, no hatch texture, no filled blocks.",
-      "caption": "Rows go in as raw text, the label list is the question, and one label plus its probability lands in the next column."
+      "caption": "Rows go in as raw text, the label list is the question, and one label plus its probability lands in the next column.",
+      "plain": {
+        "in": "One row from a bank export, exactly as it appears.",
+        "give": "The list of categories you allow, written out in advance.",
+        "ways": "Label every row the same way, so ten thousand rows read like one.",
+        "out": "One category per row, plus how sure it is from 0 to 1."
+      }
     },
     {
       "n": 2,
@@ -64,7 +70,13 @@
         }
       ],
       "plate": "One inbound arrow at the left splitting into three clearly separated route lines that leave at different angles, with a small probability dial drawn as an arc sitting on the junction. Keep the three routes distinct and unlabelled.",
-      "caption": "One message arrives, one intent and one confidence come back, and the routing rule spends them."
+      "caption": "One message arrives, one intent and one confidence come back, and the routing rule spends them.",
+      "plain": {
+        "in": "One message from a customer.",
+        "give": "Your list of teams, and your urgency levels.",
+        "ways": "Sort each message by team and urgency, and send the unsure ones to a person.",
+        "out": "A team, an urgency level and how sure it is, in one reply."
+      }
     },
     {
       "n": 3,
@@ -95,7 +107,13 @@
         }
       ],
       "plate": "A wide horizontal band split into four equal open outlined boxes, each box holding a few short vertical hairline ticks; the third box is outlined in amber instead of ink. Hairline strokes only, mostly empty space, no filled blocks, no dark mass, no grid of solid squares, nothing else on the plate.",
-      "caption": "Every ad is read against the same fixed taxonomy, so the hundredth ad is tagged like the first."
+      "caption": "Every ad is read against the same fixed taxonomy, so the hundredth ad is tagged like the first.",
+      "plain": {
+        "in": "One competitor advert, its words only.",
+        "give": "Your three short lists: format, call to action, funnel stage.",
+        "ways": "Tag hundreds of adverts with the same three labels, so patterns appear.",
+        "out": "Three tags per advert, ready to count and compare."
+      }
     },
     {
       "n": 4,
@@ -126,7 +144,13 @@
         }
       ],
       "plate": "One very long thin timeline strip drawn as a horizontal rule, with a small fraction of it drawn thicker and raised slightly above the line to suggest a peak, and a bracket beneath that thicker part. Flat geometry, generous empty space.",
-      "caption": "A long transcript becomes numbered passages, and the passages that score highest are the ones an editor gets."
+      "caption": "A long transcript becomes numbered passages, and the passages that score highest are the ones an editor gets.",
+      "plain": {
+        "in": "One passage from a transcript, with its timecodes.",
+        "give": "What makes a moment good for you, as a scale from dull to unmissable.",
+        "ways": "Score every passage and keep the ones worth cutting.",
+        "out": "A score per passage; the top ones go to the editor."
+      }
     },
     {
       "n": 5,
@@ -157,7 +181,13 @@
         }
       ],
       "plate": "A single horizontal axis with three separated zones marked by thin vertical hairlines, and small identical circles migrating from the left zone toward the right zone across the axis. No text, no numbers.",
-      "caption": "Accounts move between three known states, and the state is what decides which retention play runs."
+      "caption": "Accounts move between three known states, and the state is what decides which retention play runs.",
+      "plain": {
+        "in": "One account's facts: how long they have stayed, what they pay, what they stopped doing.",
+        "give": "Your three or four risk bands.",
+        "ways": "Put every account in a band, and work the risky ones first.",
+        "out": "One band per account, with how sure it is."
+      }
     },
     {
       "n": 6,
@@ -188,7 +218,13 @@
         }
       ],
       "plate": "A loose cloud of small circles on the left connected by a few short lines to a smaller cluster on the right, with exactly one long clean line crossing the gap. Most circles stay unconnected.",
-      "caption": "Every page is offered every other page as a candidate, and only the strongest match becomes a link."
+      "caption": "Every page is offered every other page as a candidate, and only the strongest match becomes a link.",
+      "plain": {
+        "in": "One paragraph, and the list of pages it could link to.",
+        "give": "The titles of the pages on your site.",
+        "ways": "Offer every page as a candidate, then check the best match is genuinely useful.",
+        "out": "One page to link to, or none."
+      }
     },
     {
       "n": 7,
@@ -219,7 +255,13 @@
         }
       ],
       "plate": "A short row of six identical vertical hairline ticks along the top, and below them two converging hairlines that meet a small open tray holding two of those ticks. Only nine elements in total, hairline strokes, wide empty margins, no dense comb of lines, no hatching, no filled shapes.",
-      "caption": "Comments arrive in bulk, and only the ones asking how to buy reach the top of the queue."
+      "caption": "Comments arrive in bulk, and only the ones asking how to buy reach the top of the queue.",
+      "plain": {
+        "in": "One comment from a post.",
+        "give": "The kinds of comment you care about.",
+        "ways": "Pull the buyers out of thousands of comments.",
+        "out": "One kind per comment; buyers go to the top of the queue."
+      }
     },
     {
       "n": 8,
@@ -250,7 +292,13 @@
         }
       ],
       "plate": "A two-column comparison drawn as a left column of small squares and a right column of small squares, with matching pairs joined by short horizontal lines and three pairs left visibly unjoined. Flat, minimal, generous margin.",
-      "caption": "Known answers run through the same call, and the ones the model misses move the threshold."
+      "caption": "Known answers run through the same call, and the ones the model misses move the threshold.",
+      "plain": {
+        "in": "Rows you have already labelled by hand.",
+        "give": "The same question you ask in production.",
+        "ways": "Check the answers against your labels and find the cut-off that works.",
+        "out": "How often it agrees with you, and the best cut-off."
+      }
     },
     {
       "n": 9,
@@ -281,7 +329,13 @@
         }
       ],
       "plate": "One small square at the left connected by a single clean line to exactly one filled square selected out of a neatly spaced grid of twelve empty squares at the right. The chosen square is solid, the rest are outlines.",
-      "caption": "A whole directory of skills becomes a menu, and the prompt picks one line from it before anything loads."
+      "caption": "A whole directory of skills becomes a menu, and the prompt picks one line from it before anything loads.",
+      "plain": {
+        "in": "What the person just asked for.",
+        "give": "The list of skills your agent has.",
+        "ways": "Pick one skill before any of them start loading.",
+        "out": "One skill, so only that one runs."
+      }
     },
     {
       "n": 10,
@@ -312,7 +366,13 @@
         }
       ],
       "plate": "One horizontal hairline that splits into two diverging hairlines of the same thin weight, with a small open circle sitting on the split point. Uniform hairline strokes of equal weight, one small amber dot on the upper branch, lots of empty space, nothing else on the plate.",
-      "caption": "One prompt goes in, and the price of answering it is decided before the answer is."
+      "caption": "One prompt goes in, and the price of answering it is decided before the answer is.",
+      "plain": {
+        "in": "The incoming request.",
+        "give": "Your models, and what each one costs.",
+        "ways": "Send easy work to cheap models and hard work to strong ones.",
+        "out": "One model per request, chosen before the answer."
+      }
     },
     {
       "n": 11,
@@ -360,7 +420,13 @@
       "plate_labels": {
         "detailed_text": "INBOX, SPAM, DRAFT"
       },
-      "caption": "Mail arrives as the state, the filter is the question, and only what survives it reaches a model that writes."
+      "caption": "Mail arrives as the state, the filter is the question, and only what survives it reaches a model that writes.",
+      "plain": {
+        "in": "One email: the sender, the subject, the first part of the body.",
+        "give": "Your four buckets, including spam.",
+        "ways": "Drop the junk before any writing model ever sees it.",
+        "out": "One bucket per email; only real messages reach the writer."
+      }
     },
     {
       "n": 12,
@@ -391,7 +457,13 @@
         }
       ],
       "plate": "A vertical column of small identical rectangles, three of them drawn as faint outlines and the rest solid, with the faint ones marked by a very thin diagonal cross drawn across each. Minimal and flat.",
-      "caption": "Loaded text is judged before it is seen, so the flagged blocks never take up the page."
+      "caption": "Loaded text is judged before it is seen, so the flagged blocks never take up the page.",
+      "plain": {
+        "in": "One block of loaded page text.",
+        "give": "What counts as low-effort filler for you.",
+        "ways": "Judge each block before it is shown to anyone.",
+        "out": "A yes or no per block; the yes ones stay hidden."
+      }
     },
     {
       "n": 13,
@@ -422,7 +494,13 @@
         }
       ],
       "plate": "A vertical column of stacked paragraph bars drawn as thin outlined rectangles, with one bar near the middle drawn as a double outline and a short straight arrow entering it from the left. White hairline strokes only on the dark ground, exactly one amber element, no grey fills, no curved arrows, at most eight bars.",
-      "caption": "The query and the sections are offered together, and the closest meaning wins, not the closest spelling."
+      "caption": "The query and the sections are offered together, and the closest meaning wins, not the closest spelling.",
+      "plain": {
+        "in": "What the visitor typed, plus the sections of your page.",
+        "give": "The headings and openings of your sections.",
+        "ways": "Match by meaning rather than by exact words.",
+        "out": "The section that answers it, or none."
+      }
     },
     {
       "n": 14,
@@ -453,7 +531,13 @@
         }
       ],
       "plate": "A grid of small empty picture frames at the left and one larger frame pulled out and highlighted at the right, with a single line connecting the two. The frames are empty of any content.",
-      "caption": "Every asset carries a description, and the search reads descriptions instead of file names."
+      "caption": "Every asset carries a description, and the search reads descriptions instead of file names.",
+      "plain": {
+        "in": "What someone is looking for, in their own words.",
+        "give": "A one-line description of every asset.",
+        "ways": "Search the descriptions instead of the file names.",
+        "out": "The one asset that fits, or nothing."
+      }
     },
     {
       "n": 15,
@@ -484,7 +568,13 @@
         }
       ],
       "plate": "One horizontal hairline near the top with a row of short vertical ticks of varying length hanging beneath it, and one small outlined tray below holding two ticks. At most twelve elements in total, wide margins, nothing else on the plate.",
-      "caption": "Sentences are sorted as they are spoken: decision, action, risk or question."
+      "caption": "Sentences are sorted as they are spoken: decision, action, risk or question.",
+      "plain": {
+        "in": "One finished sentence, and who said it.",
+        "give": "Your four kinds: decision, action, risk, question.",
+        "ways": "Sort the meeting while people are still speaking.",
+        "out": "One tag per sentence, building the notes live."
+      }
     },
     {
       "n": 16,
@@ -515,7 +605,13 @@
         }
       ],
       "plate": "A neat grid of small identical rectangles at the left, one inbound arrow from the bottom left, and a single rectangle sliding slightly out of the grid at the right. Nothing else.",
-      "caption": "A question matches a known answer, and nothing is generated in order to say so."
+      "caption": "A question matches a known answer, and nothing is generated in order to say so.",
+      "plain": {
+        "in": "A question from a user.",
+        "give": "One description and a start time per video or document.",
+        "ways": "Answer without writing anything new.",
+        "out": "The right passage, or an honest nothing."
+      }
     },
     {
       "n": 17,
@@ -546,7 +642,13 @@
         }
       ],
       "plate": "Three small open outlined shapes in a row (a circle, a square, a triangle) of equal size, with one amber outline drawn around the square. Outline strokes only, no filled shapes, no large coloured area, wide empty margins, nothing else on the plate.",
-      "caption": "Typed text chooses the icon, and the interface keeps up with the typing."
+      "caption": "Typed text chooses the icon, and the interface keeps up with the typing.",
+      "plain": {
+        "in": "What the person just typed.",
+        "give": "Your icon set, one line each.",
+        "ways": "Choose the icon while the typing is still happening.",
+        "out": "One icon on the screen."
+      }
     },
     {
       "n": 18,
@@ -577,7 +679,13 @@
         }
       ],
       "plate": "A wireframe of a single page drawn as empty outlined blocks in a vertical stack at the right, with three alternative small blocks drawn separately at the left and one short line pointing from one of them into the top slot.",
-      "caption": "Visitor signals pick the modules, and the page is assembled before it is read."
+      "caption": "Visitor signals pick the modules, and the page is assembled before it is read.",
+      "plain": {
+        "in": "Where the visitor came from and what they have already read.",
+        "give": "Your page modules: hero, proof, call to action.",
+        "ways": "Build the page for this visitor, just in time.",
+        "out": "The modules to show, in their order."
+      }
     },
     {
       "n": 19,
@@ -608,7 +716,13 @@
         }
       ],
       "plate": "A long horizontal process line made of many small evenly spaced squares, with three of the squares picked out by small vertical brackets beneath them and the rest left plain. Wide margins, flat geometry.",
-      "caption": "Every step of an existing workflow is asked the same question, and the answers sort the steps into work a model can take."
+      "caption": "Every step of an existing workflow is asked the same question, and the answers sort the steps into work a model can take.",
+      "plain": {
+        "in": "One step from a log or a process document.",
+        "give": "Four kinds of step: decision, writing, counting, lookup.",
+        "ways": "Ask of every step whether a typed decision would have done the job.",
+        "out": "A list of steps worth replacing, best first."
+      }
     }
   ]
 }
