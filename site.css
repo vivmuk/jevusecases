@@ -909,3 +909,8 @@ body { padding-bottom: calc(var(--rail-h, 3rem) + 2rem + env(safe-area-inset-bot
    scrollbar across the bottom of the page */
 .ledger__track { scrollbar-width: none; }
 .ledger__track::-webkit-scrollbar { display: none; }
+
+/* four facts never sit three-plus-an-orphan on a phone */
+@media (max-width: 46rem) {
+  .hero .open__facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
