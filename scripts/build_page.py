@@ -21,6 +21,7 @@ SHORT = {
     9: "Skill picking", 10: "Model routing", 11: "Inbox gate", 12: "Feed cleansing",
     13: "Semantic find", 14: "Asset search", 15: "Live sentences", 16: "No-LLM answers",
     17: "Icon picking", 18: "Page assembly", 19: "Work audit",
+    20: "Claim check", 21: "Stop searching", 22: "Run wake check",
 }
 TIERS = [
     ("easy", "Cases 01 to 08", "The ones you can wire up this afternoon",
@@ -38,12 +39,26 @@ TIERS = [
 
 
 def tier_range(cases, tier):
-    """A tier's heading is computed from the cases in it, so adding case 20 never
-    leaves a stale 'Cases 01 to 08' behind."""
+    """A tier's heading is computed from the cases in it, so adding a case never
+    leaves a stale 'Cases 01 to 08' behind.
+
+    The numbers are no longer one contiguous run: a case found in the field joins
+    the tier it belongs to whatever its number. Collapse to runs, so easy reads
+    'Cases 01 to 08, 22' rather than claiming everything up to 22."""
     ns = sorted(c["n"] for c in cases if c["tier"] == tier)
     if not ns:
         return "No Cases Yet"
-    return "Case %02d" % ns[0] if len(ns) == 1 else "Cases %02d to %02d" % (ns[0], ns[-1])
+    runs, start, prev = [], ns[0], ns[0]
+    for n in ns[1:]:
+        if n == prev + 1:
+            prev = n
+            continue
+        runs.append((start, prev))
+        start = prev = n
+    runs.append((start, prev))
+    parts = ["%02d" % a if a == b else "%02d to %02d" % (a, b) for a, b in runs]
+    label = ", ".join(parts[:-1]) + " and " + parts[-1] if len(parts) > 1 else parts[0]
+    return "Case " + label if len(ns) == 1 else "Cases " + label
 
 
 def e(text):
@@ -86,11 +101,18 @@ def prompt_blocks(case):
 
 
 def art_src(case):
-    """Each case's own artwork. Falls back to the earlier plate so a case added
-    before its art has been drawn still renders something honest."""
-    art = ROOT / "assets" / "forest" / ("case-%02d.webp" % case["n"])
-    return ("assets/forest/case-%02d.webp" % case["n"]) if art.exists() \
-        else ("assets/plates/plate-%02d.webp" % case["n"])
+    """Each case's own artwork, then the nearest drawn plate, then the hero.
+
+    The old fallback named plate-NN for a case with no plate-NN either, so a case
+    added before its art was drawn rendered a broken image rather than something
+    honest. Walk the set newest-first instead."""
+    n = case["n"]
+    for rel in ("assets/forest/case-%02d.webp" % n, "assets/plates/plate-%02d.webp" % n):
+        if (ROOT / rel).exists():
+            return rel
+    drawn = sorted((p.relative_to(ROOT).as_posix()
+                    for p in (ROOT / "assets" / "forest").glob("case-*.webp")))
+    return drawn[-1] if drawn else "assets/forest/hero.webp"
 
 
 PLAIN_LABELS = (("in", "What comes in"), ("give", "What you hand it"),
@@ -150,7 +172,7 @@ def card(case, index):
         <div class="case__text">
           <p class="case__no">Case {n:02d}<span class="case__tier">{tier}</span></p>
           <h3 class="case__title" id="case-{n}-t">{title}</h3>
-          <p class="case__src"><a href="{video}&amp;t={sec}s" rel="noreferrer">{at} in the video</a></p>
+          <p class="case__src">{src}</p>
           <p class="case__what">{what}</p>
           <dl class="shape">
 {shape}
@@ -174,7 +196,7 @@ def card(case, index):
 {plain}
     </article>""".format(
         cls=cls, n=case["n"], title=e(case["title"]), tier=e(case["tier"]),
-        video=VIDEO, sec=secs(case["at"]), at=e(case["at"]), what=e(case["what"]),
+        src=src_line(case), what=e(case["what"]),
         shape=shape, use=e(case["use"]), code=code_block(case),
         prompts=prompt_blocks(case), alt=e(short_alt(case)),
         plain=plain_band(case), art=art_src(case),
@@ -186,8 +208,25 @@ def secs(stamp):
     return int(m) * 60 + int(s)
 
 
+def src_line(case):
+    """Where the case came from. The original set came from one video, so each of
+    those links to its own timestamp; a case found in the field links to the
+    article that named the job."""
+    at = (case.get("at") or "").strip()
+    if at:
+        return ('<a href="%s&amp;t=%ds" rel="noreferrer">%s in the video</a>'
+                % (VIDEO, secs(at), e(at)))
+    url = (case.get("source") or "").strip()
+    if not url:
+        return "Found in the field"
+    name = e(case.get("source_name") or "the article that named it")
+    kind = "" if at else "found in the field, not in the video"
+    return '<a href="%s" rel="noreferrer">%s</a>%s' % (
+        e(url), name, " \u00b7 " + kind if kind else "")
+
+
 def index_grid(cases):
-    """All nineteen, up front, as links: the reader sees the whole set without
+    """The whole set, up front, as links: the reader sees it without
     scrolling through anything to reach it."""
     rows = []
     for c in cases:
@@ -207,7 +246,8 @@ def index_panel(cases):
         rows = [c for c in cases if c["tier"] == tier]
         items = "\n".join(
             """          <li><a href="#case-%d"><span class="n">%02d</span><span class="t">%s</span><span class="at">%s</span></a></li>"""
-            % (c["n"], c["n"], e(c["title"]), e(c["at"])) for c in rows)
+            % (c["n"], c["n"], e(c["title"]),
+               e(c["at"] or c.get("source_name") or "field")) for c in rows)
         groups.append("""      <div class="index-group">
         <h3>%s</h3>
         <ul class="index-list">

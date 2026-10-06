@@ -133,7 +133,7 @@ def main():
     body = [post_html(it, titles) for it in items]
     tail = [
         '</div>', '</main>', '<footer>',
-        '<p>Gathered from X, YouTube, Reddit, Hacker News, the official documentation and the blogs that cover the model. Nothing here is repeated from the nineteen cases unless it adds something to them; a link marked as not covered is a job the collection is missing.</p>',
+        '<p>Gathered from X, YouTube, Reddit, Hacker News, the official documentation and the blogs that cover the model. Nothing here is repeated from the case collection unless it adds something to it; a link marked as not covered is a job the collection is missing.</p>',
         '<p>Jev is made by TypeSafe AI. This page is an independent reading of public sources and is not affiliated with TypeSafe.</p>',
         '</footer>', '<script>',
         'var btns = document.querySelectorAll("[data-size-btn]"), html = document.documentElement;',

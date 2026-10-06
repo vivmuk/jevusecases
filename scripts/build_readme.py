@@ -21,6 +21,16 @@ TIERS = [
 ]
 
 
+
+WORDS = {19: "Nineteen", 20: "Twenty", 21: "Twenty-one", 22: "Twenty-two",
+         23: "Twenty-three", 24: "Twenty-four", 25: "Twenty-five"}
+
+
+def count_word(n):
+    """The number of cases as a word, so no sentence is left claiming nineteen."""
+    return WORDS.get(n, str(n))
+
+
 def main():
     cases = json.load(open(ROOT / "content.json"))["cases"]
     lines = []
@@ -28,7 +38,8 @@ def main():
 
     add("# Jev use cases")
     add("")
-    add("**Nineteen jobs a decision model can take over, each with its code and its prompts.**")
+    add("**%s jobs a decision model can take over, each with its code and its prompts.**"
+        % count_word(len(cases)))
     add("")
     add("![The shape of the work: one state, a set of fixed answers, one decision, drawn as "
         "vines across a cream sheet](assets/readme/overview.jpg)")
@@ -38,13 +49,16 @@ def main():
         "set of questions whose answers you already know how to list, and it sends back one of your "
         "answers with a probability your code can test.")
     add("")
-    add("This site is a reference to what that is good for: nineteen jobs, grouped by how much of "
-        "your stack they touch, each one written in plain words as well as in code.")
+    add("This site is a reference to what that is good for: %s jobs, grouped by how much of "
+        "your stack they touch, each one written in plain words as well as in code. The original "
+        "nineteen come from one video; the rest were found in the field afterwards."
+        % count_word(len(cases)).lower())
     add("")
     add("- **Live:** <%s>" % LIVE)
     add("- **Plain-language guide:** [about.html](about.html) — what Jev is, how to call it, and "
         "where it goes wrong, set for readers who find dense text hard work.")
-    add("- **Source of the nineteen jobs:** <%s> (Jay E | RoboNuggets)" % VIDEO)
+    add("- **Source of the first nineteen jobs:** <%s> (Jay E | RoboNuggets)" % VIDEO)
+    add("- **The later jobs:** found in the field; each case card links the article that named it.")
     add("")
 
     add("## What is here")
@@ -70,8 +84,15 @@ def main():
         add("_%s_" % blurb)
         add("")
         for c in group:
-            add("- **%02d. %s** — `%s` · [watch at %s](%s&t=%ds)" % (
-                c["n"], c["title"], c["at"], c["at"], VIDEO, int(c["at"][:2]) * 60 + int(c["at"][3:])))
+            at = (c.get("at") or "").strip()
+            if at:
+                add("- **%02d. %s** — `%s` · [watch at %s](%s&t=%ds)" % (
+                    c["n"], c["title"], at, at, VIDEO,
+                    int(at[:2]) * 60 + int(at[3:])))
+            else:
+                add("- **%02d. %s** — [%s](%s)" % (
+                    c["n"], c["title"], c.get("source_name") or "the field",
+                    c.get("source") or ""))
         add("")
 
     add("## How the page is made")

@@ -1,0 +1,119 @@
+[
+  {
+    "n": 20,
+    "slug": "claim-source-support",
+    "title": "Claim and Source Support Check",
+    "tier": "intermediate",
+    "at": "",
+    "source": "https://matthiasfrank.de/en/jev-ai-use-cases/",
+    "source_name": "matthiasfrank.de",
+    "what": "Given a claim and a passage, decide whether the passage actually supports it.",
+    "shape": {
+      "state": "one claim and one passage, labelled so neither can be mistaken for the other",
+      "question": "noul, for whether this passage supports this claim",
+      "answer": "a yes or no plus its probability"
+    },
+    "use": "Every citation a pipeline produces is a claim that this passage backs this sentence, and a language model will happily assert that backing without checking. Send the pair to Jev instead and put the threshold in your code: high means write the citation, low means the claim is unsupported and goes back to the writer, and the middle band means gather another passage before deciding. Because the question names the passage, the answer is about that text and not about what the model happens to remember.",
+    "code": {
+      "lang": "python",
+      "label": "one claim, one passage, one verdict",
+      "src": "CLAIM = \"The study found the model matched the larger system on abstracts.\"\nPASSAGE = (\"On the 1,240 abstract questions the two were within 0.2 points, \"\n           \"78.4% against 78.2%.\")\n\ndef supports(claim, passage):\n    state = \"CLAIM:\\n%s\\n\\nPASSAGE:\\n%s\" % (claim, passage)\n    qs = {\"supports\": {\"type\": \"noul\",\n          \"instructions\": \"Does the passage support the claim? Answer only from the passage given.\"}}\n    return decide(state, qs)[\"supports\"][\"noul\"]\n\np = supports(CLAIM, PASSAGE)\nif p >= 0.8:\n    cite(CLAIM, PASSAGE)\nelif p <= 0.3:\n    send_back(CLAIM)          # the passage does not carry it\n# between the two: gather another passage, then ask again"
+    },
+    "prompts": [
+      {
+        "state": "CLAIM: The report shows adopters cut review time by half.\n\nPASSAGE: Teams that adopted the tool reported a 46% reduction in review time, against 8% in the control group.",
+        "question": "supports=Does the passage support the claim? Answer only from the passage given."
+      },
+      {
+        "state": "CLAIM: The benchmark found prompt-injection filtering was solved.\n\nPASSAGE: Two of the nine filters blocked 89.0% of injected messages; the remaining seven ranged from 61% to 84%.",
+        "question": "supports=Does the passage support the claim? Answer only from the passage given."
+      }
+    ],
+    "plate": "A single vine entering from the left and meeting one vertical hairline gate, one branch passing through the gate and growing on, one branch stopping dead at it, and a single amber bloom carried on the branch that passed",
+    "caption": "A claim and the passage offered for it go in together, and one probability says whether the passage carries the claim or only stands near it.",
+    "plain": {
+      "in": "One sentence someone wrote, and one passage that is supposed to be its evidence.",
+      "give": "The rule that only the passage counts, written into the question.",
+      "ways": "Check every citation a pipeline makes before the citation is written down, so an unsupported claim never reaches the reader.",
+      "out": "One yes or no, with how sure it is from 0 to 1."
+    }
+  },
+  {
+    "n": 21,
+    "slug": "retrieval-stopping",
+    "title": "Retrieval Stopping Decision",
+    "tier": "intermediate",
+    "at": "",
+    "source": "https://www.lyzr.ai/blog/jev-as-an-ai-router-and-controller/",
+    "source_name": "Lyzr",
+    "what": "Decide whether the passages gathered so far are enough to answer, or whether to keep looking.",
+    "shape": {
+      "state": "the question, plus the passages gathered so far",
+      "question": "noul, asked again after every round of searching",
+      "answer": "a yes or no plus its probability, read against a threshold in your code"
+    },
+    "use": "A search-and-answer system usually stops on a fixed number of rounds, which wastes calls when the first two passages already settled it and gives up too early when they did not. Ask the stopping question instead, after each round, and let the answer end the loop. The published test found the signal scored 0.90 on both single-passage and multi-step questions, but its default cut-off of 0.5 stops far too eagerly, so raise the line to about 0.8 and keep it next to the loop it controls.",
+    "code": {
+      "lang": "python",
+      "label": "stop searching when the pile is enough",
+      "src": "THRESHOLD = 0.8   # the maker's default of 0.5 stops too early\n\ndef enough(question, passages):\n    state = \"QUESTION:\\n%s\\n\\nPASSAGES:\\n%s\" % (\n        question, \"\\n\\n\".join(\"- %s\" % p for p in passages))\n    qs = {\"enough\": {\"type\": \"noul\",\n          \"instructions\": \"Are these passages enough to answer the question, or should we keep looking?\"}}\n    return decide(state, qs)[\"enough\"][\"noul\"]\n\npassages = []\nwhile len(passages) < 40:\n    passages += search_next(question)\n    if enough(question, passages) >= THRESHOLD:\n        break\nanswer(question, passages)"
+    },
+    "prompts": [
+      {
+        "state": "QUESTION: What did the Red Hat benchmark conclude about small trained filters?\n\nPASSAGES:\n- Nine filters were tested: Jev, two older zero-shot classifiers, three large models asked to judge, and two downloadable decision models.\n- On prompt injection the 200M trained filter reached 89.0% and Jev 86.4%, and the filter answered about six times faster.",
+        "question": "enough=Are these passages enough to answer the question, or should we keep looking?"
+      },
+      {
+        "state": "QUESTION: Why did the modem not come up on the Pixel 4 port?\n\nPASSAGES:\n- The device boots with working display, touch and Wi-Fi.\n- Cellular data is listed as broken in the project's own support table.",
+        "question": "enough=Are these passages enough to answer the question, or should we keep looking?"
+      }
+    ],
+    "plate": "A vine winding to the right through a row of small vertical hairline gates, growing past the first three and stopping at the fourth, with a single amber bloom opening where it stops",
+    "caption": "The searching loop asks one question after every round, and the answer decides whether there is another round at all.",
+    "plain": {
+      "in": "The question, and everything the search has brought back so far.",
+      "give": "The line at which you accept that the pile is enough, written in your own code.",
+      "ways": "Let the searching stop when it has enough instead of after a fixed number of rounds, so it stops paying for passages it did not need.",
+      "out": "One yes or no, with how sure it is from 0 to 1, asked again after each round."
+    }
+  },
+  {
+    "n": 22,
+    "slug": "scheduled-run-wake-check",
+    "title": "Scheduled Run Wake Check",
+    "tier": "easy",
+    "at": "",
+    "source": "https://oneclickclaw.io/news/jev-hermes-agent-owners-8-jobs",
+    "source_name": "OneClickClaw news",
+    "what": "Decide whether a scheduled run has anything to do today, before paying to start it.",
+    "shape": {
+      "state": "what the last run finished with, and what has changed since",
+      "question": "noul, for whether this run is worth starting at all",
+      "answer": "a yes or no plus its probability"
+    },
+    "use": "A job on a timer runs whether or not there is anything to do, and the run costs the same either way. Put one cheap call in front of it: hand over a short summary of the last run and a list of what has changed since, and start the expensive work only when the answer clears your line. Most published add-ons that wrap Jev put it in this position, as a small gate in front of an agent step, and a check on a five-minute timer comes to well under a dollar a month at list prices.",
+    "code": {
+      "lang": "python",
+      "label": "skip a run that has nothing to do",
+      "src": "def worth_starting(last_report, changes):\n    state = \"LAST RUN ENDED WITH:\\n%s\\n\\nWHAT CHANGED SINCE:\\n%s\" % (\n        last_report, \"\\n\".join(\"- %s\" % c for c in changes))\n    qs = {\"run\": {\"type\": \"noul\",\n          \"instructions\": \"Is there anything for this scheduled run to do right now?\"}}\n    return decide(state, qs)[\"run\"][\"noul\"]\n\nif worth_starting(last_report, changes) < 0.4:\n    log(\"nothing to do, skipped before starting\")\n    return\nrun_the_expensive_pipeline()   # only now does the clock matter"
+    },
+    "prompts": [
+      {
+        "state": "LAST RUN ENDED WITH: digest published, 4 videos analysed, nothing pending.\n\nWHAT CHANGED SINCE: one new video uploaded 6 hours ago; no new newsletter; no new comments.",
+        "question": "run=Is there anything for this scheduled run to do right now?"
+      },
+      {
+        "state": "LAST RUN ENDED WITH: digest published, 4 videos analysed, nothing pending.\n\nWHAT CHANGED SINCE: nothing new on any monitored channel; a feed check returned the same items as yesterday.",
+        "question": "run=Is there anything for this scheduled run to do right now?"
+      }
+    ],
+    "plate": "A single seed resting at the left of an open field of short plain stems, with one thin amber thread leaving it and reaching a distant vertical hairline gate, the rest of the field untouched",
+    "caption": "The timer fires either way; one cheap question decides whether the expensive part starts at all.",
+    "plain": {
+      "in": "A short note of how the last run finished, and a list of what has changed since.",
+      "give": "The line below which you skip, written where the schedule lives.",
+      "ways": "Stop a scheduled job from starting when it has nothing to do, so a timer costs a fraction of a cent instead of a full run.",
+      "out": "One yes or no, with how sure it is from 0 to 1."
+    }
+  }
+]

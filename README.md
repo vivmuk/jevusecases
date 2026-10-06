@@ -1,16 +1,17 @@
 # Jev use cases
 
-**Nineteen jobs a decision model can take over, each with its code and its prompts.**
+**Twenty-two jobs a decision model can take over, each with its code and its prompts.**
 
 ![The shape of the work: one state, a set of fixed answers, one decision, drawn as vines across a cream sheet](assets/readme/overview.jpg)
 
 A language model writes an answer, and then your program has to read it, hope it is in the right shape, and cope when it is not. Jev does not write. You send it a piece of text and a set of questions whose answers you already know how to list, and it sends back one of your answers with a probability your code can test.
 
-This site is a reference to what that is good for: nineteen jobs, grouped by how much of your stack they touch, each one written in plain words as well as in code.
+This site is a reference to what that is good for: twenty-two jobs, grouped by how much of your stack they touch, each one written in plain words as well as in code. The original nineteen come from one video; the rest were found in the field afterwards.
 
 - **Live:** <https://jevusecases-production.up.railway.app>
 - **Plain-language guide:** [about.html](about.html) — what Jev is, how to call it, and where it goes wrong, set for readers who find dense text hard work.
-- **Source of the nineteen jobs:** <https://youtube.com/watch?v=3iDiWTt8lok> (Jay E | RoboNuggets)
+- **Source of the first nineteen jobs:** <https://youtube.com/watch?v=3iDiWTt8lok> (Jay E | RoboNuggets)
+- **The later jobs:** found in the field; each case card links the article that named it.
 
 ## What is here
 
@@ -26,35 +27,38 @@ Every case carries the same five things:
 
 _A single call sits in front of work you already do._
 
-- **01. Spreadsheet Data Categorisation** — `00:53` · [watch at 00:53](https://youtube.com/watch?v=3iDiWTt8lok&t=53s)
-- **02. Customer Inquiry Triage and Routing** — `01:31` · [watch at 01:31](https://youtube.com/watch?v=3iDiWTt8lok&t=91s)
-- **03. Competitor Advertisement Intelligence** — `02:35` · [watch at 02:35](https://youtube.com/watch?v=3iDiWTt8lok&t=155s)
-- **04. Video and Audio Clip Extraction** — `03:09` · [watch at 03:09](https://youtube.com/watch?v=3iDiWTt8lok&t=189s)
-- **05. Customer Churn Risk Profiling** — `03:37` · [watch at 03:37](https://youtube.com/watch?v=3iDiWTt8lok&t=217s)
-- **06. Automated Internal Linking and Knowledge Base Graphing** — `04:03` · [watch at 04:03](https://youtube.com/watch?v=3iDiWTt8lok&t=243s)
-- **07. Social Media Purchase Intent Identification** — `04:38` · [watch at 04:38](https://youtube.com/watch?v=3iDiWTt8lok&t=278s)
-- **08. Output Verification and Model Calibration** — `05:04` · [watch at 05:04](https://youtube.com/watch?v=3iDiWTt8lok&t=304s)
+- **01. Spreadsheet data categorisation** — `00:53` · [watch at 00:53](https://youtube.com/watch?v=3iDiWTt8lok&t=53s)
+- **02. Customer inquiry triage and routing** — `01:31` · [watch at 01:31](https://youtube.com/watch?v=3iDiWTt8lok&t=91s)
+- **03. Competitor advertisement intelligence** — `02:35` · [watch at 02:35](https://youtube.com/watch?v=3iDiWTt8lok&t=155s)
+- **04. Clip extraction from long recordings** — `03:09` · [watch at 03:09](https://youtube.com/watch?v=3iDiWTt8lok&t=189s)
+- **05. Churn risk profiling** — `03:37` · [watch at 03:37](https://youtube.com/watch?v=3iDiWTt8lok&t=217s)
+- **06. Internal linking and knowledge base graphing** — `04:03` · [watch at 04:03](https://youtube.com/watch?v=3iDiWTt8lok&t=243s)
+- **07. Social purchase intent** — `04:38` · [watch at 04:38](https://youtube.com/watch?v=3iDiWTt8lok&t=278s)
+- **08. Output verification and model calibration** — `05:04` · [watch at 05:04](https://youtube.com/watch?v=3iDiWTt8lok&t=304s)
+- **22. Scheduled Run Wake Check** — [OneClickClaw news](https://oneclickclaw.io/news/jev-hermes-agent-owners-8-jobs)
 
 ## Intermediate
 
 _A queue, an index, or a small service appears._
 
-- **09. Agent Skill Selection** — `06:21` · [watch at 06:21](https://youtube.com/watch?v=3iDiWTt8lok&t=381s)
-- **10. Intelligent Multi Model Routing** — `07:02` · [watch at 07:02](https://youtube.com/watch?v=3iDiWTt8lok&t=422s)
-- **11. Inbox Pre Filtering for AI Agents** — `07:37` · [watch at 07:37](https://youtube.com/watch?v=3iDiWTt8lok&t=457s)
-- **12. Browser Feed Cleansing and Element Removal** — `08:07` · [watch at 08:07](https://youtube.com/watch?v=3iDiWTt8lok&t=487s)
-- **13. Semantic In Page Search** — `08:39` · [watch at 08:39](https://youtube.com/watch?v=3iDiWTt8lok&t=519s)
-- **14. Image and Asset Retrieval via Metadata** — `09:13` · [watch at 09:13](https://youtube.com/watch?v=3iDiWTt8lok&t=553s)
+- **09. Agent skill selection** — `06:21` · [watch at 06:21](https://youtube.com/watch?v=3iDiWTt8lok&t=381s)
+- **10. Intelligent multi model routing** — `07:02` · [watch at 07:02](https://youtube.com/watch?v=3iDiWTt8lok&t=422s)
+- **11. Inbox pre filtering for AI agents** — `07:37` · [watch at 07:37](https://youtube.com/watch?v=3iDiWTt8lok&t=457s)
+- **12. Browser feed cleansing and element removal** — `08:07` · [watch at 08:07](https://youtube.com/watch?v=3iDiWTt8lok&t=487s)
+- **13. Semantic in page search** — `08:39` · [watch at 08:39](https://youtube.com/watch?v=3iDiWTt8lok&t=519s)
+- **14. Image and asset retrieval via metadata** — `09:13` · [watch at 09:13](https://youtube.com/watch?v=3iDiWTt8lok&t=553s)
+- **20. Claim and Source Support Check** — [matthiasfrank.de](https://matthiasfrank.de/en/jev-ai-use-cases/)
+- **21. Retrieval Stopping Decision** — [Lyzr](https://www.lyzr.ai/blog/jev-as-an-ai-router-and-controller/)
 
 ## Advanced
 
 _A part of your stack starts making its own choices._
 
-- **15. Live Meeting and Speech Classification** — `10:00` · [watch at 10:00](https://youtube.com/watch?v=3iDiWTt8lok&t=600s)
-- **16. Zero LLM Retrieval Engine** — `10:30` · [watch at 10:30](https://youtube.com/watch?v=3iDiWTt8lok&t=630s)
-- **17. Dynamic UI Asset and Icon Selection** — `11:13` · [watch at 11:13](https://youtube.com/watch?v=3iDiWTt8lok&t=673s)
-- **18. Dynamic Just In Time Webpage Assembly** — `11:59` · [watch at 11:59](https://youtube.com/watch?v=3iDiWTt8lok&t=719s)
-- **19. Workflow Use Case Auditing** — `12:23` · [watch at 12:23](https://youtube.com/watch?v=3iDiWTt8lok&t=743s)
+- **15. Live meeting and speech classification** — `10:00` · [watch at 10:00](https://youtube.com/watch?v=3iDiWTt8lok&t=600s)
+- **16. Zero LLM retrieval engine** — `10:30` · [watch at 10:30](https://youtube.com/watch?v=3iDiWTt8lok&t=630s)
+- **17. Dynamic UI icon selection** — `11:13` · [watch at 11:13](https://youtube.com/watch?v=3iDiWTt8lok&t=673s)
+- **18. Just in time page assembly** — `11:59` · [watch at 11:59](https://youtube.com/watch?v=3iDiWTt8lok&t=719s)
+- **19. Workflow use case auditing** — `12:23` · [watch at 12:23](https://youtube.com/watch?v=3iDiWTt8lok&t=743s)
 
 ## How the page is made
 

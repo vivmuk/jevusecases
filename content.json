@@ -3,7 +3,7 @@
     {
       "n": 1,
       "slug": "spreadsheet-categorisation",
-      "title": "Spreadsheet Data Categorisation",
+      "title": "Spreadsheet data categorisation",
       "tier": "easy",
       "at": "00:53",
       "what": "Give every row one label from a fixed list, and nothing outside the list.",
@@ -28,19 +28,12 @@
           "question": "category=choice:Which budget category?|utilities:Power, water, internet,rent:Housing,subs:Subscriptions,ignore:Not a real expense"
         }
       ],
-      "plate": "A single wide horizontal open rectangle divided by four thin vertical hairlines into five empty cells, each cell holding one short horizontal hairline of a different length; the middle cell’s hairline is amber instead of ink. Outline strokes only, at most nine elements, wide empty margins, no grid of small squares, no hatch texture, no filled blocks.",
-      "caption": "Rows go in as raw text, the label list is the question, and one label plus its probability lands in the next column.",
-      "plain": {
-        "in": "One row from a bank export, exactly as it appears.",
-        "give": "The list of categories you allow, written out in advance.",
-        "ways": "Label every row the same way, so ten thousand rows read like one.",
-        "out": "One category per row, plus how sure it is from 0 to 1."
-      }
+      "plate": "A single long horizontal bar of stacked identical tally marks on the left, a narrow vertical gate, and four separate open bins on the right receiving marks; the marks enter the gate one at a time and continue to one bin only. Show the four bins clearly separated with generous space between them."
     },
     {
       "n": 2,
       "slug": "inquiry-triage",
-      "title": "Customer Inquiry Triage and Routing",
+      "title": "Customer inquiry triage and routing",
       "tier": "easy",
       "at": "01:31",
       "what": "Read intent from an incoming message and send it down the right path.",
@@ -61,7 +54,7 @@
           "question": "dept=choice:Which team owns this?|billing:Payments,technical:Bugs,account:Login,general:Anything else"
         },
         {
-          "state": "The export button has done nothing since yesterday’s release, three of us are blocked.",
+          "state": "The export button has done nothing since yesterday's release, three of us are blocked.",
           "question": "urgency=score:How urgent is this?|Calm,Concerned,Urgent,Emergency"
         },
         {
@@ -69,24 +62,17 @@
           "question": "auto=Is this message answerable from the public documentation without a human?"
         }
       ],
-      "plate": "One inbound arrow at the left splitting into three clearly separated route lines that leave at different angles, with a small probability dial drawn as an arc sitting on the junction. Keep the three routes distinct and unlabelled.",
-      "caption": "One message arrives, one intent and one confidence come back, and the routing rule spends them.",
-      "plain": {
-        "in": "One message from a customer.",
-        "give": "Your list of teams, and your urgency levels.",
-        "ways": "Sort each message by team and urgency, and send the unsure ones to a person.",
-        "out": "A team, an urgency level and how sure it is, in one reply."
-      }
+      "plate": "One inbound arrow at the left splitting into three clearly separated route lines that leave at different angles, with a small probability dial drawn as an arc sitting on the junction. Keep the three routes distinct and unlabelled."
     },
     {
       "n": 3,
       "slug": "competitor-ad-intelligence",
-      "title": "Competitor Advertisement Intelligence",
+      "title": "Competitor advertisement intelligence",
       "tier": "easy",
       "at": "02:35",
       "what": "Turn hundreds of competitor ad variants into a pattern you can read.",
       "shape": {
-        "state": "one ad’s copy, as collected",
+        "state": "one ad's copy, as collected",
         "question": "choice for format, choice for call to action, choice for funnel stage",
         "answer": "three tags per ad, aggregate them yourself"
       },
@@ -106,19 +92,12 @@
           "question": "funnel=choice:Where in the funnel is this aimed?|top:Problem aware,mid:Comparing options,bottom:Ready to buy"
         }
       ],
-      "plate": "A wide horizontal band split into four equal open outlined boxes, each box holding a few short vertical hairline ticks; the third box is outlined in amber instead of ink. Hairline strokes only, mostly empty space, no filled blocks, no dark mass, no grid of solid squares, nothing else on the plate.",
-      "caption": "Every ad is read against the same fixed taxonomy, so the hundredth ad is tagged like the first.",
-      "plain": {
-        "in": "One competitor advert, its words only.",
-        "give": "Your three short lists: format, call to action, funnel stage.",
-        "ways": "Tag hundreds of adverts with the same three labels, so patterns appear.",
-        "out": "Three tags per advert, ready to count and compare."
-      }
+      "plate": "A dense field of many small identical rectangles at the left thinning into three neat stacks at the right, each stack a different height. No text on any rectangle."
     },
     {
       "n": 4,
       "slug": "clip-extraction",
-      "title": "Video and Audio Clip Extraction",
+      "title": "Clip extraction from long recordings",
       "tier": "easy",
       "at": "03:09",
       "what": "Find the ten minutes worth publishing inside four hours of audio.",
@@ -135,32 +114,25 @@
       },
       "prompts": [
         {
-          "state": "[00:41:12] … and that is the bit everyone gets wrong, you do not need a bigger model, you need a smaller question …",
+          "state": "[00:41:12] ... and that is the bit everyone gets wrong, you do not need a bigger model, you need a smaller question ...",
           "question": "clip=score:How strong is this passage as a standalone short clip?|Fluff,Context,Useful,Quotable,Clip gold"
         },
         {
-          "state": "[00:15:40] … so anyway we were late for the flight and the bags never made it …",
+          "state": "[00:15:40] ... so anyway we were late for the flight and the bags never made it ...",
           "question": "keep=Is this passage usable as a standalone social clip without the surrounding conversation?"
         }
       ],
-      "plate": "One very long thin timeline strip drawn as a horizontal rule, with a small fraction of it drawn thicker and raised slightly above the line to suggest a peak, and a bracket beneath that thicker part. Flat geometry, generous empty space.",
-      "caption": "A long transcript becomes numbered passages, and the passages that score highest are the ones an editor gets.",
-      "plain": {
-        "in": "One passage from a transcript, with its timecodes.",
-        "give": "What makes a moment good for you, as a scale from dull to unmissable.",
-        "ways": "Score every passage and keep the ones worth cutting.",
-        "out": "A score per passage; the top ones go to the editor."
-      }
+      "plate": "One very long thin timeline strip drawn as a horizontal rule, with a small fraction of it drawn thicker and raised slightly above the line to suggest a peak, and a bracket beneath that thicker part. Flat geometry, generous empty space."
     },
     {
       "n": 5,
       "slug": "churn-risk",
-      "title": "Customer Churn Risk Profiling",
+      "title": "Churn risk profiling",
       "tier": "easy",
       "at": "03:37",
       "what": "Sort accounts into bands your retention workflow can act on.",
       "shape": {
-        "state": "one account’s facts, named fields",
+        "state": "one account's facts, named fields",
         "question": "choice over your bands, score for how far along the risk is",
         "answer": "a band per account, routed by your code"
       },
@@ -180,19 +152,12 @@
           "question": "reach=score:How far along is the cancellation?|Just quiet,Actively drifting,Decided but not told us,Gone"
         }
       ],
-      "plate": "A single horizontal axis with three separated zones marked by thin vertical hairlines, and small identical circles migrating from the left zone toward the right zone across the axis. No text, no numbers.",
-      "caption": "Accounts move between three known states, and the state is what decides which retention play runs.",
-      "plain": {
-        "in": "One account's facts: how long they have stayed, what they pay, what they stopped doing.",
-        "give": "Your three or four risk bands.",
-        "ways": "Put every account in a band, and work the risky ones first.",
-        "out": "One band per account, with how sure it is."
-      }
+      "plate": "A single horizontal axis with three separated zones marked by thin vertical hairlines, and small identical circles migrating from the left zone toward the right zone across the axis. No text, no numbers."
     },
     {
       "n": 6,
       "slug": "internal-linking",
-      "title": "Automated Internal Linking and Knowledge Base Graphing",
+      "title": "Internal linking and knowledge base graphing",
       "tier": "easy",
       "at": "04:03",
       "what": "Connect pages or notes to each other without hand-picking the links.",
@@ -217,19 +182,12 @@
           "question": "worth=Would that link genuinely help a reader of this paragraph?"
         }
       ],
-      "plate": "A loose cloud of small circles on the left connected by a few short lines to a smaller cluster on the right, with exactly one long clean line crossing the gap. Most circles stay unconnected.",
-      "caption": "Every page is offered every other page as a candidate, and only the strongest match becomes a link.",
-      "plain": {
-        "in": "One paragraph, and the list of pages it could link to.",
-        "give": "The titles of the pages on your site.",
-        "ways": "Offer every page as a candidate, then check the best match is genuinely useful.",
-        "out": "One page to link to, or none."
-      }
+      "plate": "A loose cloud of small circles on the left connected by a few short lines to a smaller cluster on the right, with exactly one long clean line crossing the gap. Most circles stay unconnected."
     },
     {
       "n": 7,
       "slug": "purchase-intent",
-      "title": "Social Media Purchase Intent Identification",
+      "title": "Social purchase intent",
       "tier": "easy",
       "at": "04:38",
       "what": "Pull the buyers out of a comment section.",
@@ -254,28 +212,21 @@
           "question": "escalate=Does this comment need a human reply within the hour?"
         }
       ],
-      "plate": "A short row of six identical vertical hairline ticks along the top, and below them two converging hairlines that meet a small open tray holding two of those ticks. Only nine elements in total, hairline strokes, wide empty margins, no dense comb of lines, no hatching, no filled shapes.",
-      "caption": "Comments arrive in bulk, and only the ones asking how to buy reach the top of the queue.",
-      "plain": {
-        "in": "One comment from a post.",
-        "give": "The kinds of comment you care about.",
-        "ways": "Pull the buyers out of thousands of comments.",
-        "out": "One kind per comment; buyers go to the top of the queue."
-      }
+      "plate": "A wide band of many tiny identical dots at the top, with a small number of dots falling through a narrow funnel shape and landing in a small collecting tray at the bottom. Most dots stay in the band."
     },
     {
       "n": 8,
       "slug": "verification-and-calibration",
-      "title": "Output Verification and Model Calibration",
+      "title": "Output verification and model calibration",
       "tier": "easy",
       "at": "05:04",
       "what": "Measure how often the decision is right before you trust it with anything.",
       "shape": {
         "state": "one record from a labelled set, with the answer withheld",
         "question": "the same question you will ask in production",
-        "answer": "the model’s pick, for you to compare against the human answer"
+        "answer": "the model's pick, for you to compare against the human answer"
       },
-      "use": "Build a validation set of a few dozen to a few hundred records a human has already labelled, run the loop without showing the answers, and count the matches. Misclassifications tell you where the labels are ambiguous, and the spread of probabilities tells you where the confidence cutoff belongs. The video’s own advice is fifty records or more before production; tune the cutoff on one set and hold some records back.",
+      "use": "Build a validation set of a few dozen to a few hundred records a human has already labelled, run the loop without showing the answers, and count the matches. Misclassifications tell you where the labels are ambiguous, and the spread of probabilities tells you where the confidence cutoff belongs. The video's own advice is fifty records or more before production; tune the cutoff on one set and hold some records back.",
       "code": {
         "lang": "python",
         "label": "a labelled set, a match rate, a cutoff",
@@ -291,28 +242,21 @@
           "question": "category=choice:Which team owns this ticket?|billing:Payments,technical:Bugs,account:Login,general:Anything else"
         }
       ],
-      "plate": "A two-column comparison drawn as a left column of small squares and a right column of small squares, with matching pairs joined by short horizontal lines and three pairs left visibly unjoined. Flat, minimal, generous margin.",
-      "caption": "Known answers run through the same call, and the ones the model misses move the threshold.",
-      "plain": {
-        "in": "Rows you have already labelled by hand.",
-        "give": "The same question you ask in production.",
-        "ways": "Check the answers against your labels and find the cut-off that works.",
-        "out": "How often it agrees with you, and the best cut-off."
-      }
+      "plate": "A two-column comparison drawn as a left column of small squares and a right column of small squares, with matching pairs joined by short horizontal lines and three pairs left visibly unjoined. Flat, minimal, generous margin."
     },
     {
       "n": 9,
       "slug": "skill-selection",
-      "title": "Agent Skill Selection",
+      "title": "Agent skill selection",
       "tier": "intermediate",
       "at": "06:21",
       "what": "Let the agent pick the right skill before it loads any of them.",
       "shape": {
-        "state": "the user’s prompt",
+        "state": "the user's prompt",
         "question": "choice, one option per skill in the library",
         "answer": "the skill to load, plus how sure it is"
       },
-      "use": "You do not have to put every skill description in the context window to choose one. Register the skills as the options, send the prompt, and load only the winner. In the video’s own counting, 145 skills were matched in about five seconds across fourteen tests against roughly thirty for the larger model, and a separate test over 182 skills cut wrong picks by more than half. Keep the option list to the skills that are real candidates for this agent.",
+      "use": "You do not have to put every skill description in the context window to choose one. Register the skills as the options, send the prompt, and load only the winner. In the video's own counting, 145 skills were matched in about five seconds across fourteen tests against roughly thirty for the larger model, and a separate test over 182 skills cut wrong picks by more than half. Keep the option list to the skills that are real candidates for this agent.",
       "code": {
         "lang": "bash",
         "label": "the skill library is the menu",
@@ -328,24 +272,17 @@
           "question": "skill=choice:Which skill should the agent load?|xlsx:Spreadsheet work,docx:Word documents,arxiv:Paper search,email-inbox-triage:Inbox triage"
         }
       ],
-      "plate": "One small square at the left connected by a single clean line to exactly one filled square selected out of a neatly spaced grid of twelve empty squares at the right. The chosen square is solid, the rest are outlines.",
-      "caption": "A whole directory of skills becomes a menu, and the prompt picks one line from it before anything loads.",
-      "plain": {
-        "in": "What the person just asked for.",
-        "give": "The list of skills your agent has.",
-        "ways": "Pick one skill before any of them start loading.",
-        "out": "One skill, so only that one runs."
-      }
+      "plate": "One small square at the left connected by a single clean line to exactly one filled square selected out of a neatly spaced grid of twelve empty squares at the right. The chosen square is solid, the rest are outlines."
     },
     {
       "n": 10,
       "slug": "model-routing",
-      "title": "Intelligent Multi Model Routing",
+      "title": "Intelligent multi model routing",
       "tier": "intermediate",
       "at": "07:02",
       "what": "Send the easy question to the cheap model and the hard one to the expensive model.",
       "shape": {
-        "state": "the user’s message",
+        "state": "the user's message",
         "question": "choice over the models you have wired up",
         "answer": "the model to call, decided in about a third of a second"
       },
@@ -365,19 +302,12 @@
           "question": "model=choice:Which model tier does this request need?|cheap:Short lookup, formatting or extraction,mid:Normal edit, explanation or small refactor,frontier:Multi-step reasoning, architecture, hard bugs"
         }
       ],
-      "plate": "One horizontal hairline that splits into two diverging hairlines of the same thin weight, with a small open circle sitting on the split point. Uniform hairline strokes of equal weight, one small amber dot on the upper branch, lots of empty space, nothing else on the plate.",
-      "caption": "One prompt goes in, and the price of answering it is decided before the answer is.",
-      "plain": {
-        "in": "The incoming request.",
-        "give": "Your models, and what each one costs.",
-        "ways": "Send easy work to cheap models and hard work to strong ones.",
-        "out": "One model per request, chosen before the answer."
-      }
+      "plate": "One inbound line at the left meeting a small junction, with two outgoing lines of clearly different weight and thickness leaving to the right. Nothing else on the plate."
     },
     {
       "n": 11,
       "slug": "inbox-pre-filtering",
-      "title": "Inbox Pre Filtering for AI Agents",
+      "title": "Inbox pre filtering for AI agents",
       "tier": "intermediate",
       "at": "07:37",
       "what": "Stop paying a frontier model to read spam.",
@@ -386,7 +316,7 @@
         "question": "choice over the buckets you act on",
         "answer": "one bucket per message; only the useful ones continue downstream"
       },
-      "use": "Put the decision in front of the writing. Each message is bucketed as an actionable inquiry, a sponsorship, spam or phishing; spam and phishing are dropped, and only the messages that need a reply reach the model that drafts. In the video’s own run, 1,700 messages were sorted for eighteen cents. Keep the state to the fields the question needs, because the rest of the message is a distraction.",
+      "use": "Put the decision in front of the writing. Each message is bucketed as an actionable inquiry, a sponsorship, spam or phishing; spam and phishing are dropped, and only the messages that need a reply reach the model that drafts. In the video's own run, 1,700 messages were sorted for eighteen cents. Keep the state to the fields the question needs, because the rest of the message is a distraction.",
       "code": {
         "lang": "python",
         "label": "read the headers, drop the noise",
@@ -402,36 +332,12 @@
           "question": "bucket=choice:Which bucket does this message belong in?|inquiry:A real person who needs a reply,sponsor:A commercial pitch, route to the deals file,spam:Bulk marketing, no reply,phish:Attempting to take credentials or money"
         }
       ],
-      "plate": "A tall stack of many thin horizontal rectangles at the left, a wide gate in the middle, and two small trays at the right holding just a few rectangles. The bulk of the rectangles stop at the gate.",
-      "plate_levels": {
-        "minimal": "Three flat envelope rectangles in a single row, evenly spaced; the middle one carries a small amber diagonal cross, and one arrow leaves the row to the right.",
-        "readable": "Six flat envelope rectangles arriving from the left in a loose stack, passing under a single horizontal gate line that spans the frame; below the line two envelopes fall away, one of them carrying a small amber cross, while three envelopes continue right into a simple flat machine shape like a box with two dials.",
-        "detailed": [
-          "A wide open inbox tray at the left holding seven flat envelopes of slightly different sizes. From the tray a single path leads right to a small open circle, and from that circle the path splits in two: the upper branch climbs to a flat desk holding a small machine box and one sheet of ruled lines, the lower branch drops into an open bin. Three envelopes travel along the upper branch to the desk, and two envelopes, each crossed with a small amber X, fall down the lower branch into the bin. A small clock outline stands beside the desk and a paperclip rests next to the tray.",
-          "A tall stack of nine flat envelopes at the left, the top envelope sitting slightly apart from the rest. A wide horizontal sorting rack with six slats spans the middle of the frame. Two envelopes, each crossed with a small amber X, fall from the rack into an open bin below it. Four envelopes continue to the right along a single horizontal line that ends at a small machine box with two dials, with one sheet of ruled lines beneath it. A paperclip rests beside the machine.",
-          "Three groupings joined by thick arrows with clear arrowheads: at the left a flat inbox tray holding seven envelopes stacked in it; in the middle a tall vertical sorter with six horizontal slats, with two envelopes crossed by small amber X marks tumbling from its base down into an open bin; at the right a flat desk carrying a machine box with two dials, one sheet of ruled lines, and a small clock outline beside them."
-        ],
-        "detailed_text": [
-          "A single flat mail-application window seen straight on: a title bar across its top, and a list of six message rows inside, each row a horizontal band with a small envelope square at its left and one short ruled line where the subject would be. Two of the rows carry a small amber cross at the right end, and one of those two carries a small amber tag reading SPAM. A thick arrow leaves the right edge of the window and points into a narrower second panel holding a single document sheet with ruled lines above a small outlined button, with the label DRAFT across the top of that panel. A short label reading INBOX sits above the window.",
-          "Three flat panels in a row, joined by thick arrows. The left panel is a tall rectangle holding five stacked message bars, labelled INBOX across its top. The middle panel is a narrow vertical gate with a small diamond at its centre, and two message bars carrying small amber crosses fall from the gate down into a small open bin whose tag reads SPAM. The right panel holds one document sheet with ruled lines and is labelled DRAFT across its top.",
-          "A wide product window divided into two columns by a vertical divider, seen straight on. The left column is an email list of seven horizontal rows, each with a small square at its left, two ruled lines, and a small amber cross on two of the rows; a short label reading INBOX sits above the list. The right column is a reading pane holding a wide ruled document sheet, and beneath it a smaller panel with three ruled lines and two outlined buttons, labelled DRAFT above it. A thick arrow runs from the list into the right pane."
-        ]
-      },
-      "plate_labels": {
-        "detailed_text": "INBOX, SPAM, DRAFT"
-      },
-      "caption": "Mail arrives as the state, the filter is the question, and only what survives it reaches a model that writes.",
-      "plain": {
-        "in": "One email: the sender, the subject, the first part of the body.",
-        "give": "Your four buckets, including spam.",
-        "ways": "Drop the junk before any writing model ever sees it.",
-        "out": "One bucket per email; only real messages reach the writer."
-      }
+      "plate": "A tall stack of many thin horizontal rectangles at the left, a wide gate in the middle, and two small trays at the right holding just a few rectangles. The bulk of the rectangles stop at the gate."
     },
     {
       "n": 12,
       "slug": "feed-cleansing",
-      "title": "Browser Feed Cleansing and Element Removal",
+      "title": "Browser feed cleansing and element removal",
       "tier": "intermediate",
       "at": "08:07",
       "what": "Judge each item as it loads and hide what does not earn the space.",
@@ -440,7 +346,7 @@
         "question": "a single noul question, asked hundreds of times",
         "answer": "a probability per item; your code hides or keeps"
       },
-      "use": "A content script walks the loaded items, asks one narrow question of each, and collapses the ones that fail. The video’s example hides posts that read as machine-generated filler; the same shape hides ads or cookie notices. Because one call answers in a fraction of a second, the page still feels instant if you judge only the items actually in view.",
+      "use": "A content script walks the loaded items, asks one narrow question of each, and collapses the ones that fail. The video's example hides posts that read as machine-generated filler; the same shape hides ads or cookie notices. Because one call answers in a fraction of a second, the page still feels instant if you judge only the items actually in view.",
       "code": {
         "lang": "javascript",
         "label": "one question per post, in the page",
@@ -456,19 +362,12 @@
           "question": "hide=Is this post low-effort machine-generated filler?"
         }
       ],
-      "plate": "A vertical column of small identical rectangles, three of them drawn as faint outlines and the rest solid, with the faint ones marked by a very thin diagonal cross drawn across each. Minimal and flat.",
-      "caption": "Loaded text is judged before it is seen, so the flagged blocks never take up the page.",
-      "plain": {
-        "in": "One block of loaded page text.",
-        "give": "What counts as low-effort filler for you.",
-        "ways": "Judge each block before it is shown to anyone.",
-        "out": "A yes or no per block; the yes ones stay hidden."
-      }
+      "plate": "A vertical column of small identical rectangles, three of them drawn as faint outlines and the rest solid, with the faint ones marked by a very thin diagonal cross drawn across each. Minimal and flat."
     },
     {
       "n": 13,
       "slug": "semantic-search",
-      "title": "Semantic In Page Search",
+      "title": "Semantic in page search",
       "tier": "intermediate",
       "at": "08:39",
       "what": "Find the paragraph you meant, not the words you typed.",
@@ -493,19 +392,12 @@
           "question": "hit=choice:Which section of this page answers the query?|s0:Billing,s1:Shipping,s2:Account,none:No section matches"
         }
       ],
-      "plate": "A vertical column of stacked paragraph bars drawn as thin outlined rectangles, with one bar near the middle drawn as a double outline and a short straight arrow entering it from the left. White hairline strokes only on the dark ground, exactly one amber element, no grey fills, no curved arrows, at most eight bars.",
-      "caption": "The query and the sections are offered together, and the closest meaning wins, not the closest spelling.",
-      "plain": {
-        "in": "What the visitor typed, plus the sections of your page.",
-        "give": "The headings and openings of your sections.",
-        "ways": "Match by meaning rather than by exact words.",
-        "out": "The section that answers it, or none."
-      }
+      "plate": "A column of stacked paragraphs drawn as simple grey bars, with one bar highlighted by a thin outline and a small arrow curving into it from the left. The rest of the column is quiet."
     },
     {
       "n": 14,
       "slug": "asset-retrieval",
-      "title": "Image and Asset Retrieval via Metadata",
+      "title": "Image and asset retrieval via metadata",
       "tier": "intermediate",
       "at": "09:13",
       "what": "Search a media library by what is in the picture, not by file name.",
@@ -514,7 +406,7 @@
         "question": "choice over asset keys",
         "answer": "the asset to open, or no match"
       },
-      "use": "File names are a poor index, so every asset gets text first: the prompt it was generated from, or a caption written by a cheap multimodal model at indexing time. Searching then becomes one typed decision over those records. The video’s own note is that captions are nearly free at this scale, and the index is worth more than the model that wrote it.",
+      "use": "File names are a poor index, so every asset gets text first: the prompt it was generated from, or a caption written by a cheap multimodal model at indexing time. Searching then becomes one typed decision over those records. The video's own note is that captions are nearly free at this scale, and the index is worth more than the model that wrote it.",
       "code": {
         "lang": "python",
         "label": "caption once, decide on every search",
@@ -530,19 +422,12 @@
           "question": "hit=choice:Which asset is the query asking for?|a1:Harbour at night,a2:Funnel diagram,a3:Studio desk,none:Nothing in the library matches"
         }
       ],
-      "plate": "A grid of small empty picture frames at the left and one larger frame pulled out and highlighted at the right, with a single line connecting the two. The frames are empty of any content.",
-      "caption": "Every asset carries a description, and the search reads descriptions instead of file names.",
-      "plain": {
-        "in": "What someone is looking for, in their own words.",
-        "give": "A one-line description of every asset.",
-        "ways": "Search the descriptions instead of the file names.",
-        "out": "The one asset that fits, or nothing."
-      }
+      "plate": "A grid of small empty picture frames at the left and one larger frame pulled out and highlighted at the right, with a single line connecting the two. The frames are empty of any content."
     },
     {
       "n": 15,
       "slug": "live-speech-classification",
-      "title": "Live Meeting and Speech Classification",
+      "title": "Live meeting and speech classification",
       "tier": "advanced",
       "at": "10:00",
       "what": "Tag sentences while they are still being spoken.",
@@ -551,7 +436,7 @@
         "question": "choice over your categories, plus a noul for whether it is an action",
         "answer": "one tag per sentence, accumulating into live notes"
       },
-      "use": "Stream the audio through speech to text, and send each finished sentence as its own call, because a sentence is short and the answer comes back before the next one lands. Sentences are sorted into decisions, action items, risks and questions, which is a meeting record written as it happens. The video’s example on the same shape scores a debate as it is spoken, one sentence at a time.",
+      "use": "Stream the audio through speech to text, and send each finished sentence as its own call, because a sentence is short and the answer comes back before the next one lands. Sentences are sorted into decisions, action items, risks and questions, which is a meeting record written as it happens. The video's example on the same shape scores a debate as it is spoken, one sentence at a time.",
       "code": {
         "lang": "python",
         "label": "one finished sentence, one tag",
@@ -560,31 +445,24 @@
       "prompts": [
         {
           "state": "Priya said: let us ship the smaller version on Thursday and keep the migration for next month.",
-          "question": "kind=choice:How should Priya’s sentence be filed in the minutes?|decision:A choice the room committed to,action:Something one named person will do,risk:A problem or dependency raised,question:Something still unanswered"
+          "question": "kind=choice:How should Priya's sentence be filed in the minutes?|decision:A choice the room committed to,action:Something one named person will do,risk:A problem or dependency raised,question:Something still unanswered"
         },
         {
           "state": "Sam said: I will get the pricing page rewritten before the launch review.",
           "question": "owner=Does this sentence name the person who will do the work?"
         }
       ],
-      "plate": "One horizontal hairline near the top with a row of short vertical ticks of varying length hanging beneath it, and one small outlined tray below holding two ticks. At most twelve elements in total, wide margins, nothing else on the plate.",
-      "caption": "Sentences are sorted as they are spoken: decision, action, risk or question.",
-      "plain": {
-        "in": "One finished sentence, and who said it.",
-        "give": "Your four kinds: decision, action, risk, question.",
-        "ways": "Sort the meeting while people are still speaking.",
-        "out": "One tag per sentence, building the notes live."
-      }
+      "plate": "A single horizontal waveform rule at the top with short vertical ticks hanging beneath it at irregular spacing, and four small separate trays arranged along the bottom, each holding a couple of ticks."
     },
     {
       "n": 16,
       "slug": "retrieval-engine",
-      "title": "Zero LLM Retrieval Engine",
+      "title": "Zero LLM retrieval engine",
       "tier": "advanced",
       "at": "10:30",
       "what": "Answer narrow questions from a fixed corpus with no text generation at all.",
       "shape": {
-        "state": "the visitor’s question",
+        "state": "the visitor's question",
         "question": "choice over indexed topic units, plus a noul for whether the corpus covers it",
         "answer": "the matching item and its timestamp; no prose"
       },
@@ -604,19 +482,12 @@
           "question": "covered=Does the library actually cover this question?"
         }
       ],
-      "plate": "A neat grid of small identical rectangles at the left, one inbound arrow from the bottom left, and a single rectangle sliding slightly out of the grid at the right. Nothing else.",
-      "caption": "A question matches a known answer, and nothing is generated in order to say so.",
-      "plain": {
-        "in": "A question from a user.",
-        "give": "One description and a start time per video or document.",
-        "ways": "Answer without writing anything new.",
-        "out": "The right passage, or an honest nothing."
-      }
+      "plate": "A neat grid of small identical rectangles at the left, one inbound arrow from the bottom left, and a single rectangle sliding slightly out of the grid at the right. Nothing else."
     },
     {
       "n": 17,
       "slug": "icon-selection",
-      "title": "Dynamic UI Asset and Icon Selection",
+      "title": "Dynamic UI icon selection",
       "tier": "advanced",
       "at": "11:13",
       "what": "Pick the picture that matches what the user just typed.",
@@ -641,24 +512,17 @@
           "question": "icon=choice:Which icon matches what the user just typed?|water:Glass of water,walk:Footsteps,read:Open book,sleep:Crescent moon,meditate:Seated figure,gym:Dumbbell,none:Nothing in this set fits"
         }
       ],
-      "plate": "Three small open outlined shapes in a row (a circle, a square, a triangle) of equal size, with one amber outline drawn around the square. Outline strokes only, no filled shapes, no large coloured area, wide empty margins, nothing else on the plate.",
-      "caption": "Typed text chooses the icon, and the interface keeps up with the typing.",
-      "plain": {
-        "in": "What the person just typed.",
-        "give": "Your icon set, one line each.",
-        "ways": "Choose the icon while the typing is still happening.",
-        "out": "One icon on the screen."
-      }
+      "plate": "A short line of simple drawn symbols in a row at the bottom, all pale outlines, with one single symbol lifted out and rendered larger and solid directly above the row."
     },
     {
       "n": 18,
       "slug": "page-assembly",
-      "title": "Dynamic Just In Time Webpage Assembly",
+      "title": "Just in time page assembly",
       "tier": "advanced",
       "at": "11:59",
       "what": "Choose the parts a visitor needs and build the page from them.",
       "shape": {
-        "state": "the visitor’s signals, written as facts",
+        "state": "the visitor's signals, written as facts",
         "question": "one choice per slot in the layout",
         "answer": "which module fills each slot; your code renders them"
       },
@@ -678,19 +542,12 @@
           "question": "proof=choice:Which proof module fits this visitor?|logos:Customer logos,caseStudy:One case study,quote:A single customer quote,none:No proof block"
         }
       ],
-      "plate": "A wireframe of a single page drawn as empty outlined blocks in a vertical stack at the right, with three alternative small blocks drawn separately at the left and one short line pointing from one of them into the top slot.",
-      "caption": "Visitor signals pick the modules, and the page is assembled before it is read.",
-      "plain": {
-        "in": "Where the visitor came from and what they have already read.",
-        "give": "Your page modules: hero, proof, call to action.",
-        "ways": "Build the page for this visitor, just in time.",
-        "out": "The modules to show, in their order."
-      }
+      "plate": "A wireframe of a single page drawn as empty outlined blocks in a vertical stack at the right, with three alternative small blocks drawn separately at the left and one short line pointing from one of them into the top slot."
     },
     {
       "n": 19,
       "slug": "use-case-audit",
-      "title": "Workflow Use Case Auditing",
+      "title": "Workflow use case auditing",
       "tier": "advanced",
       "at": "12:23",
       "what": "Find the steps in your own work that should have been a decision, not a model call.",
@@ -715,13 +572,123 @@
           "question": "fits=Could this step be answered by picking between options you could write down in advance?"
         }
       ],
-      "plate": "A long horizontal process line made of many small evenly spaced squares, with three of the squares picked out by small vertical brackets beneath them and the rest left plain. Wide margins, flat geometry.",
-      "caption": "Every step of an existing workflow is asked the same question, and the answers sort the steps into work a model can take.",
+      "plate": "A long horizontal process line made of many small evenly spaced squares, with three of the squares picked out by small vertical brackets beneath them and the rest left plain. Wide margins, flat geometry."
+    },
+    {
+      "n": 20,
+      "slug": "claim-source-support",
+      "title": "Claim and Source Support Check",
+      "tier": "intermediate",
+      "at": "",
+      "source": "https://matthiasfrank.de/en/jev-ai-use-cases/",
+      "source_name": "matthiasfrank.de",
+      "what": "Given a claim and a passage, decide whether the passage actually supports it.",
+      "shape": {
+        "state": "one claim and one passage, labelled so neither can be mistaken for the other",
+        "question": "noul, for whether this passage supports this claim",
+        "answer": "a yes or no plus its probability"
+      },
+      "use": "Every citation a pipeline produces is a claim that this passage backs this sentence, and a language model will happily assert that backing without checking. Send the pair to Jev instead and put the threshold in your code: high means write the citation, low means the claim is unsupported and goes back to the writer, and the middle band means gather another passage before deciding. Because the question names the passage, the answer is about that text and not about what the model happens to remember.",
+      "code": {
+        "lang": "python",
+        "label": "one claim, one passage, one verdict",
+        "src": "CLAIM = \"The study found the model matched the larger system on abstracts.\"\nPASSAGE = (\"On the 1,240 abstract questions the two were within 0.2 points, \"\n           \"78.4% against 78.2%.\")\n\ndef supports(claim, passage):\n    state = \"CLAIM:\\n%s\\n\\nPASSAGE:\\n%s\" % (claim, passage)\n    qs = {\"supports\": {\"type\": \"noul\",\n          \"instructions\": \"Does the passage support the claim? Answer only from the passage given.\"}}\n    return decide(state, qs)[\"supports\"][\"noul\"]\n\np = supports(CLAIM, PASSAGE)\nif p >= 0.8:\n    cite(CLAIM, PASSAGE)\nelif p <= 0.3:\n    send_back(CLAIM)          # the passage does not carry it\n# between the two: gather another passage, then ask again"
+      },
+      "prompts": [
+        {
+          "state": "CLAIM: The report shows adopters cut review time by half.\n\nPASSAGE: Teams that adopted the tool reported a 46% reduction in review time, against 8% in the control group.",
+          "question": "supports=Does the passage support the claim? Answer only from the passage given."
+        },
+        {
+          "state": "CLAIM: The benchmark found prompt-injection filtering was solved.\n\nPASSAGE: Two of the nine filters blocked 89.0% of injected messages; the remaining seven ranged from 61% to 84%.",
+          "question": "supports=Does the passage support the claim? Answer only from the passage given."
+        }
+      ],
+      "plate": "A single vine entering from the left and meeting one vertical hairline gate, one branch passing through the gate and growing on, one branch stopping dead at it, and a single amber bloom carried on the branch that passed",
+      "caption": "A claim and the passage offered for it go in together, and one probability says whether the passage carries the claim or only stands near it.",
       "plain": {
-        "in": "One step from a log or a process document.",
-        "give": "Four kinds of step: decision, writing, counting, lookup.",
-        "ways": "Ask of every step whether a typed decision would have done the job.",
-        "out": "A list of steps worth replacing, best first."
+        "in": "One sentence someone wrote, and one passage that is supposed to be its evidence.",
+        "give": "The rule that only the passage counts, written into the question.",
+        "ways": "Check every citation a pipeline makes before the citation is written down, so an unsupported claim never reaches the reader.",
+        "out": "One yes or no, with how sure it is from 0 to 1."
+      }
+    },
+    {
+      "n": 21,
+      "slug": "retrieval-stopping",
+      "title": "Retrieval Stopping Decision",
+      "tier": "intermediate",
+      "at": "",
+      "source": "https://www.lyzr.ai/blog/jev-as-an-ai-router-and-controller/",
+      "source_name": "Lyzr",
+      "what": "Decide whether the passages gathered so far are enough to answer, or whether to keep looking.",
+      "shape": {
+        "state": "the question, plus the passages gathered so far",
+        "question": "noul, asked again after every round of searching",
+        "answer": "a yes or no plus its probability, read against a threshold in your code"
+      },
+      "use": "A search-and-answer system usually stops on a fixed number of rounds, which wastes calls when the first two passages already settled it and gives up too early when they did not. Ask the stopping question instead, after each round, and let the answer end the loop. The published test found the signal scored 0.90 on both single-passage and multi-step questions, but its default cut-off of 0.5 stops far too eagerly, so raise the line to about 0.8 and keep it next to the loop it controls.",
+      "code": {
+        "lang": "python",
+        "label": "stop searching when the pile is enough",
+        "src": "THRESHOLD = 0.8   # the maker's default of 0.5 stops too early\n\ndef enough(question, passages):\n    state = \"QUESTION:\\n%s\\n\\nPASSAGES:\\n%s\" % (\n        question, \"\\n\\n\".join(\"- %s\" % p for p in passages))\n    qs = {\"enough\": {\"type\": \"noul\",\n          \"instructions\": \"Are these passages enough to answer the question, or should we keep looking?\"}}\n    return decide(state, qs)[\"enough\"][\"noul\"]\n\npassages = []\nwhile len(passages) < 40:\n    passages += search_next(question)\n    if enough(question, passages) >= THRESHOLD:\n        break\nanswer(question, passages)"
+      },
+      "prompts": [
+        {
+          "state": "QUESTION: What did the Red Hat benchmark conclude about small trained filters?\n\nPASSAGES:\n- Nine filters were tested: Jev, two older zero-shot classifiers, three large models asked to judge, and two downloadable decision models.\n- On prompt injection the 200M trained filter reached 89.0% and Jev 86.4%, and the filter answered about six times faster.",
+          "question": "enough=Are these passages enough to answer the question, or should we keep looking?"
+        },
+        {
+          "state": "QUESTION: Why did the modem not come up on the Pixel 4 port?\n\nPASSAGES:\n- The device boots with working display, touch and Wi-Fi.\n- Cellular data is listed as broken in the project's own support table.",
+          "question": "enough=Are these passages enough to answer the question, or should we keep looking?"
+        }
+      ],
+      "plate": "A vine winding to the right through a row of small vertical hairline gates, growing past the first three and stopping at the fourth, with a single amber bloom opening where it stops",
+      "caption": "The searching loop asks one question after every round, and the answer decides whether there is another round at all.",
+      "plain": {
+        "in": "The question, and everything the search has brought back so far.",
+        "give": "The line at which you accept that the pile is enough, written in your own code.",
+        "ways": "Let the searching stop when it has enough instead of after a fixed number of rounds, so it stops paying for passages it did not need.",
+        "out": "One yes or no, with how sure it is from 0 to 1, asked again after each round."
+      }
+    },
+    {
+      "n": 22,
+      "slug": "scheduled-run-wake-check",
+      "title": "Scheduled Run Wake Check",
+      "tier": "easy",
+      "at": "",
+      "source": "https://oneclickclaw.io/news/jev-hermes-agent-owners-8-jobs",
+      "source_name": "OneClickClaw news",
+      "what": "Decide whether a scheduled run has anything to do today, before paying to start it.",
+      "shape": {
+        "state": "what the last run finished with, and what has changed since",
+        "question": "noul, for whether this run is worth starting at all",
+        "answer": "a yes or no plus its probability"
+      },
+      "use": "A job on a timer runs whether or not there is anything to do, and the run costs the same either way. Put one cheap call in front of it: hand over a short summary of the last run and a list of what has changed since, and start the expensive work only when the answer clears your line. Most published add-ons that wrap Jev put it in this position, as a small gate in front of an agent step, and a check on a five-minute timer comes to well under a dollar a month at list prices.",
+      "code": {
+        "lang": "python",
+        "label": "skip a run that has nothing to do",
+        "src": "def worth_starting(last_report, changes):\n    state = \"LAST RUN ENDED WITH:\\n%s\\n\\nWHAT CHANGED SINCE:\\n%s\" % (\n        last_report, \"\\n\".join(\"- %s\" % c for c in changes))\n    qs = {\"run\": {\"type\": \"noul\",\n          \"instructions\": \"Is there anything for this scheduled run to do right now?\"}}\n    return decide(state, qs)[\"run\"][\"noul\"]\n\nif worth_starting(last_report, changes) < 0.4:\n    log(\"nothing to do, skipped before starting\")\n    return\nrun_the_expensive_pipeline()   # only now does the clock matter"
+      },
+      "prompts": [
+        {
+          "state": "LAST RUN ENDED WITH: digest published, 4 videos analysed, nothing pending.\n\nWHAT CHANGED SINCE: one new video uploaded 6 hours ago; no new newsletter; no new comments.",
+          "question": "run=Is there anything for this scheduled run to do right now?"
+        },
+        {
+          "state": "LAST RUN ENDED WITH: digest published, 4 videos analysed, nothing pending.\n\nWHAT CHANGED SINCE: nothing new on any monitored channel; a feed check returned the same items as yesterday.",
+          "question": "run=Is there anything for this scheduled run to do right now?"
+        }
+      ],
+      "plate": "A single seed resting at the left of an open field of short plain stems, with one thin amber thread leaving it and reaching a distant vertical hairline gate, the rest of the field untouched",
+      "caption": "The timer fires either way; one cheap question decides whether the expensive part starts at all.",
+      "plain": {
+        "in": "A short note of how the last run finished, and a list of what has changed since.",
+        "give": "The line below which you skip, written where the schedule lives.",
+        "ways": "Stop a scheduled job from starting when it has nothing to do, so a timer costs a fraction of a cent instead of a full run.",
+        "out": "One yes or no, with how sure it is from 0 to 1."
       }
     }
   ]

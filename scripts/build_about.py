@@ -27,7 +27,7 @@ SOURCES = [
     ("DataCamp: System One models explained", "https://www.datacamp.com/blog/system-one-models-jev",
      "A plain-language explainer of the category, the price and the latency claims."),
     ("The video this site is built from", "https://youtube.com/watch?v=3iDiWTt8lok",
-     "Jay E | RoboNuggets walks the nineteen jobs with prompts."),
+     "Jay E | RoboNuggets walks the original jobs with prompts."),
 ]
 
 QUESTIONS = [

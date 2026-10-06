@@ -9,8 +9,10 @@ for part in sorted((root / "content").glob("part*.json")):
     cases.extend(json.loads(part.read_text()))
 
 cases.sort(key=lambda c: c["n"])
-assert len(cases) == 19, "expected 19 cases, found %d" % len(cases)
-assert len({c["slug"] for c in cases}) == 19, "duplicate slugs"
+if len(cases) < 19:
+    raise SystemExit("expected at least 19 cases, found %d" % len(cases))
+if len({c["slug"] for c in cases}) != len(cases):
+    raise SystemExit("duplicate slugs")
 for c in cases:
     for field in ("n", "slug", "title", "tier", "at", "what", "shape", "use", "code", "prompts", "plate"):
         assert field in c, "case %s missing %s" % (c["n"], field)

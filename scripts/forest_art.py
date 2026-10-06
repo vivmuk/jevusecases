@@ -73,6 +73,9 @@ CASES = {
     17: "one blossom chosen from a rack of dormant buds, opening as it is picked",
     18: "vines assembling a lattice arbour in the order a visitor walks through it",
     19: "a long winding path of vines with a few cut away, the rest still growing",
+    20: "a single vine meeting one vertical gate of light, one branch passing through it and one stopped dead",
+    21: "a vine winding to the right through a row of small gates, stopping at the fourth where an amber bloom opens",
+    22: "one seed resting at the left of an open field of short plain stems, a thin amber thread reaching a distant gate",
 }
 
 HERO = (
