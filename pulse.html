@@ -25,13 +25,13 @@
 <div class="hero"><img src="assets/forest/hero.webp" width="2000" height="1125" alt="">
 <h1>Pulse</h1></div>
 <p class="lede">What people are writing, building and arguing about with the Jev decision model: the jobs nobody has listed yet, the findings from the first independent tests, and the places to read more. <strong>Every entry links to its source.</strong> The sweep runs each Tuesday morning, so this page is always the most recent pass.</p>
-<p class="count">Last collected 5 October 2026. 16 entries, and 7 of them are jobs no case here covers yet.</p>
+<p class="count">Last collected 6 October 2026. 22 entries, and 8 of them are jobs no case here covers yet.</p>
 <p class="count">Collected on Tuesdays at 09:00 by the weekly sweep: search Twitter/X, YouTube, Reddit, Hacker News, the official docs and the blogs that cover Jev, then read what changed and add what is new here.</p>
 <hr class="rule">
 <div class="controls" role="group" aria-label="Filter the entries">
-<button type="button" class="filt" data-filter="all" aria-pressed="true">Everything <b>16</b></button><button type="button" class="filt" data-filter="gap" aria-pressed="false">Jobs no case covers yet <b>7</b></button><button type="button" class="filt" data-filter="insight" aria-pressed="false">New learning <b>5</b></button><button type="button" class="filt" data-filter="usecase" aria-pressed="false">Working example <b>2</b></button><button type="button" class="filt" data-filter="resource" aria-pressed="false">Where to read more <b>2</b></button>
+<button type="button" class="filt" data-filter="all" aria-pressed="true">Everything <b>22</b></button><button type="button" class="filt" data-filter="gap" aria-pressed="false">Jobs no case covers yet <b>8</b></button><button type="button" class="filt" data-filter="insight" aria-pressed="false">New learning <b>10</b></button><button type="button" class="filt" data-filter="usecase" aria-pressed="false">Working example <b>2</b></button><button type="button" class="filt" data-filter="resource" aria-pressed="false">Where to read more <b>2</b></button>
 </div>
-<p class="count" id="shown" aria-live="polite">All 16 entries are shown.</p>
+<p class="count" id="shown" aria-live="polite">All 22 entries are shown.</p>
 <div class="feed" id="feed">
 <article class="post" id="sig-007" data-kind="gap">
   <div class="post__ava ava--gap" aria-hidden="true">1P</div>
@@ -48,6 +48,23 @@
       <span class="chip chip--kind">Jobs no case covers yet</span>
       <span class="post__tags"><span class="tag">#grounding</span><span class="tag">#knowledge work</span></span>
       <a class="post__link" href="https://matthiasfrank.de/en/jev-ai-use-cases/" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-019" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">AA</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">OneClickClaw, reporting the Hermes plugin catalogue and Nous Research&#x27;s own test</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">agent add-ons</span></p>
+    <p class="post__where"><span class="post__source">OneClickClaw news · Hermes Agent add-ons</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">3 October 2026</span></p>
+    <h2 class="post__title">The one job they tried and dropped: shortening a long conversation</h2>
+    <p class="post__sum">By 3 October the official Hermes plugin catalogue listed thirteen add-ons built on Jev, and most of them are small gates inside the agent: approve or refuse a risky command, pick the one skill a request needs, skip a scheduled run that would do nothing, decide whether a lesson is worth saving. The one job the makers tested themselves and turned down was using Jev to shorten a long conversation. The verdict in their own scorecard is &quot;do not adopt Jev&quot; for it: it was far quicker and cheaper, 1.4 seconds and under a cent against 37 seconds and six cents, but it kept about twice as much text and remembered slightly less.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>None of the nineteen cases here covers the &quot;what do I keep in the conversation&quot; decision, and this is the evidence that the obvious use of a fast decider for it does not pay.</li><li>The gain came from keeping the person&#x27;s own words word-for-word and deleting old tool output, not from Jev: at its default setting it dropped all 851 candidates it was shown.</li><li>The warning worth copying: keeping more context means paying for it again on every turn, so the saving is smaller than the price list suggests.</li><li>The add-ons are the better model of the shape — small, single, checkable decisions placed around an agent, rather than one big one.</li></ul>
+    <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
+      <span class="post__tags"><span class="tag">#agents</span><span class="tag">#context</span><span class="tag">#gaps</span></span>
+      <a class="post__link" href="https://oneclickclaw.io/news/jev-hermes-agent-owners-8-jobs" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
 <article class="post" id="sig-001" data-kind="gap">
@@ -152,6 +169,40 @@
       <a class="post__link" href="https://www.reddit.com/r/AI_Agents/comments/1wmpcbs/interesting_disruptive_use_cases_of_jev_for_me/" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
+<article class="post" id="sig-017" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">IS</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Yaodong Yang and six co-authors, Chinese University of Hong Kong and other universities</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">independent study</span></p>
+    <p class="post__where"><span class="post__source">Research · arXiv 2610.01834</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">1 October 2026</span></p>
+    <h2 class="post__title">Jev judges what it is shown; it cannot picture what happens next</h2>
+    <p class="post__sum">The sharpest line anyone has drawn around the model so far, from a seven-author study that put it through trick questions, simple games, a text adventure and a robot arm. Jev was near perfect when the right answer could be read out of the text in front of it: it solved 99 per cent of the puzzle questions that catch people out. It failed whenever the answer depended on something not yet written down — what the other player is about to do, or which step has to come first.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>The rule to take away: let your code work out what will happen, and let Jev judge the options it is handed.</li><li>In the games it played as if the opponent moved at random, because the opponent&#x27;s move was not in the text. Told the move, it picked the best reply 98 per cent of the time, against 33 per cent before.</li><li>These were not gaps in knowledge. Asked on its own, it predicted the opponent&#x27;s move correctly 90 per cent of the time — it only broke when one call had to guess and judge at once.</li><li>Add the missing piece in code and it becomes strong: a look-ahead lifted its win rate on the text adventure from 31 per cent to 87 per cent, and with a physics simulation it matched a hand-written robot controller (22 of 40 episodes against 3).</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-9">Touches case 09: Agent Skill Selection</a>
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#agents</span><span class="tag">#limits</span><span class="tag">#planning</span></span>
+      <a class="post__link" href="https://arxiv.org/abs/2610.01834" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-022" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">TC</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Elroy Fernandes</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">the clone wave</span></p>
+    <p class="post__where"><span class="post__source">Startup Fortune</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">1 October 2026</span></p>
+    <h2 class="post__title">Four versions of the same idea in seventeen days, two of them free to download</h2>
+    <p class="post__sum">Inside about seventeen days, OpenAI described a Decisions API built on a smaller model called Luna, Cloudflare published two decision models of its own under a licence that costs nothing, and Amazon released a third. Cloudflare&#x27;s Clef is 27 billion parameters and Clef-flash 9 billion, both built on a Qwen base, both downloadable and both live on its own platform. Amazon&#x27;s is far smaller: it strips a two-billion-parameter model down to a pointer layer of about a million parameters, and it runs on a single consumer graphics card.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>The risk to a buyer is not that a rival is better, it is that equal capability is being given away: two of the largest infrastructure companies released a version that costs nothing, which is how cloud providers have squeezed open source databases and caches for a decade.</li><li>Cloudflare&#x27;s claim that it is 2.5 times and 13 times faster than Jev comes from its own runs and it is a competitor, so treat it as something to test rather than a result.</li><li>The open versions matter most where the text cannot leave the building: the judgment can now run on your own machine.</li><li>None of it changes the design rule — a decision model is a component you gate on confidence, not an answer you trust on its own.</li></ul>
+    <p class="post__meta">
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#ecosystem</span><span class="tag">#open models</span><span class="tag">#cost</span></span>
+      <a class="post__link" href="https://startupfortune.com/amazon-releases-its-own-jev-clone-as-the-ai-decision-model-race-turns-into-a-pile-up" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
 <article class="post" id="sig-008" data-kind="insight">
   <div class="post__ava ava--insight" aria-hidden="true">DO</div>
   <div class="post__body">
@@ -169,6 +220,23 @@
       <a class="post__link" href="https://docs.typesafe.ai/model-jaggedness/jev-1.13" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
+<article class="post" id="sig-018" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">GB</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Red Hat AI Safety team</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">guardrail benchmark</span></p>
+    <p class="post__where"><span class="post__source">Red Hat developer blog</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">2 October 2026</span></p>
+    <h2 class="post__title">Against a small trained filter it is close, and not always the cheapest</h2>
+    <p class="post__sum">Red Hat tested nine ways of blocking unsafe or manipulative messages: Jev, two older zero-shot classifiers, three big models asked to judge, and two decision models that anyone can download and run. On spotting a prompt attack Jev came fourth at 86.35 per cent, behind a 200-million-parameter classifier that ships with OpenShift AI at 89.01 per cent and behind a 35-billion-parameter judge at 89.31 per cent. On general content safety it came first at 86.20 per cent, ahead of the same big judge.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>The number that decides it: the small trained filter answered in 54 thousandths of a second and Jev in 348 — so on this job the older, smaller, free option is both faster and slightly more accurate.</li><li>It is the reverse on the fuzzier half of the job, where a broad sense of what is offensive beats a narrow trained filter: Jev took first place on content safety and the trained filter sixth.</li><li>The authors are honest that they wrote the questions in the style that suits language models, and that a policy written for this kind of model might score better.</li><li>Their own conclusion, plainly: decision models are now competitive with trained classifiers, not obviously better than them.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-8">Touches case 08: Output Verification and Model Calibration</a>
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#guardrails</span><span class="tag">#benchmark</span><span class="tag">#cost</span></span>
+      <a class="post__link" href="https://developers.redhat.com/articles/2026/10/02/benchmarking-ai-decision-models-against-traditional-guardrails" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
 <article class="post" id="sig-009" data-kind="insight">
   <div class="post__ava ava--insight" aria-hidden="true">IB</div>
   <div class="post__body">
@@ -184,6 +252,40 @@
       <span class="chip chip--kind">New learning</span>
       <span class="post__tags"><span class="tag">#benchmark</span><span class="tag">#thresholds</span></span>
       <a class="post__link" href="https://arxiv.org/abs/2609.37647" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-020" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">IB</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Alfredo Madrid-García and Beatriz Merino-Barbancho</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">independent benchmark</span></p>
+    <p class="post__where"><span class="post__source">Research · arXiv 2609.34024</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">4 October 2026</span></p>
+    <h2 class="post__title">In medicine: level with the best on research abstracts, far behind on hard cases</h2>
+    <p class="post__sum">Two researchers put 2,823 medical questions to Jev and to a frontier reasoning model, and every single Jev answer came back in a valid shape. On questions about a research abstract it matched the big model almost exactly, 78.4 per cent against 78.2 per cent. On medical examination questions it fell behind by about 8 points, and on real diagnostic cases by 21 to 23 points. The whole set cost eight cents and each answer came back in under a third of a second.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Its probabilities were the better calibrated of the two on the exam set, and answers it gave at 90 per cent or higher were right 93.4 per cent of the time — but the big model was just as accurate when it was equally careful, so here the better calibration bought nothing.</li><li>Where it did worst, its probabilities were also poor at telling a right answer from a wrong one (0.645 against 0.768), which is exactly where you most want a warning.</li><li>Asked questions with no correct option, it chose &quot;I don&#x27;t know or cannot answer&quot; only 10.5 per cent of the time, so a real &quot;none of these&quot; option has to be offered before it can refuse.</li><li>Their verdict: workable for low-stakes choices among fixed options, not as a second opinion on a difficult case.</li></ul>
+    <p class="post__meta">
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#domain</span><span class="tag">#calibration</span><span class="tag">#limits</span></span>
+      <a class="post__link" href="https://arxiv.org/abs/2609.34024" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-021" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">RA</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Akshat Kumar, Lyzr</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">router and controller benchmark</span></p>
+    <p class="post__where"><span class="post__source">Blog · Lyzr</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">6 October 2026</span></p>
+    <h2 class="post__title">Its best job may be deciding when to stop looking, with the line at 0.8</h2>
+    <p class="post__sum">A 21,314-call test of the four small decisions a search-and-answer system makes before anything is written: which route a question takes, which library to search, which passages to keep, and whether what has been gathered is enough. Jev&#x27;s &quot;is this enough?&quot; signal scored 0.90 as a ranker on both single-passage and multi-step questions, where the best small local models fell to 0.69 on the multi-step ones. The whole experiment cost 72 cents, with a decision costing two to seven hundredths of a cent and taking about 350 milliseconds.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>The one setting to change: the default cut-off of 0.5 is too keen to go ahead and answer, and their measurements point at about 0.8 instead.</li><li>As a router it beat everything tried on all three tasks without any training, and was the steadiest, with a calibration error of 0.09 or less.</li><li>Once you have labelled examples it loses: ten examples per intent already beat it on the 77-way banking set, 0.875 against 0.801.</li><li>It also sorted passages better than expected, adding 6 points of ranking quality on one retrieval set and 9 on another, where the strongest small reranker added 0 and 3.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-10">Touches case 10: Intelligent Multi Model Routing</a>
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#routing</span><span class="tag">#thresholds</span><span class="tag">#retrieval</span></span>
+      <a class="post__link" href="https://www.lyzr.ai/blog/jev-as-an-ai-router-and-controller/" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
 <article class="post" id="sig-011" data-kind="insight">

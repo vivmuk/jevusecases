@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-05",
+  "updated": "2026-10-06",
   "collector": "Collected on Tuesdays at 09:00 by the weekly sweep: search Twitter/X, YouTube, Reddit, Hacker News, the official docs and the blogs that cover Jev, then read what changed and add what is new here.",
   "items": [
     {
@@ -131,71 +131,6 @@
       ]
     },
     {
-      "id": "sig-007",
-      "kind": "gap",
-      "source": "matthiasfrank.de",
-      "author": "Matthias Frank",
-      "handle": "14 practical use cases",
-      "title": "Does this source actually support this claim?",
-      "url": "https://matthiasfrank.de/en/jev-ai-use-cases/",
-      "date": "2 October 2026",
-      "summary": "A list of fourteen knowledge-work jobs, and the one worth lifting is the source check: given a claim and a passage, does the passage support it. The same list also names duplicate detection, filing a document into projects and areas, checking a draft against your own writing rules, and deciding whether an enquiry meets your qualification criteria.",
-      "takeaways": [
-        "Not on this site yet, in this exact form: the grounding check.",
-        "The others are close relatives of cases 01, 02 and 06 and could be read as variants of them.",
-        "The page is honest about the limits: a score is not an instruction to delete a file, merge a contact or send a message."
-      ],
-      "near": null,
-      "tags": [
-        "grounding",
-        "knowledge work"
-      ]
-    },
-    {
-      "id": "sig-008",
-      "kind": "insight",
-      "source": "Official docs · model jaggedness",
-      "author": "TypeSafe AI",
-      "handle": "docs.typesafe.ai",
-      "title": "Eight failure modes the maker lists for itself",
-      "url": "https://docs.typesafe.ai/model-jaggedness/jev-1.13",
-      "date": "16 September 2026",
-      "summary": "TypeSafe publishes its own defect list, which is rare enough to be worth reading closely. The eight: literal reading, arithmetic, date comparison, too many hops of indirection, a large state full of irrelevant detail, adversarial content, contradictory instructions and criteria, and generation. Counting is called out separately as unreliable — the model recognises the shape of an answer rather than tallying, and the error grows with the size of the thing being counted.",
-      "takeaways": [
-        "Keep every sum, every count and every date comparison in code. Ask one question per item and add the answers up yourself.",
-        "Extra state costs accuracy. Send only what the question needs.",
-        "It answers the question you wrote, not the one you meant: write the condition into the instructions, and put boundary cases into the criteria.",
-        "Ask for colour names rather than hex values, and for high-level languages rather than assembly."
-      ],
-      "near": 1,
-      "tags": [
-        "limits",
-        "pitfalls"
-      ]
-    },
-    {
-      "id": "sig-009",
-      "kind": "insight",
-      "source": "Research · arXiv 2609.37647",
-      "author": "Deußer, Sparrenberg and Sifa",
-      "handle": "independent benchmark",
-      "title": "37 datasets, 346,009 requests, under ten dollars",
-      "url": "https://arxiv.org/abs/2609.37647",
-      "date": "29 September 2026",
-      "summary": "The first independent benchmark of the model, run zero-shot over 37 datasets with one frozen template each: classification, routing, natural language inference, reading comprehension, commonsense, moderation, legal clause analysis and rubric scoring. It reaches 95 to 99 per cent on IMDB, SST-2, HellaSwag and ARC, 86.7 per cent on a reading test across 122 languages, beats Qwen on 27 of 37 datasets and Gemma on all 37. Rotating the answer options leaves accuracy unchanged, and withholding the question drops it to chance.",
-      "takeaways": [
-        "The finding that changes how you deploy it: its yes/no probabilities rank well but sit badly against a fixed 0.5 line. Tuning the threshold on training data lifted micro-F1 from 0.50 to 0.75.",
-        "Choice probabilities are well calibrated, so they support acting only when the answer is clear.",
-        "It answered the calculation-heavy questions of a standard exam more accurately than the others (94 per cent against 91) — the opposite of the language models tested. Do not read that as licence to ask it sums: the maker's own note still says keep arithmetic in code.",
-        "All three models degrade on low-resource languages, fine-grained labels and rubric judgments."
-      ],
-      "near": 8,
-      "tags": [
-        "benchmark",
-        "thresholds"
-      ]
-    },
-    {
       "id": "sig-010",
       "kind": "insight",
       "source": "Blog · explainx.ai",
@@ -214,6 +149,67 @@
       "tags": [
         "failure modes",
         "gating"
+      ]
+    },
+    {
+      "id": "sig-012",
+      "kind": "insight",
+      "source": "Independent guide · typesafe-jev.com",
+      "author": "community editors",
+      "handle": "limitations page",
+      "title": "The hard walls, written down in one place",
+      "url": "https://typesafe-jev.com/en/limitations",
+      "date": "September 2026",
+      "summary": "An independent guide that collects the official limits and then grades the community's claims. No text generation, text-only input, a ceiling of 64k tokens across state and the longest question, rate limits of 250k tokens a second and 1,200 requests a minute, and input at $0.042 per million tokens with output free. Images and audio have to be described in words before they go in; long documents need chunking or retrieve-then-judge.",
+      "takeaways": [
+        "Handle backoff at high concurrency: the rate limits are real and officially subject to change.",
+        "The site's own verdict on the rumour that Jev is a wrapper around another model: no evidence, unverified.",
+        "Its checklist for when not to use Jev is worth copying: an open answer space, multi-step reasoning chains, a fully rule-based decision, or errors that are costly with no human review available."
+      ],
+      "near": null,
+      "tags": [
+        "limits",
+        "operations"
+      ]
+    },
+    {
+      "id": "sig-015",
+      "kind": "resource",
+      "source": "Real Python",
+      "author": "Real Python",
+      "handle": "tutorial",
+      "title": "Getting started in Python, including the yes/no traps",
+      "url": "https://realpython.com/jev-python/",
+      "date": "September 2026",
+      "summary": "A beginner-level tutorial that starts where a reader actually gets stuck: people answer a yes-or-no question with yes, Y, no! and everything in between, which is exactly the mess a probability replaces. Useful as the plainest explanation of why a probability is more useful than a parsed word.",
+      "takeaways": [
+        "Good first read for anyone who has not used a decision model before.",
+        "The yes/no example is the clearest argument for returning a number rather than a word."
+      ],
+      "near": null,
+      "tags": [
+        "python",
+        "tutorial"
+      ]
+    },
+    {
+      "id": "sig-016",
+      "kind": "resource",
+      "source": "OpenRouter blog",
+      "author": "OpenRouter",
+      "handle": "TypeScript tutorial",
+      "title": "Moderation in TypeScript through a different provider",
+      "url": "https://openrouter.ai/blog/tutorials/how-to-use-jev/",
+      "date": "September 2026",
+      "summary": "A worked moderation example in TypeScript, and a reminder that the model is reachable through more than one provider. Moderation is a use case the nineteen on this site do not cover, and it is one of the jobs the benchmark paper evaluated.",
+      "takeaways": [
+        "Moderation is a missing job for this site, not just a missing tutorial.",
+        "The same request shape works across providers; only the endpoint and the key change."
+      ],
+      "near": null,
+      "tags": [
+        "moderation",
+        "typescript"
       ]
     },
     {
@@ -238,25 +234,139 @@
       ]
     },
     {
-      "id": "sig-012",
       "kind": "insight",
-      "source": "Independent guide · typesafe-jev.com",
-      "author": "community editors",
-      "handle": "limitations page",
-      "title": "The hard walls, written down in one place",
-      "url": "https://typesafe-jev.com/en/limitations",
-      "date": "September 2026",
-      "summary": "An independent guide that collects the official limits and then grades the community's claims. No text generation, text-only input, a ceiling of 64k tokens across state and the longest question, rate limits of 250k tokens a second and 1,200 requests a minute, and input at $0.042 per million tokens with output free. Images and audio have to be described in words before they go in; long documents need chunking or retrieve-then-judge.",
+      "source": "Blog · Lyzr",
+      "author": "Akshat Kumar, Lyzr",
+      "handle": "router and controller benchmark",
+      "title": "Its best job may be deciding when to stop looking, with the line at 0.8",
+      "url": "https://www.lyzr.ai/blog/jev-as-an-ai-router-and-controller/",
+      "date": "6 October 2026",
+      "summary": "A 21,314-call test of the four small decisions a search-and-answer system makes before anything is written: which route a question takes, which library to search, which passages to keep, and whether what has been gathered is enough. Jev's \"is this enough?\" signal scored 0.90 as a ranker on both single-passage and multi-step questions, where the best small local models fell to 0.69 on the multi-step ones. The whole experiment cost 72 cents, with a decision costing two to seven hundredths of a cent and taking about 350 milliseconds.",
       "takeaways": [
-        "Handle backoff at high concurrency: the rate limits are real and officially subject to change.",
-        "The site's own verdict on the rumour that Jev is a wrapper around another model: no evidence, unverified.",
-        "Its checklist for when not to use Jev is worth copying: an open answer space, multi-step reasoning chains, a fully rule-based decision, or errors that are costly with no human review available."
+        "The one setting to change: the default cut-off of 0.5 is too keen to go ahead and answer, and their measurements point at about 0.8 instead.",
+        "As a router it beat everything tried on all three tasks without any training, and was the steadiest, with a calibration error of 0.09 or less.",
+        "Once you have labelled examples it loses: ten examples per intent already beat it on the 77-way banking set, 0.875 against 0.801.",
+        "It also sorted passages better than expected, adding 6 points of ranking quality on one retrieval set and 9 on another, where the strongest small reranker added 0 and 3."
+      ],
+      "near": 10,
+      "tags": [
+        "routing",
+        "thresholds",
+        "retrieval"
+      ],
+      "id": "sig-021"
+    },
+    {
+      "kind": "insight",
+      "source": "Research · arXiv 2609.34024",
+      "author": "Alfredo Madrid-García and Beatriz Merino-Barbancho",
+      "handle": "independent benchmark",
+      "title": "In medicine: level with the best on research abstracts, far behind on hard cases",
+      "url": "https://arxiv.org/abs/2609.34024",
+      "date": "4 October 2026",
+      "summary": "Two researchers put 2,823 medical questions to Jev and to a frontier reasoning model, and every single Jev answer came back in a valid shape. On questions about a research abstract it matched the big model almost exactly, 78.4 per cent against 78.2 per cent. On medical examination questions it fell behind by about 8 points, and on real diagnostic cases by 21 to 23 points. The whole set cost eight cents and each answer came back in under a third of a second.",
+      "takeaways": [
+        "Its probabilities were the better calibrated of the two on the exam set, and answers it gave at 90 per cent or higher were right 93.4 per cent of the time — but the big model was just as accurate when it was equally careful, so here the better calibration bought nothing.",
+        "Where it did worst, its probabilities were also poor at telling a right answer from a wrong one (0.645 against 0.768), which is exactly where you most want a warning.",
+        "Asked questions with no correct option, it chose \"I don't know or cannot answer\" only 10.5 per cent of the time, so a real \"none of these\" option has to be offered before it can refuse.",
+        "Their verdict: workable for low-stakes choices among fixed options, not as a second opinion on a difficult case."
       ],
       "near": null,
       "tags": [
-        "limits",
-        "operations"
+        "domain",
+        "calibration",
+        "limits"
+      ],
+      "id": "sig-020"
+    },
+    {
+      "kind": "gap",
+      "source": "OneClickClaw news · Hermes Agent add-ons",
+      "author": "OneClickClaw, reporting the Hermes plugin catalogue and Nous Research's own test",
+      "handle": "agent add-ons",
+      "title": "The one job they tried and dropped: shortening a long conversation",
+      "url": "https://oneclickclaw.io/news/jev-hermes-agent-owners-8-jobs",
+      "date": "3 October 2026",
+      "summary": "By 3 October the official Hermes plugin catalogue listed thirteen add-ons built on Jev, and most of them are small gates inside the agent: approve or refuse a risky command, pick the one skill a request needs, skip a scheduled run that would do nothing, decide whether a lesson is worth saving. The one job the makers tested themselves and turned down was using Jev to shorten a long conversation. The verdict in their own scorecard is \"do not adopt Jev\" for it: it was far quicker and cheaper, 1.4 seconds and under a cent against 37 seconds and six cents, but it kept about twice as much text and remembered slightly less.",
+      "takeaways": [
+        "None of the nineteen cases here covers the \"what do I keep in the conversation\" decision, and this is the evidence that the obvious use of a fast decider for it does not pay.",
+        "The gain came from keeping the person's own words word-for-word and deleting old tool output, not from Jev: at its default setting it dropped all 851 candidates it was shown.",
+        "The warning worth copying: keeping more context means paying for it again on every turn, so the saving is smaller than the price list suggests.",
+        "The add-ons are the better model of the shape — small, single, checkable decisions placed around an agent, rather than one big one."
+      ],
+      "near": null,
+      "tags": [
+        "agents",
+        "context",
+        "gaps"
+      ],
+      "id": "sig-019"
+    },
+    {
+      "id": "sig-009",
+      "kind": "insight",
+      "source": "Research · arXiv 2609.37647",
+      "author": "Deußer, Sparrenberg and Sifa",
+      "handle": "independent benchmark",
+      "title": "37 datasets, 346,009 requests, under ten dollars",
+      "url": "https://arxiv.org/abs/2609.37647",
+      "date": "29 September 2026",
+      "summary": "The first independent benchmark of the model, run zero-shot over 37 datasets with one frozen template each: classification, routing, natural language inference, reading comprehension, commonsense, moderation, legal clause analysis and rubric scoring. It reaches 95 to 99 per cent on IMDB, SST-2, HellaSwag and ARC, 86.7 per cent on a reading test across 122 languages, beats Qwen on 27 of 37 datasets and Gemma on all 37. Rotating the answer options leaves accuracy unchanged, and withholding the question drops it to chance.",
+      "takeaways": [
+        "The finding that changes how you deploy it: its yes/no probabilities rank well but sit badly against a fixed 0.5 line. Tuning the threshold on training data lifted micro-F1 from 0.50 to 0.75.",
+        "Choice probabilities are well calibrated, so they support acting only when the answer is clear.",
+        "It answered the calculation-heavy questions of a standard exam more accurately than the others (94 per cent against 91) — the opposite of the language models tested. Do not read that as licence to ask it sums: the maker's own note still says keep arithmetic in code.",
+        "All three models degrade on low-resource languages, fine-grained labels and rubric judgments."
+      ],
+      "near": 8,
+      "tags": [
+        "benchmark",
+        "thresholds"
       ]
+    },
+    {
+      "id": "sig-007",
+      "kind": "gap",
+      "source": "matthiasfrank.de",
+      "author": "Matthias Frank",
+      "handle": "14 practical use cases",
+      "title": "Does this source actually support this claim?",
+      "url": "https://matthiasfrank.de/en/jev-ai-use-cases/",
+      "date": "2 October 2026",
+      "summary": "A list of fourteen knowledge-work jobs, and the one worth lifting is the source check: given a claim and a passage, does the passage support it. The same list also names duplicate detection, filing a document into projects and areas, checking a draft against your own writing rules, and deciding whether an enquiry meets your qualification criteria.",
+      "takeaways": [
+        "Not on this site yet, in this exact form: the grounding check.",
+        "The others are close relatives of cases 01, 02 and 06 and could be read as variants of them.",
+        "The page is honest about the limits: a score is not an instruction to delete a file, merge a contact or send a message."
+      ],
+      "near": null,
+      "tags": [
+        "grounding",
+        "knowledge work"
+      ]
+    },
+    {
+      "kind": "insight",
+      "source": "Red Hat developer blog",
+      "author": "Red Hat AI Safety team",
+      "handle": "guardrail benchmark",
+      "title": "Against a small trained filter it is close, and not always the cheapest",
+      "url": "https://developers.redhat.com/articles/2026/10/02/benchmarking-ai-decision-models-against-traditional-guardrails",
+      "date": "2 October 2026",
+      "summary": "Red Hat tested nine ways of blocking unsafe or manipulative messages: Jev, two older zero-shot classifiers, three big models asked to judge, and two decision models that anyone can download and run. On spotting a prompt attack Jev came fourth at 86.35 per cent, behind a 200-million-parameter classifier that ships with OpenShift AI at 89.01 per cent and behind a 35-billion-parameter judge at 89.31 per cent. On general content safety it came first at 86.20 per cent, ahead of the same big judge.",
+      "takeaways": [
+        "The number that decides it: the small trained filter answered in 54 thousandths of a second and Jev in 348 — so on this job the older, smaller, free option is both faster and slightly more accurate.",
+        "It is the reverse on the fuzzier half of the job, where a broad sense of what is offensive beats a narrow trained filter: Jev took first place on content safety and the trained filter sixth.",
+        "The authors are honest that they wrote the questions in the style that suits language models, and that a policy written for this kind of model might score better.",
+        "Their own conclusion, plainly: decision models are now competitive with trained classifiers, not obviously better than them."
+      ],
+      "near": 8,
+      "tags": [
+        "guardrails",
+        "benchmark",
+        "cost"
+      ],
+      "id": "sig-018"
     },
     {
       "id": "sig-013",
@@ -301,44 +411,72 @@
       ]
     },
     {
-      "id": "sig-015",
-      "kind": "resource",
-      "source": "Real Python",
-      "author": "Real Python",
-      "handle": "tutorial",
-      "title": "Getting started in Python, including the yes/no traps",
-      "url": "https://realpython.com/jev-python/",
-      "date": "September 2026",
-      "summary": "A beginner-level tutorial that starts where a reader actually gets stuck: people answer a yes-or-no question with yes, Y, no! and everything in between, which is exactly the mess a probability replaces. Useful as the plainest explanation of why a probability is more useful than a parsed word.",
+      "id": "sig-008",
+      "kind": "insight",
+      "source": "Official docs · model jaggedness",
+      "author": "TypeSafe AI",
+      "handle": "docs.typesafe.ai",
+      "title": "Eight failure modes the maker lists for itself",
+      "url": "https://docs.typesafe.ai/model-jaggedness/jev-1.13",
+      "date": "16 September 2026",
+      "summary": "TypeSafe publishes its own defect list, which is rare enough to be worth reading closely. The eight: literal reading, arithmetic, date comparison, too many hops of indirection, a large state full of irrelevant detail, adversarial content, contradictory instructions and criteria, and generation. Counting is called out separately as unreliable — the model recognises the shape of an answer rather than tallying, and the error grows with the size of the thing being counted.",
       "takeaways": [
-        "Good first read for anyone who has not used a decision model before.",
-        "The yes/no example is the clearest argument for returning a number rather than a word."
+        "Keep every sum, every count and every date comparison in code. Ask one question per item and add the answers up yourself.",
+        "Extra state costs accuracy. Send only what the question needs.",
+        "It answers the question you wrote, not the one you meant: write the condition into the instructions, and put boundary cases into the criteria.",
+        "Ask for colour names rather than hex values, and for high-level languages rather than assembly."
       ],
-      "near": null,
+      "near": 1,
       "tags": [
-        "python",
-        "tutorial"
+        "limits",
+        "pitfalls"
       ]
     },
     {
-      "id": "sig-016",
-      "kind": "resource",
-      "source": "OpenRouter blog",
-      "author": "OpenRouter",
-      "handle": "TypeScript tutorial",
-      "title": "Moderation in TypeScript through a different provider",
-      "url": "https://openrouter.ai/blog/tutorials/how-to-use-jev/",
-      "date": "September 2026",
-      "summary": "A worked moderation example in TypeScript, and a reminder that the model is reachable through more than one provider. Moderation is a use case the nineteen on this site do not cover, and it is one of the jobs the benchmark paper evaluated.",
+      "kind": "insight",
+      "source": "Research · arXiv 2610.01834",
+      "author": "Yaodong Yang and six co-authors, Chinese University of Hong Kong and other universities",
+      "handle": "independent study",
+      "title": "Jev judges what it is shown; it cannot picture what happens next",
+      "url": "https://arxiv.org/abs/2610.01834",
+      "date": "1 October 2026",
+      "summary": "The sharpest line anyone has drawn around the model so far, from a seven-author study that put it through trick questions, simple games, a text adventure and a robot arm. Jev was near perfect when the right answer could be read out of the text in front of it: it solved 99 per cent of the puzzle questions that catch people out. It failed whenever the answer depended on something not yet written down — what the other player is about to do, or which step has to come first.",
       "takeaways": [
-        "Moderation is a missing job for this site, not just a missing tutorial.",
-        "The same request shape works across providers; only the endpoint and the key change."
+        "The rule to take away: let your code work out what will happen, and let Jev judge the options it is handed.",
+        "In the games it played as if the opponent moved at random, because the opponent's move was not in the text. Told the move, it picked the best reply 98 per cent of the time, against 33 per cent before.",
+        "These were not gaps in knowledge. Asked on its own, it predicted the opponent's move correctly 90 per cent of the time — it only broke when one call had to guess and judge at once.",
+        "Add the missing piece in code and it becomes strong: a look-ahead lifted its win rate on the text adventure from 31 per cent to 87 per cent, and with a physics simulation it matched a hand-written robot controller (22 of 40 episodes against 3)."
+      ],
+      "near": 9,
+      "tags": [
+        "agents",
+        "limits",
+        "planning"
+      ],
+      "id": "sig-017"
+    },
+    {
+      "kind": "insight",
+      "source": "Startup Fortune",
+      "author": "Elroy Fernandes",
+      "handle": "the clone wave",
+      "title": "Four versions of the same idea in seventeen days, two of them free to download",
+      "url": "https://startupfortune.com/amazon-releases-its-own-jev-clone-as-the-ai-decision-model-race-turns-into-a-pile-up",
+      "date": "1 October 2026",
+      "summary": "Inside about seventeen days, OpenAI described a Decisions API built on a smaller model called Luna, Cloudflare published two decision models of its own under a licence that costs nothing, and Amazon released a third. Cloudflare's Clef is 27 billion parameters and Clef-flash 9 billion, both built on a Qwen base, both downloadable and both live on its own platform. Amazon's is far smaller: it strips a two-billion-parameter model down to a pointer layer of about a million parameters, and it runs on a single consumer graphics card.",
+      "takeaways": [
+        "The risk to a buyer is not that a rival is better, it is that equal capability is being given away: two of the largest infrastructure companies released a version that costs nothing, which is how cloud providers have squeezed open source databases and caches for a decade.",
+        "Cloudflare's claim that it is 2.5 times and 13 times faster than Jev comes from its own runs and it is a competitor, so treat it as something to test rather than a result.",
+        "The open versions matter most where the text cannot leave the building: the judgment can now run on your own machine.",
+        "None of it changes the design rule — a decision model is a component you gate on confidence, not an answer you trust on its own."
       ],
       "near": null,
       "tags": [
-        "moderation",
-        "typescript"
-      ]
+        "ecosystem",
+        "open models",
+        "cost"
+      ],
+      "id": "sig-022"
     }
   ]
 }
