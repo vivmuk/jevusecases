@@ -25,13 +25,13 @@
 <div class="hero"><img src="assets/forest/hero.webp" width="2000" height="1125" alt="">
 <h1>Pulse</h1></div>
 <p class="lede">What people are writing, building and arguing about with the Jev decision model: the jobs nobody has listed yet, the findings from the first independent tests, and the places to read more. <strong>Every entry links to its source.</strong> The sweep runs each Tuesday morning, so this page is always the most recent pass.</p>
-<p class="count">Last collected 6 October 2026. 22 entries, and 8 of them are jobs no case here covers yet.</p>
+<p class="count">Last collected 13 October 2026. 28 entries, and 9 of them are jobs no case here covers yet.</p>
 <p class="count">Collected on Tuesdays at 09:00 by the weekly sweep: search Twitter/X, YouTube, Reddit, Hacker News, the official docs and the blogs that cover Jev, then read what changed and add what is new here.</p>
 <hr class="rule">
 <div class="controls" role="group" aria-label="Filter the entries">
-<button type="button" class="filt" data-filter="all" aria-pressed="true">Everything <b>22</b></button><button type="button" class="filt" data-filter="gap" aria-pressed="false">Jobs no case covers yet <b>8</b></button><button type="button" class="filt" data-filter="insight" aria-pressed="false">New learning <b>10</b></button><button type="button" class="filt" data-filter="usecase" aria-pressed="false">Working example <b>2</b></button><button type="button" class="filt" data-filter="resource" aria-pressed="false">Where to read more <b>2</b></button>
+<button type="button" class="filt" data-filter="all" aria-pressed="true">Everything <b>28</b></button><button type="button" class="filt" data-filter="gap" aria-pressed="false">Jobs no case covers yet <b>9</b></button><button type="button" class="filt" data-filter="insight" aria-pressed="false">New learning <b>12</b></button><button type="button" class="filt" data-filter="usecase" aria-pressed="false">Working example <b>4</b></button><button type="button" class="filt" data-filter="resource" aria-pressed="false">Where to read more <b>3</b></button>
 </div>
-<p class="count" id="shown" aria-live="polite">All 22 entries are shown.</p>
+<p class="count" id="shown" aria-live="polite">All 28 entries are shown.</p>
 <div class="feed" id="feed">
 <article class="post" id="sig-007" data-kind="gap">
   <div class="post__ava ava--gap" aria-hidden="true">1P</div>
@@ -65,6 +65,23 @@
       <span class="chip chip--kind">Jobs no case covers yet</span>
       <span class="post__tags"><span class="tag">#agents</span><span class="tag">#context</span><span class="tag">#gaps</span></span>
       <a class="post__link" href="https://oneclickclaw.io/news/jev-hermes-agent-owners-8-jobs" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-023" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">BA</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Browser Use, with a short read-the-code version by Gerard Rovira (zurfyx)</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">browser agent</span></p>
+    <p class="post__where"><span class="post__source">GitHub · Browser Use × TypeSafe</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">October 2026</span></p>
+    <h2 class="post__title">The uncovered job: letting Jev click and type its way through a real page</h2>
+    <p class="post__sum">A browser agent is given one goal, and on every step Jev picks one operation (click, type, select, scroll, wait, done) and one element from a numbered table built out of the live page. The operation and every possible target are asked for in the same request, and a small language model writes text only when the operation is &quot;type&quot;. Their demo books Zürich to London on Google Flights in about seven seconds with the loading waits and the generated text included; the short reference version of the same loop, last updated on 7 October, logs into Hacker News in nine decisions and eight seconds.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Not on this site yet, and it is the clearest missing case: case 12 tidies a page up and case 13 searches inside one, but neither of them acts on the page.</li><li>The trick worth copying is the speculative request: ask for the operation and every target at once, then throw away the answers you do not need. A wrong target costs tokens, not time.</li><li>The split of work is the one every other case uses — Jev judges what is in front of it, and the code does everything with a side effect, including the typing.</li><li>Both versions hand Jev a list of elements it is allowed to touch instead of letting it name one, which is what keeps a click from landing somewhere unintended.</li></ul>
+    <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
+      <span class="post__tags"><span class="tag">#browser</span><span class="tag">#agents</span><span class="tag">#gaps</span></span>
+      <a class="post__link" href="https://github.com/browser-use/jev-ultrafast" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
 <article class="post" id="sig-001" data-kind="gap">
@@ -288,6 +305,40 @@
       <a class="post__link" href="https://www.lyzr.ai/blog/jev-as-an-ai-router-and-controller/" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
+<article class="post" id="sig-025" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">IB</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Connor Frank, Vals AI</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">independent benchmark</span></p>
+    <p class="post__where"><span class="post__source">Independent evaluation · Vals AI</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">6 October 2026</span></p>
+    <h2 class="post__title">Level with the frontier on checking a claim, last of twelve on legal questions, in the same run</h2>
+    <p class="post__sum">Vals AI normally grades written answers, so for a model that writes nothing they built two tests that fit: 400 claim checks made from company filings, where the correct answer was fixed by construction before any model saw the item, and a pre-registered slice of a public legal-reasoning set. On the claim checks Jev scored 0.975, level with GPT-6 Astra, GPT-6.1 Sol and GPT-6 Luna, at $0.02 per thousand cases — about one 498th of Astra&#x27;s list price. On the legal questions it came last of the twelve systems, and on two contract tasks it answered &quot;yes&quot; to all 33 items where the answers were split 16 to 17.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>How well its confidence behaves depends on the job, not on the model: the lowest calibration error of the twelve on claim checking (0.011) and the highest on the legal set (0.108). Set the threshold on your own task instead of carrying one across.</li><li>The caution about tuning is the one to keep: with a 1 per cent error budget, six of the twelve systems broke it on held-out cases, Jev among them, automating 95 per cent of cases at 1.6 per cent error.</li><li>One call answered 32 judgments about a document in a tenth of a second, 194 times quicker than Astra, so asking many questions about one document costs almost nothing extra.</li><li>The comparison that decides a purchase is not the big model but the cheap one: GPT-6 Luna reached the same score on claim checking at about three times Jev&#x27;s price.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-20">Touches case 20: Claim and Source Support Check</a>
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#benchmark</span><span class="tag">#calibration</span><span class="tag">#cost</span></span>
+      <a class="post__link" href="https://vals-ai.com/blogs/independent-evaluation-of-jev" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-027" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">TR</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Weirui Chen, who runs an independent Jev site (Jagent)</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">three response shapes</span></p>
+    <p class="post__where"><span class="post__source">Blog · DEV Community</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">9 October 2026</span></p>
+    <h2 class="post__title">Three fields in the reply that quietly hand you the wrong number</h2>
+    <p class="post__sum">A recorded walkthrough of calling Jev through OpenRouter on 9 October, with the exact request and reply and the three things that catch out code written against it. A score is not 0 to 1: it is the probability-weighted mean of the rubric positions, so 2.38 on a four-level scale sits between the third and fourth level and leans towards the third. Score probabilities come back keyed by the position as a string, never by your own label, so they have to be read back through the legend. And a yes/no answer has no confidence field at all — not null, simply absent — so reading one and defaulting to zero silently throws away every yes/no judgment.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Worth knowing before you start: an OpenAI-style client pointed at Jev fails outright, because a model that writes nothing does not live on the chat endpoint. It is served on a decisions endpoint instead.</li><li>Model searches can miss it — its advertised output is &quot;decisions&quot;, not text — so a list filtered to chat models shows nothing while the model is live and working.</li><li>That same decisions endpoint now serves twelve other decision models, so this request shape is becoming portable across vendors.</li><li>Three questions asked together about one complaint came to about two thousandths of a cent, which is the price point the whole category is competing on.</li></ul>
+    <p class="post__meta">
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#api</span><span class="tag">#pitfalls</span><span class="tag">#cost</span></span>
+      <a class="post__link" href="https://dev.to/weirui_chen_48669a172a6be/typesafejev-fails-on-openrouter-chatcompletions-how-to-call-it-and-the-three-response-shapes-4e0f" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
 <article class="post" id="sig-011" data-kind="insight">
   <div class="post__ava ava--insight" aria-hidden="true">TO</div>
   <div class="post__body">
@@ -339,6 +390,23 @@
       <a class="post__link" href="https://typesafe-jev.com/en/limitations" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
+<article class="post" id="sig-026" data-kind="usecase">
+  <div class="post__ava ava--usecase" aria-hidden="true">MS</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Laurent Kempé</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">MCP server in .NET</span></p>
+    <p class="post__where"><span class="post__source">Blog · Laurent Kempé</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">10 October 2026</span></p>
+    <h2 class="post__title">Jev behind five MCP tools, so any coding agent can ask it for a judgment</h2>
+    <p class="post__sum">A small .NET program puts the three decision types behind MCP tools — one yes/no, one choice from a list, one score on a rubric, plus a call that asks several named questions about the same state — so a coding agent can ask Jev for a judgment without carrying any Jev-specific code of its own. The worked example asks three questions about one support ticket and gets back a 0.94 probability that it is a bug, a team chosen at odds of 0.45 against 0.55, and an urgency score at the top of two levels. The author&#x27;s own warning is in the write-up: an application still needs its own rules for review and escalation, and a choice&#x27;s confidence is a separate field, not the winning label&#x27;s probability.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>The example is the lesson: a team answer at 0.45 against 0.55 is a coin toss, and it reports a confidence of 0.09. Gating on &quot;a choice came back&quot; would act on nothing but noise.</li><li>Not covered on this site yet in this shape: an agent asking for judgments in the middle of its own task, rather than one pipeline calling Jev on its own.</li><li>It keeps the division clean. The agent owns the workflow, and the model hands back a number rather than an opinion in prose.</li><li>The three questions are deliberately different kinds — binary, unordered, ordered — and each returns something different for the caller to read, which is the part worth copying.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-2">Touches case 02: Customer inquiry triage and routing</a>
+      <span class="chip chip--kind">Working example</span>
+      <span class="post__tags"><span class="tag">#agents</span><span class="tag">#mcp</span><span class="tag">#tooling</span></span>
+      <a class="post__link" href="https://laurentkempe.com/2026/10/10/building-a-typesafe-jev-mcp-server-dotnet" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
 <article class="post" id="sig-014" data-kind="usecase">
   <div class="post__ava ava--usecase" aria-hidden="true">AH</div>
   <div class="post__body">
@@ -371,6 +439,40 @@
       <span class="chip chip--kind">Working example</span>
       <span class="post__tags"><span class="tag">#automation</span><span class="tag">#reranking</span></span>
       <a class="post__link" href="https://community.n8n.io/t/n8n-jev-4-awesome-examples-to-get-started/314596" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-024" data-kind="usecase">
+  <div class="post__ava ava--usecase" aria-hidden="true">CC</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">TypeSafe AI, writing up Jack &amp; Jill</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">customer case study</span></p>
+    <p class="post__where"><span class="post__source">TypeSafe case study · Jack &amp; Jill</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">8 October 2026</span></p>
+    <h2 class="post__title">A talent marketplace swapped Gemini for Jev in ten days and cut its screening bill by 88%</h2>
+    <p class="post__sum">Jack &amp; Jill matches people to companies through two agents, and the stage that scores a candidate against a role ran on Gemini 3.1 Flash Lite until they replaced it with Jev, in production ten days after the first test. Cost per 1,000 candidates scored fell from $0.755 to $0.092, the median time to screen a candidate halved from 20.3 to 10.3 seconds, and the share of candidates hiring managers actually asked for moved from 93.9 per cent to 94.6 per cent. The saving let them add work that had been ruled out on price, including checking every suitable open role against a new candidate at sign-up for under ten cents each.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Read the small print with it: the quality numbers come from an offline test on live roles, and the $500,000 a year saving is a projection — at their current volume it is $265,000.</li><li>It is case 5 with a person instead of a customer: one candidate, one role, one number, and then ordinary code decides what to do with it.</li><li>The honest part is that accuracy barely moved, from 93.9 to 94.6 per cent. Almost all of the gain was price and time, which is the whole argument for a decision model in one line.</li><li>A profile check that takes two tenths of a second is a change users notice; three and a half seconds is one they complain about.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-5">Touches case 05: Churn risk profiling</a>
+      <span class="chip chip--kind">Working example</span>
+      <span class="post__tags"><span class="tag">#hiring</span><span class="tag">#cost</span><span class="tag">#case study</span></span>
+      <a class="post__link" href="https://typesafe.ai/blog/jack-jill-jev-case-study" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-028" data-kind="resource">
+  <div class="post__ava ava--resource" aria-hidden="true">TN</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Ron Schmelzer</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">the new wave</span></p>
+    <p class="post__where"><span class="post__source">Forbes</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">12 October 2026</span></p>
+    <h2 class="post__title">A guide to everyone else who now makes decision models</h2>
+    <p class="post__sum">A tour of the category Jev started, written as a map for a buyer rather than a review: OpenAI, Microsoft, Cloudflare, Perplexity and several smaller labs now ship decision models and decision APIs, and open-weight versions exist for teams that cannot send their text anywhere. Its one hard number is adoption — by 11 October Jev 1.13 had passed roughly 1.05 billion requests on OpenRouter, far ahead of every other decision model listed there. The framing is the useful part: the question is no longer only which model is smartest, but which one is reliable enough at the lowest cost with the deployment control your data needs.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Read it as a directory, not a verdict: it names who is in the category, including the free and the downloadable options, and points at the boards that track them.</li><li>The number worth remembering is the size of the usage gap. Being first to market is doing a lot of work here.</li><li>Nothing in it changes the design rule this site keeps repeating — a decision model is a part you gate on confidence, not an answer you trust on its own.</li><li>If your text cannot leave the building, the open-weight half of that list is the half to read first.</li></ul>
+    <p class="post__meta">
+      <span class="chip chip--kind">Where to read more</span>
+      <span class="post__tags"><span class="tag">#ecosystem</span><span class="tag">#open models</span><span class="tag">#adoption</span></span>
+      <a class="post__link" href="https://www.forbes.com/sites/ronschmelzer/2026/10/12/decisions-decisions-a-guide-to-the-new-wave-of-ai-decision-models-besides-jev" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
 <article class="post" id="sig-015" data-kind="resource">
