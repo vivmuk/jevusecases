@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-13",
+  "updated": "2026-10-20",
   "collector": "Collected on Tuesdays at 09:00 by the weekly sweep: search Twitter/X, YouTube, Reddit, Hacker News, the official docs and the blogs that cover Jev, then read what changed and add what is new here.",
   "items": [
     {
@@ -482,6 +482,29 @@
       ]
     },
     {
+      "kind": "insight",
+      "source": "Research · arXiv 2610.24929",
+      "author": "Wang Yang and ten co-authors, Case Western Reserve University and other institutions",
+      "handle": "independent study",
+      "title": "It decides what one record says, not what several records add up to, and it does not know that",
+      "url": "https://arxiv.org/abs/2610.24929",
+      "date": "18 October 2026",
+      "summary": "An eleven-author study asks the question a benchmark score cannot answer: what can a single pass not decide. It built a set of tasks where only one thing changes at a time, ran the model through them, and then tested it on real items graded by how much written-out thinking a reference model needed. The line it found is clean and worth knowing before you design around the model.",
+      "takeaways": [
+        "It tracks a state badly once the records look alike. As soon as the answer depends on two or more updates to the same customer, accuracy falls to between 53 and 80 per cent at sixteen updates, because the records interfere with each other.",
+        "Hand it a summary of the state that is out of date and it follows the summary. It does not go back and check.",
+        "The dangerous part is the confidence. It flags the mistakes it makes on its own, but not the ones it inherits from a bad input, and adding a 'hand off to a person' option does not catch those either.",
+        "So keep the job of assembling the state in code or with a model that reasons, confirm the state is right, and let this model choose from the options once it is."
+      ],
+      "near": 8,
+      "tags": [
+        "agents",
+        "limits",
+        "confidence"
+      ],
+      "id": "sig-033"
+    },
+    {
       "id": "sig-014",
       "kind": "usecase",
       "source": "LangChain blog",
@@ -523,6 +546,121 @@
         "limits",
         "pitfalls"
       ]
+    },
+    {
+      "kind": "insight",
+      "source": "Blog · TopxAI, an API relay",
+      "author": "TopxAI",
+      "handle": "measurements on the live API",
+      "title": "A picture is billed by area, and the smallest side allowed is 280 pixels, not the 256 the docs say",
+      "url": "https://ai.topxea.com/blog/jev-1-14-images-and-box",
+      "date": "16 October 2026",
+      "summary": "A company that serves the model took a week of measurements against the live API and wrote down the working rules the documentation does not give. An image is not a separate line on the bill: its tokens count as input text, and the count follows a simple rule — divide each side by 28, round both up, multiply the two numbers, and double the result. A 1024 by 768 photo came to 2,074 tokens. The same tests pinned down the real size limits, and two of them differ from what the docs promise.",
+      "takeaways": [
+        "Cost follows the area of the picture, so shrinking a photo saves money in proportion. A 1568 by 1568 image costs about nine times a 512 by 512 one.",
+        "Naming the same image in three different questions bills it three times. Put a shared picture in the state once and point at it by name from each question.",
+        "The documented minimum side is 256 pixels, but every side under 280 was refused with an invalid-dimensions error, and one bad image fails the whole request. Keep the longest side at or under 1568 and the shortest at 280 or more.",
+        "The API drops the orientation stored in the file, so a phone photo taken sideways arrives sideways. Turn the pixels upright before sending them."
+      ],
+      "near": 14,
+      "tags": [
+        "images",
+        "cost",
+        "limits"
+      ],
+      "id": "sig-030"
+    },
+    {
+      "kind": "gap",
+      "source": "The Hacker News · piece contributed by Intezer",
+      "author": "Zev Schonberg, Intezer",
+      "handle": "alert triage in a security team",
+      "title": "Look at every security alert, not only the loud ones",
+      "url": "https://thehackernews.com/2026/10/ai-decision-models-and-their-impact-on.html",
+      "date": "16 October 2026",
+      "summary": "A security vendor argues that alert triage is the natural first job for a decision model, and shows the arithmetic. With input at $42 per billion tokens and answers in 70 to 500 milliseconds, an organisation seeing 450,000 alerts a year pays roughly a hundred dollars a year to have every one of them read, which removes the reason to inspect only the severe ones. This is a contributed piece, so read the figures as the vendor's own. The trap it names is not in the model.",
+      "takeaways": [
+        "Not on this site yet: none of the cases covers a security queue, where the volume is enormous and the cost of skipping one alert is an incident.",
+        "The pattern is a pair of thresholds: close an alert by itself above 0.97, treat below 0.6 as a likely incident and escalate, and send everything in between to a person. It also suggests a stricter bar for anything that cannot be undone, such as disabling an account.",
+        "The failure it warns about is a wrong input, not a wrong answer. In the vendor's own data, 51 per cent of the machines found to hold live malicious code had already been marked as cleaned up, so a well-calibrated model reads 'quarantined, low severity' correctly and still closes a real case.",
+        "There is a quieter benefit: the set of possible answers is fixed in advance and every verdict carries its own number, so each decision can be logged, replayed and compared with what actually happened — far easier to audit than a paragraph of reasoning."
+      ],
+      "near": null,
+      "tags": [
+        "security",
+        "triage",
+        "thresholds"
+      ],
+      "id": "sig-034"
+    },
+    {
+      "kind": "gap",
+      "source": "Official docs · the Box question",
+      "author": "TypeSafe AI",
+      "handle": "docs.typesafe.ai",
+      "title": "Find where something is in a picture, and hand the crop to a bigger model",
+      "url": "https://docs.typesafe.ai/primitives/box",
+      "date": "14 October 2026",
+      "summary": "On 14 October TypeSafe added a fourth kind of question, alongside yes/no, choose-one and score. A Box question points at a photograph and asks where a named thing is; the answer is the four edges of the smallest rectangle around it, given as fractions of the picture's width and height, plus a confidence. Because the edges are fractions, the same answer is correct at any image size, so code can cut out the region and send a small, sharp picture to a vision model instead of the whole frame. Nothing on this site covers this job.",
+      "takeaways": [
+        "Not on this site yet. Case 14 finds pictures by their labels; this decides what is inside a picture, and where.",
+        "A Box answer is always a box. Ask for a giraffe in a kitchen photo and you still get four edges, so ask a yes/no question about the target in the same request and throw the box away when that answer is low.",
+        "The work it replaces is a person drawing a rectangle: the signature field on a scanned form, the product in a listing photo, the face at a door camera.",
+        "TypeSafe marks this whole area as not ready for production and gives no recommended confidence threshold, so tune the number on your own pictures before you act on it."
+      ],
+      "near": null,
+      "tags": [
+        "images",
+        "vision",
+        "new type"
+      ],
+      "id": "sig-029"
+    },
+    {
+      "kind": "insight",
+      "source": "Research · arXiv 2610.19619",
+      "author": "Ilaria Imperatrice, Taisia Kameneva, Adam Eric Greenberg and Alessandro Romano",
+      "handle": "independent study",
+      "title": "The order of the answers can decide the answer, and a small move in the number can change what your software does",
+      "url": "https://arxiv.org/abs/2610.19619",
+      "date": "14 October 2026",
+      "summary": "A four-author study put the model through the classic traps from psychology: 41,500 questions covering short trick problems, anchoring, framing, sunk cost, and a pricing task that changes nothing but the customer's name. At the level of the final answer it came out well, and most of the traps did not move it. Two things did, and both matter to anyone gating on the returned number.",
+      "takeaways": [
+        "Order matters. Reversing the list of options in one test moved the choice from 99.6 per cent for the safer programme to 65.6 per cent, and the risky option's share from 0.4 to 34.4 per cent.",
+        "A small move in the number changes behaviour. The paper's example is a support system that handles a request by itself when the probability is at least 80 per cent: the same case came back at 83 per cent under one wording and 77 per cent under another.",
+        "So set your threshold on your own examples, and run those examples again after every wording change, including a change to the order of the options.",
+        "The authors refuse to fold this into one score, because the tests do not share a single right answer. Read it as a list of traps to test for, not as a grade for the model."
+      ],
+      "near": 8,
+      "tags": [
+        "fairness",
+        "pitfalls",
+        "calibration"
+      ],
+      "id": "sig-032"
+    },
+    {
+      "kind": "insight",
+      "source": "Research · arXiv 2610.17820",
+      "author": "Xiang Li, Aichun Huang, Mingming Zhang and Zheli Liu",
+      "handle": "independent study",
+      "title": "Strong where there is a rule to check, weak where the call is a judgement",
+      "url": "https://arxiv.org/abs/2610.17820",
+      "date": "13 October 2026",
+      "summary": "The first controlled attacker-versus-judge test that gives every system the same attacks and the same policy. Fifty attack wordings from thirteen families went to Jev, five GPT and GLM judges and two small open classifiers, across four tasks: input moderation, injection detection, routing and phishing. The useful part is the split in the results, because Jev is not uniformly robust — it leads on the tasks with a clear rule to check and trails on the one that asks for an overall judgement.",
+      "takeaways": [
+        "On input moderation it was the hardest of the eight systems to fool: eight forged versions of its structured input changed none of its decisions, and a trick that got past 56 per cent of GPT-6 Astra's blocks got past 9 per cent of Jev's.",
+        "On phishing it was a poor judge. Without any attack it caught only 62 per cent of the phishing emails, against 77 to 81 per cent for the GLM judges, and the same forgeries slipped past 19 to 29 per cent of the mail it did flag.",
+        "It was the fastest judge and the noisiest: it flagged the most harmless requests, 27 per cent of them.",
+        "The rule to carry over: if your task has a rule, this model is worth attacking before your users are. If your task needs an overall impression, measure it on your own examples and compare it with the tool you already use."
+      ],
+      "near": null,
+      "tags": [
+        "safety",
+        "moderation",
+        "limits"
+      ],
+      "id": "sig-031"
     },
     {
       "kind": "resource",

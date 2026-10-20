@@ -25,14 +25,48 @@
 <div class="hero"><img src="assets/forest/hero.webp" width="2000" height="1125" alt="">
 <h1>Pulse</h1></div>
 <p class="lede">What people are writing, building and arguing about with the Jev decision model: the jobs nobody has listed yet, the findings from the first independent tests, and the places to read more. <strong>Every entry links to its source.</strong> The sweep runs each Tuesday morning, so this page is always the most recent pass.</p>
-<p class="count">Last collected 13 October 2026. 28 entries, and 9 of them are jobs no case here covers yet.</p>
+<p class="count">Last collected 20 October 2026. 34 entries, and 11 of them are jobs no case here covers yet.</p>
 <p class="count">Collected on Tuesdays at 09:00 by the weekly sweep: search Twitter/X, YouTube, Reddit, Hacker News, the official docs and the blogs that cover Jev, then read what changed and add what is new here.</p>
 <hr class="rule">
 <div class="controls" role="group" aria-label="Filter the entries">
-<button type="button" class="filt" data-filter="all" aria-pressed="true">Everything <b>28</b></button><button type="button" class="filt" data-filter="gap" aria-pressed="false">Jobs no case covers yet <b>9</b></button><button type="button" class="filt" data-filter="insight" aria-pressed="false">New learning <b>12</b></button><button type="button" class="filt" data-filter="usecase" aria-pressed="false">Working example <b>4</b></button><button type="button" class="filt" data-filter="resource" aria-pressed="false">Where to read more <b>3</b></button>
+<button type="button" class="filt" data-filter="all" aria-pressed="true">Everything <b>34</b></button><button type="button" class="filt" data-filter="gap" aria-pressed="false">Jobs no case covers yet <b>11</b></button><button type="button" class="filt" data-filter="insight" aria-pressed="false">New learning <b>16</b></button><button type="button" class="filt" data-filter="usecase" aria-pressed="false">Working example <b>4</b></button><button type="button" class="filt" data-filter="resource" aria-pressed="false">Where to read more <b>3</b></button>
 </div>
-<p class="count" id="shown" aria-live="polite">All 28 entries are shown.</p>
+<p class="count" id="shown" aria-live="polite">All 34 entries are shown.</p>
 <div class="feed" id="feed">
+<article class="post" id="sig-029" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">DO</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">TypeSafe AI</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">docs.typesafe.ai</span></p>
+    <p class="post__where"><span class="post__source">Official docs · the Box question</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">14 October 2026</span></p>
+    <h2 class="post__title">Find where something is in a picture, and hand the crop to a bigger model</h2>
+    <p class="post__sum">On 14 October TypeSafe added a fourth kind of question, alongside yes/no, choose-one and score. A Box question points at a photograph and asks where a named thing is; the answer is the four edges of the smallest rectangle around it, given as fractions of the picture&#x27;s width and height, plus a confidence. Because the edges are fractions, the same answer is correct at any image size, so code can cut out the region and send a small, sharp picture to a vision model instead of the whole frame. Nothing on this site covers this job.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Not on this site yet. Case 14 finds pictures by their labels; this decides what is inside a picture, and where.</li><li>A Box answer is always a box. Ask for a giraffe in a kitchen photo and you still get four edges, so ask a yes/no question about the target in the same request and throw the box away when that answer is low.</li><li>The work it replaces is a person drawing a rectangle: the signature field on a scanned form, the product in a listing photo, the face at a door camera.</li><li>TypeSafe marks this whole area as not ready for production and gives no recommended confidence threshold, so tune the number on your own pictures before you act on it.</li></ul>
+    <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
+      <span class="post__tags"><span class="tag">#images</span><span class="tag">#vision</span><span class="tag">#new type</span></span>
+      <a class="post__link" href="https://docs.typesafe.ai/primitives/box" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-034" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">AT</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Zev Schonberg, Intezer</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">alert triage in a security team</span></p>
+    <p class="post__where"><span class="post__source">The Hacker News · piece contributed by Intezer</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">16 October 2026</span></p>
+    <h2 class="post__title">Look at every security alert, not only the loud ones</h2>
+    <p class="post__sum">A security vendor argues that alert triage is the natural first job for a decision model, and shows the arithmetic. With input at $42 per billion tokens and answers in 70 to 500 milliseconds, an organisation seeing 450,000 alerts a year pays roughly a hundred dollars a year to have every one of them read, which removes the reason to inspect only the severe ones. This is a contributed piece, so read the figures as the vendor&#x27;s own. The trap it names is not in the model.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Not on this site yet: none of the cases covers a security queue, where the volume is enormous and the cost of skipping one alert is an incident.</li><li>The pattern is a pair of thresholds: close an alert by itself above 0.97, treat below 0.6 as a likely incident and escalate, and send everything in between to a person. It also suggests a stricter bar for anything that cannot be undone, such as disabling an account.</li><li>The failure it warns about is a wrong input, not a wrong answer. In the vendor&#x27;s own data, 51 per cent of the machines found to hold live malicious code had already been marked as cleaned up, so a well-calibrated model reads &#x27;quarantined, low severity&#x27; correctly and still closes a real case.</li><li>There is a quieter benefit: the set of possible answers is fixed in advance and every verdict carries its own number, so each decision can be logged, replayed and compared with what actually happened — far easier to audit than a paragraph of reasoning.</li></ul>
+    <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
+      <span class="post__tags"><span class="tag">#security</span><span class="tag">#triage</span><span class="tag">#thresholds</span></span>
+      <a class="post__link" href="https://thehackernews.com/2026/10/ai-decision-models-and-their-impact-on.html" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
 <article class="post" id="sig-007" data-kind="gap">
   <div class="post__ava ava--gap" aria-hidden="true">1P</div>
   <div class="post__body">
@@ -220,6 +254,57 @@
       <a class="post__link" href="https://startupfortune.com/amazon-releases-its-own-jev-clone-as-the-ai-decision-model-race-turns-into-a-pile-up" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
+<article class="post" id="sig-031" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">IS</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Xiang Li, Aichun Huang, Mingming Zhang and Zheli Liu</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">independent study</span></p>
+    <p class="post__where"><span class="post__source">Research · arXiv 2610.17820</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">13 October 2026</span></p>
+    <h2 class="post__title">Strong where there is a rule to check, weak where the call is a judgement</h2>
+    <p class="post__sum">The first controlled attacker-versus-judge test that gives every system the same attacks and the same policy. Fifty attack wordings from thirteen families went to Jev, five GPT and GLM judges and two small open classifiers, across four tasks: input moderation, injection detection, routing and phishing. The useful part is the split in the results, because Jev is not uniformly robust — it leads on the tasks with a clear rule to check and trails on the one that asks for an overall judgement.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>On input moderation it was the hardest of the eight systems to fool: eight forged versions of its structured input changed none of its decisions, and a trick that got past 56 per cent of GPT-6 Astra&#x27;s blocks got past 9 per cent of Jev&#x27;s.</li><li>On phishing it was a poor judge. Without any attack it caught only 62 per cent of the phishing emails, against 77 to 81 per cent for the GLM judges, and the same forgeries slipped past 19 to 29 per cent of the mail it did flag.</li><li>It was the fastest judge and the noisiest: it flagged the most harmless requests, 27 per cent of them.</li><li>The rule to carry over: if your task has a rule, this model is worth attacking before your users are. If your task needs an overall impression, measure it on your own examples and compare it with the tool you already use.</li></ul>
+    <p class="post__meta">
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#safety</span><span class="tag">#moderation</span><span class="tag">#limits</span></span>
+      <a class="post__link" href="https://arxiv.org/abs/2610.17820" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-032" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">IS</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Ilaria Imperatrice, Taisia Kameneva, Adam Eric Greenberg and Alessandro Romano</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">independent study</span></p>
+    <p class="post__where"><span class="post__source">Research · arXiv 2610.19619</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">14 October 2026</span></p>
+    <h2 class="post__title">The order of the answers can decide the answer, and a small move in the number can change what your software does</h2>
+    <p class="post__sum">A four-author study put the model through the classic traps from psychology: 41,500 questions covering short trick problems, anchoring, framing, sunk cost, and a pricing task that changes nothing but the customer&#x27;s name. At the level of the final answer it came out well, and most of the traps did not move it. Two things did, and both matter to anyone gating on the returned number.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Order matters. Reversing the list of options in one test moved the choice from 99.6 per cent for the safer programme to 65.6 per cent, and the risky option&#x27;s share from 0.4 to 34.4 per cent.</li><li>A small move in the number changes behaviour. The paper&#x27;s example is a support system that handles a request by itself when the probability is at least 80 per cent: the same case came back at 83 per cent under one wording and 77 per cent under another.</li><li>So set your threshold on your own examples, and run those examples again after every wording change, including a change to the order of the options.</li><li>The authors refuse to fold this into one score, because the tests do not share a single right answer. Read it as a list of traps to test for, not as a grade for the model.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-8">Touches case 08: Output verification and model calibration</a>
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#fairness</span><span class="tag">#pitfalls</span><span class="tag">#calibration</span></span>
+      <a class="post__link" href="https://arxiv.org/abs/2610.19619" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-030" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">MO</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">TopxAI</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">measurements on the live API</span></p>
+    <p class="post__where"><span class="post__source">Blog · TopxAI, an API relay</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">16 October 2026</span></p>
+    <h2 class="post__title">A picture is billed by area, and the smallest side allowed is 280 pixels, not the 256 the docs say</h2>
+    <p class="post__sum">A company that serves the model took a week of measurements against the live API and wrote down the working rules the documentation does not give. An image is not a separate line on the bill: its tokens count as input text, and the count follows a simple rule — divide each side by 28, round both up, multiply the two numbers, and double the result. A 1024 by 768 photo came to 2,074 tokens. The same tests pinned down the real size limits, and two of them differ from what the docs promise.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Cost follows the area of the picture, so shrinking a photo saves money in proportion. A 1568 by 1568 image costs about nine times a 512 by 512 one.</li><li>Naming the same image in three different questions bills it three times. Put a shared picture in the state once and point at it by name from each question.</li><li>The documented minimum side is 256 pixels, but every side under 280 was refused with an invalid-dimensions error, and one bad image fails the whole request. Keep the longest side at or under 1568 and the shortest at 280 or more.</li><li>The API drops the orientation stored in the file, so a phone photo taken sideways arrives sideways. Turn the pixels upright before sending them.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-14">Touches case 14: Image and asset retrieval via metadata</a>
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#images</span><span class="tag">#cost</span><span class="tag">#limits</span></span>
+      <a class="post__link" href="https://ai.topxea.com/blog/jev-1-14-images-and-box" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
 <article class="post" id="sig-008" data-kind="insight">
   <div class="post__ava ava--insight" aria-hidden="true">DO</div>
   <div class="post__body">
@@ -235,6 +320,23 @@
       <span class="chip chip--kind">New learning</span>
       <span class="post__tags"><span class="tag">#limits</span><span class="tag">#pitfalls</span></span>
       <a class="post__link" href="https://docs.typesafe.ai/model-jaggedness/jev-1.13" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-033" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">IS</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Wang Yang and ten co-authors, Case Western Reserve University and other institutions</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">independent study</span></p>
+    <p class="post__where"><span class="post__source">Research · arXiv 2610.24929</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">18 October 2026</span></p>
+    <h2 class="post__title">It decides what one record says, not what several records add up to, and it does not know that</h2>
+    <p class="post__sum">An eleven-author study asks the question a benchmark score cannot answer: what can a single pass not decide. It built a set of tasks where only one thing changes at a time, ran the model through them, and then tested it on real items graded by how much written-out thinking a reference model needed. The line it found is clean and worth knowing before you design around the model.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>It tracks a state badly once the records look alike. As soon as the answer depends on two or more updates to the same customer, accuracy falls to between 53 and 80 per cent at sixteen updates, because the records interfere with each other.</li><li>Hand it a summary of the state that is out of date and it follows the summary. It does not go back and check.</li><li>The dangerous part is the confidence. It flags the mistakes it makes on its own, but not the ones it inherits from a bad input, and adding a &#x27;hand off to a person&#x27; option does not catch those either.</li><li>So keep the job of assembling the state in code or with a model that reasons, confirm the state is right, and let this model choose from the options once it is.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-8">Touches case 08: Output verification and model calibration</a>
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#agents</span><span class="tag">#limits</span><span class="tag">#confidence</span></span>
+      <a class="post__link" href="https://arxiv.org/abs/2610.24929" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
 <article class="post" id="sig-018" data-kind="insight">
