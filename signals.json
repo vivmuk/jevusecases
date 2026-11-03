@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-20",
+  "updated": "2026-11-03",
   "collector": "Collected on Tuesdays at 09:00 by the weekly sweep: search Twitter/X, YouTube, Reddit, Hacker News, the official docs and the blogs that cover Jev, then read what changed and add what is new here.",
   "items": [
     {
@@ -349,6 +349,29 @@
       "id": "sig-025"
     },
     {
+      "kind": "gap",
+      "source": "Research · SREGym",
+      "author": "Yiming Su, Saad Mohammad Rafid Pial, Jackson Clark and Tianyin Xu",
+      "handle": "software reliability study",
+      "title": "Finding what broke a live service, with no language model in the loop and two clear ways it goes wrong",
+      "url": "https://www.sregym.com/blog/jev-driven-sre-diagnosis",
+      "date": "6 October 2026",
+      "summary": "A team broke 21 test systems on purpose and built a pipeline with no language model in it. Ordinary code reads the cluster, groups what it finds by component and numbers the clues; Jev is then asked which component to look at, whether that component is the cause or a victim, which clue explains it, and which kind of fault it is. Across 105 runs the submitted diagnoses passed the marking scheme 80 times, 76.2 per cent, at a median 14.6 seconds each. Every Jev call in the whole study, 252 of them, cost about 15 cents in total.",
+      "takeaways": [
+        "The consistency is the striking part: for each fault either all five attempts passed or all five failed. Nothing here looks like luck, so the option list and the evidence you hand over decide the result.",
+        "First failure mode from the write-up: it picks the wrong clue. Offered a rule change and a raised CPU limit as evidence for the same fault, it blamed the limit in all five runs, and the judge accepted the location but not the explanation.",
+        "Second failure mode: the decisive evidence was never collected. One report showed a retry setting's name but not its value, and a single guilty component was asked for when the fault lived between two services, so all five attempts failed.",
+        "Nobody on this site covers diagnosing a system that is misbehaving. The lesson carries over to every case: a decision is only as good as the list it chooses from."
+      ],
+      "near": null,
+      "tags": [
+        "operations",
+        "root cause",
+        "evidence"
+      ],
+      "id": "sig-037"
+    },
+    {
       "kind": "insight",
       "source": "Research · arXiv 2609.34024",
       "author": "Alfredo Madrid-García and Beatriz Merino-Barbancho",
@@ -370,6 +393,29 @@
         "limits"
       ],
       "id": "sig-020"
+    },
+    {
+      "kind": "gap",
+      "source": "Official docs · cookbook",
+      "author": "TypeSafe AI",
+      "handle": "docs.typesafe.ai",
+      "title": "One sentence in, a structured order out: a loop that removes each item it has found",
+      "url": "https://docs.typesafe.ai/cookbooks/cart_from_primitives",
+      "date": "31 October 2026",
+      "summary": "A customer writes \"Can I get a large oat milk latte and a blueberry muffin please\" and the software has to end up with a cart rather than a sentence. A choose-one question returns exactly one option, so the recipe builds the cart in two stages. First a loop asks which remaining menu item the order mentions, removes that item from the next request's list of options, and stops when the answer is the \"nothing else\" option every request carries. Then one request per found item fills its known fields, such as size and milk. The published run used Jev 1.14 and can be replayed without a key.",
+      "takeaways": [
+        "The trick is shrinking the option list, not lengthening the question: each answer removes what has already been found.",
+        "A choose-one question must pick something, so the loop needs a sentinel option meaning none, and a hard cap on how many times it may run, so one bad answer cannot loop forever.",
+        "Nothing on this site reads an order out of a sentence, yet the shape fits any list of unknown length: the parts mentioned in a complaint, the filters somebody asked for, the steps named in a request.",
+        "One request per item, asking only that item's fields, keeps every question small, which is the advice the documentation gives everywhere else."
+      ],
+      "near": null,
+      "tags": [
+        "extraction",
+        "patterns",
+        "structured output"
+      ],
+      "id": "sig-036"
     },
     {
       "kind": "gap",
@@ -417,6 +463,75 @@
       ]
     },
     {
+      "kind": "gap",
+      "source": "Official docs · cookbook",
+      "author": "TypeSafe AI",
+      "handle": "docs.typesafe.ai",
+      "title": "Check what a machine read off a photo, and send only the doubtful values to a person",
+      "url": "https://docs.typesafe.ai/cookbooks/ocr_confidence_bounding_boxes",
+      "date": "29 October 2026",
+      "summary": "A recipe for a job none of the cases on this site covers. An invoice is photographed, a text reader and a language model pull the supplier, the invoice number, the date and the bank details out of it, and this step checks that reading. The photo and one value go to Jev together: it draws a box round where that value is printed, then scores the value twice, once against the whole page and once against a close crop of its own box. Anything scoring below 0.25 on either check goes to a person. On two supplier invoices the reader had got three values wrong and all three were caught, including a date read as 2028 instead of 2026.",
+      "takeaways": [
+        "It is a second reader, not a second extractor: the value and the picture go in together, and the answer is only how well the two agree.",
+        "Two checks catch what one misses. A wrong invoice number scored 0.88 against the whole page and 0.18 against the close crop, so the page check on its own would have waved it through.",
+        "The close crop only works if the model can see the picture at all. Picture input is still marked not ready for production and needs a special header on every request, so read the small print before building on it.",
+        "The shape travels well: any value that came off an image, a form or a screenshot can be re-checked against that image before a person types it in."
+      ],
+      "near": null,
+      "tags": [
+        "images",
+        "extraction",
+        "review"
+      ],
+      "id": "sig-035"
+    },
+    {
+      "kind": "insight",
+      "source": "Research · arXiv 2610.41079",
+      "author": "Jiazheng Li and Yulan He, King's College London",
+      "handle": "independent study",
+      "title": "A 4B model trained on school work beats five commercial decision services by 9 points on the same tests",
+      "url": "https://arxiv.org/abs/2610.41079",
+      "date": "29 October 2026",
+      "summary": "Two researchers trained their own decision models at three sizes, 0.8, 2 and 4 billion parameters, on the judgements a school makes all day: giving a rubric score, checking an answer against a marking rule, and spotting the first wrong step in a worked solution. Across twelve education benchmarks the 4B version averaged 67.6 per cent correct, 9.4 points above the strongest of five commercial decision services it was compared with, one of which is Jev through its 1.14 interface, and 18.7 points above the best open decision model of the same size. On four sets from other subjects it matched the strongest commercial service, which stayed ahead on general judgement and reasoning.",
+      "takeaways": [
+        "Education is a job no case on this site covers, and marking is the shape a decision model suits: a fixed set of levels, hundreds of times a day, with a person able to look at the doubtful ones.",
+        "The 2B version answers about 150 questions a second on a single H100 card, which is the argument for running this kind of model yourself rather than paying per call.",
+        "The paper names where it still struggles: counting, grading how much change has happened, and any question that needs several steps of reasoning.",
+        "Training was one supervised pass against the label distributions the data already had, with no reinforcement learning stage, and the confidence numbers were measured afterwards rather than optimised."
+      ],
+      "near": null,
+      "tags": [
+        "education",
+        "benchmarks",
+        "small models"
+      ],
+      "id": "sig-039"
+    },
+    {
+      "kind": "insight",
+      "source": "Official docs · Noul",
+      "author": "TypeSafe AI",
+      "handle": "docs.typesafe.ai",
+      "title": "Start the yes/no line at 0.7 and the no line at 0.3, the maker now says",
+      "url": "https://docs.typesafe.ai/primitives/noul",
+      "date": "23 October 2026",
+      "summary": "The page that explains yes/no questions was rewritten to answer the question everybody asks first: where to put the line. The advice is now 0.7 for yes and 0.3 for no, with the note that when you only act on a yes, 0.7 is the only number you need, and that answers landing between 0.3 and 0.7 can go to a person instead of down either path. That replaced the older suggestion of 0.5 for questions where a yes and a no cost the same to get wrong, and the page warns against fitting the number closely to a handful of test cases.",
+      "takeaways": [
+        "Two lines give three outcomes: act, hand it to a person, or do nothing. The middle band is not a failure, it is the review queue.",
+        "Move the line with the cost of being wrong rather than with the model: raise it when acting on a false yes is expensive, such as refunding money, and lower it when missing a true yes is, such as failing to flag a safety problem.",
+        "These are starting values, not measured ones, and the same page says to check them on your own examples, which is the job case 8 describes.",
+        "A yes/no answer has no separate confidence to read, because the single number already describes the whole answer."
+      ],
+      "near": 8,
+      "tags": [
+        "thresholds",
+        "confidence",
+        "noul"
+      ],
+      "id": "sig-038"
+    },
+    {
       "id": "sig-007",
       "kind": "gap",
       "source": "matthiasfrank.de",
@@ -459,6 +574,29 @@
         "cost"
       ],
       "id": "sig-018"
+    },
+    {
+      "kind": "insight",
+      "source": "Blog · Concentrate",
+      "author": "Concentrate, a model gateway writing about its own catalogue",
+      "handle": "gateway blog",
+      "title": "No agreement, no patient data: the paperwork wall in front of Jev for healthcare work",
+      "url": "https://concentrate.ai/blog/jev-baa-vs-openai-decisions-baa-why-jev-can-t-take-phi-and-openai-decisions-can-on-concentrate",
+      "date": "2 November 2026",
+      "summary": "A gateway that resells both models compared their paperwork rather than their accuracy. TypeSafe publishes no business associate agreement and no HIPAA statement for Jev, and its terms do not mention patient data, so Jev should not be given protected health information. OpenAI's competing service runs on GPT-6 Luna, which is covered by the gateway's own agreement, so the same job can be done on patient records there. The post also dates the competitor: OpenAI's Decisions interface left preview on 22 October at ten cents per million input tokens, taking text, pictures and JSON, one to four hundred questions per call, with zero data retention for eligible customers.",
+      "takeaways": [
+        "The rule is legal rather than technical: without a signed agreement, patient data does not go in, however well the model reads it.",
+        "So for classifying clinical notes, triaging patient messages or routing claims, the paperwork picks the vendor before any benchmark does.",
+        "The competitor is the one that can say yes to that question today, and it also takes pictures, so in healthcare the cheaper and faster model is not automatically the one you can use.",
+        "Nothing says the position is permanent. It is the public paperwork as it stands, and a vendor can change it."
+      ],
+      "near": null,
+      "tags": [
+        "healthcare",
+        "compliance",
+        "competitors"
+      ],
+      "id": "sig-040"
     },
     {
       "id": "sig-013",

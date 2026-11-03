@@ -25,13 +25,13 @@
 <div class="hero"><img src="assets/forest/hero.webp" width="2000" height="1125" alt="">
 <h1>Pulse</h1></div>
 <p class="lede">What people are writing, building and arguing about with the Jev decision model: the jobs nobody has listed yet, the findings from the first independent tests, and the places to read more. <strong>Every entry links to its source.</strong> The sweep runs each Tuesday morning, so this page is always the most recent pass.</p>
-<p class="count">Last collected 20 October 2026. 34 entries, and 11 of them are jobs no case here covers yet.</p>
+<p class="count">Last collected 3 November 2026. 40 entries, and 14 of them are jobs no case here covers yet.</p>
 <p class="count">Collected on Tuesdays at 09:00 by the weekly sweep: search Twitter/X, YouTube, Reddit, Hacker News, the official docs and the blogs that cover Jev, then read what changed and add what is new here.</p>
 <hr class="rule">
 <div class="controls" role="group" aria-label="Filter the entries">
-<button type="button" class="filt" data-filter="all" aria-pressed="true">Everything <b>34</b></button><button type="button" class="filt" data-filter="gap" aria-pressed="false">Jobs no case covers yet <b>11</b></button><button type="button" class="filt" data-filter="insight" aria-pressed="false">New learning <b>16</b></button><button type="button" class="filt" data-filter="usecase" aria-pressed="false">Working example <b>4</b></button><button type="button" class="filt" data-filter="resource" aria-pressed="false">Where to read more <b>3</b></button>
+<button type="button" class="filt" data-filter="all" aria-pressed="true">Everything <b>40</b></button><button type="button" class="filt" data-filter="gap" aria-pressed="false">Jobs no case covers yet <b>14</b></button><button type="button" class="filt" data-filter="insight" aria-pressed="false">New learning <b>19</b></button><button type="button" class="filt" data-filter="usecase" aria-pressed="false">Working example <b>4</b></button><button type="button" class="filt" data-filter="resource" aria-pressed="false">Where to read more <b>3</b></button>
 </div>
-<p class="count" id="shown" aria-live="polite">All 34 entries are shown.</p>
+<p class="count" id="shown" aria-live="polite">All 40 entries are shown.</p>
 <div class="feed" id="feed">
 <article class="post" id="sig-029" data-kind="gap">
   <div class="post__ava ava--gap" aria-hidden="true">DO</div>
@@ -84,6 +84,23 @@
       <a class="post__link" href="https://matthiasfrank.de/en/jev-ai-use-cases/" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
+<article class="post" id="sig-035" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">DO</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">TypeSafe AI</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">docs.typesafe.ai</span></p>
+    <p class="post__where"><span class="post__source">Official docs · cookbook</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">29 October 2026</span></p>
+    <h2 class="post__title">Check what a machine read off a photo, and send only the doubtful values to a person</h2>
+    <p class="post__sum">A recipe for a job none of the cases on this site covers. An invoice is photographed, a text reader and a language model pull the supplier, the invoice number, the date and the bank details out of it, and this step checks that reading. The photo and one value go to Jev together: it draws a box round where that value is printed, then scores the value twice, once against the whole page and once against a close crop of its own box. Anything scoring below 0.25 on either check goes to a person. On two supplier invoices the reader had got three values wrong and all three were caught, including a date read as 2028 instead of 2026.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>It is a second reader, not a second extractor: the value and the picture go in together, and the answer is only how well the two agree.</li><li>Two checks catch what one misses. A wrong invoice number scored 0.88 against the whole page and 0.18 against the close crop, so the page check on its own would have waved it through.</li><li>The close crop only works if the model can see the picture at all. Picture input is still marked not ready for production and needs a special header on every request, so read the small print before building on it.</li><li>The shape travels well: any value that came off an image, a form or a screenshot can be re-checked against that image before a person types it in.</li></ul>
+    <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
+      <span class="post__tags"><span class="tag">#images</span><span class="tag">#extraction</span><span class="tag">#review</span></span>
+      <a class="post__link" href="https://docs.typesafe.ai/cookbooks/ocr_confidence_bounding_boxes" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
 <article class="post" id="sig-019" data-kind="gap">
   <div class="post__ava ava--gap" aria-hidden="true">AA</div>
   <div class="post__body">
@@ -99,6 +116,40 @@
       <span class="chip chip--kind">Jobs no case covers yet</span>
       <span class="post__tags"><span class="tag">#agents</span><span class="tag">#context</span><span class="tag">#gaps</span></span>
       <a class="post__link" href="https://oneclickclaw.io/news/jev-hermes-agent-owners-8-jobs" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-036" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">DO</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">TypeSafe AI</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">docs.typesafe.ai</span></p>
+    <p class="post__where"><span class="post__source">Official docs · cookbook</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">31 October 2026</span></p>
+    <h2 class="post__title">One sentence in, a structured order out: a loop that removes each item it has found</h2>
+    <p class="post__sum">A customer writes &quot;Can I get a large oat milk latte and a blueberry muffin please&quot; and the software has to end up with a cart rather than a sentence. A choose-one question returns exactly one option, so the recipe builds the cart in two stages. First a loop asks which remaining menu item the order mentions, removes that item from the next request&#x27;s list of options, and stops when the answer is the &quot;nothing else&quot; option every request carries. Then one request per found item fills its known fields, such as size and milk. The published run used Jev 1.14 and can be replayed without a key.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>The trick is shrinking the option list, not lengthening the question: each answer removes what has already been found.</li><li>A choose-one question must pick something, so the loop needs a sentinel option meaning none, and a hard cap on how many times it may run, so one bad answer cannot loop forever.</li><li>Nothing on this site reads an order out of a sentence, yet the shape fits any list of unknown length: the parts mentioned in a complaint, the filters somebody asked for, the steps named in a request.</li><li>One request per item, asking only that item&#x27;s fields, keeps every question small, which is the advice the documentation gives everywhere else.</li></ul>
+    <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
+      <span class="post__tags"><span class="tag">#extraction</span><span class="tag">#patterns</span><span class="tag">#structured output</span></span>
+      <a class="post__link" href="https://docs.typesafe.ai/cookbooks/cart_from_primitives" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-037" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">SR</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Yiming Su, Saad Mohammad Rafid Pial, Jackson Clark and Tianyin Xu</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">software reliability study</span></p>
+    <p class="post__where"><span class="post__source">Research · SREGym</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">6 October 2026</span></p>
+    <h2 class="post__title">Finding what broke a live service, with no language model in the loop and two clear ways it goes wrong</h2>
+    <p class="post__sum">A team broke 21 test systems on purpose and built a pipeline with no language model in it. Ordinary code reads the cluster, groups what it finds by component and numbers the clues; Jev is then asked which component to look at, whether that component is the cause or a victim, which clue explains it, and which kind of fault it is. Across 105 runs the submitted diagnoses passed the marking scheme 80 times, 76.2 per cent, at a median 14.6 seconds each. Every Jev call in the whole study, 252 of them, cost about 15 cents in total.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>The consistency is the striking part: for each fault either all five attempts passed or all five failed. Nothing here looks like luck, so the option list and the evidence you hand over decide the result.</li><li>First failure mode from the write-up: it picks the wrong clue. Offered a rule change and a raised CPU limit as evidence for the same fault, it blamed the limit in all five runs, and the judge accepted the location but not the explanation.</li><li>Second failure mode: the decisive evidence was never collected. One report showed a retry setting&#x27;s name but not its value, and a single guilty component was asked for when the fault lived between two services, so all five attempts failed.</li><li>Nobody on this site covers diagnosing a system that is misbehaving. The lesson carries over to every case: a decision is only as good as the list it chooses from.</li></ul>
+    <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
+      <span class="post__tags"><span class="tag">#operations</span><span class="tag">#root cause</span><span class="tag">#evidence</span></span>
+      <a class="post__link" href="https://www.sregym.com/blog/jev-driven-sre-diagnosis" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
 <article class="post" id="sig-023" data-kind="gap">
@@ -339,6 +390,23 @@
       <a class="post__link" href="https://arxiv.org/abs/2610.24929" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
+<article class="post" id="sig-040" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">GB</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Concentrate, a model gateway writing about its own catalogue</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">gateway blog</span></p>
+    <p class="post__where"><span class="post__source">Blog · Concentrate</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">2 November 2026</span></p>
+    <h2 class="post__title">No agreement, no patient data: the paperwork wall in front of Jev for healthcare work</h2>
+    <p class="post__sum">A gateway that resells both models compared their paperwork rather than their accuracy. TypeSafe publishes no business associate agreement and no HIPAA statement for Jev, and its terms do not mention patient data, so Jev should not be given protected health information. OpenAI&#x27;s competing service runs on GPT-6 Luna, which is covered by the gateway&#x27;s own agreement, so the same job can be done on patient records there. The post also dates the competitor: OpenAI&#x27;s Decisions interface left preview on 22 October at ten cents per million input tokens, taking text, pictures and JSON, one to four hundred questions per call, with zero data retention for eligible customers.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>The rule is legal rather than technical: without a signed agreement, patient data does not go in, however well the model reads it.</li><li>So for classifying clinical notes, triaging patient messages or routing claims, the paperwork picks the vendor before any benchmark does.</li><li>The competitor is the one that can say yes to that question today, and it also takes pictures, so in healthcare the cheaper and faster model is not automatically the one you can use.</li><li>Nothing says the position is permanent. It is the public paperwork as it stands, and a vendor can change it.</li></ul>
+    <p class="post__meta">
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#healthcare</span><span class="tag">#compliance</span><span class="tag">#competitors</span></span>
+      <a class="post__link" href="https://concentrate.ai/blog/jev-baa-vs-openai-decisions-baa-why-jev-can-t-take-phi-and-openai-decisions-can-on-concentrate" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
 <article class="post" id="sig-018" data-kind="insight">
   <div class="post__ava ava--insight" aria-hidden="true">GB</div>
   <div class="post__body">
@@ -354,6 +422,40 @@
       <span class="chip chip--kind">New learning</span>
       <span class="post__tags"><span class="tag">#guardrails</span><span class="tag">#benchmark</span><span class="tag">#cost</span></span>
       <a class="post__link" href="https://developers.redhat.com/articles/2026/10/02/benchmarking-ai-decision-models-against-traditional-guardrails" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-038" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">DO</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">TypeSafe AI</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">docs.typesafe.ai</span></p>
+    <p class="post__where"><span class="post__source">Official docs · Noul</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">23 October 2026</span></p>
+    <h2 class="post__title">Start the yes/no line at 0.7 and the no line at 0.3, the maker now says</h2>
+    <p class="post__sum">The page that explains yes/no questions was rewritten to answer the question everybody asks first: where to put the line. The advice is now 0.7 for yes and 0.3 for no, with the note that when you only act on a yes, 0.7 is the only number you need, and that answers landing between 0.3 and 0.7 can go to a person instead of down either path. That replaced the older suggestion of 0.5 for questions where a yes and a no cost the same to get wrong, and the page warns against fitting the number closely to a handful of test cases.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Two lines give three outcomes: act, hand it to a person, or do nothing. The middle band is not a failure, it is the review queue.</li><li>Move the line with the cost of being wrong rather than with the model: raise it when acting on a false yes is expensive, such as refunding money, and lower it when missing a true yes is, such as failing to flag a safety problem.</li><li>These are starting values, not measured ones, and the same page says to check them on your own examples, which is the job case 8 describes.</li><li>A yes/no answer has no separate confidence to read, because the single number already describes the whole answer.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-8">Touches case 08: Output verification and model calibration</a>
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#thresholds</span><span class="tag">#confidence</span><span class="tag">#noul</span></span>
+      <a class="post__link" href="https://docs.typesafe.ai/primitives/noul" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-039" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">IS</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Jiazheng Li and Yulan He, King&#x27;s College London</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">independent study</span></p>
+    <p class="post__where"><span class="post__source">Research · arXiv 2610.41079</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">29 October 2026</span></p>
+    <h2 class="post__title">A 4B model trained on school work beats five commercial decision services by 9 points on the same tests</h2>
+    <p class="post__sum">Two researchers trained their own decision models at three sizes, 0.8, 2 and 4 billion parameters, on the judgements a school makes all day: giving a rubric score, checking an answer against a marking rule, and spotting the first wrong step in a worked solution. Across twelve education benchmarks the 4B version averaged 67.6 per cent correct, 9.4 points above the strongest of five commercial decision services it was compared with, one of which is Jev through its 1.14 interface, and 18.7 points above the best open decision model of the same size. On four sets from other subjects it matched the strongest commercial service, which stayed ahead on general judgement and reasoning.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Education is a job no case on this site covers, and marking is the shape a decision model suits: a fixed set of levels, hundreds of times a day, with a person able to look at the doubtful ones.</li><li>The 2B version answers about 150 questions a second on a single H100 card, which is the argument for running this kind of model yourself rather than paying per call.</li><li>The paper names where it still struggles: counting, grading how much change has happened, and any question that needs several steps of reasoning.</li><li>Training was one supervised pass against the label distributions the data already had, with no reinforcement learning stage, and the confidence numbers were measured afterwards rather than optimised.</li></ul>
+    <p class="post__meta">
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#education</span><span class="tag">#benchmarks</span><span class="tag">#small models</span></span>
+      <a class="post__link" href="https://arxiv.org/abs/2610.41079" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
 <article class="post" id="sig-009" data-kind="insight">
