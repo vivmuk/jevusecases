@@ -25,13 +25,13 @@
 <div class="hero"><img src="assets/forest/hero.webp" width="2000" height="1125" alt="">
 <h1>Pulse</h1></div>
 <p class="lede">What people are writing, building and arguing about with the Jev decision model: the jobs nobody has listed yet, the findings from the first independent tests, and the places to read more. <strong>Every entry links to its source.</strong> The sweep runs each Tuesday morning, so this page is always the most recent pass.</p>
-<p class="count">Last collected 3 November 2026. 40 entries, and 14 of them are jobs no case here covers yet.</p>
+<p class="count">Last collected 10 November 2026. 46 entries, and 14 of them are jobs no case here covers yet.</p>
 <p class="count">Collected on Tuesdays at 09:00 by the weekly sweep: search Twitter/X, YouTube, Reddit, Hacker News, the official docs and the blogs that cover Jev, then read what changed and add what is new here.</p>
 <hr class="rule">
 <div class="controls" role="group" aria-label="Filter the entries">
-<button type="button" class="filt" data-filter="all" aria-pressed="true">Everything <b>40</b></button><button type="button" class="filt" data-filter="gap" aria-pressed="false">Jobs no case covers yet <b>14</b></button><button type="button" class="filt" data-filter="insight" aria-pressed="false">New learning <b>19</b></button><button type="button" class="filt" data-filter="usecase" aria-pressed="false">Working example <b>4</b></button><button type="button" class="filt" data-filter="resource" aria-pressed="false">Where to read more <b>3</b></button>
+<button type="button" class="filt" data-filter="all" aria-pressed="true">Everything <b>46</b></button><button type="button" class="filt" data-filter="gap" aria-pressed="false">Jobs no case covers yet <b>14</b></button><button type="button" class="filt" data-filter="insight" aria-pressed="false">New learning <b>24</b></button><button type="button" class="filt" data-filter="usecase" aria-pressed="false">Working example <b>5</b></button><button type="button" class="filt" data-filter="resource" aria-pressed="false">Where to read more <b>3</b></button>
 </div>
-<p class="count" id="shown" aria-live="polite">All 40 entries are shown.</p>
+<p class="count" id="shown" aria-live="polite">All 46 entries are shown.</p>
 <div class="feed" id="feed">
 <article class="post" id="sig-029" data-kind="gap">
   <div class="post__ava ava--gap" aria-hidden="true">DO</div>
@@ -475,6 +475,57 @@
       <a class="post__link" href="https://arxiv.org/abs/2609.37647" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
+<article class="post" id="sig-042" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">TM</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Allie Laabs, DevRel at TypeSafe AI</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">the maker&#x27;s own argument</span></p>
+    <p class="post__where"><span class="post__source">TypeSafe blog · Thoughts</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">3 November 2026</span></p>
+    <h2 class="post__title">Jev makes the judgment, your code makes the decision, and the difference is the whole design</h2>
+    <p class="post__sum">The maker explains why it still calls Jev a System One model when everyone else says decision model, and the argument is about where the model sits in a system rather than about names. A real decision is rarely one small choice: part of it is plain rules, such as whether a claim is eligible or over 25 dollars, and only part of it needs judgment, such as whether this customer wants their money back. Putting all of it into one big choose-one question, with the business rules written out in the criteria, starts a loop of tweaking that prose. The post calls it prompt gymnastics: you patch one awkward case, the next day a new input appears, and you patch that too.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>The shape to copy: code holds the rules and combines the outcomes, and Jev answers only the small questions code cannot.</li><li>Two symptoms of asking the model to do logic&#x27;s work: the criteria prose keeps growing, and every fix breaks something that used to work.</li><li>It reached the front page of Hacker News on 4 November with 48 points and 10 comments, and the comments argue about the name far more than about the advice.</li><li>It touches case 02, triage and routing of customer messages, which is the example the post works through twice, once the wrong way and once the right way.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-2">Touches case 02: Customer inquiry triage and routing</a>
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#architecture</span><span class="tag">#judging</span><span class="tag">#agents</span><span class="tag">#naming</span></span>
+      <a class="post__link" href="https://typesafe.ai/blog/dont-call-it-a-decision-model" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-046" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">AI</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Opper AI, a gateway that resells access to these models</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">an independent run</span></p>
+    <p class="post__where"><span class="post__source">Benchmark · Opper</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">3 November 2026</span></p>
+    <h2 class="post__title">Pac-Man as a fair test: Jev 1.14 lands joint first of eighteen decision models</h2>
+    <p class="post__sum">A gateway that sells access to these models built a benchmark out of Pac-Man. Each model plays 100 games against the classic arcade ghosts, and at every junction the game asks it one question, with the maze, the pellets and the ghosts as the state; the model answers with a probability for each direction and Pac-Man takes its pick. An answer that takes longer than two seconds is thrown out and a simple backup rule plays instead, so a slow model loses points for being slow. Jev 1.14 sits joint first of eighteen with a mean score of 3,597 and a best game of 10,050, level within the margin of error with two rivals, while Jev 1.13 was ninth on 2,750.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>It is easier to trust than most benchmark numbers: every game is recorded and replays exactly, the code is open, and the scoring rule is written down.</li><li>The two-second deadline mixes two things, so a result is judgment and speed together, and a model that thinks carefully can lose a move for thinking.</li><li>The move from ninth to joint first between versions 1.13 and 1.14 is part real improvement and part luck, which is why the leaderboard calls near scores a tie.</li><li>For anyone new to this: a game with a scoreboard is a friendlier argument than an abstract index, and that is the point of publishing it.</li></ul>
+    <p class="post__meta">
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#benchmarks</span><span class="tag">#evidence</span><span class="tag">#games</span><span class="tag">#latency</span></span>
+      <a class="post__link" href="https://opper.ai/jevman-benchmark/" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-043" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">DO</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">TypeSafe AI</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">docs.typesafe.ai</span></p>
+    <p class="post__where"><span class="post__source">Official docs · confidence</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">4 November 2026</span></p>
+    <h2 class="post__title">Confidence is not the chance the answer is right, so put your line on the option you act on</h2>
+    <p class="post__sum">A new section on the confidence page says plainly what the number does and does not mean. Confidence measures how concentrated the probabilities are, not the chance that the chosen answer is correct, so the same 0.5 hides very different situations: with two options it means the top option holds 0.75 of the probability, and with ten options only 0.55. For a choose-one question the number is a reshaping of the top probability, so checking both adds no new evidence. The advice is to put the threshold on the probability of the option your code will act on, which is a statement anyone can read: acting above 0.9 means acting when the chance of the wrong option is under one in ten.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>For a yes/no question, threshold the probability itself, with 0.7 for yes and 0.3 for no, and give the band between them its own outcome rather than rounding it to one side.</li><li>For a score whose decision hangs on one level, use that level&#x27;s probability, because a split across two levels barely lowers confidence.</li><li>Confidence keeps two jobs: showing whether a score is settled at all, and comparing uncertainty between questions that have different numbers of options.</li><li>It touches case 08, output verification and calibration, and it moves the earlier threshold advice on this site one step further by naming the number to read instead.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-8">Touches case 08: Output verification and model calibration</a>
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#confidence</span><span class="tag">#calibration</span><span class="tag">#thresholds</span><span class="tag">#gating</span></span>
+      <a class="post__link" href="https://docs.typesafe.ai/confidence" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
 <article class="post" id="sig-020" data-kind="insight">
   <div class="post__ava ava--insight" aria-hidden="true">IB</div>
   <div class="post__body">
@@ -490,6 +541,23 @@
       <span class="chip chip--kind">New learning</span>
       <span class="post__tags"><span class="tag">#domain</span><span class="tag">#calibration</span><span class="tag">#limits</span></span>
       <a class="post__link" href="https://arxiv.org/abs/2609.34024" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-045" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">RR</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Nischay Dhankhar and eight co-authors</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">rival research team</span></p>
+    <p class="post__where"><span class="post__source">Research · arXiv 2611.07854</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">5 November 2026</span></p>
+    <h2 class="post__title">An open 27-billion rival takes the top of a public decision index, and trains out the option-order wobble</h2>
+    <p class="post__sum">A nine-author paper publishes four open decision models called Drex, at 8, 9, 27 and 35 billion parameters, and compares them with Jev 1.14.0 on public decision benchmarks. Its 27-billion model, Max, scores 67.52 on the public suite of Decision Index 0.4.1 against 60.70 for Jev 1.14.0. The comparison was run by the team that built the rival, so it is a claim to test rather than a settled result. Training mixes worked examples with reinforcement learning, and the team reports that adding a penalty for inconsistent answers makes the answer stable when the options are shuffled, which is one of the failure modes the maker lists for its own model. Max answers a typical request in 183 milliseconds, against about two seconds for GPT-6 Sol.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>The option-order fix is the idea worth stealing: penalise the model whenever reordering the same options changes its answer, which is the check the documentation tells you to run by hand.</li><li>A 27-billion model that runs on your own hardware now sits at the top of a public index, so the case for a hosted endpoint is convenience and speed rather than capability alone.</li><li>Read the gap as this team&#x27;s own measurement: they chose the index, they ran both models, and one benchmark is one benchmark even when the methods are published.</li><li>All four models and the training code are released, so anyone can replay the comparison instead of trusting it.</li></ul>
+    <p class="post__meta">
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#open models</span><span class="tag">#competitors</span><span class="tag">#benchmarks</span><span class="tag">#research</span></span>
+      <a class="post__link" href="https://arxiv.org/abs/2611.07854" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
 <article class="post" id="sig-021" data-kind="insight">
@@ -524,6 +592,23 @@
       <span class="chip chip--kind">New learning</span>
       <span class="post__tags"><span class="tag">#benchmark</span><span class="tag">#calibration</span><span class="tag">#cost</span></span>
       <a class="post__link" href="https://vals-ai.com/blogs/independent-evaluation-of-jev" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-041" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">DO</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">TypeSafe AI</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">docs.typesafe.ai</span></p>
+    <p class="post__where"><span class="post__source">Official docs · cookbook</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">8 November 2026</span></p>
+    <h2 class="post__title">Catch the answer the documents do not support, and send only the doubtful ones to a person</h2>
+    <p class="post__sum">A new recipe for a job every assistant that reads documents has: catch the answer that sounds right but is not in the text. One request asks three yes/no questions about the paragraphs and the answer, namely whether the paragraphs hold every fact the question needs, whether the answer declines to answer, and whether following the paragraphs from the question actually arrives at the answer. A few lines of code turn the three probabilities into one risk number, and any answer at 0.2 or above goes to a person. TypeSafe measured it on 1,000 questions answered by gpt-6-luna, using jev-1.14.0 on 7 November, and the numbers are in the page.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>88.5 per cent of the answers were right, the check passed 73 per cent of them, and 95.7 per cent of the answers it passed were right.</li><li>The check earns its place on what it refuses: the 27 per cent it sent to review held 84 of the 115 wrong answers.</li><li>It is a filter rather than a grader, and that is the useful part: a person only looks at the doubtful quarter instead of every answer.</li><li>Case 20 already covers checking a claim against a source, and this is the same judgment applied to a whole assistant, with a measured cost and a stated cutoff.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-20">Touches case 20: Claim and Source Support Check</a>
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#grounding</span><span class="tag">#verification</span><span class="tag">#evals</span><span class="tag">#confidence</span></span>
+      <a class="post__link" href="https://docs.typesafe.ai/cookbooks/verify_llm_outputs" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
 <article class="post" id="sig-027" data-kind="insight">
@@ -643,6 +728,23 @@
       <span class="chip chip--kind">Working example</span>
       <span class="post__tags"><span class="tag">#automation</span><span class="tag">#reranking</span></span>
       <a class="post__link" href="https://community.n8n.io/t/n8n-jev-4-awesome-examples-to-get-started/314596" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-044" data-kind="usecase">
+  <div class="post__ava ava--usecase" aria-hidden="true">DO</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">TypeSafe AI</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">docs.typesafe.ai</span></p>
+    <p class="post__where"><span class="post__source">Official docs · Made with Jev</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">5 November 2026</span></p>
+    <h2 class="post__title">A thousand listings ranked in 11 requests, from inside a spreadsheet formula</h2>
+    <p class="post__sum">A working demo that takes a stay described in plain English and returns the ten best of 1,000 Cape Town listings, each marked out of ten, in about a second, from a formula typed into a Google Sheets cell. The interesting part is the arithmetic of fitting that into a spreadsheet: one request per listing takes more than 30 seconds, and Sheets stops a custom formula at 30 seconds. So the search runs in two stages. Ten choose-one questions run at the same time, each with 100 listing IDs as its options, and the five most probable in each group make a shortlist of 50; then a single request scores those 50.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>One request can weigh many listings at once, because a choose-one answer comes back with a probability for every option, and that is what turns 1,000 calls into 11.</li><li>The two-stage shape is the same trick the cases on this site use on long lists: a cheap pass over everything, then a careful pass over the shortlist.</li><li>The scoring question has five levels from not a match at all to matches everything asked for, so each mark says how much of the request a listing covers. The best result for six people and a dog near the beach scored 8.8.</li><li>It touches case 16, a retrieval engine with no language model in the loop, and here the ranking comes from probabilities instead of word overlap.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-16">Touches case 16: Zero LLM retrieval engine</a>
+      <span class="chip chip--kind">Working example</span>
+      <span class="post__tags"><span class="tag">#ranking</span><span class="tag">#search</span><span class="tag">#batching</span><span class="tag">#spreadsheets</span></span>
+      <a class="post__link" href="https://docs.typesafe.ai/demos/airbnb-listing-search" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
 <article class="post" id="sig-024" data-kind="usecase">

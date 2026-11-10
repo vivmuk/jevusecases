@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03",
+  "updated": "2026-11-10",
   "collector": "Collected on Tuesdays at 09:00 by the weekly sweep: search Twitter/X, YouTube, Reddit, Hacker News, the official docs and the blogs that cover Jev, then read what changed and add what is new here.",
   "items": [
     {
@@ -304,6 +304,30 @@
     },
     {
       "kind": "insight",
+      "source": "Official docs · cookbook",
+      "author": "TypeSafe AI",
+      "handle": "docs.typesafe.ai",
+      "title": "Catch the answer the documents do not support, and send only the doubtful ones to a person",
+      "url": "https://docs.typesafe.ai/cookbooks/verify_llm_outputs",
+      "date": "8 November 2026",
+      "summary": "A new recipe for a job every assistant that reads documents has: catch the answer that sounds right but is not in the text. One request asks three yes/no questions about the paragraphs and the answer, namely whether the paragraphs hold every fact the question needs, whether the answer declines to answer, and whether following the paragraphs from the question actually arrives at the answer. A few lines of code turn the three probabilities into one risk number, and any answer at 0.2 or above goes to a person. TypeSafe measured it on 1,000 questions answered by gpt-6-luna, using jev-1.14.0 on 7 November, and the numbers are in the page.",
+      "takeaways": [
+        "88.5 per cent of the answers were right, the check passed 73 per cent of them, and 95.7 per cent of the answers it passed were right.",
+        "The check earns its place on what it refuses: the 27 per cent it sent to review held 84 of the 115 wrong answers.",
+        "It is a filter rather than a grader, and that is the useful part: a person only looks at the doubtful quarter instead of every answer.",
+        "Case 20 already covers checking a claim against a source, and this is the same judgment applied to a whole assistant, with a measured cost and a stated cutoff."
+      ],
+      "near": 20,
+      "tags": [
+        "grounding",
+        "verification",
+        "evals",
+        "confidence"
+      ],
+      "id": "sig-041"
+    },
+    {
+      "kind": "insight",
       "source": "Blog · Lyzr",
       "author": "Akshat Kumar, Lyzr",
       "handle": "router and controller benchmark",
@@ -372,6 +396,54 @@
       "id": "sig-037"
     },
     {
+      "kind": "usecase",
+      "source": "Official docs · Made with Jev",
+      "author": "TypeSafe AI",
+      "handle": "docs.typesafe.ai",
+      "title": "A thousand listings ranked in 11 requests, from inside a spreadsheet formula",
+      "url": "https://docs.typesafe.ai/demos/airbnb-listing-search",
+      "date": "5 November 2026",
+      "summary": "A working demo that takes a stay described in plain English and returns the ten best of 1,000 Cape Town listings, each marked out of ten, in about a second, from a formula typed into a Google Sheets cell. The interesting part is the arithmetic of fitting that into a spreadsheet: one request per listing takes more than 30 seconds, and Sheets stops a custom formula at 30 seconds. So the search runs in two stages. Ten choose-one questions run at the same time, each with 100 listing IDs as its options, and the five most probable in each group make a shortlist of 50; then a single request scores those 50.",
+      "takeaways": [
+        "One request can weigh many listings at once, because a choose-one answer comes back with a probability for every option, and that is what turns 1,000 calls into 11.",
+        "The two-stage shape is the same trick the cases on this site use on long lists: a cheap pass over everything, then a careful pass over the shortlist.",
+        "The scoring question has five levels from not a match at all to matches everything asked for, so each mark says how much of the request a listing covers. The best result for six people and a dog near the beach scored 8.8.",
+        "It touches case 16, a retrieval engine with no language model in the loop, and here the ranking comes from probabilities instead of word overlap."
+      ],
+      "near": 16,
+      "tags": [
+        "ranking",
+        "search",
+        "batching",
+        "spreadsheets"
+      ],
+      "id": "sig-044"
+    },
+    {
+      "kind": "insight",
+      "source": "Research · arXiv 2611.07854",
+      "author": "Nischay Dhankhar and eight co-authors",
+      "handle": "rival research team",
+      "title": "An open 27-billion rival takes the top of a public decision index, and trains out the option-order wobble",
+      "url": "https://arxiv.org/abs/2611.07854",
+      "date": "5 November 2026",
+      "summary": "A nine-author paper publishes four open decision models called Drex, at 8, 9, 27 and 35 billion parameters, and compares them with Jev 1.14.0 on public decision benchmarks. Its 27-billion model, Max, scores 67.52 on the public suite of Decision Index 0.4.1 against 60.70 for Jev 1.14.0. The comparison was run by the team that built the rival, so it is a claim to test rather than a settled result. Training mixes worked examples with reinforcement learning, and the team reports that adding a penalty for inconsistent answers makes the answer stable when the options are shuffled, which is one of the failure modes the maker lists for its own model. Max answers a typical request in 183 milliseconds, against about two seconds for GPT-6 Sol.",
+      "takeaways": [
+        "The option-order fix is the idea worth stealing: penalise the model whenever reordering the same options changes its answer, which is the check the documentation tells you to run by hand.",
+        "A 27-billion model that runs on your own hardware now sits at the top of a public index, so the case for a hosted endpoint is convenience and speed rather than capability alone.",
+        "Read the gap as this team's own measurement: they chose the index, they ran both models, and one benchmark is one benchmark even when the methods are published.",
+        "All four models and the training code are released, so anyone can replay the comparison instead of trusting it."
+      ],
+      "near": null,
+      "tags": [
+        "open models",
+        "competitors",
+        "benchmarks",
+        "research"
+      ],
+      "id": "sig-045"
+    },
+    {
       "kind": "insight",
       "source": "Research · arXiv 2609.34024",
       "author": "Alfredo Madrid-García and Beatriz Merino-Barbancho",
@@ -393,6 +465,30 @@
         "limits"
       ],
       "id": "sig-020"
+    },
+    {
+      "kind": "insight",
+      "source": "Official docs · confidence",
+      "author": "TypeSafe AI",
+      "handle": "docs.typesafe.ai",
+      "title": "Confidence is not the chance the answer is right, so put your line on the option you act on",
+      "url": "https://docs.typesafe.ai/confidence",
+      "date": "4 November 2026",
+      "summary": "A new section on the confidence page says plainly what the number does and does not mean. Confidence measures how concentrated the probabilities are, not the chance that the chosen answer is correct, so the same 0.5 hides very different situations: with two options it means the top option holds 0.75 of the probability, and with ten options only 0.55. For a choose-one question the number is a reshaping of the top probability, so checking both adds no new evidence. The advice is to put the threshold on the probability of the option your code will act on, which is a statement anyone can read: acting above 0.9 means acting when the chance of the wrong option is under one in ten.",
+      "takeaways": [
+        "For a yes/no question, threshold the probability itself, with 0.7 for yes and 0.3 for no, and give the band between them its own outcome rather than rounding it to one side.",
+        "For a score whose decision hangs on one level, use that level's probability, because a split across two levels barely lowers confidence.",
+        "Confidence keeps two jobs: showing whether a score is settled at all, and comparing uncertainty between questions that have different numbers of options.",
+        "It touches case 08, output verification and calibration, and it moves the earlier threshold advice on this site one step further by naming the number to read instead."
+      ],
+      "near": 8,
+      "tags": [
+        "confidence",
+        "calibration",
+        "thresholds",
+        "gating"
+      ],
+      "id": "sig-043"
     },
     {
       "kind": "gap",
@@ -439,6 +535,54 @@
         "gaps"
       ],
       "id": "sig-019"
+    },
+    {
+      "kind": "insight",
+      "source": "TypeSafe blog · Thoughts",
+      "author": "Allie Laabs, DevRel at TypeSafe AI",
+      "handle": "the maker's own argument",
+      "title": "Jev makes the judgment, your code makes the decision, and the difference is the whole design",
+      "url": "https://typesafe.ai/blog/dont-call-it-a-decision-model",
+      "date": "3 November 2026",
+      "summary": "The maker explains why it still calls Jev a System One model when everyone else says decision model, and the argument is about where the model sits in a system rather than about names. A real decision is rarely one small choice: part of it is plain rules, such as whether a claim is eligible or over 25 dollars, and only part of it needs judgment, such as whether this customer wants their money back. Putting all of it into one big choose-one question, with the business rules written out in the criteria, starts a loop of tweaking that prose. The post calls it prompt gymnastics: you patch one awkward case, the next day a new input appears, and you patch that too.",
+      "takeaways": [
+        "The shape to copy: code holds the rules and combines the outcomes, and Jev answers only the small questions code cannot.",
+        "Two symptoms of asking the model to do logic's work: the criteria prose keeps growing, and every fix breaks something that used to work.",
+        "It reached the front page of Hacker News on 4 November with 48 points and 10 comments, and the comments argue about the name far more than about the advice.",
+        "It touches case 02, triage and routing of customer messages, which is the example the post works through twice, once the wrong way and once the right way."
+      ],
+      "near": 2,
+      "tags": [
+        "architecture",
+        "judging",
+        "agents",
+        "naming"
+      ],
+      "id": "sig-042"
+    },
+    {
+      "kind": "insight",
+      "source": "Benchmark · Opper",
+      "author": "Opper AI, a gateway that resells access to these models",
+      "handle": "an independent run",
+      "title": "Pac-Man as a fair test: Jev 1.14 lands joint first of eighteen decision models",
+      "url": "https://opper.ai/jevman-benchmark/",
+      "date": "3 November 2026",
+      "summary": "A gateway that sells access to these models built a benchmark out of Pac-Man. Each model plays 100 games against the classic arcade ghosts, and at every junction the game asks it one question, with the maze, the pellets and the ghosts as the state; the model answers with a probability for each direction and Pac-Man takes its pick. An answer that takes longer than two seconds is thrown out and a simple backup rule plays instead, so a slow model loses points for being slow. Jev 1.14 sits joint first of eighteen with a mean score of 3,597 and a best game of 10,050, level within the margin of error with two rivals, while Jev 1.13 was ninth on 2,750.",
+      "takeaways": [
+        "It is easier to trust than most benchmark numbers: every game is recorded and replays exactly, the code is open, and the scoring rule is written down.",
+        "The two-second deadline mixes two things, so a result is judgment and speed together, and a model that thinks carefully can lose a move for thinking.",
+        "The move from ninth to joint first between versions 1.13 and 1.14 is part real improvement and part luck, which is why the leaderboard calls near scores a tie.",
+        "For anyone new to this: a game with a scoreboard is a friendlier argument than an abstract index, and that is the point of publishing it."
+      ],
+      "near": null,
+      "tags": [
+        "benchmarks",
+        "evidence",
+        "games",
+        "latency"
+      ],
+      "id": "sig-046"
     },
     {
       "id": "sig-009",
