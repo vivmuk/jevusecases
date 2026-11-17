@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-10",
+  "updated": "2026-11-17",
   "collector": "Collected on Tuesdays at 09:00 by the weekly sweep: search Twitter/X, YouTube, Reddit, Hacker News, the official docs and the blogs that cover Jev, then read what changed and add what is new here.",
   "items": [
     {
@@ -278,6 +278,54 @@
         "cost"
       ],
       "id": "sig-027"
+    },
+    {
+      "kind": "insight",
+      "source": "PostHog newsletter · product engineering",
+      "author": "Jina Yoon, PostHog",
+      "handle": "production experience",
+      "title": "98.7 per cent of their session summaries never reach the language model",
+      "url": "https://posthog.com/newsletter/decision-models",
+      "date": "9 November 2026",
+      "summary": "PostHog runs a decision model in front of the summaries it writes of user session recordings. Two yes/no questions — does this name a real person, does this show contact details or an ID — send anything scoring 0.4 or above to a language model to be rewritten and checked again. In production, 98.7 per cent of summaries skip that call entirely. They also use one choose-one question to send a question in Slack to the cheapest model that can handle it, and one yes/no per search result to reorder them, which improved ranking on 20 test queries by about 25 per cent.",
+      "takeaways": [
+        "The failures are the useful half. Asked to rank a code-review agent's findings, the model was no better than chance (a score of 0.52), and chaining two questions over whole sessions sent requests of up to 32 sessions and 38,000 tokens each, which blocked other products' calls for hours.",
+        "Thresholds do not travel. Moving from one version of the same model to the next moved the right line, so they made it a per-project setting and kept the new judge in the quiet background while they re-measured it against hand-labelled examples.",
+        "Set the line from which mistake costs more: 0.4 for the privacy filter, because storing a name is worse than one extra model call, and 0.85 for the Slack bot, because interrupting people is worse than staying quiet.",
+        "Two narrow questions beat one broad one: false flags fell to about a tenth of what a single question produced. It touches case 11, the job of sorting what reaches a model at all."
+      ],
+      "near": 11,
+      "tags": [
+        "production",
+        "gating",
+        "thresholds",
+        "agents"
+      ],
+      "id": "sig-048"
+    },
+    {
+      "kind": "insight",
+      "source": "Vercel AI Gateway Production Index, November 2026",
+      "author": "Vercel, writing up its own traffic",
+      "handle": "gateway traffic",
+      "title": "One request in four is now a decision model, for half a cent in every dollar spent",
+      "url": "https://vercel.com/blog/ai-gateway-production-index-november-2026",
+      "date": "9 November 2026",
+      "summary": "Vercel routes more than 100 trillion tokens a month and publishes what it sees. Decision models arrived on its gateway in mid-September; in October they took 26.1 per cent of all requests while accounting for 0.53 per cent of the money spent, and nearly a third of paying teams used one. Almost all of that traffic went to Jev, which on its own received nearly four times as many requests as every Anthropic model put together, even though for every dollar teams spent on Jev they spent 64 on Anthropic's models. Use rises with size: just over one team in five below ten million tokens a month used a decision model, against seven in ten above ten billion.",
+      "takeaways": [
+        "This is the clearest sign yet that the category is real work rather than a demo: it is measured production traffic, not a benchmark run by a lab.",
+        "The numbers that disagree are the interesting part. The calls go to the cheap model and the money goes to the expensive one, which is exactly the split the cases on this site describe: a small judgment thousands of times, a written answer rarely.",
+        "Jev reached 28 per cent of paying teams, which puts it among the six most widely used models on the gateway, beside four of Anthropic's and OpenAI's Luna.",
+        "About 11 per cent of paying teams used a decision model without sending a single request to a text-writing model, the \"no language model in the loop\" design this site keeps describing."
+      ],
+      "near": null,
+      "tags": [
+        "adoption",
+        "production",
+        "cost",
+        "ecosystem"
+      ],
+      "id": "sig-052"
     },
     {
       "kind": "usecase",
@@ -877,6 +925,30 @@
     },
     {
       "kind": "gap",
+      "source": "Research · arXiv 2611.21053",
+      "author": "Eleftherios Tzanis and Michail E. Klontzas, University of Crete and Karolinska Institute",
+      "handle": "independent study",
+      "title": "A local agent that fills in a hospital tool call without inventing anything",
+      "url": "https://arxiv.org/abs/2611.21053",
+      "date": "16 November 2026",
+      "summary": "An imaging lab builds an agent for clinical work that calls tools without writing any text. Ordinary code turns each tool's own name, description and argument list into multiple-choice questions, and a decision model answers them in one pass; code then assembles the call. On 1,952 requests over 157 medical imaging and biomedical tools, the best such agent chose the right tool or correctly declined 97.0 per cent of the time, ahead of all eighteen local language-model settings they tried, whose best was 95.2 per cent. It also filled 97.0 per cent of the 6,056 argument values that the request stated. Across 10,888 calls, not one contained an invented tool, argument or value; between 5.5 and 19.7 per cent of the language-model calls contained at least one.",
+      "takeaways": [
+        "Not on this site yet: no case deals with a clinical request, and this is the version of \"an agent picks a tool\" where a made-up value would change the analysis and every step after it.",
+        "The answer to a missing value is to ask rather than guess. These agents handled 86 to 94 per cent of underspecified requests correctly by leaving the gap for the user, where the language-model agents managed between 0 and 6 per cent.",
+        "It all ran on one local graphics card, which is the whole point for patient data: the best agent took 2.6 seconds and 0.228 watt-hours per fully correct request, against 4.5 seconds and 0.413 for a 27-billion language model with its thinking switched off.",
+        "The models here are open ones — OpenJev, Cloudflare's Clef and Perplexity's decider, not Jev — and the code, the requests and every stored answer are published so the whole result can be replayed."
+      ],
+      "near": null,
+      "tags": [
+        "agents",
+        "clinical",
+        "tool calling",
+        "open models"
+      ],
+      "id": "sig-050"
+    },
+    {
+      "kind": "gap",
       "source": "Official docs · the Box question",
       "author": "TypeSafe AI",
       "handle": "docs.typesafe.ai",
@@ -945,6 +1017,54 @@
       "id": "sig-031"
     },
     {
+      "kind": "insight",
+      "source": "Blog · Plainlamp",
+      "author": "Plainlamp, a company that turns a document into a short video lesson",
+      "handle": "pre-registered test",
+      "title": "Eight new decision models on 339 unpublished documents: none beat the one they already use",
+      "url": "https://plainlamp.com/blog/new-decision-models",
+      "date": "13 November 2026",
+      "summary": "Plainlamp sorts a person's own description of a document into one of five kinds — paper, policy, standard, rules or none — and its pipeline acts on an answer at 0.6 confidence or above. The company took the eight decision models newly listed on OpenRouter, wrote down the test before running it, and read them all on the same 339 descriptions it has never published. Two came out exactly level with its incumbent, Perplexity's Decider V1.2: the next version of that same model, and Google's Gemini Decision 1, which was right 332 times against 336 and never once took a wrong kind. Four models were behind by a gap too large for chance, including both of HeyGen's and one that searches the live web.",
+      "takeaways": [
+        "The plain lesson: a newer model is not automatically a better one for your job, and the only way to find out is to run them on words you have not tuned on.",
+        "Its measure of harm is worth copying: it counted a wrong kind being taken (a wrong label gets recorded) separately from stopping when a kind did fit (an answer not taken when it could have been).",
+        "Gemini Decision 1 took no wrong kind but stopped seven times when a kind did fit, which is the shape of a cautious model: fewer errors, more work left on the table.",
+        "Jev is not in this test, so read it as evidence about the whole category rather than a ranking of Jev: the point is that the newest and cheapest models were not the best on this one question."
+      ],
+      "near": null,
+      "tags": [
+        "benchmark",
+        "comparison",
+        "confidence",
+        "competitors"
+      ],
+      "id": "sig-049"
+    },
+    {
+      "kind": "gap",
+      "source": "Official docs · Made with Jev",
+      "author": "TypeSafe AI",
+      "handle": "docs.typesafe.ai",
+      "title": "Read 584,000 words of documentation in four seconds, then fix the pages that matter",
+      "url": "https://docs.typesafe.ai/demos/content-audit",
+      "date": "13 November 2026",
+      "summary": "A new demo reads the whole of the Django documentation — 279 pages and 584,234 words, about 39 hours of reading for a person — in 4.2 seconds, and asks 45 questions about each page in one request: eight quality scores, five questions on how much the page matters, seven classifications, 21 yes/no problem flags and four quick wins. The whole audit cost about ten cents and the median request took 147 milliseconds. Because every question in a request is judged at the same time, the median was 144 milliseconds with one question and 151 with all 45; the questions are about 40 per cent of the bill, because their words count as input.",
+      "takeaways": [
+        "Not on this site yet: no case audits content you already own and ranks it, and the output is a grid of importance against quality with the \"fix first\" corner picked out.",
+        "The serious flags come back as short lists a person can actually work through: 28 pages use a deprecated API, 18 may hold an incorrect fact and 13 are out of date, against 209 that merely lack a cross-link.",
+        "Ask every question you might want, even speculative ones: extra questions add almost no time, only tokens. That is the same speculation the browser agent's case relies on.",
+        "A second pass says where the problem is: their deep scan asks which sentence holds each finding and links it to its line on GitHub, so the fix becomes a pull request."
+      ],
+      "near": null,
+      "tags": [
+        "content",
+        "auditing",
+        "batching",
+        "gaps"
+      ],
+      "id": "sig-051"
+    },
+    {
       "kind": "resource",
       "source": "Forbes",
       "author": "Ron Schmelzer",
@@ -989,6 +1109,30 @@
         "tooling"
       ],
       "id": "sig-026"
+    },
+    {
+      "kind": "gap",
+      "source": "Blog · CodeCut",
+      "author": "Khuyen Tran, CodeCut (the code is on GitHub)",
+      "handle": "measured comparison",
+      "title": "Two product names that share a model number: Jev merged 808 pairs and got one wrong",
+      "url": "https://codecut.ai/typesafe-jev-vs-rapidfuzz-sentence-transformers/",
+      "date": "10 November 2026",
+      "summary": "A worked comparison on a standard record-matching set: two lists of about a thousand products, with 1,097 pairs known to be the same item. Fuzzy string matching and meaning-based embeddings each merged every product with its closest name, and about one merge in three was wrong, 341 and 318 out of 1,081. Jev was given the product, three shortlisted names and a \"none of these\" option, plus a rule saying what makes two products the same: the same model number, capacity and colour. Merging only where its probability passed 0.7 gave 808 merges with one wrong, 62 pairs went to a person, and 211 were left unmatched. The run took about 35 seconds and cost about three cents for the 1,081 questions.",
+      "takeaways": [
+        "Not on this site yet. None of the cases does the job of deciding that two records describe the same thing, and that is what cleans a product catalogue, a supplier list or a contact book.",
+        "The rule is the part that matters. Fuzzy matching compares letters and embeddings compare meaning, so neither can be told \"the same model number means the same product\" — a model that picks from your options can.",
+        "Two thresholds do the work: merge above 0.7, leave alone below 0.3, and send the 6 per cent in between to a person.",
+        "Its own advice is the cheap route: start with the free tools, measure them, and only pay for the model where they are not good enough."
+      ],
+      "near": null,
+      "tags": [
+        "matching",
+        "data cleaning",
+        "thresholds",
+        "gaps"
+      ],
+      "id": "sig-047"
     },
     {
       "kind": "insight",

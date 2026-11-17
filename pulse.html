@@ -25,14 +25,48 @@
 <div class="hero"><img src="assets/forest/hero.webp" width="2000" height="1125" alt="">
 <h1>Pulse</h1></div>
 <p class="lede">What people are writing, building and arguing about with the Jev decision model: the jobs nobody has listed yet, the findings from the first independent tests, and the places to read more. <strong>Every entry links to its source.</strong> The sweep runs each Tuesday morning, so this page is always the most recent pass.</p>
-<p class="count">Last collected 10 November 2026. 46 entries, and 14 of them are jobs no case here covers yet.</p>
+<p class="count">Last collected 17 November 2026. 52 entries, and 17 of them are jobs no case here covers yet.</p>
 <p class="count">Collected on Tuesdays at 09:00 by the weekly sweep: search Twitter/X, YouTube, Reddit, Hacker News, the official docs and the blogs that cover Jev, then read what changed and add what is new here.</p>
 <hr class="rule">
 <div class="controls" role="group" aria-label="Filter the entries">
-<button type="button" class="filt" data-filter="all" aria-pressed="true">Everything <b>46</b></button><button type="button" class="filt" data-filter="gap" aria-pressed="false">Jobs no case covers yet <b>14</b></button><button type="button" class="filt" data-filter="insight" aria-pressed="false">New learning <b>24</b></button><button type="button" class="filt" data-filter="usecase" aria-pressed="false">Working example <b>5</b></button><button type="button" class="filt" data-filter="resource" aria-pressed="false">Where to read more <b>3</b></button>
+<button type="button" class="filt" data-filter="all" aria-pressed="true">Everything <b>52</b></button><button type="button" class="filt" data-filter="gap" aria-pressed="false">Jobs no case covers yet <b>17</b></button><button type="button" class="filt" data-filter="insight" aria-pressed="false">New learning <b>27</b></button><button type="button" class="filt" data-filter="usecase" aria-pressed="false">Working example <b>5</b></button><button type="button" class="filt" data-filter="resource" aria-pressed="false">Where to read more <b>3</b></button>
 </div>
-<p class="count" id="shown" aria-live="polite">All 46 entries are shown.</p>
+<p class="count" id="shown" aria-live="polite">All 52 entries are shown.</p>
 <div class="feed" id="feed">
+<article class="post" id="sig-047" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">MC</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Khuyen Tran, CodeCut (the code is on GitHub)</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">measured comparison</span></p>
+    <p class="post__where"><span class="post__source">Blog · CodeCut</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">10 November 2026</span></p>
+    <h2 class="post__title">Two product names that share a model number: Jev merged 808 pairs and got one wrong</h2>
+    <p class="post__sum">A worked comparison on a standard record-matching set: two lists of about a thousand products, with 1,097 pairs known to be the same item. Fuzzy string matching and meaning-based embeddings each merged every product with its closest name, and about one merge in three was wrong, 341 and 318 out of 1,081. Jev was given the product, three shortlisted names and a &quot;none of these&quot; option, plus a rule saying what makes two products the same: the same model number, capacity and colour. Merging only where its probability passed 0.7 gave 808 merges with one wrong, 62 pairs went to a person, and 211 were left unmatched. The run took about 35 seconds and cost about three cents for the 1,081 questions.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Not on this site yet. None of the cases does the job of deciding that two records describe the same thing, and that is what cleans a product catalogue, a supplier list or a contact book.</li><li>The rule is the part that matters. Fuzzy matching compares letters and embeddings compare meaning, so neither can be told &quot;the same model number means the same product&quot; — a model that picks from your options can.</li><li>Two thresholds do the work: merge above 0.7, leave alone below 0.3, and send the 6 per cent in between to a person.</li><li>Its own advice is the cheap route: start with the free tools, measure them, and only pay for the model where they are not good enough.</li></ul>
+    <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
+      <span class="post__tags"><span class="tag">#matching</span><span class="tag">#data cleaning</span><span class="tag">#thresholds</span><span class="tag">#gaps</span></span>
+      <a class="post__link" href="https://codecut.ai/typesafe-jev-vs-rapidfuzz-sentence-transformers/" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-051" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">DO</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">TypeSafe AI</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">docs.typesafe.ai</span></p>
+    <p class="post__where"><span class="post__source">Official docs · Made with Jev</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">13 November 2026</span></p>
+    <h2 class="post__title">Read 584,000 words of documentation in four seconds, then fix the pages that matter</h2>
+    <p class="post__sum">A new demo reads the whole of the Django documentation — 279 pages and 584,234 words, about 39 hours of reading for a person — in 4.2 seconds, and asks 45 questions about each page in one request: eight quality scores, five questions on how much the page matters, seven classifications, 21 yes/no problem flags and four quick wins. The whole audit cost about ten cents and the median request took 147 milliseconds. Because every question in a request is judged at the same time, the median was 144 milliseconds with one question and 151 with all 45; the questions are about 40 per cent of the bill, because their words count as input.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Not on this site yet: no case audits content you already own and ranks it, and the output is a grid of importance against quality with the &quot;fix first&quot; corner picked out.</li><li>The serious flags come back as short lists a person can actually work through: 28 pages use a deprecated API, 18 may hold an incorrect fact and 13 are out of date, against 209 that merely lack a cross-link.</li><li>Ask every question you might want, even speculative ones: extra questions add almost no time, only tokens. That is the same speculation the browser agent&#x27;s case relies on.</li><li>A second pass says where the problem is: their deep scan asks which sentence holds each finding and links it to its line on GitHub, so the fix becomes a pull request.</li></ul>
+    <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
+      <span class="post__tags"><span class="tag">#content</span><span class="tag">#auditing</span><span class="tag">#batching</span><span class="tag">#gaps</span></span>
+      <a class="post__link" href="https://docs.typesafe.ai/demos/content-audit" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
 <article class="post" id="sig-029" data-kind="gap">
   <div class="post__ava ava--gap" aria-hidden="true">DO</div>
   <div class="post__body">
@@ -48,6 +82,23 @@
       <span class="chip chip--kind">Jobs no case covers yet</span>
       <span class="post__tags"><span class="tag">#images</span><span class="tag">#vision</span><span class="tag">#new type</span></span>
       <a class="post__link" href="https://docs.typesafe.ai/primitives/box" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-050" data-kind="gap">
+  <div class="post__ava ava--gap" aria-hidden="true">IS</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Eleftherios Tzanis and Michail E. Klontzas, University of Crete and Karolinska Institute</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">independent study</span></p>
+    <p class="post__where"><span class="post__source">Research · arXiv 2611.21053</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">16 November 2026</span></p>
+    <h2 class="post__title">A local agent that fills in a hospital tool call without inventing anything</h2>
+    <p class="post__sum">An imaging lab builds an agent for clinical work that calls tools without writing any text. Ordinary code turns each tool&#x27;s own name, description and argument list into multiple-choice questions, and a decision model answers them in one pass; code then assembles the call. On 1,952 requests over 157 medical imaging and biomedical tools, the best such agent chose the right tool or correctly declined 97.0 per cent of the time, ahead of all eighteen local language-model settings they tried, whose best was 95.2 per cent. It also filled 97.0 per cent of the 6,056 argument values that the request stated. Across 10,888 calls, not one contained an invented tool, argument or value; between 5.5 and 19.7 per cent of the language-model calls contained at least one.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>Not on this site yet: no case deals with a clinical request, and this is the version of &quot;an agent picks a tool&quot; where a made-up value would change the analysis and every step after it.</li><li>The answer to a missing value is to ask rather than guess. These agents handled 86 to 94 per cent of underspecified requests correctly by leaving the gap for the user, where the language-model agents managed between 0 and 6 per cent.</li><li>It all ran on one local graphics card, which is the whole point for patient data: the best agent took 2.6 seconds and 0.228 watt-hours per fully correct request, against 4.5 seconds and 0.413 for a 27-billion language model with its thinking switched off.</li><li>The models here are open ones — OpenJev, Cloudflare&#x27;s Clef and Perplexity&#x27;s decider, not Jev — and the code, the requests and every stored answer are published so the whole result can be replayed.</li></ul>
+    <p class="post__meta"><span class="chip chip--missing">No case on the site covers this today</span>
+      <span class="chip chip--kind">Jobs no case covers yet</span>
+      <span class="post__tags"><span class="tag">#agents</span><span class="tag">#clinical</span><span class="tag">#tool calling</span><span class="tag">#open models</span></span>
+      <a class="post__link" href="https://arxiv.org/abs/2611.21053" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
 <article class="post" id="sig-034" data-kind="gap">
@@ -303,6 +354,23 @@
       <span class="chip chip--kind">New learning</span>
       <span class="post__tags"><span class="tag">#ecosystem</span><span class="tag">#open models</span><span class="tag">#cost</span></span>
       <a class="post__link" href="https://startupfortune.com/amazon-releases-its-own-jev-clone-as-the-ai-decision-model-race-turns-into-a-pile-up" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-049" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">PT</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Plainlamp, a company that turns a document into a short video lesson</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">pre-registered test</span></p>
+    <p class="post__where"><span class="post__source">Blog · Plainlamp</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">13 November 2026</span></p>
+    <h2 class="post__title">Eight new decision models on 339 unpublished documents: none beat the one they already use</h2>
+    <p class="post__sum">Plainlamp sorts a person&#x27;s own description of a document into one of five kinds — paper, policy, standard, rules or none — and its pipeline acts on an answer at 0.6 confidence or above. The company took the eight decision models newly listed on OpenRouter, wrote down the test before running it, and read them all on the same 339 descriptions it has never published. Two came out exactly level with its incumbent, Perplexity&#x27;s Decider V1.2: the next version of that same model, and Google&#x27;s Gemini Decision 1, which was right 332 times against 336 and never once took a wrong kind. Four models were behind by a gap too large for chance, including both of HeyGen&#x27;s and one that searches the live web.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>The plain lesson: a newer model is not automatically a better one for your job, and the only way to find out is to run them on words you have not tuned on.</li><li>Its measure of harm is worth copying: it counted a wrong kind being taken (a wrong label gets recorded) separately from stopping when a kind did fit (an answer not taken when it could have been).</li><li>Gemini Decision 1 took no wrong kind but stopped seven times when a kind did fit, which is the shape of a cautious model: fewer errors, more work left on the table.</li><li>Jev is not in this test, so read it as evidence about the whole category rather than a ranking of Jev: the point is that the newest and cheapest models were not the best on this one question.</li></ul>
+    <p class="post__meta">
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#benchmark</span><span class="tag">#comparison</span><span class="tag">#confidence</span><span class="tag">#competitors</span></span>
+      <a class="post__link" href="https://plainlamp.com/blog/new-decision-models" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
 <article class="post" id="sig-031" data-kind="insight">
@@ -609,6 +677,40 @@
       <span class="chip chip--kind">New learning</span>
       <span class="post__tags"><span class="tag">#grounding</span><span class="tag">#verification</span><span class="tag">#evals</span><span class="tag">#confidence</span></span>
       <a class="post__link" href="https://docs.typesafe.ai/cookbooks/verify_llm_outputs" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-048" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">PE</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Jina Yoon, PostHog</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">production experience</span></p>
+    <p class="post__where"><span class="post__source">PostHog newsletter · product engineering</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">9 November 2026</span></p>
+    <h2 class="post__title">98.7 per cent of their session summaries never reach the language model</h2>
+    <p class="post__sum">PostHog runs a decision model in front of the summaries it writes of user session recordings. Two yes/no questions — does this name a real person, does this show contact details or an ID — send anything scoring 0.4 or above to a language model to be rewritten and checked again. In production, 98.7 per cent of summaries skip that call entirely. They also use one choose-one question to send a question in Slack to the cheapest model that can handle it, and one yes/no per search result to reorder them, which improved ranking on 20 test queries by about 25 per cent.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>The failures are the useful half. Asked to rank a code-review agent&#x27;s findings, the model was no better than chance (a score of 0.52), and chaining two questions over whole sessions sent requests of up to 32 sessions and 38,000 tokens each, which blocked other products&#x27; calls for hours.</li><li>Thresholds do not travel. Moving from one version of the same model to the next moved the right line, so they made it a per-project setting and kept the new judge in the quiet background while they re-measured it against hand-labelled examples.</li><li>Set the line from which mistake costs more: 0.4 for the privacy filter, because storing a name is worse than one extra model call, and 0.85 for the Slack bot, because interrupting people is worse than staying quiet.</li><li>Two narrow questions beat one broad one: false flags fell to about a tenth of what a single question produced. It touches case 11, the job of sorting what reaches a model at all.</li></ul>
+    <p class="post__meta"><a class="chip chip--near" href="index.html#case-11">Touches case 11: Inbox pre filtering for AI agents</a>
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#production</span><span class="tag">#gating</span><span class="tag">#thresholds</span><span class="tag">#agents</span></span>
+      <a class="post__link" href="https://posthog.com/newsletter/decision-models" rel="noreferrer">Read the source &rarr;</a></p>
+  </div>
+</article>
+<article class="post" id="sig-052" data-kind="insight">
+  <div class="post__ava ava--insight" aria-hidden="true">GT</div>
+  <div class="post__body">
+    <p class="post__who"><span class="post__name">Vercel, writing up its own traffic</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__handle">gateway traffic</span></p>
+    <p class="post__where"><span class="post__source">Vercel AI Gateway Production Index, November 2026</span><span class="post__sep" aria-hidden="true">&middot;</span>
+      <span class="post__date">9 November 2026</span></p>
+    <h2 class="post__title">One request in four is now a decision model, for half a cent in every dollar spent</h2>
+    <p class="post__sum">Vercel routes more than 100 trillion tokens a month and publishes what it sees. Decision models arrived on its gateway in mid-September; in October they took 26.1 per cent of all requests while accounting for 0.53 per cent of the money spent, and nearly a third of paying teams used one. Almost all of that traffic went to Jev, which on its own received nearly four times as many requests as every Anthropic model put together, even though for every dollar teams spent on Jev they spent 64 on Anthropic&#x27;s models. Use rises with size: just over one team in five below ten million tokens a month used a decision model, against seven in ten above ten billion.</p>
+    <p class="post__label">Key takeaways</p>
+    <ul class="post__take"><li>This is the clearest sign yet that the category is real work rather than a demo: it is measured production traffic, not a benchmark run by a lab.</li><li>The numbers that disagree are the interesting part. The calls go to the cheap model and the money goes to the expensive one, which is exactly the split the cases on this site describe: a small judgment thousands of times, a written answer rarely.</li><li>Jev reached 28 per cent of paying teams, which puts it among the six most widely used models on the gateway, beside four of Anthropic&#x27;s and OpenAI&#x27;s Luna.</li><li>About 11 per cent of paying teams used a decision model without sending a single request to a text-writing model, the &quot;no language model in the loop&quot; design this site keeps describing.</li></ul>
+    <p class="post__meta">
+      <span class="chip chip--kind">New learning</span>
+      <span class="post__tags"><span class="tag">#adoption</span><span class="tag">#production</span><span class="tag">#cost</span><span class="tag">#ecosystem</span></span>
+      <a class="post__link" href="https://vercel.com/blog/ai-gateway-production-index-november-2026" rel="noreferrer">Read the source &rarr;</a></p>
   </div>
 </article>
 <article class="post" id="sig-027" data-kind="insight">
